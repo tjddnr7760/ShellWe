@@ -1,6 +1,6 @@
 ---
-name: Feature request
-about: 기능 구현 목록
+name: Feature
+about: Requirement for this feature
 title: 기능 이슈
 labels: ''
 assignees: ''
