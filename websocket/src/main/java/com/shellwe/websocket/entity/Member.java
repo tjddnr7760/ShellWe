@@ -13,6 +13,10 @@ import java.util.List;
 @Setter
 @Entity
 public class Member extends Auditable {
+    public Member(Long memberId) {
+        this.memberId = memberId;
+    }
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long memberId;
@@ -24,7 +28,10 @@ public class Member extends Auditable {
     private String password;
 
     @Column
-    private String nickname;
+    private String displayName;
+
+    @Column
+    private String picture;
 
     @OneToMany(mappedBy = "member", cascade = {CascadeType.PERSIST, CascadeType.REMOVE})
     private List<Message> messages = new ArrayList<>();
