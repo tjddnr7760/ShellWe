@@ -9,16 +9,16 @@ spring:
     url: jdbc:h2:mem:test
   jpa:
     hibernate:
-      ddl-auto: create    # 스키마 자동 생성
+      ddl-auto: none    # 스키마 자동 생성
     show-sql: true        # SQL 쿼리 출력
     properties:
       hibernate:
         format_sql: true  # SQL pretty print
         jdbc:
           time_zone: Asia/Seoul   # 서버 시간 서울로 변경
-  sql:
-    init:
-      data-locations: classpath*:db/h2/data.sql
+#  sql:
+#    init:
+#      data-locations: classpath*:db/h2/data.sql
   security:
     oauth2:
       client:
