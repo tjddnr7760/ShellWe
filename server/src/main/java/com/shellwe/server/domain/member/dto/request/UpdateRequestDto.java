@@ -1,4 +1,15 @@
-package com.shellwe.server.domain.member.dto;
+package com.shellwe.server.domain.member.dto.request;
 
-public class MemberUpdateDto {
+import lombok.Getter;
+import lombok.Setter;
+
+@Getter
+@Setter
+public class UpdateRequestDto {
+
+    private String password;
+
+    private String displayName;
+
+    // 이미지 필드 현재단계 제외
 }

@@ -1,5 +1,11 @@
-package com.shellwe.server.domain.member.dto;
+package com.shellwe.server.domain.member.dto.request;
 
-public class MemberDeleteDto {
+import lombok.Getter;
+import lombok.Setter;
+
+@Getter
+@Setter
+public class DeleteRequestDto {
+
     private String password;
 }
