@@ -10,6 +10,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
+
 @Slf4j
 @RequestMapping("/members")
 @RestController
@@ -24,7 +26,7 @@ public class MemberController {
 
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping
-    public void signUpMember(@RequestBody SignUpRequestDto signUpRequestDto) {
+    public void signUpMember(@Valid @RequestBody SignUpRequestDto signUpRequestDto) {
         memberService.signUpMember(signUpRequestDto);
     }
 
