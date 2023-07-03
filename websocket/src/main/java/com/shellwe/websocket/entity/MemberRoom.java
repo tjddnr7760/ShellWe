@@ -20,6 +20,15 @@ public class MemberRoom {
     private Member member;
 
     @ManyToOne
-    @JoinColumn(name = "room_id")
+    @JoinColumn(name = "room_id",unique = false)
     private Room room;
+
+    public void setMember(Member member){
+        this.member = member;
+        member.setMemberRooms(this);
+    }
+    public void setRoom(Room room){
+        this.room = room;
+        room.setMemberRooms(this);
+    }
 }

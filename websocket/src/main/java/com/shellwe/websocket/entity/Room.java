@@ -13,6 +13,10 @@ import java.util.List;
 @Setter
 @Entity
 public class Room extends Auditable{
+    public Room(Long roomId) {
+        this.roomId = roomId;
+    }
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long roomId;

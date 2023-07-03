@@ -2,6 +2,13 @@ package com.shellwe.websocket.service;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.shellwe.websocket.dto.ChatRoom;
+import com.shellwe.websocket.dto.WsDto;
+import com.shellwe.websocket.entity.Member;
+import com.shellwe.websocket.entity.MemberRoom;
+import com.shellwe.websocket.entity.Room;
+import com.shellwe.websocket.mapper.WsMapper;
+import com.shellwe.websocket.repository.MemberRoomRepository;
+import com.shellwe.websocket.repository.RoomRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -16,29 +23,60 @@ import java.util.*;
 @RequiredArgsConstructor
 @Service
 public class ChatService {
-
+    private final RoomRepository roomRepository;
     private final ObjectMapper objectMapper;
-    private Map<String, ChatRoom> chatRooms;
+    private final MemberRoomRepository memberRoomRepository;
+    private final WsMapper wsMapper;
+    private Map<Long, ChatRoom> chatRooms;
+
 
     @PostConstruct
     private void init() {
         chatRooms = new LinkedHashMap<>();
     }
 
-    public List<ChatRoom> findAllRoom() {
-        return new ArrayList<>(chatRooms.values());
+    public List<WsDto.Response> findAllRoom() {
+
+
+        long myId = 1; // security context holder 접근 필요
+        List<MemberRoom> memberRooms = memberRoomRepository.findAllMyRoomsWithSeller(myId);
+
+
+        // API명세서에 나온대로 response Dto 만들어서 리턴 주기
+        return wsMapper.memberRoomsToWsResponses(memberRooms);
     }
 
-    public ChatRoom findRoomById(String roomId) {
+    public ChatRoom findRoomById(Long roomId) {
+        // db에서 룸 검색
         return chatRooms.get(roomId);
     }
 
-    public ChatRoom createRoom() { // name은 필요없음, roomId는 db와 연결해서 생성
-        String randomId = UUID.randomUUID().toString();
+    public ChatRoom createRoom(WsDto.Post requestBody) {
+        Room newRoom = roomRepository.save(new Room());
+
+        long myId = 1; // security context holder 접근 필요
+
+        Member me = new Member(myId);
+        Member seller = new Member(requestBody.getSellerMemberId());
+
+        MemberRoom memberRoom = new MemberRoom();
+        memberRoom.setRoom(newRoom);
+        memberRoom.setMember(me);
+
+        MemberRoom memberRoom2 = new MemberRoom();
+        memberRoom2.setMember(seller);
+        memberRoom2.setRoom(newRoom);
+
+        memberRoomRepository.save(memberRoom);
+        memberRoomRepository.save(memberRoom2);
+        // =========== 룸 생성, 멤버 연결
+
+        // 메세지 생성
+
         ChatRoom chatRoom = ChatRoom.builder()
-                .roomId(randomId)
+                .roomId(newRoom.getRoomId())
                 .build();
-        chatRooms.put(randomId, chatRoom);
+        chatRooms.put(newRoom.getRoomId(), chatRoom);
         return chatRoom;
     }
 
@@ -49,4 +87,5 @@ public class ChatService {
             log.error(e.getMessage(), e);
         }
     }
+
 }
