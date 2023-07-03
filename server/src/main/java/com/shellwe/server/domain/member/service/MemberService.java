@@ -32,7 +32,6 @@ public class MemberService {
     public void signUpMember(SignUpRequestDto signUpRequestDto) {
         Member member = memberMapper.signUpRequestDtoToMember(signUpRequestDto);
         log.info("sign-up in service layer start, member : {}", member);
-
         verifyExistEmail(member.getEmail());
 
         Member encryptedMember = new Member(member, passwordEncoder.encode(member.getPassword()));
@@ -53,7 +52,7 @@ public class MemberService {
 
     // password, displayName, img
     // jwt 구현후 진행(인증필요)
-    public void updateMember(String email, UpdateRequestDto updateRequestDto) {
+    public void updateMember(String email, long memberId, UpdateRequestDto updateRequestDto) {
         log.info("update member in service layer start");
         // 매퍼로 멤버 객체로 바꾼다.
         Member member = memberMapper.updateRequestDtoToMember(updateRequestDto);
@@ -69,7 +68,7 @@ public class MemberService {
 
     // 회원 탈퇴(my page)
     // jwt 구현후 진행(인증필요)
-    public void deleteMember(String email, DeleteRequestDto deleteRequestDto) {
+    public void deleteMember(String email, long memberId, DeleteRequestDto deleteRequestDto) {
         log.info("delete member in service layer start");
         // 시큐리티에서 유저 아이디를 가져온다
 
