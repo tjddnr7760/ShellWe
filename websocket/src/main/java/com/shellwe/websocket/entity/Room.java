@@ -17,12 +17,16 @@ public class Room extends Auditable{
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long roomId;
 
-    @ManyToOne
-    @JoinColumn(name = "member_id")
-    private Member member;
-
     @OneToMany(mappedBy = "room", cascade = {CascadeType.PERSIST, CascadeType.REMOVE})
     private List<Message> messages = new ArrayList<>();
+
+    @OneToMany(mappedBy = "room", cascade = {CascadeType.PERSIST, CascadeType.REMOVE})
+    private List<MemberRoom> memberRooms = new ArrayList<>();
+
+    public void setMemberRooms(MemberRoom memberRoom){
+        this.memberRooms.add(memberRoom);
+        if (memberRoom.getRoom() != this) memberRoom.setRoom(this);
+    }
 
     public void setMessages(Message message){
         this.messages.add(message);

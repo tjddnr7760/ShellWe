@@ -27,14 +27,14 @@ public class Member extends Auditable {
     private String nickname;
 
     @OneToMany(mappedBy = "member", cascade = {CascadeType.PERSIST, CascadeType.REMOVE})
-    private List<Room> rooms = new ArrayList<>();
-
-    @OneToMany(mappedBy = "member", cascade = {CascadeType.PERSIST, CascadeType.REMOVE})
     private List<Message> messages = new ArrayList<>();
 
-    public void setRooms(Room room){
-        this.rooms.add(room);
-        if (room.getMember() != this) room.setMember(this);
+    @OneToMany(mappedBy = "member", cascade = {CascadeType.PERSIST, CascadeType.REMOVE})
+    private List<MemberRoom> memberRooms = new ArrayList<>();
+
+    public void setMemberRooms(MemberRoom memberRoom){
+        this.memberRooms.add(memberRoom);
+        if (memberRoom.getMember() != this) memberRoom.setMember(this);
     }
 
     public void setMessages(Message message){
