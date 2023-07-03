@@ -1,0 +1,19 @@
+package com.shellwe.server.domain.tag.entity;
+
+import lombok.Getter;
+
+import javax.persistence.*;
+
+@Getter
+@Table(name = "TAG")
+@Entity
+public class Tag {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "TAG_ID")
+    private Long id;
+
+    @Column(name = "TAG_NAME")
+    private String tagName;
+}
