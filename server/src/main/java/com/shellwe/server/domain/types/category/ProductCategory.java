@@ -1,4 +1,5 @@
-package com.shellwe.server.domain.types;
+package com.shellwe.server.domain.types.category;
 
-public enum Category {
+public enum ProductCategory {
+    ALL, DEVICE, FOOD, HEALTH, OFFICE, LIFE, ETC
 }

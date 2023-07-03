@@ -1,2 +1,5 @@
-package com.shellwe.server.domain.types;public enum ShellType {
+package com.shellwe.server.domain.types;
+
+public enum ShellType {
+    PRODUCT, TALENT
 }
