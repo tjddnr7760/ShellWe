@@ -2,11 +2,15 @@ package com.shellwe.server.domain.member.entity;
 
 import com.shellwe.server.domain.shell.entity.Shell;
 import com.shellwe.server.utils.TimeTracker;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.util.List;
 
+@AllArgsConstructor
+@NoArgsConstructor
 @Getter
 @Table(name = "MEMBER")
 @Entity

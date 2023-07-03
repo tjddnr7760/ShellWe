@@ -6,12 +6,16 @@ import com.shellwe.server.domain.tag.entity.Tag;
 import com.shellwe.server.domain.types.ShellType;
 import com.shellwe.server.domain.types.Status;
 import com.shellwe.server.utils.TimeTracker;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
+@AllArgsConstructor
+@NoArgsConstructor
 @Getter
 @Table(name = "SHELL")
 @Entity

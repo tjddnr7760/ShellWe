@@ -2,10 +2,14 @@ package com.shellwe.server.domain.category.entity;
 
 import com.shellwe.server.domain.types.category.ProductCategory;
 import com.shellwe.server.domain.types.category.TalentCategory;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 
+@AllArgsConstructor
+@NoArgsConstructor
 @Getter
 @Table(name = "CATEGORY")
 @Entity

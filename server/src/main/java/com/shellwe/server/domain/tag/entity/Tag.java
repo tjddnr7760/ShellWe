@@ -1,9 +1,13 @@
 package com.shellwe.server.domain.tag.entity;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 
+@AllArgsConstructor
+@NoArgsConstructor
 @Getter
 @Table(name = "TAG")
 @Entity

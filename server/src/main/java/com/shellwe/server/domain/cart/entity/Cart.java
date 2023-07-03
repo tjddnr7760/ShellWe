@@ -2,10 +2,14 @@ package com.shellwe.server.domain.cart.entity;
 
 import com.shellwe.server.domain.member.entity.Member;
 import com.shellwe.server.domain.shell.entity.Shell;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 
+@AllArgsConstructor
+@NoArgsConstructor
 @Getter
 @Table(name = "CART")
 @Entity

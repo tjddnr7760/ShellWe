@@ -3,10 +3,14 @@ package com.shellwe.server.domain.trade.entity;
 import com.shellwe.server.domain.member.entity.Member;
 import com.shellwe.server.domain.shell.entity.Shell;
 import com.shellwe.server.utils.TimeTracker;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 
+@AllArgsConstructor
+@NoArgsConstructor
 @Getter
 @Table(name = "TRADE")
 @Entity
