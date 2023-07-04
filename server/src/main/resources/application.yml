@@ -48,8 +48,8 @@ server:                   # 모든 response 에 대해 지정된 인코딩 적�
     encoding:
       force-response: true
 
-jwt:                      # JWT 관련 정보
-  key: ${JWT_SECRET_KEY}  # 시스템 환경 변수에서 로드
+jwt:
+  key: "kevin12341234123412341234123412341234" #${JWT_SECRET_KEY}  # 시스템 환경 변수에서 로드
   access-token-expiration-minutes: 500
   refresh-token-expiration-minutes: 600
 
