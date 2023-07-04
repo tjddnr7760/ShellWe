@@ -1,6 +1,6 @@
 package com.shellwe.websocket.dto;
 
-import com.shellwe.websocket.service.ChatService;
+import com.shellwe.websocket.service.HttpService;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
@@ -13,28 +13,25 @@ import java.util.Set;
 @Setter
 public class ChatRoom {
     private Long roomId;
-    @Builder.Default
     private Set<WebSocketSession> sessions = new HashSet<>();
-    @Builder.Default
-    private Set<ChatMember> members = new HashSet<>();
 
     public ChatRoom(Long roomId) {
         this.roomId = roomId;
     }
 
-    public void setMembers(ChatMember chatMember){
-        members.add(chatMember);
+    public void setSessions(WebSocketSession session){
+        sessions.add(session);
     }
 
-    public void handleActions(WebSocketSession session, ChatMessage chatMessage, ChatService chatService) {
+    public void handleActions(WebSocketSession session, ChatMessage chatMessage, HttpService httpService) {
         if (chatMessage.getType().equals(ChatMessage.MessageType.ENTER)) {
             sessions.add(session);
             chatMessage.setMessage(chatMessage.getSender() + "님이 입장했습니다.");
         }
-        sendMessage(chatMessage, chatService);
+        sendMessage(chatMessage, httpService);
     }
 
-    public <T> void sendMessage(T message, ChatService chatService) {
-        sessions.parallelStream().forEach(session -> chatService.sendMessage(session, message));
+    public <T> void sendMessage(T message, HttpService httpService) {
+        sessions.parallelStream().forEach(session -> httpService.sendMessage(session, message));
     }
 }
