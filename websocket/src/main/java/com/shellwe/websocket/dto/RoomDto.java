@@ -5,7 +5,7 @@ import lombok.Getter;
 
 import javax.validation.constraints.Positive;
 
-public class WsDto {
+public class RoomDto {
     @Builder
     @Getter
     public static class Post{

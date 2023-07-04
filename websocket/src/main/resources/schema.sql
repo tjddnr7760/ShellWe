@@ -36,6 +36,7 @@ create table message(
     payload varchar(255),
     created_at timestamp,
     last_modified_at timestamp,
+    unread boolean,
     room_id bigint,
     member_id bigint,
     primary key (message_id),
