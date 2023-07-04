@@ -16,6 +16,8 @@ public class SignUpRequestDto {
     @Email
     private String email;
 
+    private Boolean emailVerificationStatus = false;
+
     @NotBlank
     @Pattern(regexp = "^(?=.*[a-zA-Z])(?=.*\\d)(?=.*[!@#$%&*])[a-zA-Z\\d!@#$%&*]{8,}$")
     private String password;
