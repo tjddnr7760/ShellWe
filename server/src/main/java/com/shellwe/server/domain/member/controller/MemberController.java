@@ -26,8 +26,16 @@ public class MemberController {
 
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping
-    public void signUpMember(@Valid @RequestBody SignUpRequestDto signUpRequestDto) {
+    public void signUpMember(@Valid @RequestBody SignUpRequestDto signUpRequestDto) throws InterruptedException {
         memberService.signUpMember(signUpRequestDto);
+    }
+
+    @ResponseStatus(HttpStatus.OK)
+    @GetMapping("/email/{email}")
+    public String verificationMember(@PathVariable String email) throws InterruptedException {
+        memberService.verifyEmail(email);
+
+        return "인증이 완료되었습니다.";
     }
 
 //    @ResponseStatus(HttpStatus.OK)
