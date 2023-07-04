@@ -8,7 +8,8 @@ import com.shellwe.websocket.entity.Room;
 import com.shellwe.websocket.mapper.RoomMapper;
 import com.shellwe.websocket.repository.MemberRepository;
 import com.shellwe.websocket.repository.MessageRepository;
-import com.shellwe.websocket.service.ChatService;
+import com.shellwe.websocket.service.HttpService;
+import com.shellwe.websocket.service.WsService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
@@ -26,60 +27,23 @@ import java.util.stream.Collectors;
 @Component
 public class WebSockChatHandler extends TextWebSocketHandler {
     private final ObjectMapper objectMapper;
-    private final ChatService chatService;
+    private final HttpService httpService;
     private final MessageRepository messageRepository;
     private final RoomMapper roomMapper;
     private final MemberRepository memberRepository;
+    private final WsService wsService;
     private final Gson gson;
     private Map<Long, ChatRoom> chatRooms = new LinkedHashMap<>();
 
     @Override
     public void afterConnectionEstablished(WebSocketSession session) throws Exception, IOException{
-        System.out.println("afterConnectionEstablished:" + session);
-        // sessionId가 계속 바뀜
+        // session을 room에 참여 시키기
+        wsService.joinRoom(session);
 
-        // 연결시 db에 저장된 룸의 메세지들을 현재 세션에 출력 (모든 세션을 식별할 필요가 없어짐)
-        // 문제는 상대방이 메세지를 보냈을때 ws에서 감지할 수 있는가? 룸이라는 맵 무조건 필요한듯
+        // db에 저장된 이전 메세지들 로딩
+        List<MessageDto.Response> responses = wsService.getMessageResponse(session);
 
-        // uri에서 member와 room id 분리
-        HashMap<String, Long> attribute = new HashMap<>();
-        Arrays.stream(session.getUri().getQuery().split("&"))
-                .map(s -> s.split("="))
-                .forEach(a-> attribute.put(a[0],Long.parseLong(a[1])));
-        long roomId = attribute.get("roomId"); // room이 존재하는지 확인
-        long memberId = attribute.get("memberId");
-
-        // 챗룸 생성 및 세션 정보 넣기, 챗룸이 있을경우 세션정보만
-        // service로 로직 옴겨주기
-        MemberDto.Response member = roomMapper.memberToMemberResponse(memberRepository.findById(memberId).get());
-
-        ChatMember chatMember = ChatMember.builder().member(member).session(session).build();
-
-        if(chatRooms.containsKey(roomId)){
-            chatRooms.get(roomId).setMembers(chatMember);
-        }else {
-            ChatRoom chatRoom = new ChatRoom(roomId);
-            chatRoom.setMembers(chatMember);
-            chatRooms.put(roomId, chatRoom);
-        }
-
-
-        // db에서 과거 메시지들 찾아서 불러오기
-        // roomId를 이용해서 모든 메세지들 가저오기
-        List<Message> messages = messageRepository.findAllByRoomOrderByMessageIdAsc(new Room(roomId));
-
-        // 모든 메세지들 + 작성자의 정보를 response dto로 변환 (맵퍼생성하기)
-        List<MessageDto.Response> responses = messages.stream().map(
-                m-> MessageDto.Response.builder()
-                            .createdAt(m.getCreatedAt())
-                            .payload(m.getPayload())
-                            .roomId(roomId)
-                            .member(roomMapper.memberToMemberResponse(m.getMember()))
-                            .isMine(memberId==m.getMember().getMemberId())
-                            .build()
-        ).collect(Collectors.toList());
-
-        // 모든메세지들을 자신의 세션에 메세지 전송
+        // 이전 메세지들 세션에 보내기
         responses.forEach(r-> {
             try {
                 session.sendMessage(new TextMessage(objectMapper.writeValueAsString(r)));
@@ -101,10 +65,10 @@ public class WebSockChatHandler extends TextWebSocketHandler {
         log.info("payload {}", payload);
         ChatMessage chatMessage = objectMapper.readValue(payload, ChatMessage.class);
 
-        ChatRoom room = chatService.findRoomById(chatMessage.getRoomId());
+        ChatRoom room = httpService.findRoomById(chatMessage.getRoomId());
         //
 
-        room.handleActions(session, chatMessage, chatService);
+        room.handleActions(session, chatMessage, httpService);
     }
 
     public void afterConnectionClosed(WebSocketSession session, CloseStatus status) throws Exception {
