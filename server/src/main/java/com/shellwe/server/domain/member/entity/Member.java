@@ -26,6 +26,9 @@ public class Member extends TimeTracker {
 
     private String email;
 
+    @Column(name = "EMAIL_VERIFICATION_STATUS", nullable = false)
+    private Boolean emailVerificationStatus;
+
     private String password;
 
     private String displayName;
@@ -35,19 +38,28 @@ public class Member extends TimeTracker {
 
     public Member(Member member, String password) {
         this.email = member.getEmail();
+        this.emailVerificationStatus = member.getEmailVerificationStatus();
         this.displayName = member.getDisplayName();
         this.shells = member.getShells();
         this.password = password;
     }
 
     @Builder
-    public Member(String email, String password, String displayName, List<Shell> shells) {
+    public Member(String email,
+                  String password,
+                  String displayName,
+                  List<Shell> shells) {
+
         this.email = email;
         this.password = password;
         this.displayName = displayName;
         if (shells != null) {
             this.shells = shells;
         }
+    }
+
+    public void emailVerificationCompleted() {
+        this.emailVerificationStatus = true;
     }
 
     public void addShell(Shell shell) {
