@@ -7,6 +7,7 @@ import com.shellwe.server.domain.member.dto.response.FindResponseDto;
 import com.shellwe.server.domain.member.entity.Member;
 import com.shellwe.server.domain.member.mapper.MemberMapper;
 import com.shellwe.server.domain.member.repository.MemberRepository;
+import com.shellwe.server.email.EmailSendable;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -21,15 +22,18 @@ public class MemberService {
     private final MemberRepository memberRepository;
     private final MemberMapper memberMapper;
     private final PasswordEncoder passwordEncoder;
+    private final EmailSendable emailSendable;
 
     @Autowired
-    public MemberService(MemberRepository memberRepository, MemberMapper memberMapper, PasswordEncoder passwordEncoder) {
+    public MemberService(MemberRepository memberRepository, MemberMapper memberMapper,
+                         PasswordEncoder passwordEncoder, EmailSendable emailSendable) {
         this.memberRepository = memberRepository;
         this.memberMapper = memberMapper;
         this.passwordEncoder = passwordEncoder;
+        this.emailSendable = emailSendable;
     }
 
-    public void signUpMember(SignUpRequestDto signUpRequestDto) {
+    public void signUpMember(SignUpRequestDto signUpRequestDto) throws InterruptedException {
         Member member = memberMapper.signUpRequestDtoToMember(signUpRequestDto);
         log.info("sign-up in service layer start, member : {}", member);
         verifyExistEmail(member.getEmail());
@@ -37,7 +41,19 @@ public class MemberService {
         Member encryptedMember = new Member(member, passwordEncoder.encode(member.getPassword()));
         memberRepository.save(encryptedMember);
 
+        emailSendable.send(new String[]{member.getEmail()}, "회원가입 인증",
+                member.getEmail(), "email-registration-member");
         log.info("sign-up in service layer done");
+    }
+
+    public void verifyEmail(String email) {
+        Optional<Member> byEmail = memberRepository.findByEmail(email);
+        Member findMember = byEmail.orElseThrow(() -> new IllegalStateException());
+
+        findMember.emailVerificationCompleted();
+        memberRepository.save(findMember);
+
+        log.info("email verification completed");
     }
 
     public FindResponseDto findMemberById(Long memberId) {
