@@ -1,11 +1,15 @@
 package com.shellwe.server.auth.config;
 
 import com.shellwe.server.auth.filter.JwtAuthenticationFilter;
+import com.shellwe.server.auth.filter.JwtVerificationFilter;
 import com.shellwe.server.auth.handler.loginAuthenticationFailureHandler;
 import com.shellwe.server.auth.handler.loginAuthenticationSuccessHandler;
+import com.shellwe.server.auth.handler.tokenVerificationFailedHandler;
+import com.shellwe.server.auth.handler.verificationAuthFailedHandler;
 import com.shellwe.server.auth.jwt.JwtTokenizer;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -66,7 +70,11 @@ public class SecurityConfiguration {
             jwtAuthenticationFilter.setAuthenticationSuccessHandler(new loginAuthenticationSuccessHandler());
             jwtAuthenticationFilter.setAuthenticationFailureHandler(new loginAuthenticationFailureHandler());
 
-            builder.addFilter(jwtAuthenticationFilter);
+            JwtVerificationFilter jwtVerificationFilter = new JwtVerificationFilter(jwtTokenizer);
+
+            builder
+                    .addFilter(jwtAuthenticationFilter)
+                    .addFilterAfter(jwtVerificationFilter, JwtAuthenticationFilter.class);
         }
     }
 
@@ -83,8 +91,18 @@ public class SecurityConfiguration {
                 .formLogin().disable()
                 .httpBasic().disable()
                 .exceptionHandling()
+                .authenticationEntryPoint(new tokenVerificationFailedHandler())
+                .accessDeniedHandler(new verificationAuthFailedHandler())
                 .and()
-                .apply(new CustomFilterConfigurer());
+                .apply(new CustomFilterConfigurer())
+                .and()
+                .authorizeHttpRequests(authorize -> authorize
+                        .mvcMatchers(HttpMethod.GET, "/**").permitAll()
+                        .mvcMatchers(HttpMethod.POST, "/members").permitAll()
+                        .mvcMatchers(HttpMethod.POST, "/auth/login").permitAll()
+                        .mvcMatchers("/**").hasAuthority("EMAIL_VERIFIED")
+                        .anyRequest().authenticated()
+                );
 
         return http.build();
     }
