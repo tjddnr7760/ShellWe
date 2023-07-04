@@ -2,12 +2,14 @@ package com.shellwe.websocket.service;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.shellwe.websocket.dto.ChatRoom;
-import com.shellwe.websocket.dto.WsDto;
+import com.shellwe.websocket.dto.RoomDto;
 import com.shellwe.websocket.entity.Member;
 import com.shellwe.websocket.entity.MemberRoom;
+import com.shellwe.websocket.entity.Message;
 import com.shellwe.websocket.entity.Room;
-import com.shellwe.websocket.mapper.WsMapper;
+import com.shellwe.websocket.mapper.RoomMapper;
 import com.shellwe.websocket.repository.MemberRoomRepository;
+import com.shellwe.websocket.repository.MessageRepository;
 import com.shellwe.websocket.repository.RoomRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -26,32 +28,26 @@ public class ChatService {
     private final RoomRepository roomRepository;
     private final ObjectMapper objectMapper;
     private final MemberRoomRepository memberRoomRepository;
-    private final WsMapper wsMapper;
-    private Map<Long, ChatRoom> chatRooms;
+    private final MessageRepository messageRepository;
+    private final RoomMapper roomMapper;
 
-
-    @PostConstruct
-    private void init() {
-        chatRooms = new LinkedHashMap<>();
-    }
-
-    public List<WsDto.Response> findAllRoom() {
-
-
+    public List<RoomDto.Response> findAllRoom() {
         long myId = 1; // security context holder 접근 필요
         List<MemberRoom> memberRooms = memberRoomRepository.findAllMyRoomsWithSeller(myId);
 
-
-        // API명세서에 나온대로 response Dto 만들어서 리턴 주기
-        return wsMapper.memberRoomsToWsResponses(memberRooms);
+        return roomMapper.memberRoomsToWsResponses(memberRooms);
     }
 
     public ChatRoom findRoomById(Long roomId) {
-        // db에서 룸 검색
-        return chatRooms.get(roomId);
+        // db에서 룸 검색, 이후 메세지 로직
+
+
+
+//        return chatRooms.get(roomId);
+        return null;
     }
 
-    public ChatRoom createRoom(WsDto.Post requestBody) {
+    public ChatRoom createRoom(RoomDto.Post requestBody) {
         Room newRoom = roomRepository.save(new Room());
 
         long myId = 1; // security context holder 접근 필요
@@ -71,13 +67,28 @@ public class ChatService {
         memberRoomRepository.save(memberRoom2);
         // =========== 룸 생성, 멤버 연결
 
-        // 메세지 생성
+        Message message = new Message();
+        message.setRoom(newRoom);
+        message.setMember(new Member(myId));
+        message.setPayload("/shells/"+requestBody.getMyShellId()+"와 교환하기를 원합니다.");
 
-        ChatRoom chatRoom = ChatRoom.builder()
-                .roomId(newRoom.getRoomId())
-                .build();
-        chatRooms.put(newRoom.getRoomId(), chatRoom);
-        return chatRoom;
+        Message message2 = new Message();
+        message2.setRoom(newRoom);
+        message2.setMember(new Member(requestBody.getSellerMemberId()));
+        message2.setPayload("/shells/"+requestBody.getSellerShellId()+"와 교환하기를 원합니다.");
+
+        messageRepository.save(message);
+        messageRepository.save(message2);
+        // 초기 메세지 생성 ChatRoom.handleActions 참고
+
+        // 이후 컨트롤러와 조정해서 리턴값 생성
+
+//        ChatRoom chatRoom = ChatRoom.builder()
+//                .roomId(newRoom.getRoomId())
+//                .build();
+//        chatRooms.put(newRoom.getRoomId(), chatRoom);
+//        return chatRoom;
+        return null;
     }
 
     public <T> void sendMessage(WebSocketSession session, T message) {
