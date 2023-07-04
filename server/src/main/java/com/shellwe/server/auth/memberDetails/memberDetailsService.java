@@ -1,13 +1,15 @@
-package com.shellwe.server.global.auth.memberDetails;
+package com.shellwe.server.auth.memberDetails;
 
 import com.shellwe.server.domain.member.entity.Member;
 import com.shellwe.server.domain.member.repository.MemberRepository;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.stereotype.Component;
 
 import java.util.Optional;
 
+@Component
 public class memberDetailsService implements UserDetailsService {
 
     private final MemberRepository memberRepository;

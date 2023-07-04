@@ -1,4 +1,4 @@
-package com.shellwe.server.global.auth.memberDetails;
+package com.shellwe.server.auth.memberDetails;
 
 import com.shellwe.server.domain.member.entity.Member;
 import org.springframework.security.core.GrantedAuthority;
@@ -10,7 +10,12 @@ import java.util.Collections;
 public class memberDetails extends Member implements UserDetails {
 
     public memberDetails(Member member) {
-        super(member.getEmail(), member.getPassword(), member.getDisplayName(), member.getShells());
+        super(member.getId(),
+                member.getEmail(),
+                member.getEmailVerificationStatus(),
+                member.getPassword(),
+                member.getDisplayName(),
+                member.getShells());
     }
 
     @Override

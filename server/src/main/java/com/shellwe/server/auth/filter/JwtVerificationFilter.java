@@ -1,4 +1,5 @@
-package com.shellwe.server.global.auth.filter;
+package com.shellwe.server.auth.filter;
 
-public class jwtVerificationFilter {
+public class JwtVerificationFilter {
+
 }
