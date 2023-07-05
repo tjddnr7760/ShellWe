@@ -22,6 +22,8 @@ public class ChatRoom {
     public void setSessions(WebSocketSession session){
         sessions.add(session);
     }
+    public void removeSession(WebSocketSession session) {sessions.remove(session);}
+
 
     public void handleActions(WebSocketSession session, ChatMessage chatMessage, HttpService httpService) {
         if (chatMessage.getType().equals(ChatMessage.MessageType.ENTER)) {

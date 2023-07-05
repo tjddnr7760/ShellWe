@@ -13,8 +13,10 @@ import com.shellwe.websocket.repository.MessageRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+import org.springframework.web.socket.TextMessage;
 import org.springframework.web.socket.WebSocketSession;
 
+import java.io.IOException;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -28,7 +30,33 @@ public class WsService {
     private final RoomMapper roomMapper;
     private final MemberRepository memberRepository;
     private Map<Long, ChatRoom> chatRooms = new LinkedHashMap<>();
-    public QueryDto getQuery(WebSocketSession session){
+
+    public void terminateSession(WebSocketSession session){
+        QueryDto query = getQuery(session);
+
+        chatRooms.get(query.getRoomId()).removeSession(session);
+        if(chatRooms.get(query.getRoomId()).getSessions().size()==0) chatRooms.remove(query.getRoomId());
+    }
+
+    public void getPreviousMessages(WebSocketSession session){
+        // session을 room에 참여 시키기
+        joinRoom(session);
+
+        // db에 저장된 이전 메세지들 로딩
+        List<MessageDto.Response> responses = getMessageResponse(session);
+
+        // 이전 메세지들 세션에 보내기
+        responses.forEach(r-> {
+            try {
+                session.sendMessage(new TextMessage(objectMapper.writeValueAsString(r)));
+                // 메세지들 Unread true 필터로 찾은후 false로 바꾸기
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        });
+    }
+
+    private QueryDto getQuery(WebSocketSession session){
         // security context holder에 접근이 가능하면 memberId는 뺄수 있음
 
         QueryDto query = new QueryDto();
@@ -40,7 +68,7 @@ public class WsService {
                 });
         return query;
     }
-    public ChatRoom joinRoom(WebSocketSession session){
+    private ChatRoom joinRoom(WebSocketSession session){
         // 연결시 db에 저장된 룸의 메세지들을 현재 세션에 출력 (모든 세션을 식별할 필요가 없어짐)
         // 문제는 상대방이 메세지를 보냈을때 ws에서 감지할 수 있는가? 룸이라는 맵 무조건 필요한듯
 
@@ -59,7 +87,7 @@ public class WsService {
         return chatRooms.get(roomId);
     }
 
-    public List<MessageDto.Response> getMessageResponse(WebSocketSession session){
+    private List<MessageDto.Response> getMessageResponse(WebSocketSession session){
         QueryDto query = getQuery(session);
         long roomId = query.getRoomId();
         long memberId = query.getMemberId();
