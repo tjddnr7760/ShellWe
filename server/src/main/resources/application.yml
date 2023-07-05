@@ -1,12 +1,4 @@
 spring:
-#  h2:
-#    console:
-#      enabled: true
-#      path: /h2
-#      settings:
-#        web-allow-others: true
-#  datasource:
-#    url: jdbc:h2:mem:test
   datasource:
     url: jdbc:mysql://localhost:3306/shellweprototype?useSSL=false
     username: root
@@ -15,13 +7,13 @@ spring:
   jpa:
     database-platform: org.hibernate.dialect.MySQL8Dialect
     hibernate:
-      ddl-auto: update    # 스키마 자동 생성
-    show-sql: true        # SQL 쿼리 출력
+      ddl-auto: update
+    show-sql: true
     properties:
       hibernate:
-        format_sql: true  # SQL pretty print
+        format_sql: true
         jdbc:
-          time_zone: Asia/Seoul   # 서버 시간 서울로 변경
+          time_zone: Asia/Seoul
   sql:
     init:
       data-locations: classpath*:db/mysql/data.sql
@@ -30,35 +22,17 @@ spring:
       client:
         registration:
           google:
-            client-id: ${G_CLIENT_ID}
-            client-secret: ${G_CLIENT_SECRET}
+            clientId: fake
+            clientSecret: fake
             scope:
               - profile
               - email
-
-logging:
-  level:
-    org:
-      springframework:
-        orm:
-          jpa: DEBUG
-
-server:                   # 모든 response 에 대해 지정된 인코딩 적용(한글 깨짐 방지)
-  servlet:
-    encoding:
-      force-response: true
-
-jwt:
-  key: "kevin12341234123412341234123412341234" #${JWT_SECRET_KEY}  # 시스템 환경 변수에서 로드
-  access-token-expiration-minutes: 500
-  refresh-token-expiration-minutes: 600
-
 mail:
   smtp:
     host: smtp.gmail.com
     port: 587
-    username: fakeEmail@gmail.com
-    password: fakepassword
+    username: fake
+    password: fake
     auth: true
     starttls:
       enable: true
@@ -69,3 +43,18 @@ mail:
     name:
       member:
         join: email-registration-member
+logging:
+  level:
+    org:
+      springframework:
+        orm:
+          jpa: DEBUG
+
+server:
+  servlet:
+    encoding:
+      force-response: true
+jwt:
+  key: "kevin12341234123412341234123412341234"
+  access-token-expiration-minutes: 500
+  refresh-token-expiration-minutes: 600
