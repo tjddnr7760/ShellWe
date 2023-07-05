@@ -30,7 +30,7 @@ public class JwtVerificationFilter extends OncePerRequestFilter {
     }
 
     private static final String[] whitelist = {
-            "/members", "/auth/login", "/members/email/*",
+            "/members", "/auth/login", "/members/email/*", "/login/oauth2/*", "/login"
     };
 
     @Override
