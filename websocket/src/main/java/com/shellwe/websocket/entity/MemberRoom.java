@@ -15,12 +15,15 @@ public class MemberRoom {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long memberRoomId;
 
+    @Column
+    private boolean active = true;
+
     @ManyToOne
     @JoinColumn(name = "member_id")
     private Member member;
 
     @ManyToOne
-    @JoinColumn(name = "room_id",unique = false)
+    @JoinColumn(name = "room_id")
     private Room room;
 
     public void setMember(Member member){

@@ -49,12 +49,18 @@ public class HttpService {
     public ChatRoom findRoomById(Long roomId) {
         // db에서 룸 검색, 이후 메세지 로직
 
-
-
 //        return chatRooms.get(roomId);
         return null;
     }
 
+    public void deleteRoom(long roomId){
+        long memberId = 1L; // context holder 연결 필요
+
+        MemberRoom memberRoom = findExistsMemberRoom(roomId, memberId);
+
+        memberRoom.setActive(false);
+        memberRoomRepository.save(memberRoom);
+    }
     public ResponseDto createRoom(RoomDto.Post requestBody) {
         Room room = roomRepository.save(new Room());
         long myId = 1; // security context holder 접근 필요
@@ -114,5 +120,8 @@ public class HttpService {
         Optional<Member> optionalMember = memberRepository.findById(memberId);
         return optionalMember.orElseThrow(()->new BusinessLogicException(ExceptionCode.MEMBER_NOT_FOUND));
     }
-
+    private MemberRoom findExistsMemberRoom(long roomId, long memberId){
+        Optional<MemberRoom> optionalMemberRoom = memberRoomRepository.findByRoomAndMember(new Room(roomId), new Member(memberId));
+        return optionalMemberRoom.orElseThrow(()->new BusinessLogicException(ExceptionCode.MEMBER_ROOM_NOT_FOUND));
+    }
 }
