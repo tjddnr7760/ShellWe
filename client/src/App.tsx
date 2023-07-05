@@ -1,6 +1,7 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import './App.css'
 import GlobalStyle from './style/GlobalStyle.ts'
+import Avatar from './common/avatar/avatar.tsx'
 // import Header from './Components/Common/Header/Header';
 // import Sidebar from './Components/Common/Sidebar/Sidebar';
 // import Footer from './Components/Common/Footer/Footer';
@@ -19,6 +20,7 @@ function App() {
       <GlobalStyle />
       <main>
         <Routes>
+          <Route path='/' element={<Avatar />}></Route>
           {/* <Route path="/" element={} /> // 홈페이지
           <Route path="/main" element={} /> // 메인페이지
           <Route path="/login" element={} /> // 로그인

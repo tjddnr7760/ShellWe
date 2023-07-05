@@ -1,0 +1,39 @@
+// import { useEffect } from 'react';
+import { Icon, UserImg } from './Avatar.styled.ts';
+import userimg from '../../asset/avatar/userimg.svg';
+
+const Avatar: React.FC = () => {
+  // useEffect(() => {
+  //         // 비동기 함수 재사용
+  //         // method: GET
+  //         // api url:
+  //     })
+
+  return (
+    <>
+      <Icon>
+        <img src={userimg} alt="icon" />
+      </Icon>
+      <UserImg>
+        <img src={userimg} alt="icon" />
+      </UserImg>
+    </>
+  );
+};
+
+export default Avatar;
+
+// Nav Icon
+// 1. div로 동그라미 하나 만들기
+// 2. 규격 설정 35x35
+// 3. get 요청으로 recoil에 저장된 전역 memberId의 picture 렌더(주석으로 작성)
+
+// Shell userImg
+// 1. div로 동그라미 하나 만들기
+// 2. 규격 설정 50x50
+// 3. get 요청으로 이미지 불러오기(case로 분기)
+// 3-1. case 1(요청함 페이지)
+// shell.member.picture
+// 3-2. case 2
+// case 2-1. ChatList rooms.member.picture
+// case 2-2. ChatRoom messages.member.picture
