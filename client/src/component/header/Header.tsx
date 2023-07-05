@@ -5,10 +5,10 @@ const Header: React.FC = () => {
     <HeaderContainer>
       <Logo
         src="https://cdn-icons-png.flaticon.com/512/499/499857.png"
-        alt="로고"
+        alt="Logo"
       />
       <div>
-        <Button className="LoginButton">Log in</Button>
+        <Button className="LoginButton">Login</Button>
         <Button className="SignupButton">Sign up</Button>
       </div>
     </HeaderContainer>
