@@ -7,6 +7,8 @@ import com.shellwe.websocket.dto.MessageDto;
 import com.shellwe.websocket.dto.QueryDto;
 import com.shellwe.websocket.entity.Message;
 import com.shellwe.websocket.entity.Room;
+import com.shellwe.websocket.exception.businessLogicException.BusinessLogicException;
+import com.shellwe.websocket.exception.businessLogicException.ExceptionCode;
 import com.shellwe.websocket.mapper.RoomMapper;
 import com.shellwe.websocket.repository.MemberRepository;
 import com.shellwe.websocket.repository.MessageRepository;
@@ -25,17 +27,36 @@ import java.util.stream.Collectors;
 @Service
 public class WsService {
     private final ObjectMapper objectMapper;
-    private final HttpService httpService;
     private final MessageRepository messageRepository;
     private final RoomMapper roomMapper;
-    private final MemberRepository memberRepository;
     private Map<Long, ChatRoom> chatRooms = new LinkedHashMap<>();
+
+    public void sendMessage(WebSocketSession session, TextMessage message){
+        // 멤버룸 확인
+        // db에 메세지 생성, 비동기
+        // 각세션에 메세지 전송
+        // 시스템 메세지
+        System.out.println(message.getPayload());
+
+        throw new BusinessLogicException(ExceptionCode.MEMBER_ROOM_NOT_FOUND);
+
+//        QueryDto query = getQuery(session);
+//        long roomId = query.getRoomId();
+//        long memberId = 1L; // 컨텍스트 홀더 필요
+
+
+    }
+    private void saveMessage(TextMessage message){
+
+    }
+
 
     public void terminateSession(WebSocketSession session){
         QueryDto query = getQuery(session);
+        long roomId = query.getRoomId();
 
-        chatRooms.get(query.getRoomId()).removeSession(session);
-        if(chatRooms.get(query.getRoomId()).getSessions().size()==0) chatRooms.remove(query.getRoomId());
+        chatRooms.get(roomId).removeSession(session);
+        if(chatRooms.get(roomId).getSessions().size()==0) chatRooms.remove(roomId);
     }
 
     public void getPreviousMessages(WebSocketSession session){
