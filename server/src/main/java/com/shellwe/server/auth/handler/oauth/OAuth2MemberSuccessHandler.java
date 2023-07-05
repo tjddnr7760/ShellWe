@@ -66,7 +66,7 @@ public class OAuth2MemberSuccessHandler extends SimpleUrlAuthenticationSuccessHa
 
     private void redirectToken(HttpServletRequest request,
                                HttpServletResponse response,
-                               Member member) {
+                               Member member) throws IOException {
 
         String accessToken = delegateAccessToken(member);
         String refreshToken = delegateRefreshToken(member);
@@ -76,6 +76,9 @@ public class OAuth2MemberSuccessHandler extends SimpleUrlAuthenticationSuccessHa
 
         response.setContentType("application/json");
         response.setStatus(HttpStatus.OK.value());
+
+        String bodyContent = "OAuth2 토큰이 성공적으로 생성되었습니다.";
+        response.getWriter().write(bodyContent);
 
         log.info("oauth response completed");
     }
