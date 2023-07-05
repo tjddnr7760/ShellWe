@@ -38,6 +38,7 @@ create table message(
     created_at timestamp,
     last_modified_at timestamp,
     unread boolean,
+    notification boolean,
     room_id bigint,
     member_id bigint,
     primary key (message_id),

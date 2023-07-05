@@ -14,7 +14,8 @@ public class MessageDto {
     public static class Response{
         private Long roomId;
         private String payload;
-        private boolean isMine;
+        private boolean mine;
+        private boolean notification;
         private LocalDateTime createdAt;
         private MemberDto.Response member;
     }

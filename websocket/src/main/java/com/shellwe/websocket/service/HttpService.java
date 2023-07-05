@@ -22,12 +22,14 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.socket.TextMessage;
 import org.springframework.web.socket.WebSocketSession;
 
+import javax.transaction.Transactional;
 import java.io.IOException;
 import java.util.*;
 
 @Slf4j
 @RequiredArgsConstructor
 @Service
+@Transactional
 public class HttpService {
     @Value("${client-server.url}")
     private String url;
@@ -47,9 +49,8 @@ public class HttpService {
     }
 
     public ChatRoom findRoomById(Long roomId) {
-        // db에서 룸 검색, 이후 메세지 로직
+        // db에서 룸 검색, 이후 메세지 unread true만 리턴
 
-//        return chatRooms.get(roomId);
         return null;
     }
 
@@ -76,12 +77,6 @@ public class HttpService {
         // 생성된 룸에 상품정보 메세지 생성
         createInitMessage(room,myId,myShellId);
         createInitMessage(room,sellerId,sellerShellId);
-
-//        ChatRoom chatRoom = ChatRoom.builder()
-//                .roomId(newRoom.getRoomId())
-//                .build();
-//        chatRooms.put(newRoom.getRoomId(), chatRoom);
-//        return chatRoom;
 
         // 프론트엔드와 상의 후 response 다시 정의
         return ResponseDto.builder()
@@ -111,7 +106,8 @@ public class HttpService {
         Member member = findExistsMember(memberId);
         Message message = new Message();
         message.setRoom(room);
-        message.setMember(member);
+//        message.setMember(member);
+        message.setNotification(true);
         message.setPayload(member.getDisplayName()+"님께서 거래하실 Shell : " + url +"/shells/"+shellId);
         messageRepository.save(message);
     }

@@ -21,6 +21,9 @@ public class Message extends Auditable{
     @Column(columnDefinition = "boolean default true")
     private boolean unread;
 
+    @Column
+    private boolean Notification;
+
     @ManyToOne
     @JoinColumn(name = "member_id")
     private Member member;
