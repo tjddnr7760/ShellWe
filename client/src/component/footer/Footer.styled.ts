@@ -20,7 +20,7 @@ export const FooterContainer = styled.div`
     width: 380px;
     height: 20px;
     flex-shrink: 0;
-    gap: 30px;
+    gap: 31px;
   }
 
   span {

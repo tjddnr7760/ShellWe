@@ -10,7 +10,7 @@ const Footer: React.FC = () => {
         <span>Legal</span>
       </div>
       <div>
-        <span>Copyright © 2023 ShellWe Inc. All rights reserved.</span>
+        <span>Copyright © 2023 ShellWe Inc. All Rights Reserved.</span>
       </div>
     </FooterContainer>
   );
