@@ -41,14 +41,13 @@ public class MemberService {
         Member encryptedMember = new Member(member, passwordEncoder.encode(member.getPassword()));
         memberRepository.save(encryptedMember);
 
-        emailSendable.send(new String[]{member.getEmail()}, "회원가입 인증",
+        emailSendable.send(new String[]{member.getEmail()}, "ShellWe 회원가입 인증",
                 member.getEmail(), "email-registration-member");
-        log.info("sign-up in service layer done");
+        log.info("sent email and sign-up in service layer done");
     }
 
     public void verifyEmail(String email) {
-        Optional<Member> byEmail = memberRepository.findByEmail(email);
-        Member findMember = byEmail.orElseThrow(() -> new IllegalStateException());
+        Member findMember = findByEmail(email);
 
         findMember.emailVerificationCompleted();
         memberRepository.save(findMember);
@@ -56,47 +55,73 @@ public class MemberService {
         log.info("email verification completed");
     }
 
-    public FindResponseDto findMemberById(Long memberId) {
+    public FindResponseDto findMemberById(String email, Long memberId) {
         log.info("find member in service layer by Id start, memberId : {}", memberId);
+        FindResponseDto findResponseDto = new FindResponseDto();
+        if (email == null) {
+            Member findMember = findById(memberId);
+            findResponseDto.setMeIdName(false, findMember.getId(), findMember.getDisplayName());
+            return findResponseDto;
+        }
 
-        Optional<Member> optionalMember = memberRepository.findById(memberId);
-        Member findMember = optionalMember.orElseThrow(() -> new IllegalStateException());
+        Member member = findByEmail(email);
+        if (member.getId() != memberId) {
+            Member findMember = findById(memberId);
+            findResponseDto.setMeIdName(false, findMember.getId(), findMember.getDisplayName());
+        }
+        if (member.getId() == memberId) {
+            Member findMember = findById(memberId);
+            findResponseDto.setMeIdName(true, findMember.getId(), findMember.getDisplayName());
+        }
 
         log.info("find member in service layer by Id done");
-        return memberMapper.memberToFindResponseDto(findMember);
+        return findResponseDto;
     }
 
-    // password, displayName, img
-    // jwt 구현후 진행(인증필요)
     public void updateMember(String email, long memberId, UpdateRequestDto updateRequestDto) {
         log.info("update member in service layer start");
-        // 매퍼로 멤버 객체로 바꾼다.
-        Member member = memberMapper.updateRequestDtoToMember(updateRequestDto);
-        // 멤버 객체를 멤버의 파라미터로 넘긴다
+        Member findMember = findByEmail(email);
+        long findId = findMember.getId();
 
-        // 자동으로 값을 업데이트한다
+        if (memberId == findId) {
+            findMember.updateMember(updateRequestDto.getPassword(), updateRequestDto.getDisplayName(), passwordEncoder);
+            memberRepository.save(findMember);
+        } else {
+            throw new IllegalStateException("자신의 아이디만 수정 가능합니다.");
+        }
 
-        // 멤버를 저장한다
-
-        // 200을 반환한다
         log.info("update member in service layer end");
     }
 
-    // 회원 탈퇴(my page)
-    // jwt 구현후 진행(인증필요)
     public void deleteMember(String email, long memberId, DeleteRequestDto deleteRequestDto) {
         log.info("delete member in service layer start");
-        // 시큐리티에서 유저 아이디를 가져온다
+        Member findMember = findByEmail(email);
+        long findId = findMember.getId();
 
-        // 유저 아이디와 비밀번호를 검증한다
+        System.out.println("findId = " + findId);
+        System.out.println("memberId = " + memberId);
+        System.out.println("findMemberPassword = " + findMember.getPassword());
+        System.out.println("deleteRequestDto = " + deleteRequestDto.getPassword());
 
-        // 맞으면 회원을 삭제한다
-
-        // 틀리면 예외를 출력한다
-
-        // 회원을 삭제한다
+        if (memberId == findId && passwordEncoder.matches(deleteRequestDto.getPassword(), findMember.getPassword())) {
+            memberRepository.delete(findMember);
+        } else {
+            throw new IllegalStateException("자신의 아이디만 삭제 가능합니다.");
+        }
 
         log.info("delete member in service layer end");
+    }
+
+    private Member findByEmail(String email) {
+        Optional<Member> byEmail = memberRepository.findByEmail(email);
+        Member member = byEmail.orElseThrow(() -> new IllegalStateException());
+        return member;
+    }
+
+    private Member findById(long memberId) {
+        Optional<Member> byId = memberRepository.findById(memberId);
+        Member member = byId.orElseThrow(() -> new IllegalStateException());
+        return member;
     }
 
     private void verifyExistEmail(String email) {
