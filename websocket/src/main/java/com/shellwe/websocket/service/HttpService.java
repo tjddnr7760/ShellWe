@@ -112,12 +112,12 @@ public class HttpService {
         messageRepository.save(message);
     }
 
-    private Member findExistsMember(long memberId){
+    public Member findExistsMember(long memberId){
         Optional<Member> optionalMember = memberRepository.findById(memberId);
         return optionalMember.orElseThrow(()->new BusinessLogicException(ExceptionCode.MEMBER_NOT_FOUND));
     }
     private MemberRoom findExistsMemberRoom(long roomId, long memberId){
-        Optional<MemberRoom> optionalMemberRoom = memberRoomRepository.findByRoomAndMember(new Room(roomId), new Member(memberId));
+        Optional<MemberRoom> optionalMemberRoom = memberRoomRepository.findByRoomAndMemberAndActiveTrue(new Room(roomId), new Member(memberId));
         return optionalMemberRoom.orElseThrow(()->new BusinessLogicException(ExceptionCode.MEMBER_ROOM_NOT_FOUND));
     }
 }
