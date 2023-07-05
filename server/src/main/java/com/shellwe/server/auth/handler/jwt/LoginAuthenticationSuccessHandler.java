@@ -1,4 +1,4 @@
-package com.shellwe.server.auth.handler;
+package com.shellwe.server.auth.handler.jwt;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.shellwe.server.domain.member.entity.Member;
@@ -15,7 +15,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 @Slf4j
-public class loginAuthenticationSuccessHandler implements AuthenticationSuccessHandler {
+public class LoginAuthenticationSuccessHandler implements AuthenticationSuccessHandler {
 
     @Override
     public void onAuthenticationSuccess(HttpServletRequest request,

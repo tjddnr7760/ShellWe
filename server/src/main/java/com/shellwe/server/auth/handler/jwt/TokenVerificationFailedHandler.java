@@ -1,4 +1,4 @@
-package com.shellwe.server.auth.handler;
+package com.shellwe.server.auth.handler.jwt;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
@@ -13,7 +13,7 @@ import java.io.IOException;
 
 @Slf4j
 @Component
-public class tokenVerificationFailedHandler implements AuthenticationEntryPoint {
+public class TokenVerificationFailedHandler implements AuthenticationEntryPoint {
     @Override
     public void commence(HttpServletRequest request, HttpServletResponse response, AuthenticationException authException) throws IOException, ServletException {
         Exception exception = (Exception) request.getAttribute("exception");
