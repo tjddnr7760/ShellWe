@@ -6,6 +6,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -60,6 +61,16 @@ public class Member extends TimeTracker {
 
     public void emailVerificationCompleted() {
         this.emailVerificationStatus = true;
+    }
+
+    public void updateMember(String password, String displayName, PasswordEncoder passwordEncoder) {
+        if (password != null) {
+            this.password = passwordEncoder.encode(password);
+        }
+
+        if (displayName != null) {
+            this.displayName = displayName;
+        }
     }
 
     public void addShell(Shell shell) {
