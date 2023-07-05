@@ -1,16 +1,21 @@
 package com.shellwe.websocket.service;
 
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.google.gson.Gson;
 import com.shellwe.websocket.dto.ChatRoom;
 import com.shellwe.websocket.dto.MessageDto;
 import com.shellwe.websocket.dto.QueryDto;
+import com.shellwe.websocket.entity.Member;
+import com.shellwe.websocket.entity.MemberRoom;
 import com.shellwe.websocket.entity.Message;
 import com.shellwe.websocket.entity.Room;
 import com.shellwe.websocket.exception.businessLogicException.BusinessLogicException;
 import com.shellwe.websocket.exception.businessLogicException.ExceptionCode;
 import com.shellwe.websocket.mapper.RoomMapper;
 import com.shellwe.websocket.repository.MemberRepository;
+import com.shellwe.websocket.repository.MemberRoomRepository;
 import com.shellwe.websocket.repository.MessageRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -19,6 +24,8 @@ import org.springframework.web.socket.TextMessage;
 import org.springframework.web.socket.WebSocketSession;
 
 import java.io.IOException;
+import java.sql.Timestamp;
+import java.time.LocalDateTime;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -28,26 +35,54 @@ import java.util.stream.Collectors;
 public class WsService {
     private final ObjectMapper objectMapper;
     private final MessageRepository messageRepository;
+    private final MemberRoomRepository memberRoomRepository;
     private final RoomMapper roomMapper;
+    private final HttpService httpService;
+    private final Gson gson;
     private Map<Long, ChatRoom> chatRooms = new LinkedHashMap<>();
 
-    public void sendMessage(WebSocketSession session, TextMessage message){
-        // 멤버룸 확인
-        // db에 메세지 생성, 비동기
-        // 각세션에 메세지 전송
-        // 시스템 메세지
-        System.out.println(message.getPayload());
+    public void handleMessage(WebSocketSession session, TextMessage message) throws IOException {
+        // 각세션에 메세지 전송, 비동기
+        QueryDto query = getQuery(session);
+        long roomId = query.getRoomId();
+        long memberId = 1L; // 컨텍스트 홀더 필요
 
-        throw new BusinessLogicException(ExceptionCode.MEMBER_ROOM_NOT_FOUND);
-
-//        QueryDto query = getQuery(session);
-//        long roomId = query.getRoomId();
-//        long memberId = 1L; // 컨텍스트 홀더 필요
-
+        saveMessage(message,roomId,memberId);
+        sendMessage(session, message, roomId);
 
     }
-    private void saveMessage(TextMessage message){
+    private void sendMessage(WebSocketSession session, TextMessage message, long roomId) throws IOException {
+        long memberId = 1L; // 컨텍스트 홀더 필요
 
+        Member member = httpService.findExistsMember(memberId); // 시큐리티 적용후 세션 혹은 컨텍스트 홀더에서 사용자 정보를 구할 수 있을시 로직 변경
+
+        ChatRoom chatRoom = chatRooms.get(roomId);
+
+        chatRoom.getSessions().forEach(sessions->{
+            MessageDto.Response response = MessageDto.Response.builder()
+                    .roomId(roomId)
+                    .payload(message.getPayload())
+                    .createdAt(Timestamp.valueOf(LocalDateTime.now()).toLocalDateTime())
+                    .member(roomMapper.memberToMemberResponse(member))
+                    .build();
+            if(sessions.equals(session)) response.setMine(true);
+            try {
+                sessions.sendMessage(new TextMessage(objectMapper.writeValueAsString(response)));
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        });
+    }
+
+    private void saveMessage(TextMessage textMessage, long roomId, long memberId){
+        new Thread(()->{
+            Message message = new Message();
+            message.setRoom(new Room(roomId));
+            message.setMember(new Member(memberId));
+            message.setPayload(textMessage.getPayload());
+
+            messageRepository.save(message);
+        }).start();
     }
 
 
@@ -59,14 +94,15 @@ public class WsService {
         if(chatRooms.get(roomId).getSessions().size()==0) chatRooms.remove(roomId);
     }
 
-    public void getPreviousMessages(WebSocketSession session){
-        // session을 room에 참여 시키기
-        joinRoom(session);
+    public void getPreviousMessages(WebSocketSession session) throws IOException {
+        long roomId = getQuery(session).getRoomId();
+        long memberId = 1L; // 시큐리티 컨텍스트 홀더
 
-        // db에 저장된 이전 메세지들 로딩
-        List<MessageDto.Response> responses = getMessageResponse(session);
+        joinRoom(session, roomId);
+        findExistsMemberRoom(session,roomId,memberId);
 
-        // 이전 메세지들 세션에 보내기
+        List<MessageDto.Response> responses = getMessageResponse(roomId, memberId);
+
         responses.forEach(r-> {
             try {
                 session.sendMessage(new TextMessage(objectMapper.writeValueAsString(r)));
@@ -89,14 +125,7 @@ public class WsService {
                 });
         return query;
     }
-    private ChatRoom joinRoom(WebSocketSession session){
-        // 연결시 db에 저장된 룸의 메세지들을 현재 세션에 출력 (모든 세션을 식별할 필요가 없어짐)
-        // 문제는 상대방이 메세지를 보냈을때 ws에서 감지할 수 있는가? 룸이라는 맵 무조건 필요한듯
-
-        long roomId = getQuery(session).getRoomId();
-        // 챗룸 생성 및 세션 정보 넣기, 챗룸이 있을경우 세션정보만
-        // service로 로직 옴겨주기
-        // DB에서 사용자 중복검색을 안함
+    private ChatRoom joinRoom(WebSocketSession session, long roomId){
 
         if(chatRooms.containsKey(roomId)){
             chatRooms.get(roomId).setSessions(session);
@@ -108,18 +137,26 @@ public class WsService {
         return chatRooms.get(roomId);
     }
 
-    private List<MessageDto.Response> getMessageResponse(WebSocketSession session){
-        QueryDto query = getQuery(session);
-        long roomId = query.getRoomId();
-        long memberId = query.getMemberId();
-
+    private List<MessageDto.Response> getMessageResponse(long roomId, long memberId){
         List<Message> messages = messageRepository.findAllByRoomOrderByMessageIdAsc(new Room(roomId));
 
-        // 모든 메세지들 + 작성자의 정보를 response dto로 변환 (맵퍼생성하기)
         List<MessageDto.Response> responses = messages.stream()
                 .map(message->roomMapper.messageToMessageResponse(message, memberId))
                 .collect(Collectors.toList());
 
         return responses;
+    }
+    private MemberRoom findExistsMemberRoom(WebSocketSession session, long roomId, long memberId) throws IOException {
+        Optional<MemberRoom> optionalMemberRoom = memberRoomRepository.findByRoomAndMemberAndActiveTrue(new Room(roomId), new Member(memberId));
+        if(optionalMemberRoom.isEmpty()) {
+            MessageDto.Response message = MessageDto.Response.builder()
+                    .notification(true)
+                    .roomId(roomId)
+                    .createdAt(Timestamp.valueOf(LocalDateTime.now()).toLocalDateTime())
+                    .payload("해당 채팅방의 접근권한이 없습니다.")
+                    .build();
+            session.sendMessage(new TextMessage(objectMapper.writeValueAsString(message)));
+            throw new BusinessLogicException(ExceptionCode.MEMBER_ROOM_NOT_FOUND);
+        }else return optionalMemberRoom.get();
     }
 }

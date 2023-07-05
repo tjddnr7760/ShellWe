@@ -19,6 +19,6 @@ public interface MemberRoomRepository extends JpaRepository<MemberRoom, Long> {
             "inner join (select room_id from member_room where member_id = ?1 and active = true) as a on a.room_id = member_room.room_id \n" +
             "where member_id != ?1", nativeQuery = true)
     List<MemberRoom> findAllMyRoomsWithSeller(Long memberId);
-    Optional<MemberRoom> findByRoomAndMember(Room room, Member member);
+    Optional<MemberRoom> findByRoomAndMemberAndActiveTrue(Room room, Member member);
     Optional<MemberRoom> findByRoom(Room room);
 }
