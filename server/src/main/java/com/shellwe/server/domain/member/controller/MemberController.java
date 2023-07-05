@@ -8,6 +8,7 @@ import com.shellwe.server.domain.member.service.MemberService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -34,36 +35,40 @@ public class MemberController {
     @GetMapping("/email/{email}")
     public String verificationMember(@PathVariable String email) throws InterruptedException {
         memberService.verifyEmail(email);
-
-        return "인증이 완료되었습니다.";
+        return "인증이 완료되었습니다. 새롭게 로그인 해주세요";
     }
-
-//    @ResponseStatus(HttpStatus.OK)
-//    @GetMapping("/{memberId}")
-//    public FindResponseDto getMyMemberById(Authentication authentication,
-//                                           @PathVariable long memberId) {
-//        FindResponseDto memberById = memberService.findMemberById(memberId);
-//        return memberById;
-//    }
 
     @ResponseStatus(HttpStatus.OK)
     @GetMapping("/{memberId}")
-    public FindResponseDto getOtherMemberById(@PathVariable long memberId) {
-        FindResponseDto memberById = memberService.findMemberById(memberId);
+    public FindResponseDto getMemberById(@PathVariable long memberId, Authentication authentication) {
+        FindResponseDto memberById = memberService.findMemberById(getEmail(authentication), memberId);
         return memberById;
     }
+
 
     @ResponseStatus(HttpStatus.OK)
     @PatchMapping("/{memberId}")
     public void updateMemberById(@PathVariable long memberId,
-                                 @RequestBody UpdateRequestDto updateRequestDto) {
-        memberService.updateMember("email", memberId, updateRequestDto);
+                                 @RequestBody UpdateRequestDto updateRequestDto,
+                                 Authentication authentication) {
+        memberService.updateMember(authentication.getName(), memberId, updateRequestDto);
     }
 
     @ResponseStatus(HttpStatus.NO_CONTENT)
     @DeleteMapping("/{memberId}")
     public void deleteMemberByIdAndPassword(@PathVariable long memberId,
-                                            @RequestBody DeleteRequestDto deleteRequestDto) {
-        memberService.deleteMember("email", memberId, deleteRequestDto);
+                                            @RequestBody DeleteRequestDto deleteRequestDto,
+                                            Authentication authentication) {
+        memberService.deleteMember(authentication.getName(), memberId, deleteRequestDto);
+    }
+
+    private String getEmail(Authentication authentication) {
+        String email;
+        if (authentication == null) {
+            email = null;
+        } else {
+            email = authentication.getName();
+        }
+        return email;
     }
 }
