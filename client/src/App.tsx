@@ -3,6 +3,7 @@ import './App.css';
 import GlobalStyle from './style/GlobalStyle.ts';
 import Button from './common/button/Button.tsx';
 import Nav from './component/nav/Nav.tsx';
+import Header from './component/header/Header.tsx';
 // import Header from './Components/Common/Header/Header';
 // import Sidebar from './Components/Common/Sidebar/Sidebar';
 // import Footer from './Components/Common/Footer/Footer';
@@ -16,6 +17,7 @@ import Nav from './component/nav/Nav.tsx';
 function App() {
   return (
     <BrowserRouter>
+      <Header />
       <GlobalStyle />
       <Button />
       <Nav />
