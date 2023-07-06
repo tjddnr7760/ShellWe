@@ -1,5 +1,6 @@
 package com.shellwe.server.domain.member.controller;
 
+import com.shellwe.server.auth.memberDetails.MemberContextInform;
 import com.shellwe.server.domain.member.dto.request.DeleteRequestDto;
 import com.shellwe.server.domain.member.dto.request.SignUpRequestDto;
 import com.shellwe.server.domain.member.dto.request.UpdateRequestDto;
@@ -47,17 +48,16 @@ public class MemberController {
     @ResponseStatus(HttpStatus.OK)
     @GetMapping("/{memberId}")
     public FindResponseDto getMemberById(@PathVariable long memberId, Authentication authentication) {
-        FindResponseDto memberById = memberService.findMemberById(getEmail(authentication), memberId);
+        FindResponseDto memberById = memberService.findMemberById(getId(authentication), memberId);
         return memberById;
     }
-
 
     @ResponseStatus(HttpStatus.OK)
     @PatchMapping("/{memberId}")
     public void updateMemberById(@PathVariable long memberId,
                                  @RequestBody UpdateRequestDto updateRequestDto,
                                  Authentication authentication) {
-        memberService.updateMember(authentication.getName(), memberId, updateRequestDto);
+        memberService.updateMember(getId(authentication), memberId, updateRequestDto);
     }
 
     @ResponseStatus(HttpStatus.NO_CONTENT)
@@ -65,16 +65,18 @@ public class MemberController {
     public void deleteMemberByIdAndPassword(@PathVariable long memberId,
                                             @RequestBody DeleteRequestDto deleteRequestDto,
                                             Authentication authentication) {
-        memberService.deleteMember(authentication.getName(), memberId, deleteRequestDto);
+        memberService.deleteMember(getId(authentication), memberId, deleteRequestDto);
     }
 
-    private String getEmail(Authentication authentication) {
-        String email;
+    private Long getId(Authentication authentication) {
+        Long id;
         if (authentication == null) {
-            email = null;
+            id = null;
         } else {
-            email = authentication.getName();
+            MemberContextInform memberInform = (MemberContextInform) authentication.getPrincipal();
+            id = memberInform.getId();
         }
-        return email;
+        System.out.println("id = " + id);
+        return id;
     }
 }

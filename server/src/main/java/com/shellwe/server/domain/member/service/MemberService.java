@@ -61,35 +61,34 @@ public class MemberService {
         log.info("email verification completed");
     }
 
-    public FindResponseDto findMemberById(String email, Long memberId) {
+    public FindResponseDto findMemberById(Long contextId, Long memberId) {
         log.info("find member in service layer by Id start, memberId : {}", memberId);
         FindResponseDto findResponseDto = new FindResponseDto();
-        if (email == null) {
+
+        if (contextId == null) {
             Member findMember = findById(memberId);
             findResponseDto.setMeIdName(false, findMember.getId(), findMember.getDisplayName());
             return findResponseDto;
         }
-
-        Member member = findByEmail(email);
-        if (member.getId() != memberId) {
+        if (!contextId.equals(memberId)) {
             Member findMember = findById(memberId);
             findResponseDto.setMeIdName(false, findMember.getId(), findMember.getDisplayName());
+            return findResponseDto;
         }
-        if (member.getId() == memberId) {
+        if (contextId.equals(memberId)) {
             Member findMember = findById(memberId);
             findResponseDto.setMeIdName(true, findMember.getId(), findMember.getDisplayName());
+            return findResponseDto;
         }
 
-        log.info("find member in service layer by Id done");
         return findResponseDto;
     }
 
-    public void updateMember(String email, long memberId, UpdateRequestDto updateRequestDto) {
+    public void updateMember(long contextId, long memberId, UpdateRequestDto updateRequestDto) {
         log.info("update member in service layer start");
-        Member findMember = findByEmail(email);
-        long findId = findMember.getId();
 
-        if (memberId == findId) {
+        if (memberId == contextId) {
+            Member findMember = findById(memberId);
             findMember.updateMember(updateRequestDto.getPassword(), updateRequestDto.getDisplayName(), passwordEncoder);
             memberRepository.save(findMember);
         } else {
@@ -99,12 +98,11 @@ public class MemberService {
         log.info("update member in service layer end");
     }
 
-    public void deleteMember(String email, long memberId, DeleteRequestDto deleteRequestDto) {
+    public void deleteMember(long contextId, long memberId, DeleteRequestDto deleteRequestDto) {
         log.info("delete member in service layer start");
-        Member findMember = findByEmail(email);
-        long findId = findMember.getId();
+        Member findMember = findById(contextId);
 
-        if (memberId == findId && passwordEncoder.matches(deleteRequestDto.getPassword(), findMember.getPassword())) {
+        if (memberId == contextId && passwordEncoder.matches(deleteRequestDto.getPassword(), findMember.getPassword())) {
             memberRepository.delete(findMember);
         } else {
             throw new IllegalStateException("자신의 아이디만 삭제 가능합니다.");
