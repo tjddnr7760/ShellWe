@@ -7,15 +7,14 @@ import org.springframework.security.core.userdetails.UserDetails;
 import java.util.Collection;
 import java.util.Collections;
 
-public class memberDetails extends Member implements UserDetails {
+public class MemberDetails extends Member implements UserDetails {
 
-    public memberDetails(Member member) {
+    public MemberDetails(Member member) {
         super(member.getId(),
                 member.getEmail(),
                 member.getEmailVerificationStatus(),
                 member.getPassword(),
-                member.getDisplayName(),
-                member.getShells());
+                member.getDisplayName());
     }
 
     @Override

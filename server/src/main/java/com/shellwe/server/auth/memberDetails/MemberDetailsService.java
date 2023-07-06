@@ -10,11 +10,11 @@ import org.springframework.stereotype.Component;
 import java.util.Optional;
 
 @Component
-public class memberDetailsService implements UserDetailsService {
+public class MemberDetailsService implements UserDetailsService {
 
     private final MemberRepository memberRepository;
 
-    public memberDetailsService(MemberRepository memberRepository) {
+    public MemberDetailsService(MemberRepository memberRepository) {
         this.memberRepository = memberRepository;
     }
 
@@ -23,6 +23,6 @@ public class memberDetailsService implements UserDetailsService {
         Optional<Member> byEmail = memberRepository.findByEmail(email);
         Member member = byEmail.orElseThrow(() -> new IllegalStateException("회원 정보가 없습니다."));
 
-        return new memberDetails(member);
+        return new MemberDetails(member);
     }
 }
