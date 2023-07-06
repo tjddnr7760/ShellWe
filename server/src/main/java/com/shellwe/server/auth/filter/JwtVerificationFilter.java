@@ -2,6 +2,7 @@ package com.shellwe.server.auth.filter;
 
 import com.shellwe.server.auth.authority.EmailVerifiedAuthority;
 import com.shellwe.server.auth.jwt.JwtTokenizer;
+import com.shellwe.server.auth.memberDetails.MemberContextInform;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jws;
 import lombok.extern.slf4j.Slf4j;
@@ -42,16 +43,13 @@ public class JwtVerificationFilter extends OncePerRequestFilter {
         if (isLoginCheckPath((request.getRequestURI()))) {
             try {
                 log.info("verification filter active start");
-                Jws<Claims> jws = verifyJws(request);
-                String subject = jws.getBody().getSubject();
-                Map<String, Object> claims = jws.getBody();
-                setAuthenticationToContext(subject, claims);
+                Map<String, Object> claims = verifyJws(request).getBody();
+                setAuthenticationToContext(claims);
             } catch (Exception e) {
                 log.info("unauthorized member access denied");
                 request.setAttribute("exception", e);
             }
         }
-        log.info("verification filter active end");
         filterChain.doFilter(request, response);
     }
 
@@ -73,12 +71,18 @@ public class JwtVerificationFilter extends OncePerRequestFilter {
         return claims;
     }
 
-    private void setAuthenticationToContext(String subject, Map<String, Object> claims) {
+    private void setAuthenticationToContext(Map<String, Object> claims) {
+        String email = (String) claims.get("email");
+        String displayName = (String) claims.get("displayName");
+        String id = (String) claims.get("id");
         boolean emailVerificationStatus = (boolean) claims.get("emailVerificationStatus");
+
         List<EmailVerifiedAuthority> emailVerifiedAuthorities =
                 Collections.singletonList(new EmailVerifiedAuthority(emailVerificationStatus));
 
-        Authentication authentication = new UsernamePasswordAuthenticationToken(subject, null, emailVerifiedAuthorities);
+        MemberContextInform memberContextInform = new MemberContextInform(email, displayName, id);
+
+        Authentication authentication = new UsernamePasswordAuthenticationToken(memberContextInform, null, emailVerifiedAuthorities);
         SecurityContextHolder.getContext().setAuthentication(authentication);
     }
 }

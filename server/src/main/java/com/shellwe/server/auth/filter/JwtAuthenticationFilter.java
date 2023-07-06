@@ -67,10 +67,10 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
 
     private String delegateAccessToken(Member member) {
         Map<String, Object> claims = new HashMap<>();
+        claims.put("id", member.getId());
         claims.put("displayName", member.getDisplayName());
         claims.put("emailVerificationStatus", member.getEmailVerificationStatus());
-
-        System.out.println("member.getEmail() = " + member.getEmail());
+        //picture는 도메인 생성후 구현완료하면 추가하겠습니다.
 
         String subject = member.getEmail();
         Date expirations = jwtTokenizer.getTokenExpiration(jwtTokenizer.getAccessTokenExpirationMinutes());
