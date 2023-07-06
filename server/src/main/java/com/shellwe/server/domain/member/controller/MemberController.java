@@ -1,0 +1,82 @@
+package com.shellwe.server.domain.member.controller;
+
+import com.shellwe.server.auth.memberDetails.MemberContextInform;
+import com.shellwe.server.domain.member.dto.request.DeleteRequestDto;
+import com.shellwe.server.domain.member.dto.request.SignUpRequestDto;
+import com.shellwe.server.domain.member.dto.request.UpdateRequestDto;
+import com.shellwe.server.domain.member.dto.response.FindResponseDto;
+import com.shellwe.server.domain.member.service.MemberService;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.HttpStatus;
+import org.springframework.security.core.Authentication;
+import org.springframework.web.bind.annotation.*;
+
+import javax.servlet.http.HttpServletResponse;
+import javax.validation.Valid;
+import java.io.IOException;
+
+@Slf4j
+@RequestMapping("/members")
+@RestController
+public class MemberController {
+
+    private final MemberService memberService;
+
+    @Value("${redirect.email-verification-success-url}")
+    private String emailRedirectUrl;
+
+    @Autowired
+    public MemberController(MemberService memberService) {
+        this.memberService = memberService;
+    }
+
+    @ResponseStatus(HttpStatus.CREATED)
+    @PostMapping
+    public void signUpMember(@Valid @RequestBody SignUpRequestDto signUpRequestDto) throws InterruptedException {
+        memberService.signUpMember(signUpRequestDto);
+    }
+
+    @ResponseStatus(HttpStatus.OK)
+    @GetMapping("/email/{email}")
+    public void verificationMember(@PathVariable String email, HttpServletResponse response) throws IOException {
+        memberService.verifyEmail(email);
+        response.sendRedirect(emailRedirectUrl);
+    }
+
+    @ResponseStatus(HttpStatus.OK)
+    @GetMapping("/{memberId}")
+    public FindResponseDto getMemberById(@PathVariable long memberId, Authentication authentication) {
+        FindResponseDto memberById = memberService.findMemberById(getId(authentication), memberId);
+        return memberById;
+    }
+
+    @ResponseStatus(HttpStatus.OK)
+    @PatchMapping("/{memberId}")
+    public void updateMemberById(@PathVariable long memberId,
+                                 @RequestBody UpdateRequestDto updateRequestDto,
+                                 Authentication authentication) {
+        memberService.updateMember(getId(authentication), memberId, updateRequestDto);
+    }
+
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    @DeleteMapping("/{memberId}")
+    public void deleteMemberByIdAndPassword(@PathVariable long memberId,
+                                            @RequestBody DeleteRequestDto deleteRequestDto,
+                                            Authentication authentication) {
+        memberService.deleteMember(getId(authentication), memberId, deleteRequestDto);
+    }
+
+    private Long getId(Authentication authentication) {
+        Long id;
+        if (authentication == null) {
+            id = null;
+        } else {
+            MemberContextInform memberInform = (MemberContextInform) authentication.getPrincipal();
+            id = memberInform.getId();
+        }
+        System.out.println("id = " + id);
+        return id;
+    }
+}
