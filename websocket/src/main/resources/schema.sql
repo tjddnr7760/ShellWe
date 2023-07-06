@@ -8,7 +8,8 @@ create table member (
 	email varchar(255),
 	display_name varchar(255),
 	password varchar(255),
-	picture varchar(255),
+	profile_url varchar(255),
+	EMAIL_VERIFICATION_STATUS boolean,
 	created_at timestamp,
 	last_modified_at timestamp,
 	primary key (member_id)

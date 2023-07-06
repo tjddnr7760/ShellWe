@@ -28,7 +28,7 @@ public interface RoomMapper {
                 .roomId(message.getRoom().getRoomId())
                 .member(memberToMemberResponse(message.getMember()))
                 .notification(message.isNotification())
-                .mine(!message.isNotification() && memberId == message.getMember().getMemberId())
+                .mine(!message.isNotification() && memberId == message.getMember().getId())
                 .build();
     };
 }
