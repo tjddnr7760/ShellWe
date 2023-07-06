@@ -11,13 +11,13 @@ import javax.persistence.*;
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
-@Table(name = "PHOTO")
+@Table(name = "PICTURE")
 @Entity
 public class Picture {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "PHOTO_ID")
+    @Column(name = "PICTURE_ID")
     private Long id;
 
     private String url;
