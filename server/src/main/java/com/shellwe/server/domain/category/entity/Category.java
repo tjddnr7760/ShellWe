@@ -1,7 +1,6 @@
 package com.shellwe.server.domain.category.entity;
 
-import com.shellwe.server.domain.types.category.ProductCategory;
-import com.shellwe.server.domain.types.category.TalentCategory;
+import com.shellwe.server.domain.types.category.ShellCategory;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -21,10 +20,6 @@ public class Category {
     private Long id;
 
     @Enumerated(EnumType.STRING)
-    @Column(name = "PRODUCT_CATEGORY")
-    private ProductCategory productCategory;
-
-    @Enumerated(EnumType.STRING)
-    @Column(name = "TALENT_CATEGORY")
-    private TalentCategory talentCategory;
+    @Column(name = "SHELL_CATEGORY")
+    private ShellCategory shellCategory;
 }
