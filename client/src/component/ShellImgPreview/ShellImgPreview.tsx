@@ -1,4 +1,5 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faAngleLeft, faAngleRight } from '@fortawesome/free-solid-svg-icons';
 import {
   ImageWrapper,
   LeftSlideButton,
@@ -6,14 +7,13 @@ import {
   ShellImg,
   ShellImgBox,
 } from './ShellImgPreview.styled';
-import { faAngleLeft, faAngleRight } from '@fortawesome/free-solid-svg-icons';
 import product from '../../asset/product.jpg';
 
 const ShellImgPreview = () => {
   return (
     <ImageWrapper>
       <ShellImgBox>
-        <ShellImg src={product} alt="sshell-image"></ShellImg>
+        <ShellImg src={product} alt="shell-image"></ShellImg>
         {/* src={GET 요청 후, data에서 Shell 이미지 받아서 할당 } */}
       </ShellImgBox>
       <LeftSlideButton>

@@ -10,7 +10,6 @@ const ImageWrapper = styled.div`
   border-radius: 10px;
   position: relative;
   z-index: 0;
-  margin: 100px;
 `;
 
 const ShellImgBox = styled.div`
