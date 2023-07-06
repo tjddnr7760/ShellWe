@@ -72,8 +72,8 @@ public class JwtVerificationFilter extends OncePerRequestFilter {
     }
 
     private void setAuthenticationToContext(Map<String, Object> claims) {
-        Long id = (Long) claims.get("id");
-        String email = (String) claims.get("email");
+        Long id = Long.parseLong(claims.get("id").toString());
+        String email = (String) claims.get("sub");
         String displayName = (String) claims.get("displayName");
         boolean emailVerificationStatus = (boolean) claims.get("emailVerificationStatus");
 
