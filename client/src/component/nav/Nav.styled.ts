@@ -5,8 +5,8 @@ export const NavContainer = styled.div`
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  width: 360px;
-  height: 1080px;
+  width: 16%;
+  height: 100%;
   position: fixed;
   top: 0;
   left: 0;
@@ -15,13 +15,16 @@ export const NavContainer = styled.div`
 `;
 
 export const Logo = styled.img`
-  margin-top: 40px;
+  cursor: pointer;
+
+  margin-top: 15px;
+  margin-bottom: 30px;
   width: 60px;
   height: 60px;
 `;
 
 export const NavItems = styled.div`
-  margin: 20px 0px 490px 0px;
+  margin: 20px 0px 330px 0px;
 `;
 
 export const NavItemContent = styled.div`
@@ -35,7 +38,7 @@ export const NavItemContent = styled.div`
   color: #828282;
   border-radius: 10px;
 
-  padding-left: 30px;
+  padding-left: 40px;
   margin-left: 90px;
   svg {
     margin-right: 10px;
@@ -54,9 +57,9 @@ export const NavItem = styled.div`
   width: 260px;
   height: 60px;
   border-radius: 10px;
-  padding-left: 30px;
+  padding-left: 32px;
   margin-left: 60px;
-  font-size: 28px;
+  font-size: 24px;
   font-weight: 500;
   color: #828282;
 
@@ -77,13 +80,14 @@ export const NavItem = styled.div`
 `;
 
 export const LogoutButton = styled.div`
-  padding-left: 300px;
+  padding-left: 200px;
   display: flex;
   flex-direction: flex-end;
   color: #828282;
 
   svg {
-    width: 30px;
-    height: 30px;
+    cursor: pointer;
+    width: 25px;
+    height: 25px;
   }
 `;
