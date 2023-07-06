@@ -1,25 +1,12 @@
-import React, { useEffect } from 'react';
-import { useSetRecoilState, useResetRecoilState } from 'recoil';
 import ShellList from '../../component/shelllist/ShellList.tsx';
-import { catagoryState, shellPageState } from '../../recoil/atom.ts';
+import { useResetRecoilStateOnUnmount } from '../../hooks/useResetRecoilStateOnUnmount';
 
 const TalentShell = () => {
-  const resetCatagoryState = useResetRecoilState(catagoryState);
-  const resetShellPageState = useResetRecoilState(shellPageState);
-
-  useEffect(() => {
-    return () => {
-      resetCatagoryState();
-      resetShellPageState();
-    };
-  }, []);
+  useResetRecoilStateOnUnmount();
 
   return (
     <>
-      <ShellList
-        initialcategory="TALL"
-        initialshellpage="talent"
-      />
+      <ShellList initialcategory="TALL" initialshellpage="talent" />
     </>
   );
 };

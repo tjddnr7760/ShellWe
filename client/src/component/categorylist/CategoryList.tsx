@@ -17,7 +17,7 @@ const CategoryList = () => {
           ? PRODUCT_CATEGORIES_DATA
           : TALENT_CATEGORIES_DATA
       );
-    }, 0);
+    });
 
     return () => clearTimeout(timer);
   }, [shellPage]);
@@ -48,43 +48,43 @@ const PRODUCT_CATEGORIES_DATA: TalentCategory[] = [
   {
     id: 1,
     name: 'All',
-    categoryid: 'PALL ',
+    categoryid: 'PALL',
     categoryimg: '/categoryimage/All.svg',
   },
   {
     id: 2,
     name: 'Device',
-    categoryid: 'PDEVICE ',
+    categoryid: 'PDEVICE',
     categoryimg: '/categoryimage/Device.svg',
   },
   {
     id: 3,
     name: 'Food',
-    categoryid: 'PFOOD ',
+    categoryid: 'PFOOD',
     categoryimg: '/categoryimage/Food.svg',
   },
   {
     id: 4,
     name: 'Health',
-    categoryid: 'PHEALTH ',
+    categoryid: 'PHEALTH',
     categoryimg: '/categoryimage/Health.svg',
   },
   {
     id: 5,
     name: 'Office',
-    categoryid: 'POFFICE ',
+    categoryid: 'POFFICE',
     categoryimg: '/categoryimage/Office.svg',
   },
   {
     id: 6,
     name: 'Life',
-    categoryid: 'PLIFE ',
+    categoryid: 'PLIFE',
     categoryimg: '/categoryimage/Life.svg',
   },
   {
     id: 7,
     name: 'etc',
-    categoryid: 'PETC ',
+    categoryid: 'PETC',
     categoryimg: '/categoryimage/Etc.svg',
   },
 ];
@@ -94,19 +94,19 @@ const TALENT_CATEGORIES_DATA: TalentCategory[] = [
   {
     id: 101,
     name: 'All',
-    categoryid: 'TALL ',
+    categoryid: 'TALL',
     categoryimg: '/categoryimage/All.svg',
   },
   {
     id: 102,
     name: 'Tech ',
-    categoryid: 'TTECH ',
+    categoryid: 'TTECH',
     categoryimg: '/categoryimage/Tech.svg',
   },
   {
     id: 103,
     name: 'Home',
-    categoryid: 'THOME ',
+    categoryid: 'THOME',
     categoryimg: '/categoryimage/Home.svg',
   },
   {
@@ -118,13 +118,13 @@ const TALENT_CATEGORIES_DATA: TalentCategory[] = [
   {
     id: 105,
     name: 'Lang',
-    categoryid: 'TLANG ',
+    categoryid: 'TLANG',
     categoryimg: '/categoryimage/Lang.svg',
   },
   {
     id: 106,
     name: 'Art',
-    categoryid: 'TART ',
+    categoryid: 'TART',
     categoryimg: '/categoryimage/Art.svg',
   },
   {
