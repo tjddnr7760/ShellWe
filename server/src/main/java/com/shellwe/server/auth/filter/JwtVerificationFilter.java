@@ -66,21 +66,21 @@ public class JwtVerificationFilter extends OncePerRequestFilter {
         for (Map.Entry<String, Object> entry : claims.getBody().entrySet()) {
             String key = entry.getKey();
             Object value = entry.getValue();
-            log.info("key = {}, value = {}", key, value);
+            log.info("access token information key = {}, value = {}", key, value);
         }
         return claims;
     }
 
     private void setAuthenticationToContext(Map<String, Object> claims) {
+        Long id = (Long) claims.get("id");
         String email = (String) claims.get("email");
         String displayName = (String) claims.get("displayName");
-        String id = (String) claims.get("id");
         boolean emailVerificationStatus = (boolean) claims.get("emailVerificationStatus");
 
         List<EmailVerifiedAuthority> emailVerifiedAuthorities =
                 Collections.singletonList(new EmailVerifiedAuthority(emailVerificationStatus));
 
-        MemberContextInform memberContextInform = new MemberContextInform(email, displayName, id);
+        MemberContextInform memberContextInform = new MemberContextInform(id, email, displayName);
 
         Authentication authentication = new UsernamePasswordAuthenticationToken(memberContextInform, null, emailVerifiedAuthorities);
         SecurityContextHolder.getContext().setAuthentication(authentication);
