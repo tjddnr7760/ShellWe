@@ -14,15 +14,26 @@ import java.util.List;
 @Entity
 public class Member extends Auditable {
     public Member(Long memberId) {
-        this.memberId = memberId;
+        this.id = memberId;
+    }
+    public Member(Long id, String email, Boolean emailVerificationStatus, String password, String displayName) {
+        this.id = id;
+        this.email = email;
+        this.emailVerificationStatus = emailVerificationStatus;
+        this.password = password;
+        this.displayName = displayName;
     }
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long memberId;
+    @Column(name = "MEMBER_ID")
+    private Long id;
 
     @Column
     private String email;
+
+    @Column(name = "EMAIL_VERIFICATION_STATUS", nullable = false)
+    private Boolean emailVerificationStatus;
 
     @Column
     private String password;
@@ -31,13 +42,15 @@ public class Member extends Auditable {
     private String displayName;
 
     @Column
-    private String picture;
+    private String profileUrl;
 
     @OneToMany(mappedBy = "member", cascade = {CascadeType.PERSIST, CascadeType.REMOVE})
     private List<Message> messages = new ArrayList<>();
 
     @OneToMany(mappedBy = "member", cascade = {CascadeType.PERSIST, CascadeType.REMOVE})
     private List<MemberRoom> memberRooms = new ArrayList<>();
+
+
 
     public void setMemberRooms(MemberRoom memberRoom){
         this.memberRooms.add(memberRoom);
@@ -49,5 +62,4 @@ public class Member extends Auditable {
         if (message.getMember() != this) message.setMember(this);
     }
 
-    //shells
 }
