@@ -27,19 +27,19 @@ import java.io.IOException;
 import java.util.*;
 
 @Slf4j
-@RequiredArgsConstructor
 @Service
 @Transactional
-public class HttpService {
+public class HttpService extends com.shellwe.websocket.service.Service {
     @Value("${client-server.url}")
     private String url;
 
-    private final RoomRepository roomRepository;
-    private final ObjectMapper objectMapper;
-    private final MemberRoomRepository memberRoomRepository;
-    private final MessageRepository messageRepository;
-    private final MemberRepository memberRepository;
-    private final RoomMapper roomMapper;
+    public HttpService(MemberRoomRepository memberRoomRepository,
+                       MemberRepository memberRepository,
+                       RoomRepository roomRepository,
+                       MessageRepository messageRepository,
+                       RoomMapper roomMapper) {
+        super(memberRoomRepository, memberRepository, roomRepository, messageRepository, roomMapper);
+    }
 
     public List<RoomDto.Response> findAllRoom() {
         long myId = 1; // security context holder 접근 필요
@@ -85,14 +85,6 @@ public class HttpService {
                 .build();
     }
 
-    public <T> void sendMessage(WebSocketSession session, T message) {
-        try {
-            session.sendMessage(new TextMessage(objectMapper.writeValueAsString(message)));
-        } catch (IOException e) {
-            log.error(e.getMessage(), e);
-        }
-    }
-
     private void linkMemberToRoom(Room room, long memberId){
         Member member = new Member(memberId);
         MemberRoom memberRoom = new MemberRoom();
@@ -106,18 +98,8 @@ public class HttpService {
         Member member = findExistsMember(memberId);
         Message message = new Message();
         message.setRoom(room);
-//        message.setMember(member);
         message.setNotification(true);
         message.setPayload(member.getDisplayName()+"님께서 거래하실 Shell : " + url +"/shells/"+shellId);
         messageRepository.save(message);
-    }
-
-    public Member findExistsMember(long memberId){
-        Optional<Member> optionalMember = memberRepository.findById(memberId);
-        return optionalMember.orElseThrow(()->new BusinessLogicException(ExceptionCode.MEMBER_NOT_FOUND));
-    }
-    private MemberRoom findExistsMemberRoom(long roomId, long memberId){
-        Optional<MemberRoom> optionalMemberRoom = memberRoomRepository.findByRoomAndMemberAndActiveTrue(new Room(roomId), new Member(memberId));
-        return optionalMemberRoom.orElseThrow(()->new BusinessLogicException(ExceptionCode.MEMBER_ROOM_NOT_FOUND));
     }
 }

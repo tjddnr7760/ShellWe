@@ -17,6 +17,7 @@ import com.shellwe.websocket.mapper.RoomMapper;
 import com.shellwe.websocket.repository.MemberRepository;
 import com.shellwe.websocket.repository.MemberRoomRepository;
 import com.shellwe.websocket.repository.MessageRepository;
+import com.shellwe.websocket.repository.RoomRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -30,16 +31,19 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 @Slf4j
-@RequiredArgsConstructor
 @Service
-public class WsService {
+public class WsService extends com.shellwe.websocket.service.Service {
     private final ObjectMapper objectMapper;
-    private final MessageRepository messageRepository;
-    private final MemberRoomRepository memberRoomRepository;
-    private final RoomMapper roomMapper;
-    private final HttpService httpService;
-    private final Gson gson;
     private Map<Long, ChatRoom> chatRooms = new LinkedHashMap<>();
+    public WsService(MemberRoomRepository memberRoomRepository,
+                     MemberRepository memberRepository,
+                     RoomRepository roomRepository,
+                     MessageRepository messageRepository,
+                     RoomMapper roomMapper,
+                     ObjectMapper objectMapper) {
+        super(memberRoomRepository, memberRepository, roomRepository, messageRepository, roomMapper);
+        this.objectMapper = objectMapper;
+    }
 
     public void handleMessage(WebSocketSession session, TextMessage message) throws IOException {
         // 각세션에 메세지 전송, 비동기
@@ -54,7 +58,7 @@ public class WsService {
     private void sendMessage(WebSocketSession session, TextMessage message, long roomId) throws IOException {
         long memberId = 1L; // 컨텍스트 홀더 필요
 
-        Member member = httpService.findExistsMember(memberId); // 시큐리티 적용후 세션 혹은 컨텍스트 홀더에서 사용자 정보를 구할 수 있을시 로직 변경
+        Member member = findExistsMember(memberId); // 시큐리티 적용후 세션 혹은 컨텍스트 홀더에서 사용자 정보를 구할 수 있을시 로직 변경
 
         ChatRoom chatRoom = chatRooms.get(roomId);
 

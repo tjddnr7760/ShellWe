@@ -18,22 +18,9 @@ public class ChatRoom {
     public ChatRoom(Long roomId) {
         this.roomId = roomId;
     }
-
     public void setSessions(WebSocketSession session){
         sessions.add(session);
     }
     public void removeSession(WebSocketSession session) {sessions.remove(session);}
 
-
-    public void handleActions(WebSocketSession session, ChatMessage chatMessage, HttpService httpService) {
-        if (chatMessage.getType().equals(ChatMessage.MessageType.ENTER)) {
-            sessions.add(session);
-            chatMessage.setMessage(chatMessage.getSender() + "님이 입장했습니다.");
-        }
-        sendMessage(chatMessage, httpService);
-    }
-
-    public <T> void sendMessage(T message, HttpService httpService) {
-        sessions.parallelStream().forEach(session -> httpService.sendMessage(session, message));
-    }
 }
