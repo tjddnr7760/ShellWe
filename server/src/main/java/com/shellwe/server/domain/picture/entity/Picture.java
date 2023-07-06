@@ -23,10 +23,6 @@ public class Picture {
     private String url;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "MEMBER_ID")
-    private Member owner;
-
-    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "SHELL_ID")
     private Shell shell;
 }
