@@ -11,8 +11,8 @@ const CategoryWrapper = styled.div`
 `;
 
 const CategoryIcon = styled.img`
-  width: 80px;
-  height: 80px;
+  width: 60px;
+  height: 60px;
   border-radius: 100px;
   background: url(${(props) => props.src}), lightgray 50% / cover no-repeat,
     #d9d9d9;
@@ -21,7 +21,7 @@ const CategoryIcon = styled.img`
 const Categorytext = styled.div`
   color: #000;
   text-align: center;
-  font-size: 24px;
+  font-size: 20px;
   font-family: Inter;
   font-style: normal;
   font-weight: 500;

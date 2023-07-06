@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { useSetRecoilState } from 'recoil';
 import CategoryList from '../categorylist/CategoryList.tsx';
-import { CategoryListWrapper } from './ShellList.styled.ts';
+import {
+  CategoryListWrapper,
+  ShellListContainer,
+  SeachToolbarWrapper,
+  ShellsWrapper,
+} from './ShellList.styled.ts';
 import { catagoryState, shellPageState } from '../../recoil/atom.ts';
-
-interface ShellListProps {
-  initialcategory: string;
-  initialshellpage: string;
-}
 
 const ShellList = ({ initialcategory, initialshellpage }: ShellListProps) => {
   const catagoryTypeHandler = useSetRecoilState<string>(catagoryState);
@@ -19,10 +19,20 @@ const ShellList = ({ initialcategory, initialshellpage }: ShellListProps) => {
   }, []);
 
   return (
-    <CategoryListWrapper>
-      <CategoryList />
-    </CategoryListWrapper>
+    <ShellListContainer>
+      <SeachToolbarWrapper>
+        <div>1111</div>
+      </SeachToolbarWrapper>
+      <CategoryListWrapper>
+        <CategoryList />
+      </CategoryListWrapper>
+      <ShellsWrapper></ShellsWrapper>
+    </ShellListContainer>
   );
 };
 
 export default ShellList;
+interface ShellListProps {
+  initialcategory: string;
+  initialshellpage: string;
+}
