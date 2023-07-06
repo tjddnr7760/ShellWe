@@ -1,9 +1,9 @@
 import styled from 'styled-components';
 
 const CategoryWrapper = styled.div`
-  width: 120px;
+  width: 100px;
   height: 80px;
-  gap: 10px;
+  gap: 5px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -11,8 +11,8 @@ const CategoryWrapper = styled.div`
 `;
 
 const CategoryIcon = styled.img`
-  width: 60px;
-  height: 60px;
+  width: 52px;
+  height: 52px;
   border-radius: 100px;
   background: url(${(props) => props.src}), lightgray 50% / cover no-repeat,
     #d9d9d9;
@@ -21,7 +21,7 @@ const CategoryIcon = styled.img`
 const Categorytext = styled.div`
   color: #000;
   text-align: center;
-  font-size: 20px;
+  font-size: 16px;
   font-family: Inter;
   font-style: normal;
   font-weight: 500;

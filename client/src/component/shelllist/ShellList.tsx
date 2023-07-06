@@ -8,6 +8,7 @@ import {
   ShellsWrapper,
 } from './ShellList.styled.ts';
 import { catagoryState, shellPageState } from '../../recoil/atom.ts';
+import SearchToolbar from '../searchtoolbar/SearchToolbar.tsx';
 
 const ShellList = ({ initialcategory, initialshellpage }: ShellListProps) => {
   const catagoryTypeHandler = useSetRecoilState<string>(catagoryState);
@@ -21,7 +22,7 @@ const ShellList = ({ initialcategory, initialshellpage }: ShellListProps) => {
   return (
     <ShellListContainer>
       <SeachToolbarWrapper>
-        <div>1111</div>
+        <SearchToolbar />
       </SeachToolbarWrapper>
       <CategoryListWrapper>
         <CategoryList />
