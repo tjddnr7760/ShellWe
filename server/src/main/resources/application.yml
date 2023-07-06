@@ -22,8 +22,8 @@ spring:
       client:
         registration:
           google:
-            clientId: fake
-            clientSecret: fake
+            clientId: fake-id
+            clientSecret: fake-secret-key
             scope:
               - profile
               - email
@@ -31,8 +31,8 @@ mail:
   smtp:
     host: smtp.gmail.com
     port: 587
-    username: fake
-    password: fake
+    username: fake-id
+    password: fake-secret-key
     auth: true
     starttls:
       enable: true
@@ -58,3 +58,7 @@ jwt:
   key: "kevin12341234123412341234123412341234"
   access-token-expiration-minutes: 500
   refresh-token-expiration-minutes: 600
+
+redirect:
+  # 이메일 인증 성공시, 아직 url 페이지 없음, 이메일 인증 성공시 white error 뜰 예정(이메일 인증은 성공)
+  email-verification-success-url : "/login"
