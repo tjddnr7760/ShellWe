@@ -30,6 +30,6 @@ const DropdownContent = styled.div`
   border-radius: 10px;
   background-color: white;
   padding: 10px;
-  animation: ${fadeIn} 0.5s ease-in-out;
+  animation: ${fadeIn} 0.3s ease-in-out;
 `;
 export { DropdownBTN, DropdownContainer, DropdownContent };

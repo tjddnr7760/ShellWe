@@ -9,6 +9,7 @@ import {
 } from './ShellList.styled.ts';
 import { catagoryState, shellPageState } from '../../recoil/atom.ts';
 import SearchToolbar from '../searchtoolbar/SearchToolbar.tsx';
+import LiftBtn from '../../common/liftbtn/LiftBtn.tsx';
 
 const ShellList = ({ initialcategory, initialshellpage }: ShellListProps) => {
   const catagoryTypeHandler = useSetRecoilState<string>(catagoryState);
@@ -28,6 +29,7 @@ const ShellList = ({ initialcategory, initialshellpage }: ShellListProps) => {
         <CategoryList />
       </CategoryListWrapper>
       <ShellsWrapper></ShellsWrapper>
+      <LiftBtn />
     </ShellListContainer>
   );
 };
