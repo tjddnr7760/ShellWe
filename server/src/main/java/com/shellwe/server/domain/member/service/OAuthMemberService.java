@@ -17,6 +17,11 @@ public class OAuthMemberService {
         this.memberRepository = memberRepository;
     }
 
+    public Member oauthFindMemberByEmail(String email) {
+        log.info("find member by email in oauth layer start, email : {}", email);
+        return findByEmail(email);
+    }
+
     public void oauthSignUpMember(Member member) {
         log.info("sign-up in service layer by oauth start, member : {}", member);
 
@@ -28,6 +33,12 @@ public class OAuthMemberService {
         memberRepository.save(member);
 
         log.info("sign-up in service layer done");
+    }
+
+    private Member findByEmail(String email) {
+        Optional<Member> byEmail = memberRepository.findByEmail(email);
+        Member member = byEmail.orElseThrow(() -> new IllegalStateException());
+        return member;
     }
 
     private boolean verifyExistEmailByOauth(String email) {

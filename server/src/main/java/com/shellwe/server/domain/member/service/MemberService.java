@@ -41,8 +41,14 @@ public class MemberService {
         Member encryptedMember = new Member(member, passwordEncoder.encode(member.getPassword()));
         memberRepository.save(encryptedMember);
 
-        emailSendable.send(new String[]{member.getEmail()}, "ShellWe 회원가입 인증",
-                member.getEmail(), "email-registration-member");
+        new Thread(() -> {
+            try {
+                emailSendable.send(new String[]{member.getEmail()}, "ShellWe 회원가입 인증",
+                        member.getEmail(), "email-registration-member");
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            }
+        }).start();
         log.info("sent email and sign-up in service layer done");
     }
 
@@ -97,11 +103,6 @@ public class MemberService {
         log.info("delete member in service layer start");
         Member findMember = findByEmail(email);
         long findId = findMember.getId();
-
-        System.out.println("findId = " + findId);
-        System.out.println("memberId = " + memberId);
-        System.out.println("findMemberPassword = " + findMember.getPassword());
-        System.out.println("deleteRequestDto = " + deleteRequestDto.getPassword());
 
         if (memberId == findId && passwordEncoder.matches(deleteRequestDto.getPassword(), findMember.getPassword())) {
             memberRepository.delete(findMember);

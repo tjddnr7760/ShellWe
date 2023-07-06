@@ -45,6 +45,14 @@ public class Member extends TimeTracker {
         this.password = password;
     }
 
+    public Member(Long id, String email, Boolean emailVerificationStatus, String password, String displayName) {
+        this.id = id;
+        this.email = email;
+        this.emailVerificationStatus = emailVerificationStatus;
+        this.password = password;
+        this.displayName = displayName;
+    }
+
     @Builder
     public Member(String email,
                   String password,
@@ -67,7 +75,6 @@ public class Member extends TimeTracker {
         if (password != null) {
             this.password = passwordEncoder.encode(password);
         }
-
         if (displayName != null) {
             this.displayName = displayName;
         }

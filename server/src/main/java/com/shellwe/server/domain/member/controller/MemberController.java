@@ -7,11 +7,14 @@ import com.shellwe.server.domain.member.dto.response.FindResponseDto;
 import com.shellwe.server.domain.member.service.MemberService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
+import java.io.IOException;
 
 @Slf4j
 @RequestMapping("/members")
@@ -19,6 +22,9 @@ import javax.validation.Valid;
 public class MemberController {
 
     private final MemberService memberService;
+
+    @Value("${redirect.email-verification-success-url}")
+    private String emailRedirectUrl;
 
     @Autowired
     public MemberController(MemberService memberService) {
@@ -33,9 +39,9 @@ public class MemberController {
 
     @ResponseStatus(HttpStatus.OK)
     @GetMapping("/email/{email}")
-    public String verificationMember(@PathVariable String email) throws InterruptedException {
+    public void verificationMember(@PathVariable String email, HttpServletResponse response) throws IOException {
         memberService.verifyEmail(email);
-        return "인증이 완료되었습니다. 새롭게 로그인 해주세요";
+        response.sendRedirect(emailRedirectUrl);
     }
 
     @ResponseStatus(HttpStatus.OK)
