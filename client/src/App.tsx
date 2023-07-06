@@ -2,6 +2,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import './App.css';
 import GlobalStyle from './style/GlobalStyle.ts';
 import Button from './common/button/Button.tsx';
+import Nav from './component/nav/Nav.tsx';
 // import Header from './Components/Common/Header/Header';
 // import Sidebar from './Components/Common/Sidebar/Sidebar';
 // import Footer from './Components/Common/Footer/Footer';
@@ -17,6 +18,7 @@ function App() {
     <BrowserRouter>
       <GlobalStyle />
       <Button />
+      <Nav />
       <main>
         <Routes>
           {/* <Route path="/" element={} /> // 홈페이지
