@@ -1,4 +1,4 @@
-package com.shellwe.server.domain.photo.entity;
+package com.shellwe.server.domain.picture.entity;
 
 import com.shellwe.server.domain.member.entity.Member;
 import com.shellwe.server.domain.shell.entity.Shell;
@@ -13,7 +13,7 @@ import javax.persistence.*;
 @Getter
 @Table(name = "PHOTO")
 @Entity
-public class Photo {
+public class Picture {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
