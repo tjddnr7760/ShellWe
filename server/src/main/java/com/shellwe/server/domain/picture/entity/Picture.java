@@ -1,6 +1,5 @@
 package com.shellwe.server.domain.picture.entity;
 
-import com.shellwe.server.domain.member.entity.Member;
 import com.shellwe.server.domain.shell.entity.Shell;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
