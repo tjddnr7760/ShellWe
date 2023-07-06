@@ -1,6 +1,7 @@
-import { BrowserRouter, Routes, Route } from 'react-router-dom'
-import './App.css'
-import GlobalStyle from './style/GlobalStyle.ts'
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import './App.css';
+import GlobalStyle from './style/GlobalStyle.ts';
+import Nav from './component/nav/Nav.tsx';
 // import Header from './Components/Common/Header/Header';
 // import Sidebar from './Components/Common/Sidebar/Sidebar';
 // import Footer from './Components/Common/Footer/Footer';
@@ -11,12 +12,11 @@ import GlobalStyle from './style/GlobalStyle.ts'
 // import SignupPage from './Pages/LoginSignup/SingupPage.jsx';
 // import AfterSignupPage from './Pages/LoginSignup/AfterSignupPage.jsx';
 
-
 function App() {
-
   return (
     <BrowserRouter>
       <GlobalStyle />
+      <Nav />
       <main>
         <Routes>
           {/* <Route path="/" element={} /> // 홈페이지
@@ -37,4 +37,4 @@ function App() {
   );
 }
 
-export default App
+export default App;
