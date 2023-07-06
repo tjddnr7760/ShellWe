@@ -34,15 +34,16 @@ public class OAuth2MemberSuccessHandler extends SimpleUrlAuthenticationSuccessHa
                                         Authentication authentication) throws IOException, ServletException {
 
         OAuth2User principal = (OAuth2User) authentication.getPrincipal();
+
         String email = String.valueOf(principal.getAttributes().get("email"));
-        //String imgUrl = String.valueOf(principal.getAttributes().get("img"));
+        //이미지는 picture 도메인 구현후 추가
         String displayName = String.valueOf(principal.getAttributes().get("name"));
-        System.out.println("displayName = " + displayName);
 
-        Member member = memberFactory(email, displayName);
+        Member memberByOauth = memberFactory(email, displayName);
+        oauthSignUpMember(memberByOauth);
 
-        oauthSignUpMember(member);
-        redirectToken(request, response, member);
+        Member memberByDb = oAuthMemberService.oauthFindMemberByEmail(email);
+        redirectToken(request, response, memberByDb);
     }
 
     private Member memberFactory(String email, String displayName) {
@@ -52,11 +53,6 @@ public class OAuth2MemberSuccessHandler extends SimpleUrlAuthenticationSuccessHa
                 .build();
 
         member.emailVerificationCompleted();
-
-        System.out.println("member.getEmail() = " + member.getEmail());
-        System.out.println("member.getDisplayName() = " + member.getDisplayName());
-        System.out.println("member.getEmailVerificationStatus() = " + member.getEmailVerificationStatus());
-
         return member;
     }
 
@@ -85,10 +81,10 @@ public class OAuth2MemberSuccessHandler extends SimpleUrlAuthenticationSuccessHa
 
     private String delegateAccessToken(Member member) {
         Map<String, Object> claims = new HashMap<>();
+        claims.put("id", member.getId());
         claims.put("displayName", member.getDisplayName());
         claims.put("emailVerificationStatus", member.getEmailVerificationStatus());
-
-        System.out.println("member.getEmail() = " + member.getEmail());
+        //picture는 도메인 생성후 구현완료하면 추가하겠습니다.
 
         String subject = member.getEmail();
         Date expirations = jwtTokenizer.getTokenExpiration(jwtTokenizer.getAccessTokenExpirationMinutes());
