@@ -16,7 +16,7 @@ const Avatar: React.FC = () => {
   return (
     <>
       <Icon>
-        <img src={userImg !== '' ? userimg : noprofile} alt="user-icon" />
+        <img src={userImg ? userimg : noprofile} alt="user-icon" />
         {/* member.picture data 없을 경우, noprofile image로 대체 */}
       </Icon>
       <UserImg>
