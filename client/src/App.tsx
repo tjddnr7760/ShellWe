@@ -18,7 +18,7 @@ function App() {
     <BrowserRouter>
       <Header />
       <GlobalStyle />
-      <Nav />
+
       <main>
         <Routes>
           {/* <Route path="/" element={} /> // 홈페이지
