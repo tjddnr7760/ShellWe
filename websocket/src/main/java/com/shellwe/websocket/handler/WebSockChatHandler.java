@@ -34,6 +34,10 @@ public class WebSockChatHandler extends TextWebSocketHandler {
     private final Gson gson;
     @Override
     public void afterConnectionEstablished(WebSocketSession session) throws Exception, IOException{
+        // 시큐리티 컨텍스트 홀더 체크해보기
+        // 세션의 핸드쉐이크 헤더 체크해보기
+        // 세션의 principal에 사용자의 정보 넣기
+
         wsService.getPreviousMessages(session);
     }
 
@@ -42,17 +46,6 @@ public class WebSockChatHandler extends TextWebSocketHandler {
     @Override
     protected void handleTextMessage(WebSocketSession session, TextMessage message) throws Exception {
         wsService.handleMessage(session,message);
-
-
-
-//        String payload = message.getPayload();
-//        log.info("payload {}", payload);
-//        ChatMessage chatMessage = objectMapper.readValue(payload, ChatMessage.class);
-//
-//        ChatRoom room = httpService.findRoomById(chatMessage.getRoomId());
-//        //
-//
-//        room.handleActions(session, chatMessage, httpService);
     }
 
     public void afterConnectionClosed(WebSocketSession session, CloseStatus status) throws Exception {

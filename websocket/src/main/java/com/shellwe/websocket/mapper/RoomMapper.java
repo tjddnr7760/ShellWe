@@ -16,7 +16,7 @@ public interface RoomMapper {
     MemberDto.Response memberToMemberResponse(Member member);
     default RoomDto.Response memberRoomToWsResponse(MemberRoom memberRoom){
         return RoomDto.Response.builder()
-                .roomId(memberRoom.getRoom().getRoomId())
+                .id(memberRoom.getRoom().getId())
                 .member(memberToMemberResponse(memberRoom.getMember()))
                 .build();
     };
@@ -25,7 +25,7 @@ public interface RoomMapper {
         return MessageDto.Response.builder()
                 .createdAt(message.getCreatedAt())
                 .payload(message.getPayload())
-                .roomId(message.getRoom().getRoomId())
+                .roomId(message.getRoom().getId())
                 .member(memberToMemberResponse(message.getMember()))
                 .notification(message.isNotification())
                 .mine(!message.isNotification() && memberId == message.getMember().getId())

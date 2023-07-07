@@ -1,24 +1,22 @@
 spring:
-  h2:
-    console:
-      enabled: true
-      path: /h2
-      settings:
-        web-allow-others: true
   datasource:
-    url: jdbc:h2:mem:test
+    url: jdbc:mysql://localhost:3306/shellweprototype?useSSL=false
+    username: root
+    password: ${LOCAL_MYSQL_PASSWORD}
+    driverClassName: com.mysql.cj.jdbc.Driver
   jpa:
+    database-platform: org.hibernate.dialect.MySQL8Dialect
     hibernate:
-      ddl-auto: none    # 스키마 자동 생성
-    show-sql: true        # SQL 쿼리 출력
+      ddl-auto: update
+    show-sql: true
     properties:
       hibernate:
-        format_sql: true  # SQL pretty print
+        format_sql: true
         jdbc:
-          time_zone: Asia/Seoul   # 서버 시간 서울로 변경
-#  sql:
-#    init:
-#      data-locations: classpath*:db/h2/data.sql
+          time_zone: Asia/Seoul
+  sql:
+    init:
+      data-locations: classpath*:db/mysql/data.sql
   security:
     oauth2:
       client:

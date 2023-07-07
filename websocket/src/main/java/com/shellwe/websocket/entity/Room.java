@@ -12,14 +12,15 @@ import java.util.List;
 @Getter
 @Setter
 @Entity
-public class Room extends Auditable{
+public class Room extends TimeTracker{
     public Room(Long roomId) {
-        this.roomId = roomId;
+        this.id = roomId;
     }
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long roomId;
+    @Column(name = "ROOM_ID")
+    private Long id;
 
     @OneToMany(mappedBy = "room", cascade = {CascadeType.PERSIST, CascadeType.REMOVE})
     private List<Message> messages = new ArrayList<>();
