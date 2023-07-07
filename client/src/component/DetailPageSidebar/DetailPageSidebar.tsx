@@ -2,17 +2,11 @@ import { useState } from 'react';
 import {
   Wrapper,
   Div,
-  ToggleBody,
   DealState,
-  ToggleRetangle,
   Text
 } from './DetailPageSidebar.styled';
 import { SmallButton3 } from '../../common/button/Button.styled';
-
-type ToggleProps = {
-  toggleOn: boolean;
-  handleClick: () => void;
-}
+import Toggle from './Toggle.tsx'
 
 const DetailPageSidebar = () => {
   const [toggleOn, setToggleOn] = useState(true);
@@ -42,22 +36,6 @@ const DetailPageSidebar = () => {
     </Wrapper>
   );
 };
-
-const Toggle = ({toggleOn, handleClick}: ToggleProps) => {
-
-  return (
-    <div>
-      <ToggleBody
-        className={`${toggleOn && 'toggle-checked'}`}
-        onClick={handleClick}
-      >
-        <ToggleRetangle
-          className={`${toggleOn && 'toggle-checked'}`}
-        />
-      </ToggleBody>
-    </div>
-  );
-}
 
 
 export default DetailPageSidebar;

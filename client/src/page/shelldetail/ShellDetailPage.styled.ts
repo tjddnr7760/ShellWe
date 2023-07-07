@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 const Wrapper = styled.div`
-  width: 1612.8px;
+  width: 100%;
   height: fit-content;
 `;
 

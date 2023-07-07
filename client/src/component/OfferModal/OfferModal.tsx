@@ -15,7 +15,7 @@ import plus from '../../asset/plus.svg';
 import Poke from '../../asset/poke.svg';
 import { SmallButton3 } from '../../common/button/Button.styled.ts';
 
-type Shell = {
+interface myShellProps {
   shellId: number;
   numberOfTrades: number;
   type: string;
@@ -61,7 +61,7 @@ const MyShellList = () => {
   );
 };
 
-const MyShell = ({ shell }: { shell: Shell }) => {
+const MyShell = ({ shell }: { shell: myShellProps }) => {
   const picture = shell.shellPhotos[0];
   const title = shell.title;
 
