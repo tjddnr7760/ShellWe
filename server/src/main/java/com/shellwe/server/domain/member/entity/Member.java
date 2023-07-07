@@ -34,7 +34,7 @@ public class Member extends TimeTracker {
 
     private String displayName;
 
-    private String profileUrl;
+    private String profileUrl = "empty";
 
     @OneToMany(mappedBy = "member")
     private List<Shell> shells = new ArrayList<>();
