@@ -81,6 +81,8 @@ export const EmailBox = styled.div`
 `;
 
 export const EmailInputBox = styled.div`
+  margin-top: 5px;
+
   border-radius: 16px;
   display: flex;
   align-items: center;
@@ -89,7 +91,6 @@ export const EmailInputBox = styled.div`
 `;
 
 export const EmailInput = styled.input`
-  margin-top: 5px;
   border: none;
   border-radius: 15px;
   width: 352px;
