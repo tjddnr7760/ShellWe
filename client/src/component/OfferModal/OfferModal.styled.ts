@@ -4,7 +4,7 @@ const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   width: 600px;
-  height: 700px;
+  height: 610px;
   border: 0.5px solid #48cae4;
   border-radius: 10px;
   margin-left: 500px;
@@ -29,7 +29,7 @@ const CreateShellButton = styled.button`
 
 const ShellListContainer = styled(Div)`
   border-top: 0.5px solid #48cae4;
-  height: 600px;
+  height: 500px;
   border-radius: 0px 0px 10px 10px;
   margin-bottom: 1px;
 `;
@@ -38,18 +38,18 @@ const MyShellListWrapper = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 15px;
+  gap: 20px;
   width: 590px;
-  height: 590px;
-  padding-top: 15px;
-  padding-bottom: 20px;
+  height: 500px;
+  padding-top: 25px;
+  padding-bottom: 15px;
   overflow-y: scroll; /* Add scrollbar when content overflows */
 `;
 
 const MyShellContainer = styled(Div)`
   flex-direction: row;
   justify-content: space-between;
-  width: 550px;
+  width: 540px;
   background-color: #ffffff;
   border: 0.5px solid #48cae4;
   border-radius: 10px;
@@ -75,6 +75,14 @@ const ShellInfo = styled.div`
   align-items: center;
 `;
 
+const ButtonDiv = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding-left: 2px;
+  font-weight: 400;
+`;
+
 export {
   CreateShellButton,
   Wrapper,
@@ -85,4 +93,5 @@ export {
   ImgBox,
   Title,
   ShellInfo,
+  ButtonDiv,
 };

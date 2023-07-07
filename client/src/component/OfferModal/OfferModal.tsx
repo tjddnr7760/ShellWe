@@ -8,9 +8,12 @@ import {
   ImgBox,
   Title,
   ShellInfo,
+  ButtonDiv,
 } from './OfferModal.styled';
 import dummydata from '../../mock/mock.tsx';
 import plus from '../../asset/plus.svg';
+import Poke from '../../asset/poke.svg';
+import { SmallButton3 } from '../../common/button/Button.styled.ts';
 
 type Shell = {
   shellId: number;
@@ -29,7 +32,6 @@ type Shell = {
     profilePhoto: string;
   };
 };
-
 
 const OfferModal = () => {
   return (
@@ -53,15 +55,15 @@ const MyShellList = () => {
   return (
     <MyShellListWrapper>
       {myShellArray.map((shell) => {
-          return <MyShell key={shell.shellId} shell={shell} />;
+        return <MyShell key={shell.shellId} shell={shell} />;
       })}
     </MyShellListWrapper>
   );
 };
 
-const MyShell = ({shell}: {shell: Shell}) => {
-    const picture = shell.shellPhotos[0];
-    const title = shell.title;
+const MyShell = ({ shell }: { shell: Shell }) => {
+  const picture = shell.shellPhotos[0];
+  const title = shell.title;
 
   return (
     <MyShellContainer>
@@ -69,7 +71,12 @@ const MyShell = ({shell}: {shell: Shell}) => {
         <ImgBox src={picture} alt="shell-image" />
         <Title>{title}</Title>
       </ShellInfo>
-      <button>찌르기</button>
+      <SmallButton3>
+        <ButtonDiv>
+          <img src={Poke} alt="pokeicon" />
+          <span>찌르기</span>
+        </ButtonDiv>
+      </SmallButton3>
     </MyShellContainer>
   );
 };
