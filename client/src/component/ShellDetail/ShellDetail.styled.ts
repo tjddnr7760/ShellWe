@@ -3,7 +3,7 @@ import styled from 'styled-components';
 const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
-  width: 665px;
+  width: 650px;
   height: 400px;
   gap: 10px;
 `;
@@ -13,7 +13,7 @@ const ShellInfoContainer = styled.div`
   flex-direction: column;
   border: 0.5px solid rgba(0, 0, 0, 0.3);
   border-radius: 10px;
-  width: 665px;
+  width: 645px;
   max-height: fit-content;
   background-color: rgba(202, 240, 248, 0.5);
   padding: 10px;
@@ -23,6 +23,7 @@ const ShellInfoContainer = styled.div`
 const UserInfoAndHamburgerDiv = styled.div`
   display: flex;
   justify-content: space-between;
+  width: 650px;
 `;
 
 const UserInfoDiv = styled.div`
@@ -49,9 +50,9 @@ const Div = styled.div`
   border: 0.5px solid rgba(0, 0, 0, 0.3);
   border-radius: 10px;
   font-size: 16px;
-  width: 640px;
+  width: 630px;
   height: 50px;
-  padding: 10px;
+  padding-left: 10px;
   background-color: #ffffff;
 `;
 
@@ -91,6 +92,7 @@ const Category = styled.div`
   border-radius: 10px;
   background-color: #0096c7;
   padding-top: 3px;
+  margin-right: 8px;
 `;
 
 const SeeMore = styled.div`
