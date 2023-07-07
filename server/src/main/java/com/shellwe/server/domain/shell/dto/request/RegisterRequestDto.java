@@ -11,15 +11,15 @@ import java.util.List;
 @Setter
 public class RegisterRequestDto {
 
+    private ShellType type;
+
     private String title;
 
     private String body;
-
-    private ShellType type;
 
     private ShellCategory category;
 
     private List<String> tags;
 
-    private String profileUrl;
+    private List<String> pictures;
 }
