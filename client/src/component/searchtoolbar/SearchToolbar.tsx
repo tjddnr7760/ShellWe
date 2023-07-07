@@ -27,7 +27,6 @@ const SearchToolbar = () => {
           onChange={handleInputChange}
         />
       </SearchToolbarInputWrapper>
-
       <DropDownMenu />
     </SearchToolbarContainer>
   );

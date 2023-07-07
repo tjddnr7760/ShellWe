@@ -27,10 +27,14 @@ const SeachToolbarWrapper = styled.div`
 
 const ShellsWrapper = styled.div`
   display: flex;
-  width: 100%;
-  height: 80%;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
+  width: auto;
+  height: 80%;
+  gap: 15px;
+  flex-wrap: wrap;
+  margin:10px;
+  padding:10px;
 `;
 export {
   CategoryListWrapper,

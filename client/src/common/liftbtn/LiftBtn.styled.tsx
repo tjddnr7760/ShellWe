@@ -3,7 +3,7 @@ import { DropdownBTN } from '../dropdownmenu/DropDownMenu.styled';
 
 export const Lift = styled(DropdownBTN)`
   box-shadow: none;
-  position: absolute;
+  position: fixed;
   bottom: 5%;
   right: 5%;
   cursor: pointer;

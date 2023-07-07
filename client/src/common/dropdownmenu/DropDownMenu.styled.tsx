@@ -18,9 +18,11 @@ const DropdownBTN = styled.img`
 
 const DropdownContainer = styled.div`
   position: relative;
+  
 `;
 
 const DropdownContent = styled.div`
+ right: 5%;
   position: absolute;
   display: flex;
   flex-direction: column;

@@ -5,9 +5,9 @@ const SearchToolbarContainer = styled.div`
   width: 100%;
   height: 30px;
   margin: 0 30px;
-  justify-content: center;
+  justify-content: flex-end;
   align-items: center;
-  gap: 50px;
+  gap: 250px;
 `;
 
 const SearchToolbarInputWrapper = styled.div`
