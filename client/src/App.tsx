@@ -1,6 +1,7 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import './App.css';
 import GlobalStyle from './style/GlobalStyle.ts';
+
 // import Header from './Components/Common/Header/Header';
 // import Sidebar from './Components/Common/Sidebar/Sidebar';
 // import Footer from './Components/Common/Footer/Footer';
@@ -14,11 +15,14 @@ import ProductShell from './page/productshell/ProductShell.tsx';
 import TalentShell from './page/talentshell/TalentShell.tsx';
 import { RecoilRoot } from 'recoil';
 
+
+
 function App() {
   return (
     <RecoilRoot>
 
     <BrowserRouter>
+      <Header />
       <GlobalStyle />
       <main>
         <Routes>
@@ -31,7 +35,6 @@ function App() {
 
           <Route path="/shelllist/product" element={<ProductShell />} />
           <Route path="/shelllist/talent" element={<TalentShell />} />
-
           {/*       <Route path="/shellcreate" element={} /> // 제품 생성 페이지
           <Route path="/shelldetail/:id" element={} /> // 제품 상세 페이지
           <Route path="/shellupdate" element={} /> // 제품 수정 페이지
