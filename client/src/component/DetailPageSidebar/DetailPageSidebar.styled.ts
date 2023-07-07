@@ -6,9 +6,8 @@ const Wrapper = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  width: 200px;
-  height: 210px;
-  margin: 10px;
+  width: 180px;
+  height: 200px;
   border: 0.5px solid rgba(0, 0, 0, 0.2);
   border-radius: 10px;
   background-color: #caf0f8;
@@ -23,9 +22,8 @@ const Div = styled.div`
 `;
 
 const DealState = styled(Div)`
-  justify-content: space-between;
-  padding-left: 24px;
-  padding-right: 24px;
+  width: 160px;
+  justify-content: space-around;
 `;
 
 const ToggleBody = styled(Div)`
@@ -58,5 +56,6 @@ const ToggleRetangle = styled.div`
 
 const Text = styled.div`
   font-size: 16px;
+  font-weight: 400;
 `;
 export { Wrapper, Div, ToggleBody, DealState, ToggleRetangle, Text };
