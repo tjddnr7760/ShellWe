@@ -1,6 +1,7 @@
 // import { useEffect } from 'react';
 import { Icon, UserImg } from './Avatar.styled.ts';
 import userimg from '../../asset/avatar/userimg.svg';
+import noprofile from '../../asset/avatar/noprofile.svg'
 
 const Avatar: React.FC = () => {
   // useEffect(() => {
@@ -9,13 +10,17 @@ const Avatar: React.FC = () => {
   //         // api url:
   //     })
 
+  const userImg = userimg;
+  // response 객체 data인 member.picture를 넣을 예정
+
   return (
     <>
       <Icon>
-        <img src={userimg} alt="icon" />
+        <img src={userImg !== '' ? userimg : noprofile} alt="user-icon" />
+        {/* member.picture data 없을 경우, noprofile image로 대체 */}
       </Icon>
       <UserImg>
-        <img src={userimg} alt="icon" />
+        <img src={userImg !== '' ? userimg : noprofile} alt="user-image" />
       </UserImg>
     </>
   );
