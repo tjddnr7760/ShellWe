@@ -4,7 +4,7 @@ const TagContainer = styled.div`
   display: flex;
   align-items: center;
   flex-wrap: wrap;
-  min-height: 50px;
+  width: 50%;
   margin: 10px;
   padding: 0 10px;
   border: 1px solid #82c0fa;

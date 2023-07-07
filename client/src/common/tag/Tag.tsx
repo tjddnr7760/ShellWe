@@ -1,6 +1,6 @@
 import React, { ChangeEvent, useState } from 'react';
 import { v4 as uuidv4 } from 'uuid';
-import { TagContainer,TagInput  } from './Tag.styled';
+import { TagContainer, TagInput } from './Tag.styled';
 import TagBox from './TagBox.tsx';
 
 const Tag = () => {
@@ -15,7 +15,7 @@ const Tag = () => {
     if (e.key === 'Enter') {
       e.preventDefault();
       const tag = inputTagValue.trim();
-  
+
       if (tag !== '' && tags.length < 4) {
         setTags([...tags, tag]);
       }
@@ -28,21 +28,26 @@ const Tag = () => {
     updatedTags.splice(index, 1);
     setTags(updatedTags);
   };
-  
 
   return (
-      <TagContainer>
-        {tags.map((tag,index) => (
-             <TagBox  key={uuidv4()} index={index} type="write" tag={tag} handleRemove={handleRemove} />
-        ))}
-        <TagInput 
+    <TagContainer>
+      {tags.map((tag, index) => (
+        <TagBox
+          key={uuidv4()}
+          index={index}
+          type="write"
+          tag={tag}
+          handleRemove={handleRemove}
+        />
+      ))}
+      <TagInput
         type="text"
         value={inputTagValue}
         onChange={handleChange}
         onKeyDown={handleKeyDown}
         placeholder="#태그를 입력해주세요. (최대 4개)"
       />
-      </TagContainer>
+    </TagContainer>
   );
 };
 
