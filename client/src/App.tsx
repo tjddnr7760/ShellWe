@@ -1,6 +1,7 @@
-import { BrowserRouter, Routes, Route } from 'react-router-dom'
-import './App.css'
-import GlobalStyle from './style/GlobalStyle.ts'
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import './App.css';
+import GlobalStyle from './style/GlobalStyle.ts';
+import Header from './component/header/Header.tsx';
 // import Header from './Components/Common/Header/Header';
 // import Sidebar from './Components/Common/Sidebar/Sidebar';
 // import Footer from './Components/Common/Footer/Footer';
@@ -10,12 +11,12 @@ import GlobalStyle from './style/GlobalStyle.ts'
 // import MyPage from './Pages/My/MyPage.jsx';
 // import SignupPage from './Pages/LoginSignup/SingupPage.jsx';
 // import AfterSignupPage from './Pages/LoginSignup/AfterSignupPage.jsx';
-import ShellList from './page/shelllist/ShellList.tsx';
+
 
 function App() {
-
   return (
     <BrowserRouter>
+      <Header />
       <GlobalStyle />
       <main>
         <Routes>
@@ -39,4 +40,4 @@ function App() {
   );
 }
 
-export default App
+export default App;
