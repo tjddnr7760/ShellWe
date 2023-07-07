@@ -2,6 +2,7 @@ package com.shellwe.websocket.handler;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.gson.Gson;
+import com.shellwe.websocket.auth.memberDetails.MemberContextInform;
 import com.shellwe.websocket.dto.*;
 import com.shellwe.websocket.entity.Message;
 import com.shellwe.websocket.entity.Room;
@@ -12,6 +13,8 @@ import com.shellwe.websocket.service.HttpService;
 import com.shellwe.websocket.service.WsService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Component;
 import org.springframework.web.socket.CloseStatus;
 import org.springframework.web.socket.TextMessage;
@@ -36,7 +39,9 @@ public class WebSockChatHandler extends TextWebSocketHandler {
         // 세션의 핸드쉐이크 헤더 체크해보기
         // 세션의 principal에 사용자의 정보 넣기
 
-        System.out.println(session.getAttributes());
+        Authentication a = (Authentication) session.getPrincipal();
+        MemberContextInform m = (MemberContextInform) a.getPrincipal();
+        System.out.println(m);
 
         wsService.getPreviousMessages(session);
     }
@@ -51,7 +56,7 @@ public class WebSockChatHandler extends TextWebSocketHandler {
     }
 
     public void afterConnectionClosed(WebSocketSession session, CloseStatus status) throws Exception {
-        wsService.terminateSession(session);
+//        wsService.terminateSession(session);
     }
 }
 

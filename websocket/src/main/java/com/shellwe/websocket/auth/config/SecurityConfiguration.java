@@ -48,10 +48,11 @@ public class SecurityConfiguration {
     public CorsConfigurationSource corsConfigurationSource() {
 
         CorsConfiguration configuration = new CorsConfiguration();
-        configuration.setAllowedOrigins(Arrays.asList("*"));
+        configuration.setAllowedOriginPatterns(Arrays.asList("*"));
         configuration.setAllowedMethods(Arrays.asList("GET", "POST", "DELETE", "OPTIONS", "PATCH"));
         configuration.setAllowedHeaders(Arrays.asList("*"));
         configuration.addExposedHeader("Authorization");
+        configuration.setAllowCredentials(true);
 
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         source.registerCorsConfiguration("/**", configuration);
@@ -87,8 +88,9 @@ public class SecurityConfiguration {
                     .apply(new CustomFilterConfigurer())
                 .and()
                     .authorizeHttpRequests(authorize -> authorize
-                            .antMatchers("/ws/*").permitAll()
-                            .anyRequest().hasAuthority("EMAIL_VERIFIED")
+//                            .antMatchers("/ws/*").permitAll()
+                            .anyRequest().authenticated()
+//                                    .anyRequest().permitAll()
                     );
 
         return http.build();
