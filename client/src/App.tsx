@@ -4,6 +4,7 @@ import GlobalStyle from './style/GlobalStyle.ts';
 import Button from './common/button/Button.tsx';
 import Nav from './component/nav/Nav.tsx';
 import Header from './component/header/Header.tsx';
+// import ShellDetailPage from './page/shelldetail/ShellDetailPage.tsx';
 // import Header from './Components/Common/Header/Header';
 // import Sidebar from './Components/Common/Sidebar/Sidebar';
 // import Footer from './Components/Common/Footer/Footer';
@@ -17,10 +18,10 @@ import Header from './component/header/Header.tsx';
 function App() {
   return (
     <BrowserRouter>
-      <Header />
-      <GlobalStyle />
-      <Button />
-      <Nav />
+      {/* <Header /> */}
+      {/* <GlobalStyle /> */}
+      {/* <Button /> */}
+      {/* <Nav /> */}
       <main>
         <Routes>
           {/* <Route path="/" element={} /> // 홈페이지
@@ -28,11 +29,9 @@ function App() {
           <Route path="/login" element={} /> // 로그인
           <Route path="/singup" element={} /> // 회원가입
           <Route path="/signup/success" element={} /> // 회원가입 완료
-*/}
-
-          <Route path="/shelllist" element={<ShellList/>} /> 
-{/*       <Route path="/shellcreate" element={} /> // 제품 생성 페이지
-          <Route path="/shelldetail/:id" element={} /> // 제품 상세 페이지
+          <Route path="/shelllist" element={<ShellList/>} />  
+          <Route path="/shellcreate" element={} /> // 제품 생성 페이지
+          <Route path="/shelldetail/:id" element={<ShellDetailPage />} /> // 제품 상세 페이지
           <Route path="/shellupdate" element={} /> // 제품 수정 페이지
           <Route path="/member/:id" element={} /> // 마이 페이지
           <Route path="/dm/:id" element={} /> // DM 페이지
