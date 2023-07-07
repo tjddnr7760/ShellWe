@@ -30,32 +30,22 @@ public class JwtVerificationFilter extends OncePerRequestFilter {
         this.jwtTokenizer = jwtTokenizer;
     }
 
-    private static final String[] whitelist = {
-            "/chat/*"
-    };
-
     @Override
     protected void doFilterInternal(HttpServletRequest request,
                                     HttpServletResponse response,
                                     FilterChain filterChain) throws ServletException, IOException {
-
         log.info("url = {}", request.getRequestURI());
-        if (isLoginCheckPath((request.getRequestURI()))) {
-            try {
-                log.info("verification filter active start");
-                Map<String, Object> claims = verifyJws(request).getBody();
-                setAuthenticationToContext(claims);
-            } catch (Exception e) {
-                log.info("unauthorized member access denied");
-                request.setAttribute("exception", e);
-            }
+        try {
+            log.info("verification filter active start");
+            Map<String, Object> claims = verifyJws(request).getBody();
+            setAuthenticationToContext(claims);
+        } catch (Exception e) {
+            log.info("unauthorized member access denied");
+            request.setAttribute("exception", e);
         }
         filterChain.doFilter(request, response);
     }
 
-    private boolean isLoginCheckPath(String requestURI) {
-        return !PatternMatchUtils.simpleMatch(whitelist, requestURI);
-    }
 
     private Jws<Claims> verifyJws(HttpServletRequest request) {
         String accessToken = request.getHeader("Authorization").replace("Bearer ", "");
@@ -75,14 +65,14 @@ public class JwtVerificationFilter extends OncePerRequestFilter {
         Long id = Long.parseLong(claims.get("id").toString());
         String email = (String) claims.get("sub");
         String displayName = (String) claims.get("displayName");
+        String profileUrl = (String) claims.get("profileUrl");
+
         boolean emailVerificationStatus = (boolean) claims.get("emailVerificationStatus");
-        // profileUrl 필요
 
         List<EmailVerifiedAuthority> emailVerifiedAuthorities =
                 Collections.singletonList(new EmailVerifiedAuthority(emailVerificationStatus));
 
-        // profileUrl 필요
-        MemberContextInform memberContextInform = new MemberContextInform(id, email, displayName);
+        MemberContextInform memberContextInform = new MemberContextInform(id, email, displayName, profileUrl);
 
         Authentication authentication = new UsernamePasswordAuthenticationToken(memberContextInform, null, emailVerifiedAuthorities);
         SecurityContextHolder.getContext().setAuthentication(authentication);

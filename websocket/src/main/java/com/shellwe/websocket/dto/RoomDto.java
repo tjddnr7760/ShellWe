@@ -20,7 +20,7 @@ public class RoomDto {
     @Builder
     @Getter
     public static class Response{
-        private long roomId;
+        private long id;
         private boolean unread;
         private MemberDto.Response member;
     }

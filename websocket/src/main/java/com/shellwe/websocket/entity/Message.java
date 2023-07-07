@@ -10,10 +10,12 @@ import javax.persistence.*;
 @Getter
 @Setter
 @Entity
-public class Message extends Auditable{
+public class Message extends TimeTracker{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long messageId;
+    @Column(name = "MESSAGE_ID")
+    private Long id;
+
 
     @Column
     private String payload;

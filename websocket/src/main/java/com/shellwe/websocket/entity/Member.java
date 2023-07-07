@@ -12,7 +12,7 @@ import java.util.List;
 @Getter
 @Setter
 @Entity
-public class Member extends Auditable {
+public class Member extends TimeTracker {
     public Member(Long memberId) {
         this.id = memberId;
     }

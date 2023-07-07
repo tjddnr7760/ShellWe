@@ -7,7 +7,7 @@ public class MemberDto {
     @Builder
     @Getter
     public static class Response{
-        private long memberId;
+        private long id;
         private String displayName;
         private String picture;
     }

@@ -1,10 +1,8 @@
 package com.shellwe.websocket.auth.config;
 
 
-import com.shellwe.websocket.auth.filter.JwtAuthenticationFilter;
+
 import com.shellwe.websocket.auth.filter.JwtVerificationFilter;
-import com.shellwe.websocket.auth.handler.jwt.LoginAuthenticationFailureHandler;
-import com.shellwe.websocket.auth.handler.jwt.LoginAuthenticationSuccessHandler;
 import com.shellwe.websocket.auth.handler.jwt.TokenVerificationFailedHandler;
 import com.shellwe.websocket.auth.handler.jwt.VerificationAuthFailedHandler;
 import com.shellwe.websocket.auth.jwt.JwtTokenizer;
@@ -19,6 +17,7 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.logout.LogoutFilter;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
@@ -63,17 +62,9 @@ public class SecurityConfiguration {
     public class CustomFilterConfigurer extends AbstractHttpConfigurer<CustomFilterConfigurer, HttpSecurity> {
         @Override
         public void configure(HttpSecurity builder) throws Exception {
-            AuthenticationManager authenticationManager = builder.getSharedObject(AuthenticationManager.class);
-
-            JwtAuthenticationFilter jwtAuthenticationFilter = new JwtAuthenticationFilter(authenticationManager, jwtTokenizer);
-            jwtAuthenticationFilter.setFilterProcessesUrl("/auth/login");
-            jwtAuthenticationFilter.setAuthenticationSuccessHandler(new LoginAuthenticationSuccessHandler());
-            jwtAuthenticationFilter.setAuthenticationFailureHandler(new LoginAuthenticationFailureHandler());
-
             JwtVerificationFilter jwtVerificationFilter = new JwtVerificationFilter(jwtTokenizer);
-
             builder
-                    .addFilter(jwtAuthenticationFilter);
+                    .addFilterAfter(jwtVerificationFilter, LogoutFilter.class);
         }
     }
 
@@ -96,8 +87,8 @@ public class SecurityConfiguration {
                     .apply(new CustomFilterConfigurer())
                 .and()
                     .authorizeHttpRequests(authorize -> authorize
-                            .antMatchers("/h2/*").permitAll()
-                            .anyRequest().authenticated()
+                            .antMatchers("/ws/*").permitAll()
+                            .anyRequest().hasAuthority("EMAIL_VERIFIED")
                     );
 
         return http.build();
