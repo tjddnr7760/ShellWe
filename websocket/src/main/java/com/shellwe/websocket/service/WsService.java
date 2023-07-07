@@ -142,7 +142,7 @@ public class WsService extends com.shellwe.websocket.service.Service {
     }
 
     private List<MessageDto.Response> getMessageResponse(long roomId, long memberId){
-        List<Message> messages = messageRepository.findAllByRoomOrderByMessageIdAsc(new Room(roomId));
+        List<Message> messages = messageRepository.findAllByRoomOrderByIdAsc(new Room(roomId));
 
         List<MessageDto.Response> responses = messages.stream()
                 .map(message->roomMapper.messageToMessageResponse(message, memberId))

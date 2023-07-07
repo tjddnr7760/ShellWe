@@ -28,15 +28,15 @@ import java.util.stream.Collectors;
 @Component
 @Transactional
 public class WebSockChatHandler extends TextWebSocketHandler {
-    private final ObjectMapper objectMapper;
-    private final HttpService httpService;
     private final WsService wsService;
-    private final Gson gson;
+
     @Override
     public void afterConnectionEstablished(WebSocketSession session) throws Exception, IOException{
         // 시큐리티 컨텍스트 홀더 체크해보기
         // 세션의 핸드쉐이크 헤더 체크해보기
         // 세션의 principal에 사용자의 정보 넣기
+
+        System.out.println(session.getAttributes());
 
         wsService.getPreviousMessages(session);
     }
@@ -45,6 +45,8 @@ public class WebSockChatHandler extends TextWebSocketHandler {
 
     @Override
     protected void handleTextMessage(WebSocketSession session, TextMessage message) throws Exception {
+        System.out.println(session.getAttributes());
+
         wsService.handleMessage(session,message);
     }
 
