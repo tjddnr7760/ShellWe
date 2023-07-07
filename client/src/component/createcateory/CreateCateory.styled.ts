@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 export const CreateCateoryWrapper = styled.div`
-  width: 50%;
+  width: 70%;
   height: auto;
   border-radius: 20px;
   border: 0.5px solid rgba(0, 0, 0, 0.5);
@@ -9,8 +9,8 @@ export const CreateCateoryWrapper = styled.div`
   background: #fff;
   display: flex;
   padding: 10px;
-  display: flex;
   flex-direction: column;
+  justify-content: center;
   gap: 10px;
 `;
 export const CategoryMenuWrapper = styled.div`

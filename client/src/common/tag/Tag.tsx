@@ -3,7 +3,7 @@ import { v4 as uuidv4 } from 'uuid';
 import { TagContainer, TagInput } from './Tag.styled';
 import TagBox from './TagBox.tsx';
 
-const Tag = () => {
+const Tag: React.FC = () => {
   const [tags, setTags] = useState<string[]>([]);
   const [inputTagValue, setInputTagValue] = useState<string>('');
 

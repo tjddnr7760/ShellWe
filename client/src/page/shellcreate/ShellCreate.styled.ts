@@ -22,7 +22,7 @@ export const CreateInput = styled.input`
   outline: none;
 `;
 export const CreateTitleWrapper = styled.div`
-  width: 50%;
+  width: 70%;
   height: 55px;
   border-radius: 20px;
   border: 0.5px solid rgba(0, 0, 0, 0.5);
@@ -50,4 +50,24 @@ export const CreateBodyWrapper = styled(CreateTitleWrapper)`
   height: auto;
   max-height: none;
   flex: 1;
+`;
+export const CreateImgContainer = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  gap: 10px;
+  width: 70%;
+`;
+export const CreateMainImgWrapper = styled(CreateTitleWrapper)`
+  min-height: 400px;
+  min-width: 200px;
+
+  height: 100%;
+  width: 40%;
+`;
+
+export const CreateImgImgListWrapper = styled(CreateTitleWrapper)`
+  height: 100%;
+  min-height: 400px;
+  width: 60%;
 `;

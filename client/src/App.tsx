@@ -3,6 +3,7 @@ import './App.css';
 import GlobalStyle from './style/GlobalStyle.ts';
 import Header from './component/header/Header.tsx';
 import ShellCreate from './page/shellcreate/ShellCreate.tsx';
+import ShellUpdate from './page/shellupdate/ShellUpdate.tsx';
 
 // import Sidebar from './Components/Common/Sidebar/Sidebar';
 // import Footer from './Components/Common/Footer/Footer';
@@ -27,10 +28,11 @@ function App() {
           <Route path="/signup/success" element={} /> // 회원가입 완료
 */}
           <Route path="/shellcreate" element={<ShellCreate />} />
+          <Route path="/shellupdate/:id" element={<ShellUpdate />} />
+
           {/*
            /> // 제품 생성 페이지
           <Route path="/shelldetail/:id" element={} /> // 제품 상세 페이지
-          <Route path="/shellupdate" element={} /> // 제품 수정 페이지
           <Route path="/member/:id" element={} /> // 마이 페이지
           <Route path="/dm/:id" element={} /> // DM 페이지
           <Route path="/offer/:id" element={} /> // 요청함 페이지 */}

@@ -21,7 +21,7 @@ interface CategoryType {
   id: number;
 }
 
-const CreateCateory = () => {
+const CreateCateory: React.FC = () => {
   const [isOpenCategory, setIsOpenCategory] = useState(false);
   const [selectedCateory, setSelectedCateory] = useState({
     name: '카테고리',
