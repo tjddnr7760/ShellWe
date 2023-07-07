@@ -15,7 +15,7 @@ type ToggleProps = {
 }
 
 const DetailPageSidebar = () => {
-    const [toggleOn, setToggleOn] = useState(true);
+  const [toggleOn, setToggleOn] = useState(true);
 
   const handleClick = () => {
     setToggleOn((prevToggle) => !prevToggle);

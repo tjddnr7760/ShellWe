@@ -30,7 +30,7 @@ const ContentDiv = styled(Div)`
   display: flex;
   flex-direction: column;
   justify-content: center;
-  width: 858px;
+  width: 670px;
   gap: 5px;
 `;
 

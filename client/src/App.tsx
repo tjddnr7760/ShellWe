@@ -4,7 +4,7 @@ import GlobalStyle from './style/GlobalStyle.ts';
 import Button from './common/button/Button.tsx';
 import Nav from './component/nav/Nav.tsx';
 import Header from './component/header/Header.tsx';
-// import ShellDetailPage from './page/shelldetail/ShellDetailPage.tsx';
+import ShellDetailPage from './page/shelldetail/ShellDetailPage.tsx';
 // import Header from './Components/Common/Header/Header';
 // import Sidebar from './Components/Common/Sidebar/Sidebar';
 // import Footer from './Components/Common/Footer/Footer';

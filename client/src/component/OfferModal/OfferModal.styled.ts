@@ -1,13 +1,13 @@
 import styled from 'styled-components';
 
 const Wrapper = styled.div`
+  position: fixed;
   display: flex;
   flex-direction: column;
   width: 600px;
   height: 610px;
   border: 0.5px solid #48cae4;
   border-radius: 10px;
-  margin-left: 500px;
   background-color: rgba(202, 240, 248, 0.5);
 `;
 

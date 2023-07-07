@@ -1,6 +1,7 @@
+import React, { useState } from 'react';
+import OfferModal from '../OfferModal/OfferModal';
 import Ellipsis from '../../asset/ellipsis.svg';
 import Poke from '../../asset/poke.svg';
-
 import {
   ShellInfoContainer,
   Wrapper,
@@ -17,8 +18,12 @@ import {
   SeeMoreBody,
 } from './ShellDetail.styled';
 
-const ShellDetail = () => {
-  
+interface ShellDetailProps {
+  handlePoke: () => void; // Define the handlePoke prop
+  handleOpenSidebar: () => void;
+}
+
+const ShellDetail = ({ handlePoke, handleOpenSidebar }: ShellDetailProps) => {
   return (
     <Wrapper>
       <ShellInfoContainer>
@@ -27,7 +32,7 @@ const ShellDetail = () => {
             <div className="avatar">userimg</div>
             <Nickname>nickname</Nickname>
           </UserInfoDiv>
-          <Hamburger>
+          <Hamburger onClick={handleOpenSidebar}>
             <img src={Ellipsis} alt="hamburger" />
           </Hamburger>
         </UserInfoAndHamburgerDiv>
@@ -41,7 +46,7 @@ const ShellDetail = () => {
         <SeeMore>더 보기</SeeMore>
       </ShellInfoContainer>
       <PokeBox>
-        <PokeButton>
+        <PokeButton onClick={handlePoke}>
           <img src={Poke} alt="pokeicon" />
           찌르기
         </PokeButton>

@@ -1,6 +1,8 @@
+import React, { useState } from 'react';
 import ShellImgPreview from '../../component/ShellImgPreview/ShellImgPreview';
 import ShellDetail from '../../component/ShellDetail/ShellDetail';
 import DetailPageSidebar from '../../component/DetailPageSidebar/DetailPageSidebar';
+import OfferModal from '../../component/OfferModal/OfferModal';
 import {
   DetailPageContainer,
   Div,
@@ -10,6 +12,17 @@ import {
 } from './ShellDetailPage.styled';
 
 const ShellDetailPage = () => {
+  const [modalVisible, setModalVisible] = useState(false);
+  const [sidebarOpen, setSidebarOpen] = useState(false);
+  
+  const handleOpenSidebar = () => {
+    setSidebarOpen(!sidebarOpen);
+  };
+
+  const handlePoke = () => {
+    setModalVisible(!modalVisible);
+  };
+
   return (
     <Wrapper>
       <DetailPageContainer>
@@ -18,10 +31,14 @@ const ShellDetailPage = () => {
             <ShellImgPreview />
           </PreviewDiv>
           <Div>
-            <ShellDetail />
-            <DetailPageSidebar />
+            <ShellDetail
+              handlePoke={handlePoke}
+              handleOpenSidebar={handleOpenSidebar}
+            />
+            {sidebarOpen && <DetailPageSidebar />}
           </Div>
         </ContentDiv>
+        {modalVisible && <OfferModal />}
       </DetailPageContainer>
     </Wrapper>
   );
