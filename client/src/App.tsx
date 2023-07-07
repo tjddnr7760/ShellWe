@@ -1,7 +1,7 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import './App.css';
 import GlobalStyle from './style/GlobalStyle.ts';
-import Nav from './component/nav/Nav.tsx';
+
 // import Header from './Components/Common/Header/Header';
 // import Sidebar from './Components/Common/Sidebar/Sidebar';
 // import Footer from './Components/Common/Footer/Footer';
@@ -16,6 +16,7 @@ import Nav from './component/nav/Nav.tsx';
 function App() {
   return (
     <BrowserRouter>
+      <Header />
       <GlobalStyle />
       <Nav />
       <main>
