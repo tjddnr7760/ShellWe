@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+
 import CreateCateory from '../../component/createcateory/CreateCateory.js';
 import {
   ShellCreateContainer,
@@ -17,10 +18,11 @@ const ShellCreate = () => {
       </CreateTitleWrapper>
       <div></div>
       <div></div>
+
       <CreateBodyWrapper>
-        <CreateBody type="text" placeholder="내용을 입력하세요"></CreateBody>
+        <CreateBody minRows={10} placeholder="내용을 입력하세요" />
       </CreateBodyWrapper>
-      <Tag></Tag>
+      <Tag />
     </ShellCreateContainer>
   );
 };

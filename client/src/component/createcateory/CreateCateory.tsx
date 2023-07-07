@@ -18,6 +18,7 @@ import CategoryMenu from '../../asset/categorymenu/CategoryMenu.svg';
 interface CategoryType {
   name: string;
   categoryid: string;
+  id: number;
 }
 
 const CreateCateory = () => {
@@ -51,6 +52,7 @@ const CreateCateory = () => {
           {PRODUCT_CATEGORIES_DATA.map((item: CategoryType) => {
             return (
               <CategoryItem
+                key={item.id}
                 onClick={() => handleClickChangeCategery(item, 'product')}
               >
                 {item.name}
@@ -61,6 +63,7 @@ const CreateCateory = () => {
           {TALENT_CATEGORIES_DATA.map((item: CategoryType) => {
             return (
               <CategoryItem
+                key={item.id}
                 onClick={() => handleClickChangeCategery(item, 'talent')}
               >
                 {item.name}

@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import TextareaAutosize from 'react-textarea-autosize';
 
 export const ShellCreateContainer = styled.section`
   border: 1px solid rgba(202, 240, 248, 0.5);
@@ -15,6 +16,11 @@ export const ShellCreateContainer = styled.section`
   gap: 10px;
   padding: 20px;
 `;
+export const CreateInput = styled.input`
+  margin: 5px;
+  border: none;
+  outline: none;
+`;
 export const CreateTitleWrapper = styled.div`
   width: 50%;
   height: 55px;
@@ -29,20 +35,19 @@ export const CreateTitleWrapper = styled.div`
   font-size: 24px;
   gap: 10px;
 `;
-export const CreateBodyWrapper = styled(CreateTitleWrapper)`
-  min-height: 120px;
-`;
-
-export const CreateInput = styled.input`
+export const CreateBody = styled(TextareaAutosize)`
   margin: 5px;
   border: none;
   outline: none;
-`;
-export const CreateBody = styled.textarea`
-  margin: 5px;
-  border: none;
-  outline: none;
-  height: 100%;
-  width: auto;
+  width: 100%;
   resize: none;
+  overflow: hidden;
+`;
+export const CreateBodyWrapper = styled(CreateTitleWrapper)`
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  height: auto;
+  max-height: none;
+  flex: 1;
 `;
