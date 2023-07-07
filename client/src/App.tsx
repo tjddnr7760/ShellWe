@@ -1,7 +1,7 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import './App.css';
 import GlobalStyle from './style/GlobalStyle.ts';
-import Button from './common/button/Button.tsx';
+
 // import Header from './Components/Common/Header/Header';
 // import Sidebar from './Components/Common/Sidebar/Sidebar';
 // import Footer from './Components/Common/Footer/Footer';
@@ -12,11 +12,13 @@ import Button from './common/button/Button.tsx';
 // import SignupPage from './Pages/LoginSignup/SingupPage.jsx';
 // import AfterSignupPage from './Pages/LoginSignup/AfterSignupPage.jsx';
 
+
 function App() {
   return (
     <BrowserRouter>
+      <Header />
       <GlobalStyle />
-      <Button />
+
       <main>
         <Routes>
           {/* <Route path="/" element={} /> // 홈페이지
