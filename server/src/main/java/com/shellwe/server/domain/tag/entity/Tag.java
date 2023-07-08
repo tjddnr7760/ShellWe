@@ -3,9 +3,11 @@ package com.shellwe.server.domain.tag.entity;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 import javax.persistence.*;
 
+@ToString
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
@@ -20,4 +22,8 @@ public class Tag {
 
     @Column(name = "TAG_NAME")
     private String tagName;
+
+    public void setTagName(String tagName) {
+        this.tagName = tagName;
+    }
 }
