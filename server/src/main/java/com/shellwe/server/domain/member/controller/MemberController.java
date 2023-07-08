@@ -76,7 +76,6 @@ public class MemberController {
             MemberContextInform memberInform = (MemberContextInform) authentication.getPrincipal();
             id = memberInform.getId();
         }
-        System.out.println("id = " + id);
         return id;
     }
 }

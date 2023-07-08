@@ -55,20 +55,6 @@ public class Member extends TimeTracker {
         this.displayName = displayName;
     }
 
-    @Builder
-    public Member(String email,
-                  String password,
-                  String displayName,
-                  List<Shell> shells) {
-
-        this.email = email;
-        this.password = password;
-        this.displayName = displayName;
-        if (shells != null) {
-            this.shells = shells;
-        }
-    }
-
     public void emailVerificationCompleted() {
         this.emailVerificationStatus = true;
     }

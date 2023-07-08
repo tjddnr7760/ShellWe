@@ -111,6 +111,10 @@ public class MemberService {
         log.info("delete member in service layer end");
     }
 
+    public Member getMemberByOtherLayer(long memberId) {
+        return findById(memberId);
+    }
+
     private Member findByEmail(String email) {
         Optional<Member> byEmail = memberRepository.findByEmail(email);
         Member member = byEmail.orElseThrow(() -> new IllegalStateException());
