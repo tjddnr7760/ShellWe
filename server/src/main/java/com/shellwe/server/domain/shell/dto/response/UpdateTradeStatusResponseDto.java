@@ -1,6 +1,8 @@
 package com.shellwe.server.domain.shell.dto.response;
 
 import com.shellwe.server.domain.member.dto.response.FindResponseDto;
+import com.shellwe.server.domain.picture.dto.PictureResponseDto;
+import com.shellwe.server.domain.tag.dto.TagResponseDto;
 import com.shellwe.server.domain.types.ShellType;
 import com.shellwe.server.domain.types.Status;
 import com.shellwe.server.domain.types.category.ShellCategory;
@@ -20,7 +22,7 @@ public class UpdateTradeStatusResponseDto {
 
     private String title;
 
-    private List<String> pictures;
+    private List<PictureResponseDto> pictures;
 
     private String body;
 
@@ -30,7 +32,7 @@ public class UpdateTradeStatusResponseDto {
 
     private ShellCategory category;
 
-    private List<String> tags;
+    private List<TagResponseDto> tags;
 
     private Status status;
 

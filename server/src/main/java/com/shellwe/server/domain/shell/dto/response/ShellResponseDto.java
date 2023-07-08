@@ -1,6 +1,11 @@
 package com.shellwe.server.domain.shell.dto.response;
 
 import com.shellwe.server.domain.member.dto.response.FindResponseDto;
+import com.shellwe.server.domain.picture.dto.PictureResponseDto;
+import com.shellwe.server.domain.tag.dto.TagResponseDto;
+import com.shellwe.server.domain.types.ShellType;
+import com.shellwe.server.domain.types.Status;
+import com.shellwe.server.domain.types.category.ShellCategory;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -14,9 +19,9 @@ public class ShellResponseDto {
 
     private int numberOfTrades;
 
-    private String type;
+    private ShellType type;
 
-    private String status;
+    private Status status;
 
     private String title;
 
@@ -24,11 +29,11 @@ public class ShellResponseDto {
 
     private String modifiedAt;
 
-    private String category;
+    private ShellCategory category;
 
-    private List<String> tags;
+    private List<TagResponseDto> tags;
 
-    private List<String> shellPhotos;
+    private List<PictureResponseDto> pictures;
 
     private FindResponseDto member;
 }
