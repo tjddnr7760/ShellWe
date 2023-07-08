@@ -14,8 +14,13 @@ import ShellUpdate from './page/shellupdate/ShellUpdate.tsx';
 // import SignupPage from './Pages/LoginSignup/SingupPage.jsx';
 // import AfterSignupPage from './Pages/LoginSignup/AfterSignupPage.jsx';
 
+import ProductShell from './page/productshell/ProductShell.tsx';
+import TalentShell from './page/talentshell/TalentShell.tsx';
+import { RecoilRoot } from 'recoil';
+
 function App() {
   return (
+    <RecoilRoot>
     <BrowserRouter>
       <Header />
       <GlobalStyle />
@@ -25,13 +30,13 @@ function App() {
           <Route path="/main" element={} /> // 메인페이지
           <Route path="/login" element={} /> // 로그인
           <Route path="/singup" element={} /> // 회원가입
-          <Route path="/signup/success" element={} /> // 회원가입 완료
-*/}
+
           <Route path="/shellcreate" element={<ShellCreate />} />
           <Route path="/shellupdate/:id" element={<ShellUpdate />} />
 
-          {/*
-           /> // 제품 생성 페이지
+          <Route path="/shelllist/product" element={<ProductShell />} />
+          <Route path="/shelllist/talent" element={<TalentShell />} />
+
           <Route path="/shelldetail/:id" element={} /> // 제품 상세 페이지
           <Route path="/member/:id" element={} /> // 마이 페이지
           <Route path="/dm/:id" element={} /> // DM 페이지
@@ -39,6 +44,8 @@ function App() {
         </Routes>
       </main>
     </BrowserRouter>
+        </RecoilRoot>
+
   );
 }
 
