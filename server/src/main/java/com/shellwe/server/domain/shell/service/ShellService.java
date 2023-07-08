@@ -1,89 +1,165 @@
 package com.shellwe.server.domain.shell.service;
 
+import com.shellwe.server.domain.member.entity.Member;
+import com.shellwe.server.domain.member.service.MemberService;
 import com.shellwe.server.domain.shell.dto.request.RegisterRequestDto;
 import com.shellwe.server.domain.shell.dto.request.UpdateRequestDto;
 import com.shellwe.server.domain.shell.dto.request.UpdateTradeStatusRequestDto;
 import com.shellwe.server.domain.shell.dto.response.*;
+import com.shellwe.server.domain.shell.entity.Shell;
 import com.shellwe.server.domain.shell.mapper.ShellMapper;
 import com.shellwe.server.domain.shell.repository.ShellRepository;
+import com.shellwe.server.File.UploadPictureService;
 import com.shellwe.server.domain.types.ShellType;
 import com.shellwe.server.domain.types.category.ShellCategory;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
+
+import java.util.List;
+import java.util.Optional;
 
 @Slf4j
 @Service
 public class ShellService {
 
     private final ShellRepository shellRepository;
+    private final MemberService memberService;
+    private final UploadPictureService uploadPictureService;
     private final ShellMapper shellMapper;
 
     @Autowired
-    public ShellService(ShellRepository shellRepository, ShellMapper shellMapper) {
+    public ShellService(ShellRepository shellRepository, MemberService memberService,
+                        ShellMapper shellMapper, UploadPictureService uploadPictureService) {
         this.shellRepository = shellRepository;
+        this.memberService = memberService;
         this.shellMapper = shellMapper;
+        this.uploadPictureService = uploadPictureService;
     }
 
-    public RegisterResponseDto register(RegisterRequestDto registerRequestDto, long memberId) {
-        // dto를 shell 객체로 변환한다.
+    public RegisterResponseDto register(RegisterRequestDto registerRequestDto, long memberId, List<MultipartFile> pictures) {
+        Shell registerShell = shellMapper.registerRequestDtoToShell(registerRequestDto);
+        List<String> pictureUrls = uploadPictureService.severalPictureFilesToUrls(pictures);
 
-        // shell의 정보를 셋팅하고 member를 등록한다.
+        registerShell.statusActive();
+        registerShell.setMember(memberService.getMemberByOtherLayer(memberId));
+        registerShell.setPictureUrls(pictureUrls);
 
-        // shell을 db에 저장한다.
-
-        // dto로 변환해서 리턴한다.
+        RegisterResponseDto registerResponseDto = shellMapper.shellToRegisterResponseDto(shellRepository.save(registerShell));
+        registerResponseDto.getMember().setMe(true);
+        return registerResponseDto;
     }
 
-    public FindDetailsResponseDto findDetails(long shellId, Long memberId) {
-        // shellid로 특정 shell을 조회한다.
+    public FindDetailsResponseDto findDetails(Long shellId, Long memberId) {
+        Shell shell = findById(shellId);
+        System.out.println(shell.toString());
+        FindDetailsResponseDto findDetailsResponseDto = shellMapper.shellToFindDetailsResponseDto(shell);
+        findDetailsResponseDto.getMember().setMe(false);
 
-        // memberId를 비교하고 자기자신이면 isMe를 true로 변경한다. memberId가 null이면 비로그인 정보 조회이다.
-
-        // dto로 바꿔서 리턴한다.
+        if (shell.getMember().getId().equals(memberId)) {
+            findDetailsResponseDto.getMember().setMe(true);
+        }
+        return findDetailsResponseDto;
     }
 
-    public UpdateResponseDto update(long shellId, UpdateRequestDto updateRequestDto, long memberId) {
-        // shellId로 특정 shell을 조회한다.
+    public UpdateResponseDto update(long shellId, UpdateRequestDto updateRequestDto, long memberId, MultipartFile picture) {
+        System.out.println(updateRequestDto.toString());
+        UpdateResponseDto updateResponseDto;
+        Shell shell = findById(shellId);
+        Member member = shell.getMember();
+        int pictureOrder = updateRequestDto.getPictureOrder();
 
-        // 유저가 memberId와 동일한지 검증한다.
-
-        // 동일하면 업데이트하고 dto를 리턴한다.
+        if (member.getId() == memberId) {
+            Shell requestShell = shellMapper.updateRequestDtoToShell(updateRequestDto);
+            shell.updateShellInformExceptPictureUrl(requestShell);
+            if (pictureOrder >= 0) {
+                judgePictureUrl(picture, shell, pictureOrder);
+            }
+            updateResponseDto = shellMapper.shellToUpdateResponseDto(shellRepository.save(shell));
+            updateResponseDto.getMember().setMe(true);
+        } else {
+            throw new IllegalStateException("자신의 아이디만 수정 가능합니다.");
+        }
+        return updateResponseDto;
     }
 
-    public void delete(long shellId, long id) {
-        // shellId로 특정 shell을 조회한다.
+    private void judgePictureUrl(MultipartFile picture, Shell shell, int pictureOrder) {
+        if (picture == null || picture.isEmpty()) {
+            // 사진 url 삭제
+            shell.deleteOnePictureUrl(pictureOrder);
+        } else if (pictureOrder == shell.getPictureUrls().size() && pictureOrder < 4) {
+            // 사진 url 추가
+            String pictureUrl = uploadPictureService.onePictureFileToUrl(picture);
+            shell.addOnePictureUrl(pictureUrl, pictureOrder);
+        } else if (pictureOrder >= 0 && pictureOrder < shell.getPictureUrls().size()) {
+            // 사진 url 변경
+            String pictureUrl = uploadPictureService.onePictureFileToUrl(picture);
+            shell.updateShellPictureUrl(pictureUrl, pictureOrder);
+        } else {
+            throw new IllegalArgumentException("사진을 수정할 수 없습니다. 갯수가 초과했거나 옳바른 순서가 아닙니다.");
+        }
+    }
 
-        // 유저가 memberId와 동일한지 검증한다.
+    public void delete(long shellId, long memberId) {
+        Shell shell = findById(shellId);
 
-        // 동일하면 삭제하고 dto를 리턴한다.
+        if (shell.getMember().getId() == memberId) {
+            shellRepository.delete(shell);
+        } else {
+            throw new IllegalStateException("자신의 아이디만 삭제 가능합니다.");
+        }
     }
 
     public UpdateTradeStatusResponseDto updateTradeStatus(long shellId, UpdateTradeStatusRequestDto updateTradeStatusRequestDto, long memberId) {
-        // shellId로 특정 shell을 조회한다.
+        Shell shell = findById(shellId);
+        UpdateTradeStatusResponseDto updateTradeStatusResponseDto;
 
-        // 유저가 memberId와 동일한지 검증한다.
-
-        // dto에 저장된 정보대로 저장한다.
+        if (shell.getMember().getId() == memberId) {
+            shell.setStatus(updateTradeStatusRequestDto.getStatus());
+            updateTradeStatusResponseDto = shellMapper.shellToUpdateTradeStatusResponseDto(shellRepository.save(shell));
+            updateTradeStatusResponseDto.getMember().setMe(true);
+        } else {
+            throw new IllegalStateException("자신의 아이디만 거래상태수정 가능합니다.");
+        }
+        return updateTradeStatusResponseDto;
     }
 
-    public InquiryToMainResponseDto inquiryToMain(int size) {
-        // size만큼 거래정보 많은 쉘순서대로 List로 가져온다.
+//    public InquiryResponseDto inquiry(int limit, int cursor, ShellType shellType, ShellCategory shellCategory) {
+//        List<Shell> shells = shellRepository.findShells(cursor, shellType, shellCategory, limit);
+//
+//        //InquiryResponseDto inquiryResponseDto = getInquiryResponseDto(shells);
+//        return shellMapper.shellsToInquiryResponseDto(shells);
+//    }
+//
+//    public SearchResponseDto search(int limit, int cursor, String title) {
+//        Pageable pageable = PageRequest.of(0, limit, Sort.by(Sort.Direction.DESC, "id"));
+//        List<Shell> shells = shellRepository.searchShells("%" + title + "%", cursor, pageable).getContent();
+//        return shellMapper.shellsToSearchResponseDto(shells);
+//    }
+//
+//    private InquiryResponseDto getInquiryResponseDto(List<Shell> shells) {
+//        List<ShellResponseDto> shellResponseDtos = shells.stream()
+//                .map(shellMapper::shellToShellResponseDto)
+//                .collect(Collectors.toList());
+//
+//        InquiryResponseDto inquiryResponseDto = new InquiryResponseDto();
+//        inquiryResponseDto.setShells(shellResponseDtos);
+//        return inquiryResponseDto;
+//    }
+//
+//    private SearchResponseDto getSearchResponseDto(List<Shell> shells) {
+//        List<ShellResponseDto> shellResponseDtos = shells.stream()
+//                .map(shellMapper::shellToShellResponseDto)
+//                .collect(Collectors.toList());
+//
+//        SearchResponseDto searchResponseDto = new SearchResponseDto();
+//        searchResponseDto.setShells(shellResponseDtos);
+//        return searchResponseDto;
+//    }
 
-        // 리스트를 각각 findshells에서 처리해주고
-
-        // dto로 변환해서 리턴한다.
-    }
-
-    public InquiryResponseDto inquiry(int limit, int cursor, ShellType shellType, ShellCategory shellCategory) {
-        // 커서 형태로 최대 limit만큼 특정 shelltype의 특정 카테고리 shell을 불러온다.
-
-        // 리스트를 각각 findshells에서 처리해주고
-
-        // dto로 변환해서 리턴한다.
-    }
-
-    public SearchResponseDto search(int limit, int cursor, String title) {
-        // shelltype? -> 타이틀로 검색
+    private Shell findById(long shellId) {
+        Optional<Shell> byId = shellRepository.findById(shellId);
+        return byId.orElseThrow(() -> new IllegalStateException());
     }
 }
