@@ -4,11 +4,9 @@ import LikeDefaultShell from '../../asset/likeshells/LikeDefaultShell.svg';
 import LikeSelectedShell from '../../asset/likeshells/LikeSelectedShell.svg';
 
 export const ShellContainer = styled.div`
-  width: 23%;
-  height: 45%;
-  min-width:200px;
-  min-height:230px;
-
+  width: fit-content;
+  max-width: 400px;
+  height: fit-content;
   flex-shrink: 0;
   box-shadow: 1px 1px 1px 0px rgba(0, 0, 0, 0.25);
   background-color: #caf0f8;
@@ -16,8 +14,9 @@ export const ShellContainer = styled.div`
 `;
 export const ShellImgWrapper = styled.div`
   position: relative;
-  height: 80%;
   border-radius: 10px;
+  width: 250px;
+  height: 230px;
   margin: 10px 10px 0px 10px;
 `;
 
@@ -44,12 +43,13 @@ export const LikeShellIcon = styled.img`
 export const ShellInfoWrapper = styled.div`
   display: flex;
   align-items: center;
-  margin: 5px;
+
+  margin: 10px;
   gap: 10px;
 `;
 export const Avatar = styled.div`
   height: 35px;
-  width:35px;
+  width: 35px;
   background-color: white;
 
   border-radius: 100%;
@@ -61,11 +61,10 @@ export const ShellTitleInfo = styled.div`
   font-style: normal;
   font-weight: 500;
   line-height: normal;
-  background:white;
+  background: white;
   border-radius: 10px;
-  padding:5px;
-  width:77%;
-
+  padding: 10px;
+  flex-grow: 1;
 `;
 
 const Shell = () => {
@@ -86,10 +85,7 @@ const Shell = () => {
       </ShellImgWrapper>
       <ShellInfoWrapper>
         <Avatar />
-        <ShellTitleInfo>
-          제목제목제목제
-
-        </ShellTitleInfo>
+        <ShellTitleInfo>제목목제목제</ShellTitleInfo>
       </ShellInfoWrapper>
     </ShellContainer>
   );

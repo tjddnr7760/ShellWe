@@ -2,17 +2,16 @@ import styled from 'styled-components';
 
 const SearchToolbarContainer = styled.div`
   display: flex;
-  width: 100%;
   height: 30px;
   margin: 0 30px;
-  justify-content: flex-end;
+  justify-content: center;
   align-items: center;
-  gap: 250px;
+  gap: 25px;
 `;
 
 const SearchToolbarInputWrapper = styled.div`
   display: flex;
-  width: 50%;
+  width: 400px;
   align-items: center;
   padding: 0 10px;
   gap: 10px;

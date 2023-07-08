@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useSetRecoilState } from 'recoil';
+import { useSetRecoilState, useRecoilState } from 'recoil';
 import CategoryList from '../categorylist/CategoryList.tsx';
 import {
   CategoryListWrapper,
@@ -14,7 +14,7 @@ import Shell from '../../common/shell/Shell.tsx';
 
 const ShellList = ({ initialcategory, initialshellpage }: ShellListProps) => {
   const catagoryTypeHandler = useSetRecoilState<string>(catagoryState);
-  const shellPageHandler = useSetRecoilState<string>(shellPageState);
+  const [shellPage, shellPageHandler] = useRecoilState<string>(shellPageState);
 
   useEffect(() => {
     catagoryTypeHandler(initialcategory);
@@ -22,25 +22,27 @@ const ShellList = ({ initialcategory, initialshellpage }: ShellListProps) => {
   }, []);
 
   return (
-    <ShellListContainer>
-      <SeachToolbarWrapper>
-        <SearchToolbar />
-      </SeachToolbarWrapper>
-      <CategoryListWrapper>
-        <CategoryList />
-      </CategoryListWrapper>
-      <ShellsWrapper>
-        <Shell /> <Shell />
-        <Shell />
-        <Shell />
-        <Shell />
-        <Shell />
-        <Shell />
-        <Shell />
-        <Shell />
-      </ShellsWrapper>
-      <LiftBtn />
-    </ShellListContainer>
+    shellPage && (
+      <ShellListContainer>
+        <SeachToolbarWrapper>
+          <SearchToolbar />
+        </SeachToolbarWrapper>
+        <CategoryListWrapper>
+          <CategoryList />
+        </CategoryListWrapper>
+        <ShellsWrapper>
+          <Shell /> <Shell />
+          <Shell />
+          <Shell />
+          <Shell />
+          <Shell />
+          <Shell />
+          <Shell />
+          <Shell />
+        </ShellsWrapper>
+        <LiftBtn />
+      </ShellListContainer>
+    )
   );
 };
 

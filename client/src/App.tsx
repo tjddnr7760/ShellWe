@@ -17,29 +17,28 @@ import { RecoilRoot } from 'recoil';
 function App() {
   return (
     <RecoilRoot>
-    <BrowserRouter>
-      <Header />
-      <GlobalStyle />
-      <main>
-        <Routes>
-          {/* <Route path="/" element={} /> // 홈페이지
+      <BrowserRouter>
+        {/* <Header /> */}
+        <GlobalStyle />
+        <main>
+          <Routes>
+            {/* <Route path="/" element={} /> // 홈페이지
           <Route path="/main" element={} /> // 메인페이지
           <Route path="/login" element={} /> // 로그인
           <Route path="/singup" element={} /> // 회원가입
           <Route path="/signup/success" element={} /> // 회원가입 완료*/}
-          <Route path="/shelllist/product" element={<ProductShell />} />
-          <Route path="/shelllist/talent" element={<TalentShell />} />
-          {/*       <Route path="/shellcreate" element={} /> // 제품 생성 페이지
+            <Route path="/shelllist/product" element={<ProductShell />} />
+            <Route path="/shelllist/talent" element={<TalentShell />} />
+            {/*       <Route path="/shellcreate" element={} /> // 제품 생성 페이지
           <Route path="/shelldetail/:id" element={} /> // 제품 상세 페이지
           <Route path="/shellupdate" element={} /> // 제품 수정 페이지
           <Route path="/member/:id" element={} /> // 마이 페이지
           <Route path="/dm/:id" element={} /> // DM 페이지
           <Route path="/offer/:id" element={} /> // 요청함 페이지 */}
-        </Routes>
-      </main>
-    </BrowserRouter>
-        </RecoilRoot>
-
+          </Routes>
+        </main>
+      </BrowserRouter>
+    </RecoilRoot>
   );
 }
 
