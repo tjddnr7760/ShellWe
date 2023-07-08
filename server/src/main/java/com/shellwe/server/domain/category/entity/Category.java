@@ -4,9 +4,11 @@ import com.shellwe.server.domain.types.category.ShellCategory;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 import javax.persistence.*;
 
+@ToString
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
@@ -22,4 +24,8 @@ public class Category {
     @Enumerated(EnumType.STRING)
     @Column(name = "SHELL_CATEGORY")
     private ShellCategory shellCategory;
+
+    public void setShellCategory(ShellCategory shellCategory) {
+        this.shellCategory = shellCategory;
+    }
 }
