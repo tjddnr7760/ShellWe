@@ -1,5 +1,6 @@
 package com.shellwe.server.domain.shell.dto.response;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.shellwe.server.domain.member.dto.response.FindResponseDto;
 import com.shellwe.server.domain.picture.dto.PictureResponseDto;
 import com.shellwe.server.domain.tag.dto.TagResponseDto;
@@ -8,10 +9,12 @@ import com.shellwe.server.domain.types.Status;
 import com.shellwe.server.domain.types.category.ShellCategory;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 
 import java.time.LocalDateTime;
 import java.util.List;
 
+@ToString
 @Getter
 @Setter
 public class FindDetailsResponseDto {
