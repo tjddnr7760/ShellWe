@@ -7,20 +7,9 @@ import { useRecoilValue } from 'recoil';
 const CategoryList = () => {
   const shellPage = useRecoilValue<string>(shellPageState);
 
-  const [categoryData, setCategoryData] = useState<TalentCategory[]>([]);
-
-  useEffect(() => {
-    //불필요한 렌더링을 방지하기 위해 setTimeout으로 약간의 딜레이를 부여
-    const timer = setTimeout(() => {
-      setCategoryData(
-        shellPage === 'product'
-          ? PRODUCT_CATEGORIES_DATA
-          : TALENT_CATEGORIES_DATA
-      );
-    });
-
-    return () => clearTimeout(timer);
-  }, [shellPage]);
+  //const [categoryData, setCategoryData] = useState<TalentCategory[]>([]);
+  const categoryData =
+    shellPage === 'product' ? PRODUCT_CATEGORIES_DATA : TALENT_CATEGORIES_DATA;
 
   return (
     <CategoryContainer>
