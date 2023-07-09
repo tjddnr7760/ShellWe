@@ -5,8 +5,8 @@ export const NavContainer = styled.div`
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  width: 360px;
-  height: 100vh;
+  width: 100%;
+  height: 100%;
   position: fixed;
   top: 0;
   left: 0;
