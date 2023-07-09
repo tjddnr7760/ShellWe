@@ -1,6 +1,5 @@
 /* eslint-disable import/no-unresolved */
 import styled from 'styled-components';
-import { UserImg, Box } from './profile.styled.ts';
 import { SmallButton6 } from '../../common/button/Button.styled';
 
 const Wrapper = styled.div`
@@ -16,20 +15,28 @@ const Wrapper = styled.div`
   padding-left: 50px;
 `;
 
-const ContentBox = styled(Box)``;
+const ContentBox = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+`;
 
-const ProfileImage = styled(UserImg)`
+const ProfileImage = styled.div`
+  display: flex;
   flex-direction: column;
   justify-content: flex-end;
+  align-items: center;
+  background-color: #ffffff;
+  border: 0.5px solid rgba(0, 0, 0, 0.5);
+  border-radius: 10px;
+  font-size: 20px;
   width: 150px;
   height: 150px;
 `;
 
-const Title = styled.div`
-  font-size: 16px;
-`;
+const Title = styled.div``;
 
-const TextDiv = styled(Title)`
+const TextDiv = styled.div`
   display: flex;
   width: 100%;
   height: 15%;
@@ -37,6 +44,7 @@ const TextDiv = styled(Title)`
   align-items: center;
   text-align: center;
   background-color: #023e8a;
+  font-size: 16px;
   color: #fff;
   border-radius: 0px 0px 10px 10px;
 `;
@@ -45,7 +53,8 @@ const NicknameInput = styled.input`
   width: 320px;
 `;
 
-const IntroductionInput = styled(NicknameInput)`
+const IntroductionInput = styled.input`
+  width: 320px;
   height: 150px;
   max-height: fit-content;
 `;

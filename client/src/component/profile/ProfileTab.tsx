@@ -10,7 +10,7 @@ const Wrapper = styled.div`
 
 const TabContainer = styled.div`
   display: flex;
-  gap: 10px;
+  gap: 20px;
 `;
 
 const TabButton = styled.div<{ isselected?: boolean }>`
@@ -20,7 +20,7 @@ const TabButton = styled.div<{ isselected?: boolean }>`
   width: 220px;
   height: 40px;
   font-size: 16px;
-  border: 0.5px solid rgba(0, 0, 0, 0.5);
+  border: 0.5px solid rgba(0, 0, 0, 0.1);
   border-radius: 20px;
   background-color: ${({ isselected }) => (isselected ? '#00b4d8' : 'white')};
   color: ${({ isselected }) => (isselected ? 'white' : '#000000')};
@@ -28,18 +28,23 @@ const TabButton = styled.div<{ isselected?: boolean }>`
 
 export { TabButton, TabContainer, Wrapper }
 
-const ProfileTab = () => {
+interface ProfileTabProps {
+  handleComponent: (componentName: string) => void;
+}
+
+const ProfileTab = ( {handleComponent}: ProfileTabProps) => {
   const [selectedTab, setSelectedTab] = useState('edit');
 
   const handleTabClick = (Tab: string) => {
     setSelectedTab(Tab);
+    handleComponent(Tab);
   };
   return (
     <Wrapper>
       <TabContainer>
         <TabButton
           onClick={() => handleTabClick('edit')}
-          isselected={selectedTab === 'edit'}
+          isselected={selectedTab === 'edit' }
         >
           Edit profile
         </TabButton>

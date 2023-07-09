@@ -1,16 +1,14 @@
 import {
-  Wrapper,
   ProfileContainer,
   UserImg,
   Nickname,
   Introduction,
   AllLikeCategorys,
   Box,
-} from './profile.styled';
+} from './Profile.styled'
 
 const profile = () => {
   return (
-    <Wrapper>
       <ProfileContainer>
         <Box>
           <UserImg>userImg</UserImg>
@@ -21,7 +19,6 @@ const profile = () => {
           <AllLikeCategorys>All Like Categorys</AllLikeCategorys>
         </Box>
       </ProfileContainer>
-    </Wrapper>
   );
 };
 

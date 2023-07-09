@@ -1,13 +1,9 @@
 import styled from 'styled-components';
 
-const Wrapper = styled.div`
-  width: 100%;
-  height: 100%;
-`;
 const ProfileContainer = styled.div`
   display: flex;
-  width: 945px;
-  height: 270px;
+  max-width: 700px;
+  height: fit-content;
   gap: 20px;
 `;
 
@@ -28,16 +24,16 @@ const Div = styled.div`
 `;
 
 const UserImg = styled(Div)`
-  width: 220px;
-  height: 220px;
+  width: 200px;
+  height: 200px;
 `;
 const Nickname = styled(UserImg)`
   height: 40px;
 `;
 const Introduction = styled(Div)`
   justify-content: flex-start;
-  width: 700px;
-  height: 220px;
+  width: 480px;
+  height: 200px;
   padding: 10px;
 `;
 const AllLikeCategorys = styled(Introduction)`
@@ -45,7 +41,6 @@ const AllLikeCategorys = styled(Introduction)`
 `;
 
 export {
-  Wrapper,
   ProfileContainer,
   UserImg,
   Nickname,

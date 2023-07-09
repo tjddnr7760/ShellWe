@@ -10,7 +10,7 @@ import {
   CancelButton,
   ButtonBox,
   Image,
-} from './editProfile.styled';
+} from './EditProfile.styled';
 import example from '../../asset/example.png';
 
 const EditProfile = () => {
