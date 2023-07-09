@@ -6,7 +6,7 @@ const Container = styled.div`
   background-color: #ffffff;
   border-radius: 10px;
   max-width: 620px;
-  gap: 20px;
+  gap: 10px;
   @media (max-width: 768px) {
     max-width: 350px;
   }
