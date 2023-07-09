@@ -10,7 +10,7 @@ export const NavContainer = styled.div`
   position: fixed;
   top: 0;
   left: 0;
-  border: 0.5px solid rgba(0, 0, 0, 0.1);
+  border: 0.5px solid rgba(0, 0, 0, 0.2);
   background: #e3f6fe;
 `;
 
