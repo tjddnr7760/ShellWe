@@ -2,10 +2,8 @@ import styled from 'styled-components';
 
 const ShellInfoContainer = styled.div`
   display: flex;
-  width: 505px;
-  height: 135px;
   border: 0.5px solid rgba(0, 0, 0, 0.5);
-  padding: 15px;
+  padding: 12px;
   gap: 15px;
 `;
 
