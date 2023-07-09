@@ -1,6 +1,9 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import './App.css';
 import GlobalStyle from './style/GlobalStyle.ts';
+
+import DirectMessage from './page/directmessage/DirectMessage.tsx';
+import Nav from './component/nav/Nav.tsx';
 // import Header from './Components/Common/Header/Header';
 // import Sidebar from './Components/Common/Sidebar/Sidebar';
 // import Footer from './Components/Common/Footer/Footer';
@@ -18,11 +21,13 @@ function App() {
   return (
     <RecoilRoot>
       <BrowserRouter>
+        <DirectMessage />
         {/* <Header /> */}
         <GlobalStyle />
         <main>
           <Routes>
             {/* <Route path="/" element={} /> // 홈페이지
+
           <Route path="/main" element={} /> // 메인페이지
           <Route path="/login" element={} /> // 로그인
           <Route path="/singup" element={} /> // 회원가입

@@ -1,7 +1,7 @@
 // import { useEffect } from 'react';
 import { Icon, UserImg } from './Avatar.styled.ts';
 import userimg from '../../asset/avatar/userimg.svg';
-import noprofile from '../../asset/avatar/noprofile.svg'
+import noprofile from '../../asset/avatar/noprofile.svg';
 
 const Avatar: React.FC = () => {
   // useEffect(() => {
