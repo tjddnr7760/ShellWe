@@ -1,18 +1,17 @@
 import styled from 'styled-components';
 
-const PokedShellListWrapper = styled.div`
+const PokedShellListContainer = styled.div`
   display: flex;
   flex-direction: column;
-  max-width: 505px;
-  max-height: 1080px;
 `;
 const IntroBox = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
   padding-top: 20px;
-  height: 135px;
+  height: 130px;
   gap: 10px;
+  background-color: rgba(202, 240, 248, 0.15);
 `;
 
 const IntroText1 = styled.div`
@@ -25,11 +24,11 @@ const IntroText2 = styled.div`
 const ShellInfoListContainer = styled.div`
   max-width: 505px;
   max-height: 945px;
-  overflow-y: scroll;
+  overflow-y: auto;
 `;
 
 export {
-  PokedShellListWrapper,
+  PokedShellListContainer,
   IntroBox,
   IntroText1,
   IntroText2,

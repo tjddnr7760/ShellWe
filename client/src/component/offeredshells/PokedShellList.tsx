@@ -1,6 +1,6 @@
 import ShellInfo from './ShellInfo.tsx';
 import {
-  PokedShellListWrapper,
+  PokedShellListContainer,
   IntroBox,
   IntroText1,
   IntroText2,
@@ -9,7 +9,7 @@ import {
 
 const PokedShellList = () => {
   return (
-    <PokedShellListWrapper>
+    <PokedShellListContainer>
       <IntroBox>
         <IntroText1>Poked Shell List</IntroText1>
         <IntroText2>Find great shells!</IntroText2>
@@ -22,8 +22,12 @@ const PokedShellList = () => {
         <ShellInfo />
         <ShellInfo />
         <ShellInfo />
+        <ShellInfo />
+        <ShellInfo />
+        <ShellInfo />
+        <ShellInfo />
       </ShellInfoListContainer>
-    </PokedShellListWrapper>
+    </PokedShellListContainer>
   );
 };
 
