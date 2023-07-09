@@ -5,13 +5,13 @@ export const NavContainer = styled.div`
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  width: 16%;
-  height: 100%;
+  width: 360px;
+  height: 100vh;
   position: fixed;
   top: 0;
   left: 0;
   border: 0.5px solid rgba(0, 0, 0, 0.1);
-  background: rgba(202, 240, 248, 0.5);
+  background: #e3f6fe;
 `;
 
 export const Logo = styled.img`
@@ -24,7 +24,7 @@ export const Logo = styled.img`
 `;
 
 export const NavItems = styled.div`
-  margin: 20px 0px 330px 0px;
+  margin: 20px 0px 280px 0px;
 `;
 
 export const NavItemContent = styled.div`
@@ -80,7 +80,7 @@ export const NavItem = styled.div`
 `;
 
 export const LogoutButton = styled.div`
-  padding-left: 200px;
+  padding-left: 250px;
   display: flex;
   flex-direction: flex-end;
   color: #828282;
