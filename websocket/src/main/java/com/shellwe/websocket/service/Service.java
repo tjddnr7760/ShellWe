@@ -17,6 +17,7 @@ import com.shellwe.websocket.repository.RoomRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.socket.WebSocketSession;
 
 import javax.transaction.Transactional;
@@ -46,6 +47,11 @@ public abstract class Service {
         MemberContextInform member =  (MemberContextInform) authentication.getPrincipal();
         MemberDto.Response memberResponse = roomMapper.memberContextToMemberResponse(member);
         return memberResponse;
+    }
+    protected long getLoggedInMemberId(){
+        Authentication authentication = (Authentication) SecurityContextHolder.getContext().getAuthentication();
+        MemberContextInform member =  (MemberContextInform) authentication.getPrincipal();
+        return member.getId();
     }
     protected long getRoomId(WebSocketSession session){
         return Long.parseLong(session.getUri().getQuery().replace("roomId=",""));
