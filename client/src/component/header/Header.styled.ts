@@ -7,9 +7,11 @@ export const HeaderContainer = styled.div`
   display: flex;
   width: 100%;
   height: 80px;
-  background-color: #caf0f880;
+  background-color: #fff;
+  border-bottom: 0.5px solid rgba(0, 0, 0, 0.1);
   justify-content: space-between;
   align-items: center;
+  z-index: 999;
 `;
 
 export const Button = styled.button`

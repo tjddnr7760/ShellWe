@@ -11,8 +11,8 @@ const TagBox = ({ type, index, tag, handleRemove }: TagBoxProps) => {
   return (
     <TagWrapper>
       <TagText>{tag}</TagText>
-      {type !== 'write' ? null : (
-        (handleRemove && index)&& <CloseButton onClick={() => handleRemove(index)}>X</CloseButton>
+      {type === 'write' && handleRemove && index != undefined && (
+        <CloseButton onClick={() => handleRemove(index)}>X</CloseButton>
       )}
     </TagWrapper>
   );
