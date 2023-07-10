@@ -1,4 +1,4 @@
-package com.shellwe.websocket.config;
+package com.shellwe.websocket.handler;
 
 import org.springframework.http.server.ServerHttpRequest;
 import org.springframework.http.server.ServerHttpResponse;
@@ -14,7 +14,9 @@ import java.util.Map;
 public class CustomHandshakeHandler extends DefaultHandshakeHandler {
 
     @Override
-    protected Principal determineUser(ServerHttpRequest request, WebSocketHandler wsHandler, Map<String, Object> attributes) {
+    protected Principal determineUser(ServerHttpRequest request,
+                                      WebSocketHandler wsHandler,
+                                      Map<String, Object> attributes) {
         Principal member = (Principal) SecurityContextHolder.getContext().getAuthentication();
         return member;
     }

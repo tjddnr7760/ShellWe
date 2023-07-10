@@ -1,8 +1,6 @@
 package com.shellwe.websocket.entity;
 
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
 
@@ -10,12 +8,13 @@ import javax.persistence.*;
 @Getter
 @Setter
 @Entity
+//@Builder
+@AllArgsConstructor
 public class Message extends TimeTracker{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "MESSAGE_ID")
     private Long id;
-
 
     @Column
     private String payload;

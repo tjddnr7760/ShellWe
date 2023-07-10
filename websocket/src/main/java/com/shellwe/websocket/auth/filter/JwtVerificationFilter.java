@@ -48,10 +48,10 @@ public class JwtVerificationFilter extends OncePerRequestFilter {
 
 
     private Jws<Claims> verifyJws(HttpServletRequest request) {
-        String accessToken;
+        String accessToken= "eyJhbGciOiJIUzM4NCJ9.eyJwcm9maWxlVXJsIjoiZW1wdHkiLCJkaXNwbGF5TmFtZSI6IuydvOuwmOuhnOq3uOyduOyduCIsImlkIjoxLCJlbWFpbFZlcmlmaWNhdGlvblN0YXR1cyI6dHJ1ZSwic3ViIjoibHRzODkwMzAzQGdvb2dsZS5jb20iLCJpYXQiOjE2ODg5NjM3ODUsImV4cCI6MTY4ODk5Mzc4NX0.fbaJDU9blzCPvX0sghw4gRX_xEMjXJCHkimAfcFm3CQbVUP8453TvdkVFhIgIv57";
 
-        if(request.getRequestURI().startsWith("/ws")) accessToken = request.getHeader("sec-websocket-protocol");
-        else accessToken = request.getHeader("Authorization").replace("Bearer ", "");
+//        if(request.getRequestURI().startsWith("/ws")) accessToken = request.getHeader("sec-websocket-protocol");
+//        else accessToken = request.getHeader("Authorization").replace("Bearer ", "");
 
         String base64EncodedSecretKey = jwtTokenizer.encodeBase64SecretKey(jwtTokenizer.getSecretKey());
 
