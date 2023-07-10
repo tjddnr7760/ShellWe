@@ -16,12 +16,11 @@ import shellwefirstpage from '../../asset/homepage/shellwefisrtpage.png';
 
 const HomePage = () => {
   const intro1 = '혁신적인 물물교환 서비스';
-  const intro2 = '상호 혜택의 가치를 나눠요';
+  const intro2 = '상호 혜택의 가치 제공';
   const aboutproduct1 = `Shell을 공유해보세요`;
   const pokefeature1 = 'Shell이 있나요?';
   const pokefeature2 = '원하는 제품을 찔러보세요';
   const messagefeature = '메시지를 통한 자유로운 소통';
-  const outtro = 'Shall We? Shell We!';
 
   return (
     <HomePageWrapper>
