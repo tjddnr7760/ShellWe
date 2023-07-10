@@ -4,7 +4,7 @@ import GlobalStyle from './style/GlobalStyle.ts';
 import Header from './component/header/Header.tsx';
 import ShellCreate from './page/shellcreate/ShellCreate.tsx';
 import ShellUpdate from './page/shellupdate/ShellUpdate.tsx';
-import AfterSignUp from './page/aftersignup/afterSignUp.tsx';
+import AfterSignUp from './page/aftersignup/AfterSignUp.tsx';
 // import Sidebar from './Components/Common/Sidebar/Sidebar';
 // import Footer from './Components/Common/Footer/Footer';
 // import HomePage from './Pages/Common/HomePage/HomePage';
@@ -21,7 +21,7 @@ function App() {
   return (
     <RecoilRoot>
       <BrowserRouter>
-        {/* <Header /> */}
+        <Header />
         <GlobalStyle />
         <main>
           <Routes>
