@@ -40,22 +40,24 @@ import java.util.stream.Collectors;
 @Transactional
 public class WsService extends com.shellwe.websocket.service.Service {
     private final ObjectMapper objectMapper;
+    private final AsyncService asyncService;
     private Map<Long, ChatRoom> chatRooms = new LinkedHashMap<>();
     public WsService(MemberRoomRepository memberRoomRepository,
                      MemberRepository memberRepository,
                      RoomRepository roomRepository,
                      MessageRepository messageRepository,
                      RoomMapper roomMapper,
-                     ObjectMapper objectMapper) {
+                     ObjectMapper objectMapper,
+                     AsyncService asyncService) {
         super(memberRoomRepository, memberRepository, roomRepository, messageRepository, roomMapper);
         this.objectMapper = objectMapper;
+        this.asyncService = asyncService;
     }
 
     public void handleMessage(WebSocketSession session, TextMessage message) throws IOException {
         long roomId = getRoomId(session);
         MemberDto.Response member = getMemberResponse(session);
-        System.out.println(Thread.currentThread().getName());
-        saveMessage(message, roomId, member.getId());
+        asyncService.saveMessage(chatRooms, message, roomId, member.getId());
         sendMessage(session, message, member, roomId);
     }
     private void sendMessage(WebSocketSession session, TextMessage message, MemberDto.Response member, long roomId) throws IOException {
@@ -77,22 +79,6 @@ public class WsService extends com.shellwe.websocket.service.Service {
         });
     }
 
-    @Async
-    private void saveMessage(TextMessage textMessage, long roomId, long memberId){
-        System.out.println(Thread.currentThread().getName());
-        long joinedMemberNumber = chatRooms.get(roomId).getSessions().size();
-        Message message = Message.builder()
-                .room(new Room(roomId))
-                .member(new Member(memberId))
-                .payload(textMessage.getPayload())
-                .build();
-
-        if(joinedMemberNumber<2) message.setUnread(true);
-
-        messageRepository.save(message);
-    }
-
-
     public void terminateSession(WebSocketSession session){
         long roomId = getRoomId(session);
 
@@ -111,14 +97,15 @@ public class WsService extends com.shellwe.websocket.service.Service {
 
         responses.forEach(r-> {
             try {
+                log.info("thread");
                 session.sendMessage(new TextMessage(objectMapper.writeValueAsString(r)));
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
         });
     }
-    private ChatRoom joinRoom(WebSocketSession session, long roomId){
 
+    private ChatRoom joinRoom(WebSocketSession session, long roomId){
         if(chatRooms.containsKey(roomId)){
             chatRooms.get(roomId).setSessions(session);
         }else {
@@ -148,7 +135,6 @@ public class WsService extends com.shellwe.websocket.service.Service {
             messageRepository.save(message);
         }
     }
-
 
     private MemberRoom findExistsMemberRoom(WebSocketSession session, long roomId, long memberId) throws IOException {
         Optional<MemberRoom> optionalMemberRoom = memberRoomRepository.findByRoomAndMemberAndActiveTrue(new Room(roomId), new Member(memberId));
