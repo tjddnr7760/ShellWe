@@ -1,17 +1,17 @@
-import { Container, ImgBox, ShellImg, ShellInfoBox , Text} from "./MyShells.styled";
+import { MyShellsContainer, ImgBox, ShellImg, ShellInfoBox , Text} from "./MyShells.styled";
 import example from '../../asset/example.png'
 
 const MyShells = () => {
   return (
-    <Container>
+    <MyShellsContainer>
       <ImgBox>
         <ShellImg src={example} alt="Shells img"></ShellImg>
       </ImgBox>
       <ShellInfoBox>
-        <Text>title</Text>
-        <Text>category</Text>
+        <Text className="title">title</Text>
+        <Text className="category">category</Text>
       </ShellInfoBox>
-    </Container>
+    </MyShellsContainer>
   );
 };
 

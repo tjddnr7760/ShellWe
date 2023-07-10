@@ -13,31 +13,77 @@ const Box = styled.div`
   gap: 10px;
 `;
 
-const Div = styled.div`
+const Box2 = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  flex-grow: 1;
+`;
+
+const UserImgBox = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
   background-color: #ffffff;
+  max-width: 200px;
+  max-height: fit-content;
   border: 0.5px solid rgba(0, 0, 0, 0.5);
   border-radius: 10px;
   font-size: 20px;
+  overflow: hidden;
+
+  @media (max-width: 768px) {
+    max-width: 100px;
+  }
 `;
 
-const UserImg = styled(Div)`
-  width: 200px;
-  height: 200px;
+const UserImg = styled.img`
+  width: 100%;
 `;
-const Nickname = styled(UserImg)`
-  height: 40px;
-`;
-const Introduction = styled(Div)`
-  justify-content: flex-start;
-  width: 480px;
-  height: 200px;
+
+const Nickname = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #ffffff;
+  max-width: 200px;
+  max-height: fit-content;
+  border: 0.5px solid rgba(0, 0, 0, 0.5);
+  border-radius: 10px;
+  font-size: 20px;
   padding: 10px;
+  @media (max-width: 768px) {
+    font-size: 16px;
+  }
 `;
-const AllLikeCategorys = styled(Introduction)`
-  height: 40px;
+
+const Introduction = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  background-color: #ffffff;
+  border: 0.5px solid rgba(0, 0, 0, 0.5);
+  border-radius: 10px;
+  font-size: 20px;
+  padding: 10px;
+  flex-grow: 1;
+  @media (max-width: 768px) {
+    font-size: 16px;
+  }
+`;
+
+const AllLikeCategorys = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  background-color: #ffffff;
+  border: 0.5px solid rgba(0, 0, 0, 0.5);
+  border-radius: 10px;
+  font-size: 20px;
+  padding: 10px;
+  @media (max-width: 768px) {
+    font-size: 16px;
+  }
 `;
 
 export {
@@ -47,4 +93,6 @@ export {
   Introduction,
   AllLikeCategorys,
   Box,
+  Box2,
+  UserImgBox,
 };

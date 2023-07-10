@@ -1,8 +1,6 @@
 import styled from 'styled-components';
 
 const MyShellsPageWrapper = styled.div`
-  width: 1560px;
-  height: 1080px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -13,6 +11,7 @@ const MyShellsPageWrapper = styled.div`
 const MyShellsPageContainer = styled.div`
   display: flex;
   flex-direction: column;
+  width: 100%;
   max-width: 700px;
   height: fit-content;
   gap: 10px;

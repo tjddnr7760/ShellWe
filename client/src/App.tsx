@@ -36,7 +36,6 @@ function App() {
           <Route path="/shellupdate" element={} /> // 제품 수정 페이지
           <Route path="/member/:id" element={<MyPage />} /> // 마이 페이지
           <Route path="/myshells/:id" element={<MyShellsPage />} /> // 마이 쉘 페이지
-          <Route path="/member/:id" element={} /> // 마이 페이지
           <Route path="/dm/:id" element={} /> // DM 페이지
           <Route path="/offer/:id" element={} /> // 요청함 페이지 */}
           </Routes>

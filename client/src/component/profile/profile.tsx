@@ -5,20 +5,25 @@ import {
   Introduction,
   AllLikeCategorys,
   Box,
-} from './Profile.styled'
+  Box2,
+  UserImgBox,
+} from './profile.styled';
+import example from '../../asset/example.png'
 
 const profile = () => {
   return (
-      <ProfileContainer>
-        <Box>
-          <UserImg>userImg</UserImg>
-          <Nickname>Nickname</Nickname>
-        </Box>
-        <Box>
-          <Introduction>Introduction</Introduction>
-          <AllLikeCategorys>All Like Categorys</AllLikeCategorys>
-        </Box>
-      </ProfileContainer>
+    <ProfileContainer>
+      <Box>
+        <UserImgBox>
+          <UserImg src={example} alt='product'></UserImg>
+        </UserImgBox>
+        <Nickname>Nickname</Nickname>
+      </Box>
+      <Box2>
+        <Introduction>Introduction</Introduction>
+        <AllLikeCategorys>All Like Categorys</AllLikeCategorys>
+      </Box2>
+    </ProfileContainer>
   );
 };
 

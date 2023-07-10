@@ -4,19 +4,21 @@ const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
-  gap: 50px;
-  width: 700px;
-  height: 350px;
+  gap: 40px;
   background-color: #fff;
   border-radius: 10px;
   border: 0.5px solid rgba(0, 0, 0, 0.5);
-  padding-left: 50px;
+  padding: 50px;
+
+  @media (max-width: 768px) {
+    padding: 30px;
+    gap: 20px;
+  }
 `;
 const ContentBox = styled.div`
   display: flex;
   flex-direction: column;
   max-width: 270px;
-  max-height: 140px;
   gap: 10px;
 `;
 

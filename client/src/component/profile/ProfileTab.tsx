@@ -13,17 +13,23 @@ const TabContainer = styled.div`
   gap: 20px;
 `;
 
-const TabButton = styled.div<{ isselected?: boolean }>`
+const TabButton = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 220px;
+  flex-grow: 1;
   height: 40px;
   font-size: 16px;
   border: 0.5px solid rgba(0, 0, 0, 0.1);
   border-radius: 20px;
-  background-color: ${({ isselected }) => (isselected ? '#00b4d8' : 'white')};
-  color: ${({ isselected }) => (isselected ? 'white' : '#000000')};
+  background-color: #fff;
+  text-align: center;
+  color: #000;
+
+  &.selected {
+    background-color: #00b4d8;
+    color: #fff;
+  }
 `;
 
 export { TabButton, TabContainer, Wrapper }
@@ -44,19 +50,19 @@ const ProfileTab = ( {handleComponent}: ProfileTabProps) => {
       <TabContainer>
         <TabButton
           onClick={() => handleTabClick('edit')}
-          isselected={selectedTab === 'edit' }
+          className={selectedTab === 'edit' ? 'selected' : ''}
         >
           Edit profile
         </TabButton>
         <TabButton
           onClick={() => handleTabClick('change')}
-          isselected={selectedTab === 'change'}
+          className={selectedTab === 'change' ? 'selected' : ''}
         >
           Change password
         </TabButton>
         <TabButton
           onClick={() => handleTabClick('delete')}
-          isselected={selectedTab === 'delete'}
+          className={selectedTab === 'delete' ? 'selected' : ''}
         >
           Delete profile
         </TabButton>

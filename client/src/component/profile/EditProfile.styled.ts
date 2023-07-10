@@ -7,12 +7,13 @@ const Wrapper = styled.div`
   flex-direction: column;
   justify-content: center;
   gap: 50px;
-  width: 700px;
-  height: 700px;
   background-color: #fff;
   border-radius: 10px;
   border: 0.5px solid rgba(0, 0, 0, 0.5);
-  padding-left: 50px;
+  padding: 50px;
+  @media (max-width: 768px) {
+    padding: 30px;
+  }
 `;
 
 const ContentBox = styled.div`
@@ -26,12 +27,18 @@ const ProfileImage = styled.div`
   flex-direction: column;
   justify-content: flex-end;
   align-items: center;
+  max-width: 150px;
+  max-height: fit-content;
   background-color: #ffffff;
   border: 0.5px solid rgba(0, 0, 0, 0.5);
   border-radius: 10px;
   font-size: 20px;
-  width: 150px;
-  height: 150px;
+  overflow: hidden;
+`;
+
+const Image = styled.img`
+  width: 100%;
+  height: fit-content; // img 밑에 텍스트인 "change picture" 요소의 높이를 15% 줬기 때문입니다.
 `;
 
 const Title = styled.div``;
@@ -39,7 +46,6 @@ const Title = styled.div``;
 const TextDiv = styled.div`
   display: flex;
   width: 100%;
-  height: 15%;
   justify-content: center;
   align-items: center;
   text-align: center;
@@ -47,15 +53,18 @@ const TextDiv = styled.div`
   font-size: 16px;
   color: #fff;
   border-radius: 0px 0px 10px 10px;
+  padding: 5px;
 `;
 
 const NicknameInput = styled.input`
-  width: 320px;
+  min-width: 100px;
+  max-width: 320px;
 `;
 
 const IntroductionInput = styled.input`
-  width: 320px;
-  height: 150px;
+  min-width: 100px;
+  max-width: 320px;
+  min-height: 150px;
   max-height: fit-content;
 `;
 
@@ -72,10 +81,6 @@ const CancelButton = styled(SaveButton)`
 
 const ButtonBox = styled(ContentBox)`
   flex-direction: row;
-`;
-
-const Image = styled.img`
-  height: 85%; // img 밑에 텍스트인 "change picture" 요소의 높이를 15% 줬기 때문입니다.
 `;
 
 export {

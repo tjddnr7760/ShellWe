@@ -17,11 +17,11 @@ const EditProfile = () => {
   return (
     <Wrapper>
       <ContentBox>
-        <Title>profile image</Title>
+        <Title>Profile image</Title>
         <ProfileImage>
           <Image src={example} alt="userimg" />
           {/* 이미지는 js 작업 시, res 객체로 받은 데이터로 수정 */}
-          <TextDiv>change picture</TextDiv>
+          <TextDiv>Change picture</TextDiv>
         </ProfileImage>
       </ContentBox>
       <ContentBox>

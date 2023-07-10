@@ -5,12 +5,14 @@ const Wrapper = styled.div`
   flex-direction: column;
   justify-content: center;
   gap: 50px;
-  width: 700px;
-  height: 350px;
   background-color: #fff;
   border-radius: 10px;
   border: 0.5px solid rgba(0, 0, 0, 0.5);
-  padding-left: 50px;
+  padding: 50px;
+
+  @media (max-width: 768px) {
+    padding: 30px;
+  }
 `;
 const ContentBox = styled.div`
   display: flex;
