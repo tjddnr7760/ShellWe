@@ -1,5 +1,6 @@
 package com.shellwe.websocket.mapper;
 
+import com.shellwe.websocket.auth.memberDetails.MemberContextInform;
 import com.shellwe.websocket.dto.MemberDto;
 import com.shellwe.websocket.dto.MessageDto;
 import com.shellwe.websocket.dto.RoomDto;
@@ -14,6 +15,7 @@ import java.util.List;
 @Mapper(componentModel = "spring", unmappedTargetPolicy = ReportingPolicy.IGNORE)
 public interface RoomMapper {
     MemberDto.Response memberToMemberResponse(Member member);
+    MemberDto.Response memberContextToMemberResponse(MemberContextInform member);
     default RoomDto.Response memberRoomToWsResponse(MemberRoom memberRoom){
         return RoomDto.Response.builder()
                 .id(memberRoom.getRoom().getId())
