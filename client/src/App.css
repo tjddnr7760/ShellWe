@@ -1,0 +1,10 @@
+
+
+main{
+    margin-left: auto;
+    height:100vh;
+    width: 80%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
