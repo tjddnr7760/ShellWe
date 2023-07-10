@@ -17,9 +17,11 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 @Slf4j
 public class JwtVerificationFilter extends OncePerRequestFilter {
@@ -48,10 +50,15 @@ public class JwtVerificationFilter extends OncePerRequestFilter {
 
 
     private Jws<Claims> verifyJws(HttpServletRequest request) {
-        String accessToken= "eyJhbGciOiJIUzM4NCJ9.eyJwcm9maWxlVXJsIjoiZW1wdHkiLCJkaXNwbGF5TmFtZSI6IuydvOuwmOuhnOq3uOyduOyduCIsImlkIjoxLCJlbWFpbFZlcmlmaWNhdGlvblN0YXR1cyI6dHJ1ZSwic3ViIjoibHRzODkwMzAzQGdvb2dsZS5jb20iLCJpYXQiOjE2ODg5NjM3ODUsImV4cCI6MTY4ODk5Mzc4NX0.fbaJDU9blzCPvX0sghw4gRX_xEMjXJCHkimAfcFm3CQbVUP8453TvdkVFhIgIv57";
-
-//        if(request.getRequestURI().startsWith("/ws")) accessToken = request.getHeader("sec-websocket-protocol");
-//        else accessToken = request.getHeader("Authorization").replace("Bearer ", "");
+        String accessToken;
+        if(request.getRequestURI().startsWith("/ws")) accessToken =
+                Arrays.stream(request.getHeader("cookie")
+                        .split("; "))
+                        .filter(a->a.startsWith("Authorization"))
+                        .collect(Collectors.toList())
+                        .get(0)
+                        .replace("Authorization=bearer ","");
+        else accessToken = request.getHeader("Authorization").replace("Bearer ", "");
 
         String base64EncodedSecretKey = jwtTokenizer.encodeBase64SecretKey(jwtTokenizer.getSecretKey());
 
