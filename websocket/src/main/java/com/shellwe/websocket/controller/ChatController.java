@@ -1,6 +1,5 @@
 package com.shellwe.websocket.controller;
 
-import com.shellwe.websocket.dto.ChatRoom;
 import com.shellwe.websocket.dto.RoomDto;
 import com.shellwe.websocket.service.HttpService;
 import lombok.RequiredArgsConstructor;

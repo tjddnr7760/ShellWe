@@ -1,5 +1,6 @@
 package com.shellwe.websocket.config;
 
+import com.shellwe.websocket.handler.CustomHandshakeHandler;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.socket.WebSocketHandler;
@@ -15,6 +16,8 @@ public class WebSockConfig implements WebSocketConfigurer {
 
     @Override
     public void registerWebSocketHandlers(WebSocketHandlerRegistry registry) {
-        registry.addHandler(webSocketHandler, "ws/chat").setAllowedOrigins("*");
+        registry.addHandler(webSocketHandler, "/ws/chat")
+                .setHandshakeHandler(new CustomHandshakeHandler())
+                .setAllowedOrigins("*");
     }
 }

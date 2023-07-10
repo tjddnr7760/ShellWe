@@ -12,11 +12,11 @@ import java.util.Set;
 @Getter
 @Setter
 public class ChatRoom {
-    private Long roomId;
+    private Long id;
     private Set<WebSocketSession> sessions = new HashSet<>();
 
     public ChatRoom(Long roomId) {
-        this.roomId = roomId;
+        this.id = roomId;
     }
     public void setSessions(WebSocketSession session){
         sessions.add(session);

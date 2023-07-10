@@ -2,6 +2,7 @@ package com.shellwe.websocket.handler;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.gson.Gson;
+import com.shellwe.websocket.auth.memberDetails.MemberContextInform;
 import com.shellwe.websocket.dto.*;
 import com.shellwe.websocket.entity.Message;
 import com.shellwe.websocket.entity.Room;
@@ -12,6 +13,9 @@ import com.shellwe.websocket.service.HttpService;
 import com.shellwe.websocket.service.WsService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
 import org.springframework.web.socket.CloseStatus;
 import org.springframework.web.socket.TextMessage;
@@ -28,31 +32,16 @@ import java.util.stream.Collectors;
 @Component
 @Transactional
 public class WebSockChatHandler extends TextWebSocketHandler {
-    private final ObjectMapper objectMapper;
-    private final HttpService httpService;
     private final WsService wsService;
-    private final Gson gson;
+
     @Override
     public void afterConnectionEstablished(WebSocketSession session) throws Exception, IOException{
         wsService.getPreviousMessages(session);
     }
 
-
-
     @Override
     protected void handleTextMessage(WebSocketSession session, TextMessage message) throws Exception {
         wsService.handleMessage(session,message);
-
-
-
-//        String payload = message.getPayload();
-//        log.info("payload {}", payload);
-//        ChatMessage chatMessage = objectMapper.readValue(payload, ChatMessage.class);
-//
-//        ChatRoom room = httpService.findRoomById(chatMessage.getRoomId());
-//        //
-//
-//        room.handleActions(session, chatMessage, httpService);
     }
 
     public void afterConnectionClosed(WebSocketSession session, CloseStatus status) throws Exception {

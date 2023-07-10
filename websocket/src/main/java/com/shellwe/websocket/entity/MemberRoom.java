@@ -13,7 +13,8 @@ import javax.persistence.*;
 public class MemberRoom {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long memberRoomId;
+    @Column(name = "MEMBER_ROOM_ID")
+    private Long id;
 
     @Column
     private boolean active = true;

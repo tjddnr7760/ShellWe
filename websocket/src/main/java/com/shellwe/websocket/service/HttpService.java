@@ -28,7 +28,7 @@ import java.util.*;
 
 @Slf4j
 @Service
-@Transactional
+//@Transactional
 public class HttpService extends com.shellwe.websocket.service.Service {
     @Value("${client-server.url}")
     private String url;
@@ -69,6 +69,8 @@ public class HttpService extends com.shellwe.websocket.service.Service {
 
         // 생성된 룸과 멤버들 연결
         linkMemberToRoom(room, myId);
+
+        // 상대 멤버 존재하는지 체크
         linkMemberToRoom(room, sellerId);
 
         long myShellId = requestBody.getMyShellId();
@@ -81,7 +83,7 @@ public class HttpService extends com.shellwe.websocket.service.Service {
         // 프론트엔드와 상의 후 response 다시 정의
         return ResponseDto.builder()
                 .roomsUrl("http://localhost:8080/chat")
-                .roomUrl("ws://localhost:8080/chat?roomId="+ room.getRoomId() + "&memberId="+ myId)
+                .roomUrl("ws://localhost:8080/chat?roomId="+ room.getId() + "&memberId="+ myId)
                 .build();
     }
 

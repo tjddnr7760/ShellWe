@@ -3,12 +3,14 @@ package com.shellwe.websocket.dto;
 import lombok.Builder;
 import lombok.Getter;
 
+import javax.persistence.Column;
+
 public class MemberDto {
     @Builder
     @Getter
     public static class Response{
-        private long memberId;
+        private long id;
         private String displayName;
-        private String picture;
+        private String profileUrl;
     }
 }

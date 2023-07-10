@@ -1,45 +1,64 @@
 spring:
-  h2:
-    console:
-      enabled: true
-      path: /h2
-      settings:
-        web-allow-others: true
   datasource:
-    url: jdbc:h2:mem:test
+    url: jdbc:mysql://localhost:3306/shellweprototype?useSSL=false
+    username: root
+    password: ${LOCAL_MYSQL_PASSWORD}
+    driverClassName: com.mysql.cj.jdbc.Driver
   jpa:
+    database-platform: org.hibernate.dialect.MySQL8Dialect
     hibernate:
-      ddl-auto: create    # 스키마 자동 생성
-    show-sql: true        # SQL 쿼리 출력
+      ddl-auto: update
+    show-sql: true
     properties:
       hibernate:
-        format_sql: true  # SQL pretty print
+        format_sql: true
         jdbc:
-          time_zone: Asia/Seoul   # 서버 시간 서울로 변경
+          time_zone: Asia/Seoul
   sql:
     init:
-      data-locations: classpath*:db/h2/data.sql
+      data-locations: classpath*:db/mysql/data.sql
   security:
     oauth2:
       client:
         registration:
           google:
-            client-id: ${G_CLIENT_ID}
-            client-secret: ${G_CLIENT_SECRET}
+            clientId: ${G_CLIENT_ID}
+            clientSecret: ${G_CLIENT_SECRET}
             scope:
               - profile
               - email
+mail:
+  smtp:
+    host: smtp.gmail.com
+    port: 587
+    username: ${GMAIL_SMTP_USERNAME}
+    password: ${GMAIL_SMTP_PASSWORD}
+    auth: true
+    starttls:
+      enable: true
+  subject:
+    member:
+      registration: Welcome to ShellWe Project
+  template:
+    name:
+      member:
+        join: email-registration-member
 logging:
   level:
     org:
       springframework:
         orm:
           jpa: DEBUG
-server:                   # 모든 response 에 대해 지정된 인코딩 적용(한글 깨짐 방지)
+
+server:
   servlet:
     encoding:
       force-response: true
-jwt:                      # JWT 관련 정보
-  key: ${JWT_SECRET_KEY}  # 시스템 환경 변수에서 로드
+jwt:
+  key: ${JWT_SECRET_KEY}
   access-token-expiration-minutes: 500
   refresh-token-expiration-minutes: 600
+
+redirect:
+  # 이메일 인증 성공시, 아직 url 페이지 없음, 이메일 인증 성공시 white error 뜰 예정(이메일 인증은 성공)
+  email-verification-success-url : "/login"

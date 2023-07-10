@@ -1,6 +1,9 @@
 package com.shellwe.websocket.service;
 
 
+import com.shellwe.websocket.auth.memberDetails.MemberContextInform;
+import com.shellwe.websocket.dto.MemberDto;
+import com.shellwe.websocket.dto.QueryDto;
 import com.shellwe.websocket.entity.Member;
 import com.shellwe.websocket.entity.MemberRoom;
 import com.shellwe.websocket.entity.Room;
@@ -13,8 +16,11 @@ import com.shellwe.websocket.repository.MessageRepository;
 import com.shellwe.websocket.repository.RoomRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.security.core.Authentication;
+import org.springframework.web.socket.WebSocketSession;
 
 import javax.transaction.Transactional;
+import java.util.Arrays;
 import java.util.Optional;
 
 @Slf4j
@@ -34,5 +40,14 @@ public abstract class Service {
     protected MemberRoom findExistsMemberRoom(long roomId, long memberId){
         Optional<MemberRoom> optionalMemberRoom = memberRoomRepository.findByRoomAndMemberAndActiveTrue(new Room(roomId), new Member(memberId));
         return optionalMemberRoom.orElseThrow(()->new BusinessLogicException(ExceptionCode.MEMBER_ROOM_NOT_FOUND));
+    }
+    protected MemberDto.Response getMemberResponse(WebSocketSession session){
+        Authentication authentication = (Authentication) session.getPrincipal();
+        MemberContextInform member =  (MemberContextInform) authentication.getPrincipal();
+        MemberDto.Response memberResponse = roomMapper.memberContextToMemberResponse(member);
+        return memberResponse;
+    }
+    protected long getRoomId(WebSocketSession session){
+        return Long.parseLong(session.getUri().getQuery().replace("roomId=",""));
     }
 }

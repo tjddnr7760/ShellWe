@@ -1,4 +1,4 @@
-package com.shellwe.websocket.entity;
+package com.shellwe.server.utils;
 
 import lombok.Getter;
 import org.springframework.data.annotation.CreatedDate;
@@ -13,12 +13,12 @@ import java.time.LocalDateTime;
 @Getter
 @MappedSuperclass
 @EntityListeners(AuditingEntityListener.class)
-public abstract class Auditable {
+public abstract class TimeTracker {
     @CreatedDate
-    @Column(name = "created_at", updatable = false)
+    @Column(name = "CREATED_AT", updatable = false)
     private LocalDateTime createdAt;
 
     @LastModifiedDate
-    @Column(name = "LAST_MODIFIED_AT")
+    @Column(name = "MODIFIED_AT")
     private LocalDateTime modifiedAt;
 }
