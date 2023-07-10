@@ -3,7 +3,6 @@ import React from 'react';
 import './App.css';
 import GlobalStyle from './style/GlobalStyle.ts';
 import LoginPage from './page/login/LoginPage.tsx';
-
 import DirectMessage from './page/directmessage/DirectMessage.tsx';
 import Nav from './component/nav/Nav.tsx';
 import Header from './component/header/Header.tsx';
@@ -39,6 +38,8 @@ function App() {
           {/* <Route path="/aftersignup" element={<AfterSignUp />} />
             <Route path="/shelllist/product" element={<ProductShell />} />
             <Route path="/shelllist/talent" element={<TalentShell />} />
+          <Route path="/member/:id" element={<MyPage />} /> // 마이 페이지
+          <Route path="/myshells/:id" element={<MyShellsPage />} /> // 마이 쉘 페이지
             <Route path="/shellcreate" element={<ShellCreate />} />
             <Route path="/shelldetail/:id" element={<ShellUpdate />} /> */}
           {/*<Route path="/member/:id" element={} /> // 마이 페이지
