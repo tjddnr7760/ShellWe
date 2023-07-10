@@ -1,7 +1,6 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import './App.css';
 import GlobalStyle from './style/GlobalStyle.ts';
-import Header from './component/header/Header.tsx';
 import ShellCreate from './page/shellcreate/ShellCreate.tsx';
 import ShellUpdate from './page/shellupdate/ShellUpdate.tsx';
 import AfterSignUp from './page/aftersignup/AfterSignUp.tsx';
@@ -16,13 +15,13 @@ import AfterSignUp from './page/aftersignup/AfterSignUp.tsx';
 import ProductShell from './page/productshell/ProductShell.tsx';
 import TalentShell from './page/talentshell/TalentShell.tsx';
 import { RecoilRoot } from 'recoil';
-
+import MainPage from './page/main/MainPage.tsx';
 function App() {
   return (
     <RecoilRoot>
       <BrowserRouter>
-        <Header />
         <GlobalStyle />
+        <MainPage />
         <main>
           <Routes>
             {/* <Route path="/" element={} /> // 홈페이지
