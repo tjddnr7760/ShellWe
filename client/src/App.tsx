@@ -2,10 +2,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import React from 'react';
 import './App.css';
 import GlobalStyle from './style/GlobalStyle.ts';
-import LoginPage from './page/login/LoginPage.tsx';
-import DirectMessage from './page/directmessage/DirectMessage.tsx';
-import Nav from './component/nav/Nav.tsx';
-import Header from './component/header/Header.tsx';
+
 import ShellCreate from './page/shellcreate/ShellCreate.tsx';
 import ShellUpdate from './page/shellupdate/ShellUpdate.tsx';
 import AfterSignUp from './page/aftersignup/AfterSignUp.tsx';
@@ -20,17 +17,17 @@ import SignupPage from './page/signup/SignupPage.tsx';
 import ProductShell from './page/productshell/ProductShell.tsx';
 import TalentShell from './page/talentshell/TalentShell.tsx';
 import { RecoilRoot } from 'recoil';
-import HomePage from './page/home/HomePage.tsx';
 
 function App() {
   return (
     <RecoilRoot>
       <BrowserRouter>
-        {/* <Header /> */}
         <GlobalStyle />
-        {/* <main> */}
-        <Routes>
-          {/* <Route path="/" element={<HomePage />} /> // 홈페이지
+        <MainPage />
+        <main>
+          <Routes>
+
+
           <Route path="/main" element={} /> // 메인페이지
            // 로그인
           <Route path="/signup/success" element={} /> // 회원가입 완료*/}
