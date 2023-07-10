@@ -1,6 +1,9 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import './App.css';
 import GlobalStyle from './style/GlobalStyle.ts';
+
+import DirectMessage from './page/directmessage/DirectMessage.tsx';
+import Nav from './component/nav/Nav.tsx';
 import Header from './component/header/Header.tsx';
 import ShellCreate from './page/shellcreate/ShellCreate.tsx';
 import ShellUpdate from './page/shellupdate/ShellUpdate.tsx';
@@ -29,7 +32,6 @@ function App() {
           <Route path="/main" element={} /> // 메인페이지
           <Route path="/login" element={} /> // 로그인
           <Route path="/singup" element={} /> // 회원가입
-
           <Route path="/signup/success" element={} /> // 회원가입 완료*/}
           {/* <Route path="/aftersignup" element={<AfterSignUp />} />
             <Route path="/shelllist/product" element={<ProductShell />} />
