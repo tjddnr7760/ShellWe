@@ -2,10 +2,11 @@ import styled from 'styled-components';
 
 export const NavWrapper = styled.div`
   display: flex;
+  postion:sticky
   flex-direction: column;
   justify-content: space-between;
   width: 360px;
-  height: 1080px;
+  height: 100%;
   border: 0.5px solid rgba(0, 0, 0, 0.2);
   background: #e3f6fe;
 `;
