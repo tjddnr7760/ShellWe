@@ -3,7 +3,7 @@ import { Icon, UserImg } from './Avatar.styled.ts';
 import userimg from '../../asset/avatar/userimg.svg';
 import noprofile from '../../asset/avatar/noprofile.svg';
 
-const Avatar: React.FC = () => {
+const Avatar = ({ avatartype }: { avatartype: string }) => {
   // useEffect(() => {
   //         // 비동기 함수 재사용
   //         // method: GET
@@ -13,16 +13,15 @@ const Avatar: React.FC = () => {
   const userImg = userimg;
   // response 객체 data인 member.picture를 넣을 예정
 
-  return (
-    <>
-      <Icon>
-        <img src={userImg ? userimg : noprofile} alt="user-icon" />
-        {/* member.picture data 없을 경우, noprofile image로 대체 */}
-      </Icon>
-      <UserImg>
-        <img src={userImg !== '' ? userimg : noprofile} alt="user-image" />
-      </UserImg>
-    </>
+  return avatartype === 'UserImg' ? (
+    <UserImg>
+      <img src={userImg !== '' ? userimg : noprofile} alt="user-image" />
+    </UserImg>
+  ) : (
+    <Icon>
+      <img src={userImg ? userimg : noprofile} alt="user-icon" />
+      {/* member.picture data 없을 경우, noprofile image로 대체 */}
+    </Icon>
   );
 };
 
