@@ -22,6 +22,7 @@ import com.shellwe.websocket.repository.MessageRepository;
 import com.shellwe.websocket.repository.RoomRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
 import org.springframework.web.socket.TextMessage;
@@ -53,7 +54,7 @@ public class WsService extends com.shellwe.websocket.service.Service {
     public void handleMessage(WebSocketSession session, TextMessage message) throws IOException {
         long roomId = getRoomId(session);
         MemberDto.Response member = getMemberResponse(session);
-
+        System.out.println(Thread.currentThread().getName());
         saveMessage(message, roomId, member.getId());
         sendMessage(session, message, member, roomId);
     }
@@ -76,19 +77,19 @@ public class WsService extends com.shellwe.websocket.service.Service {
         });
     }
 
+    @Async
     private void saveMessage(TextMessage textMessage, long roomId, long memberId){
+        System.out.println(Thread.currentThread().getName());
         long joinedMemberNumber = chatRooms.get(roomId).getSessions().size();
+        Message message = Message.builder()
+                .room(new Room(roomId))
+                .member(new Member(memberId))
+                .payload(textMessage.getPayload())
+                .build();
 
-        new Thread(()->{
-            Message message = new Message();
-            message.setRoom(new Room(roomId));
-            message.setMember(new Member(memberId));
-            message.setPayload(textMessage.getPayload());
+        if(joinedMemberNumber<2) message.setUnread(true);
 
-            if(joinedMemberNumber<2) message.setUnread(true);
-
-            messageRepository.save(message);
-        }).start();
+        messageRepository.save(message);
     }
 
 
