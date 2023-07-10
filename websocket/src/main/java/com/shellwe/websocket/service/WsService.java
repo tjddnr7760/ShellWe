@@ -4,7 +4,9 @@ package com.shellwe.websocket.service;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.gson.Gson;
+import com.shellwe.websocket.auth.memberDetails.MemberContextInform;
 import com.shellwe.websocket.dto.ChatRoom;
+import com.shellwe.websocket.dto.MemberDto;
 import com.shellwe.websocket.dto.MessageDto;
 import com.shellwe.websocket.dto.QueryDto;
 import com.shellwe.websocket.entity.Member;
@@ -20,10 +22,12 @@ import com.shellwe.websocket.repository.MessageRepository;
 import com.shellwe.websocket.repository.RoomRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
 import org.springframework.web.socket.TextMessage;
 import org.springframework.web.socket.WebSocketSession;
 
+import javax.transaction.Transactional;
 import java.io.IOException;
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
@@ -32,6 +36,7 @@ import java.util.stream.Collectors;
 
 @Slf4j
 @Service
+@Transactional
 public class WsService extends com.shellwe.websocket.service.Service {
     private final ObjectMapper objectMapper;
     private Map<Long, ChatRoom> chatRooms = new LinkedHashMap<>();
@@ -46,20 +51,13 @@ public class WsService extends com.shellwe.websocket.service.Service {
     }
 
     public void handleMessage(WebSocketSession session, TextMessage message) throws IOException {
-        // 각세션에 메세지 전송, 비동기
-        QueryDto query = getQuery(session);
-        long roomId = query.getRoomId();
-        long memberId = 1L; // 컨텍스트 홀더 필요
+        long roomId = getRoomId(session);
+        MemberDto.Response member = getMemberResponse(session);
 
-        saveMessage(message,roomId,memberId);
-        sendMessage(session, message, roomId);
-
+        saveMessage(message, roomId, member.getId());
+        sendMessage(session, message, member, roomId);
     }
-    private void sendMessage(WebSocketSession session, TextMessage message, long roomId) throws IOException {
-        long memberId = 1L; // 컨텍스트 홀더 필요
-
-        Member member = findExistsMember(memberId); // 시큐리티 적용후 세션 혹은 컨텍스트 홀더에서 사용자 정보를 구할 수 있을시 로직 변경
-
+    private void sendMessage(WebSocketSession session, TextMessage message, MemberDto.Response member, long roomId) throws IOException {
         ChatRoom chatRoom = chatRooms.get(roomId);
 
         chatRoom.getSessions().forEach(sessions->{
@@ -67,7 +65,7 @@ public class WsService extends com.shellwe.websocket.service.Service {
                     .roomId(roomId)
                     .payload(message.getPayload())
                     .createdAt(Timestamp.valueOf(LocalDateTime.now()).toLocalDateTime())
-                    .member(roomMapper.memberToMemberResponse(member))
+                    .member(member)
                     .build();
             if(sessions.equals(session)) response.setMine(true);
             try {
@@ -79,11 +77,15 @@ public class WsService extends com.shellwe.websocket.service.Service {
     }
 
     private void saveMessage(TextMessage textMessage, long roomId, long memberId){
+        long joinedMemberNumber = chatRooms.get(roomId).getSessions().size();
+
         new Thread(()->{
             Message message = new Message();
             message.setRoom(new Room(roomId));
             message.setMember(new Member(memberId));
             message.setPayload(textMessage.getPayload());
+
+            if(joinedMemberNumber<2) message.setUnread(true);
 
             messageRepository.save(message);
         }).start();
@@ -91,43 +93,28 @@ public class WsService extends com.shellwe.websocket.service.Service {
 
 
     public void terminateSession(WebSocketSession session){
-        QueryDto query = getQuery(session);
-        long roomId = query.getRoomId();
+        long roomId = getRoomId(session);
 
         chatRooms.get(roomId).removeSession(session);
         if(chatRooms.get(roomId).getSessions().size()==0) chatRooms.remove(roomId);
     }
 
     public void getPreviousMessages(WebSocketSession session) throws IOException {
-        long roomId = getQuery(session).getRoomId();
-        long memberId = 1L; // 시큐리티 컨텍스트 홀더
+        long roomId = getRoomId(session);
+        MemberDto.Response member = getMemberResponse(session);
 
         joinRoom(session, roomId);
-        findExistsMemberRoom(session,roomId,memberId);
+        findExistsMemberRoom(session,roomId,member.getId());
 
-        List<MessageDto.Response> responses = getMessageResponse(roomId, memberId);
+        List<MessageDto.Response> responses = getMessageResponse(roomId, member.getId());
 
         responses.forEach(r-> {
             try {
                 session.sendMessage(new TextMessage(objectMapper.writeValueAsString(r)));
-                // 메세지들 Unread true 필터로 찾은후 false로 바꾸기
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
         });
-    }
-
-    private QueryDto getQuery(WebSocketSession session){
-        // security context holder에 접근이 가능하면 memberId는 뺄수 있음
-
-        QueryDto query = new QueryDto();
-        Arrays.stream(session.getUri().getQuery().split("&"))
-                .map(s -> s.split("="))
-                .forEach(a->{
-                    if(a[0].equals("roomId")) query.setRoomId(Long.parseLong(a[1]));
-                    else if (a[0].equals("memberId")) query.setMemberId(Long.parseLong(a[1]));
-                });
-        return query;
     }
     private ChatRoom joinRoom(WebSocketSession session, long roomId){
 
@@ -145,11 +132,23 @@ public class WsService extends com.shellwe.websocket.service.Service {
         List<Message> messages = messageRepository.findAllByRoomOrderByIdAsc(new Room(roomId));
 
         List<MessageDto.Response> responses = messages.stream()
-                .map(message->roomMapper.messageToMessageResponse(message, memberId))
+                .map(message->{
+                    modifyUnreadMessage(message,memberId);
+                    return roomMapper.messageToMessageResponse(message, memberId);
+                })
                 .collect(Collectors.toList());
 
         return responses;
     }
+
+    private void modifyUnreadMessage(Message message, long memberId){
+        if(!message.isNotification() && message.getMember().getId()!=memberId && message.isUnread()){
+            message.setUnread(false);
+            messageRepository.save(message);
+        }
+    }
+
+
     private MemberRoom findExistsMemberRoom(WebSocketSession session, long roomId, long memberId) throws IOException {
         Optional<MemberRoom> optionalMemberRoom = memberRoomRepository.findByRoomAndMemberAndActiveTrue(new Room(roomId), new Member(memberId));
         if(optionalMemberRoom.isEmpty()) {
@@ -163,4 +162,5 @@ public class WsService extends com.shellwe.websocket.service.Service {
             throw new BusinessLogicException(ExceptionCode.MEMBER_ROOM_NOT_FOUND);
         }else return optionalMemberRoom.get();
     }
+
 }
