@@ -1,7 +1,13 @@
 import React from 'react';
-import { MainShellWrapper, MainShellImg } from './MainPage.styled';
-import MainShellList from '../../component/mainshelllist/MainShellList';
+import {
+  MainShellWrapper,
+  MainShellImg,
+  ShellListContainer,
+  ShellBox,
+} from './MainPage.styled';
+import LiftBtn from '../../common/liftbtn/LiftBtn.tsx';
 import MainShell from '../../asset/mainshell.svg';
+import Shell from '../../common/shell/Shell.tsx';
 
 const MainPage: React.FC = () => {
   return (
@@ -9,10 +15,21 @@ const MainPage: React.FC = () => {
       <div>
         <MainShellImg src={MainShell} alt="mainshell"></MainShellImg>
       </div>
-      <MainShellList
-        initialcategory="exampleCategory"
-        initialshellpage="exampleShellPage"
-      />
+      <ShellListContainer>
+        <ShellBox>
+          <Shell />
+          <Shell />
+          <Shell />
+          <Shell />
+        </ShellBox>
+        <ShellBox>
+          <Shell />
+          <Shell />
+          <Shell />
+          <Shell />
+        </ShellBox>
+        <LiftBtn />
+      </ShellListContainer>
     </MainShellWrapper>
   );
 };
