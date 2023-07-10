@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
-import ShellImgPreview from '../../component/ShellImgPreview/ShellImgPreview';
-import ShellDetail from '../../component/ShellDetail/ShellDetail';
-import DetailPageSidebar from '../../component/DetailPageSidebar/DetailPageSidebar';
-import OfferModal from '../../component/OfferModal/OfferModal';
+import ShellImgPreview from '../../component/shellimgpreview/ShellImgPreview';
+import ShellDetail from '../../component/shelldetail/ShellDetail';
+import DetailPageSidebar from '../../component/detailpagesidebar/DetailPageSidebar';
+import OfferModal from '../../component/offermodal/OfferModal';
 import {
   DetailPageContainer,
   Div,

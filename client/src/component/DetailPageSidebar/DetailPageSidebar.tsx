@@ -4,8 +4,8 @@ import {
   Div,
   DealState,
   Text
-} from './DetailPageSidebar.styled';
-import { SmallButton3 } from '../../common/button/Button.styled';
+} from './DetailPageSidebar.styled.ts';
+import { SmallButton3 } from '../../common/button/Button.styled.ts';
 import Toggle from './Toggle.tsx'
 
 const DetailPageSidebar = () => {

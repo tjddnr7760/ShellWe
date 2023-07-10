@@ -9,7 +9,7 @@ import {
   Title,
   ShellInfo,
   ButtonDiv,
-} from './OfferModal.styled';
+} from './OfferModal.styled.ts';
 import dummydata from '../../mock/mock.tsx';
 import plus from '../../asset/plus.svg';
 import Poke from '../../asset/poke.svg';

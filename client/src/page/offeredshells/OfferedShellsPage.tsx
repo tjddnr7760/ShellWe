@@ -1,4 +1,4 @@
-import ShellImgPreview from '../../component/ShellImgPreview/ShellImgPreview';
+import ShellImgPreview from '../../component/shellimgpreview/ShellImgPreview';
 import PokedShellList from '../../component/offeredshells/PokedShellList';
 import ResponseShellList from '../../component/offeredshells/ResponseShellList';
 import {

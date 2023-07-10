@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import OfferModal from '../OfferModal/OfferModal';
+import OfferModal from '../offermodal/OfferModal';
 import Ellipsis from '../../asset/ellipsis.svg';
 import Poke from '../../asset/poke.svg';
 import {
