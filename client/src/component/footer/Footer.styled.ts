@@ -7,7 +7,7 @@ export const FooterContainer = styled.div`
   display: flex;
   border-top: 0.5px solid rgba(130, 130, 130, 0.5);
   background: rgba(202, 240, 248, 0.5);
-  width: 84%;
+  width: 100%;
   height: 150px;
   padding: 37px 0px 36px 0px;
   justify-content: center;
@@ -17,10 +17,7 @@ export const FooterContainer = styled.div`
 
   div {
     display: flex;
-    width: 380px;
-    height: 20px;
-    flex-shrink: 0;
-    gap: 31px;
+    gap: 30px;
   }
 
   span {
