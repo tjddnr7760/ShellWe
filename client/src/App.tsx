@@ -4,7 +4,7 @@ import GlobalStyle from './style/GlobalStyle.ts';
 import Header from './component/header/Header.tsx';
 import ShellCreate from './page/shellcreate/ShellCreate.tsx';
 import ShellUpdate from './page/shellupdate/ShellUpdate.tsx';
-
+import AfterSignUp from './page/aftersignup/afterSignUp.tsx';
 // import Sidebar from './Components/Common/Sidebar/Sidebar';
 // import Footer from './Components/Common/Footer/Footer';
 // import HomePage from './Pages/Common/HomePage/HomePage';
@@ -12,7 +12,6 @@ import ShellUpdate from './page/shellupdate/ShellUpdate.tsx';
 // import LoginPage from './Pages/LoginSignup/LoginPage.tsx';
 // import MyPage from './Pages/My/MyPage.jsx';
 // import SignupPage from './Pages/LoginSignup/SingupPage.jsx';
-// import AfterSignupPage from './Pages/LoginSignup/AfterSignupPage.jsx';
 
 import ProductShell from './page/productshell/ProductShell.tsx';
 import TalentShell from './page/talentshell/TalentShell.tsx';
@@ -32,11 +31,12 @@ function App() {
           <Route path="/singup" element={} /> // 회원가입
 
           <Route path="/signup/success" element={} /> // 회원가입 완료*/}
+            <Route path="/aftersignup" element={<AfterSignUp />} />
             <Route path="/shelllist/product" element={<ProductShell />} />
             <Route path="/shelllist/talent" element={<TalentShell />} />
-            {/*       <Route path="/shellcreate" element={} /> // 제품 생성 페이지
-          <Route path="/shelldetail/:id" element={} /> // 제품 상세 페이지
-          <Route path="/member/:id" element={} /> // 마이 페이지
+            <Route path="/shellcreate" element={<ShellCreate />} />
+            <Route path="/shelldetail/:id" element={<ShellUpdate />} />
+            {/*<Route path="/member/:id" element={} /> // 마이 페이지
           <Route path="/dm/:id" element={} /> // DM 페이지
           <Route path="/offer/:id" element={} /> // 요청함 페이지 */}
           </Routes>

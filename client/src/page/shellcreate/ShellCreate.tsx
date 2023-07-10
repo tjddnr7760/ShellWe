@@ -10,11 +10,13 @@ import {
   CreateImgContainer,
   CreateMainImgWrapper,
   CreateImgImgListWrapper,
+  ButtonContainer,
 } from './ShellCreate.styled.js';
 import Tag from '../../common/tag/Tag.js';
 const ShellCreate: React.FC = () => {
   return (
     <ShellCreateContainer>
+      <img src="/createLogo.svg" alt="createLogo" />
       <CreateCateory />
       <CreateTitleWrapper>
         <CreateInput type="text" placeholder="제목을 입력하세요"></CreateInput>
@@ -28,7 +30,9 @@ const ShellCreate: React.FC = () => {
         <CreateBody minRows={10} placeholder="내용을 입력하세요" />
       </CreateBodyWrapper>
       <Tag />
-      <SmallButton6>수정</SmallButton6>
+      <ButtonContainer>
+        <SmallButton6>수정</SmallButton6>
+      </ButtonContainer>
     </ShellCreateContainer>
   );
 };

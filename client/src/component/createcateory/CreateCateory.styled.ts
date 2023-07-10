@@ -1,8 +1,6 @@
 import styled from 'styled-components';
 
 export const CreateCateoryWrapper = styled.div`
-  width: 70%;
-  height: auto;
   border-radius: 20px;
   border: 0.5px solid rgba(0, 0, 0, 0.5);
   opacity: 0.6499999761581421;
@@ -10,7 +8,11 @@ export const CreateCateoryWrapper = styled.div`
   display: flex;
   padding: 10px;
   flex-direction: column;
+  width: fit-content;
+  min-width: 270px;
   justify-content: center;
+  transition: 0.3s ease-in-out;
+
   gap: 10px;
 `;
 export const CategoryMenuWrapper = styled.div`
@@ -19,30 +21,34 @@ export const CategoryMenuWrapper = styled.div`
   gap: 20px;
   margin: 0 20px;
 `;
-export const CategoryMenuImg = styled.img`
-  width: auto;
-  height: auto;
-`;
+export const CategoryMenuImg = styled.img``;
 export const CategoryMenuText = styled.div`
   color: rgba(0, 0, 0, 0.5);
   font-weight: 400;
 `;
 
 export const CategoryDropdown = styled.div`
-  font-weight: 700;
+  font-weight: 500;
   display: flex;
   flex-direction: column;
+  align-items: center;
   justify-content: space-between;
   gap: 10px;
   overflow-y: auto;
-
   height: 300px;
   max-height: 600px;
+  ::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+    border-radius: 10px;
+    background-color: #f5f5f5;
+  }
 `;
 
 export const CategoryItem = styled.div`
   cursor: pointer;
   padding: 10px;
+  width: 100%;
+  text-align: center;
   &:hover {
     background-color: gray;
   }
@@ -52,7 +58,9 @@ export const CategoryItem = styled.div`
 `;
 export const CategoryText = styled.div`
   border-bottom: 2px dotted black;
-  margin: 20px 0 0 0;
-  text-align: center;
+  margin: 10px 0 0 0;
   width: 100%;
+  padding: 20px;
+  font-weight: 700;
+  text-align: center;
 `;

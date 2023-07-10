@@ -4,10 +4,8 @@ const TagContainer = styled.div`
   display: flex;
   align-items: center;
   flex-wrap: wrap;
-  width: 70%;
-  margin: 10px;
   padding: 0 10px;
-  border: 1px solid #82c0fa;
+  border: 0.5px solid rgba(0, 0, 0, 0.5);
   border-radius: 20px;
   background-color: #f5fdff;
   &:focus-within {
