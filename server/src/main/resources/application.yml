@@ -14,6 +14,10 @@ spring:
         format_sql: true
         jdbc:
           time_zone: Asia/Seoul
+  servlet:
+    multipart:
+      max-file-size: 25MB
+      max-request-size: 25MB
   sql:
     init:
       data-locations: classpath*:db/mysql/data.sql
@@ -62,3 +66,19 @@ jwt:
 redirect:
   # 이메일 인증 성공시, 아직 url 페이지 없음, 이메일 인증 성공시 white error 뜰 예정(이메일 인증은 성공)
   email-verification-success-url : "/login"
+# S3 연결 설정
+cloud:
+  aws:
+    region:
+      use-default-aws-region-chain: false
+      static: ap-northeast-2
+    stack:
+      auto: false
+    credentials:
+      accesskey: ${AWS_ACCESS_KEY}
+      secretkey: ${AWS_SECRET_KEY}
+  s3:
+    bucket: shellwepicture
+    folder:
+      folderName1: member/
+      folderName2: shell/
