@@ -8,7 +8,6 @@ export const MessageWrapper = styled.div`
 `;
 
 export const MessageListContainer = styled.div`
-  width: 32%;
   padding: 15px;
   background-color: #caf0f8bf;
   overflow-y: scroll;
@@ -56,10 +55,10 @@ export const MessageUserLastText = styled.div`
 `;
 
 export const MessageRoomContainer = styled.div`
-  width: 68%;
+  flex-grow: 1;
   display: flex;
   flex-direction: column;
-  align-items: center;
+  margin: 30px;
 `;
 
 export const MessageLiftButton = styled.div`
@@ -67,8 +66,6 @@ export const MessageLiftButton = styled.div`
 `;
 
 export const MessageRoom = styled.div`
-  width: 84%;
-  height: 850px;
   border-radius: 30px;
   background-color: #00000010;
   display: flex;
@@ -90,10 +87,6 @@ export const OpponentChat = styled.div`
   align-self: flex-start;
   align-items: center;
   padding: 15px 18px 15px 18px;
-  min-width: 300px;
-  max-width: 300px;
-  min-height: 70px;
-  max-height: auto;
   overflow: hidden;
   word-break: break-word;
   background-color: #6cedf599;
@@ -106,10 +99,6 @@ export const MyChat = styled.div`
   align-self: flex-end;
   align-items: center;
   padding: 15px 18px 15px 18px;
-  min-width: 300px;
-  max-width: 300px;
-  min-height: 70px;
-  max-height: auto;
   overflow: hidden;
   word-break: break-word;
   background-color: #bbe7ff;
@@ -117,7 +106,6 @@ export const MyChat = styled.div`
 
 export const ChatTextAreaContainer = styled.div`
   display: flex;
-  justify-content: center;
   align-items: center;
   height: 80px;
 `;
@@ -132,19 +120,17 @@ export const ImageContainer = styled.img`
 export const TextAreaContainer = styled.div`
   border-radius: 25px;
   display: flex;
-  align-items: center;
-  justify-content: center;
+  justify-content: space-between;
   border: 0.5px solid #00000020;
   margin-left: 15px;
   width: fit-content;
-  flex: 1;
+  flex-grow: 1;
 `;
 
 export const TextArea = styled.textarea`
   border: none;
+  flex-grow: 1;
   border-radius: 25px;
-  width: 650px;
-  height: 30px;
   padding-left: 10px;
   &:focus {
     outline: none;
@@ -161,9 +147,6 @@ export const SendButton = styled.button`
   font-weight: 300;
   cursor: pointer;
   border: 0.5px solid white;
-  font-weight: 400;
-  font-size: 14px;
-  margin-right: 20px;
   &:hover {
     color: #023e8a;
     background-color: #90e0ef;
