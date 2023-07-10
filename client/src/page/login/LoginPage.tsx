@@ -1,3 +1,4 @@
+import React from 'react';
 import {
   LoginContainer,
   LoginBox,
@@ -9,11 +10,10 @@ import {
   EmailInputBox,
   EmailInput,
   EmailError,
-  PasswordBox,
-  PasswordInput,
-  PasswordError,
   LoginButton,
 } from './LoginPage.styled';
+import btn_google from '../../asset/btn_google.png';
+
 const LoginPage: React.FC = () => {
   return (
     <LoginContainer>
@@ -23,25 +23,23 @@ const LoginPage: React.FC = () => {
           alt="Logo"
         ></Logo>
         <Oath>
-          <OathImg
-            src="https://banner2.cleanpng.com/20180416/xlq/kisspng-g-suite-pearl-river-middle-school-google-software-sign-up-button-5ad4e1a9d11d62.1599053415239008418566.jpg"
-            alt="GoogleLogoImg"
-          ></OathImg>
-          Sign in with Google
+          <OathImg src={btn_google} alt="GoogleLogoImg"></OathImg>
         </Oath>
         <UserinfoContainer>
           <EmailBox>
-            Email
+            <div> Email</div>
             <EmailInputBox>
               <EmailInput type="email" />
             </EmailInputBox>
             <EmailError>유효하지 않은 사용자입니다..</EmailError>
           </EmailBox>
-          <PasswordBox>
-            Password
-            <PasswordInput type="password" />
-            <PasswordError>비밀번호를 확인해주세요 </PasswordError>
-          </PasswordBox>
+          <EmailBox>
+            <div> Password</div>
+            <EmailInputBox>
+              <EmailInput type="password" />
+            </EmailInputBox>
+            <EmailError>비밀번호를 확인해주세요 </EmailError>
+          </EmailBox>
         </UserinfoContainer>
         <LoginButton>Log in</LoginButton>
       </LoginBox>
