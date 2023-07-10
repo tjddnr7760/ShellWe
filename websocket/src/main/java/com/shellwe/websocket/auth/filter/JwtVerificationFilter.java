@@ -57,7 +57,7 @@ public class JwtVerificationFilter extends OncePerRequestFilter {
                         .filter(a->a.startsWith("Authorization"))
                         .collect(Collectors.toList())
                         .get(0)
-                        .replace("Authorization=bearer ","");
+                        .replace("Authorization=Bearer ","");
         else accessToken = request.getHeader("Authorization").replace("Bearer ", "");
 
         String base64EncodedSecretKey = jwtTokenizer.encodeBase64SecretKey(jwtTokenizer.getSecretKey());
