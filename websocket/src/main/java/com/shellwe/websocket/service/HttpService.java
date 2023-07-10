@@ -28,7 +28,7 @@ import java.util.*;
 
 @Slf4j
 @Service
-//@Transactional
+@Transactional
 public class HttpService extends com.shellwe.websocket.service.Service {
     @Value("${client-server.url}")
     private String url;
@@ -42,20 +42,14 @@ public class HttpService extends com.shellwe.websocket.service.Service {
     }
 
     public List<RoomDto.Response> findAllRoom() {
-        long myId = 1; // security context holder 접근 필요
+        long myId = getLoggedInMemberId();
         List<MemberRoom> memberRooms = memberRoomRepository.findAllMyRoomsWithSeller(myId);
 
         return roomMapper.memberRoomsToWsResponses(memberRooms);
     }
 
-    public ChatRoom findRoomById(Long roomId) {
-        // db에서 룸 검색, 이후 메세지 unread true만 리턴
-
-        return null;
-    }
-
     public void deleteRoom(long roomId){
-        long memberId = 1L; // context holder 연결 필요
+        long memberId = getLoggedInMemberId();
 
         MemberRoom memberRoom = findExistsMemberRoom(roomId, memberId);
 
@@ -64,7 +58,7 @@ public class HttpService extends com.shellwe.websocket.service.Service {
     }
     public ResponseDto createRoom(RoomDto.Post requestBody) {
         Room room = roomRepository.save(new Room());
-        long myId = 1; // security context holder 접근 필요
+        long myId = getLoggedInMemberId();
         long sellerId = requestBody.getSellerMemberId();
 
         // 생성된 룸과 멤버들 연결
