@@ -53,11 +53,8 @@ public class JwtVerificationFilter extends OncePerRequestFilter {
 
     private Jws<Claims> verifyJws(HttpServletRequest request) {
         String accessToken = getAccessToken(request);
-
         String base64EncodedSecretKey = jwtTokenizer.encodeBase64SecretKey(jwtTokenizer.getSecretKey());
-
         Jws<Claims> claims = jwtTokenizer.getClaims(accessToken, base64EncodedSecretKey);
-
         for (Map.Entry<String, Object> entry : claims.getBody().entrySet()) {
             String key = entry.getKey();
             Object value = entry.getValue();
