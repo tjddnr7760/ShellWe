@@ -30,7 +30,11 @@ const CreateShellButton = styled.button`
   }
 `;
 
-const ShellListContainer = styled(Div)`
+const ShellListContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
   border-top: 0.5px solid #48cae4;
   height: 500px;
   border-radius: 0px 0px 10px 10px;

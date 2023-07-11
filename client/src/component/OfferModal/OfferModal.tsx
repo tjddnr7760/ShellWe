@@ -1,3 +1,4 @@
+import { useNavigate } from 'react-router-dom';
 import MyShellList from '../offermodal-myshelllist/MyShellList.tsx';
 import {
   CreateShellButton,
@@ -8,13 +9,18 @@ import {
 import plus from '../../asset/plus.svg';
 
 const OfferModal = () => {
+  const navigate = useNavigate();
+
+  const goToCreateShellPage = () => {
+    navigate('/shellcreate');
+  }
+
   return (
     <Wrapper>
       <Div>
-        <CreateShellButton>
+        <CreateShellButton onClick={goToCreateShellPage}>
           <img src={plus} alt="create-newshell" />
         </CreateShellButton>
-        {/* 클릭 시, 제품 생성 페이지로 navigate */}
       </Div>
       <ShellListContainer>
         <MyShellList />

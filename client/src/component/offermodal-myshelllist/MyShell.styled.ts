@@ -1,9 +1,11 @@
 import styled from 'styled-components';
-import { Div } from '../offermodal/OfferModal.styled.ts';
 
-const MyShellContainer = styled(Div)`
+const MyShellContainer = styled.div`
+  display: flex;
   flex-direction: row;
   justify-content: space-between;
+  align-items: center;
+  height: 100px;
   width: 540px;
   background-color: #ffffff;
   border: 0.5px solid #48cae4;
