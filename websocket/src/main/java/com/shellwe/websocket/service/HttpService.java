@@ -25,6 +25,7 @@ import org.springframework.web.socket.WebSocketSession;
 import javax.transaction.Transactional;
 import java.io.IOException;
 import java.util.*;
+import java.util.stream.Collectors;
 
 @Slf4j
 @Service
@@ -45,7 +46,12 @@ public class HttpService extends com.shellwe.websocket.service.Service {
         long myId = getLoggedInMemberId();
         List<MemberRoom> memberRooms = memberRoomRepository.findAllMyRoomsWithSeller(myId);
 
-        return roomMapper.memberRoomsToWsResponses(memberRooms);
+        List<RoomDto.Response> response = memberRooms.stream().map(mr->{
+            Long unreadCount = messageRepository.unReadCount(mr.getRoom().getId(), myId);
+            return roomMapper.memberRoomToWsResponse(mr, unreadCount);
+        }).collect(Collectors.toList());
+
+        return response;
     }
 
     public void deleteRoom(long roomId){

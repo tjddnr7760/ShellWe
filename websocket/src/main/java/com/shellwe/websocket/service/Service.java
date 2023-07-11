@@ -25,14 +25,11 @@ import org.springframework.web.socket.TextMessage;
 import org.springframework.web.socket.WebSocketSession;
 
 import javax.transaction.Transactional;
-import java.util.Arrays;
-import java.util.Map;
-import java.util.Optional;
+import java.util.*;
 
 @Slf4j
 @RequiredArgsConstructor
 @org.springframework.stereotype.Service
-@Transactional
 public abstract class Service {
     protected final MemberRoomRepository memberRoomRepository;
     protected final MemberRepository memberRepository;
@@ -46,6 +43,17 @@ public abstract class Service {
     protected MemberRoom findExistsMemberRoom(long roomId, long memberId){
         Optional<MemberRoom> optionalMemberRoom = memberRoomRepository.findByRoomAndMemberAndActiveTrue(new Room(roomId), new Member(memberId));
         return optionalMemberRoom.orElseThrow(()->new BusinessLogicException(ExceptionCode.MEMBER_ROOM_NOT_FOUND));
+    }
+
+    protected ChatRoom joinRoom(WebSocketSession session, Map<Long, ChatRoom> chatRooms,long roomId){
+        if(chatRooms.containsKey(roomId)){
+            chatRooms.get(roomId).setSessions(session);
+        }else {
+            ChatRoom chatRoom = new ChatRoom(roomId);
+            chatRoom.setSessions(session);
+            chatRooms.put(roomId, chatRoom);
+        }
+        return chatRooms.get(roomId);
     }
 
     protected MemberDto.Response getMemberResponse(WebSocketSession session){

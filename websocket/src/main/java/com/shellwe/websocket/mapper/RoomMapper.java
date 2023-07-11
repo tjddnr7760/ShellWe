@@ -16,13 +16,13 @@ import java.util.List;
 public interface RoomMapper {
     MemberDto.Response memberToMemberResponse(Member member);
     MemberDto.Response memberContextToMemberResponse(MemberContextInform member);
-    default RoomDto.Response memberRoomToWsResponse(MemberRoom memberRoom){
+    default RoomDto.Response memberRoomToWsResponse(MemberRoom memberRoom, long unreadCount){
         return RoomDto.Response.builder()
                 .id(memberRoom.getRoom().getId())
+                .unread(unreadCount)
                 .member(memberToMemberResponse(memberRoom.getMember()))
                 .build();
     };
-    List<RoomDto.Response> memberRoomsToWsResponses(List<MemberRoom> memberRooms);
     default MessageDto.Response messageToMessageResponse(Message message, long memberId){
         return MessageDto.Response.builder()
                 .createdAt(message.getCreatedAt())
