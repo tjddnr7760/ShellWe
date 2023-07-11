@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import Profile from '../../component/profile/Profile.tsx'
+import Profile from '../../component/profile/Profile.tsx';
 import ProfileTab from '../../component/profile/ProfileTab';
 import EditProfile from '../../component/profile/EditProfile';
 import ChangePassword from '../../component/profile/ChangePassword';
@@ -11,23 +11,18 @@ const MyPage = () => {
 
   const handelComponent = (componentName: string) => {
     setSelectedComponent(componentName);
-
-  }
-    return (
-      <div className="MyPage">
-        <MyPageWrapper>
-          <MyPageContainer>
-            <Profile />
-            <ProfileTab handleComponent={handelComponent}></ProfileTab>
-            {selectedComponent === 'edit' && <EditProfile></EditProfile>}
-            {selectedComponent === 'change' && (
-              <ChangePassword></ChangePassword>
-            )}
-            {selectedComponent === 'delete' && <DeleteProfile></DeleteProfile>}
-          </MyPageContainer>
-        </MyPageWrapper>
-      </div>
-    );
-}
+  };
+  return (
+    <MyPageWrapper>
+      <MyPageContainer>
+        <Profile />
+        <ProfileTab handleComponent={handelComponent}></ProfileTab>
+        {selectedComponent === 'edit' && <EditProfile></EditProfile>}
+        {selectedComponent === 'change' && <ChangePassword></ChangePassword>}
+        {selectedComponent === 'delete' && <DeleteProfile></DeleteProfile>}
+      </MyPageContainer>
+    </MyPageWrapper>
+  );
+};
 
 export default MyPage;

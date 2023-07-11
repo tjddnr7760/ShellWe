@@ -28,15 +28,22 @@ const ShellsWrapper = styled.div`
   align-items: center;
   height: fit-content;
   justify-content: flex-start;
-  gap: 15px;
+  gap: 20px;
   flex-wrap: wrap;
   margin: 10px;
   padding: 10px;
-  width: 100%;
 `;
+
+const ShellsContainer = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: c;
+`;
+
 export {
   CategoryListWrapper,
   ShellListContainer,
   SeachToolbarWrapper,
   ShellsWrapper,
+  ShellsContainer,
 };

@@ -6,6 +6,7 @@ import {
   ShellListContainer,
   SeachToolbarWrapper,
   ShellsWrapper,
+  ShellsContainer,
 } from './ShellList.styled.ts';
 import { catagoryState, shellPageState } from '../../recoil/atom.ts';
 import SearchToolbar from '../searchtoolbar/SearchToolbar.tsx';
