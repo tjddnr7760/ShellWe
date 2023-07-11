@@ -27,7 +27,10 @@ const UserInfoDiv = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 40px;
+  width: fit-content;
+  gap: 10px;
+  height: 45px;
+  padding: 5px;
   border: 0.5px solid rgba(0, 0, 0, 0.3);
   border-radius: 10px;
   background-color: #ffffff;
@@ -49,21 +52,6 @@ const Div = styled.div`
   background-color: #ffffff;
 `;
 
-const DefaultBody = styled(Div)``;
-
-const SeeMoreBody = styled.div`
-  display: flex;
-  justify-content: space-between;
-  border: 0.5px solid rgba(0, 0, 0, 0.3);
-  border-radius: 10px;
-  font-size: 16px;
-  padding: 10px;
-  background-color: #ffffff;
-  flex-direction: column;
-  gap: 10px;
-  line-height: 20px;
-`;
-
 const Hamburger = styled.div`
   width: 30px;
   height: 30px;
@@ -72,6 +60,30 @@ const Hamburger = styled.div`
   &:hover {
     background-color: rgba(0, 0, 0, 0.2);
   }
+`;
+const DefaultBodyWrapper = styled.div`
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  border: 0.5px solid rgba(0, 0, 0, 0.3);
+  border-radius: 10px;
+  font-size: 16px;
+  padding: 10px;
+  background-color: #ffffff;
+  line-height: 20px;
+`;
+
+const SeeMoreBodyWrapper = styled.div`
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  flex-direction: column;
+  border: 0.5px solid rgba(0, 0, 0, 0.3);
+  border-radius: 10px;
+  font-size: 16px;
+  padding: 10px;
+  background-color: #ffffff;
+  line-height: 20px;
 `;
 
 const Category = styled.div`
@@ -83,8 +95,7 @@ const Category = styled.div`
   height: 30px;
   border-radius: 10px;
   background-color: #0096c7;
-  padding-top: 3px;
-  margin-right: 8px;
+  padding: 15px;
 `;
 
 const SeeMore = styled.div`
@@ -131,8 +142,8 @@ export {
   UserInfoDiv,
   Nickname,
   Div,
-  DefaultBody,
-  SeeMoreBody,
+  DefaultBodyWrapper,
+  SeeMoreBodyWrapper,
   Hamburger,
   Category,
   SeeMore,
