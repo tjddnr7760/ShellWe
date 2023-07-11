@@ -3,6 +3,8 @@ package com.shellwe.websocket.auth.filter;
 import com.shellwe.websocket.auth.authority.EmailVerifiedAuthority;
 import com.shellwe.websocket.auth.jwt.JwtTokenizer;
 import com.shellwe.websocket.auth.memberDetails.MemberContextInform;
+import com.shellwe.websocket.exception.businessLogicException.BusinessLogicException;
+import com.shellwe.websocket.exception.businessLogicException.ExceptionCode;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jws;
 import lombok.extern.slf4j.Slf4j;
@@ -50,15 +52,7 @@ public class JwtVerificationFilter extends OncePerRequestFilter {
 
 
     private Jws<Claims> verifyJws(HttpServletRequest request) {
-        String accessToken;
-        if(request.getRequestURI().startsWith("/ws")) accessToken =
-                Arrays.stream(request.getHeader("cookie")
-                        .split("; "))
-                        .filter(a->a.startsWith("Authorization"))
-                        .collect(Collectors.toList())
-                        .get(0)
-                        .replace("Authorization=Bearer ","");
-        else accessToken = request.getHeader("Authorization").replace("Bearer ", "");
+        String accessToken = getAccessToken(request);
 
         String base64EncodedSecretKey = jwtTokenizer.encodeBase64SecretKey(jwtTokenizer.getSecretKey());
 
@@ -70,6 +64,18 @@ public class JwtVerificationFilter extends OncePerRequestFilter {
             log.info("access token information key = {}, value = {}", key, value);
         }
         return claims;
+    }
+
+    private String getAccessToken(HttpServletRequest request){
+        if(request.getRequestURI().startsWith("/ws"))
+            return
+                Arrays.stream(request.getHeader("cookie")
+                                .split("; "))
+                        .filter(a->a.startsWith("Authorization"))
+                        .collect(Collectors.toList())
+                        .get(0)
+                        .replace("Authorization=Bearer ","");
+        else return request.getHeader("Authorization").replace("Bearer ", "");
     }
 
     private void setAuthenticationToContext(Map<String, Object> claims) {
