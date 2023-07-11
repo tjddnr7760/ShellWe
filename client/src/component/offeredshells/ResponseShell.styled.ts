@@ -4,11 +4,11 @@ import { SmallButton4 } from '../../common/button/Button.styled';
 
 const ResponseShellWrapper = styled.div`
   display: flex;
-  width: 1055px;
+  width: 1115px;
   height: 180px;
   border-top: 0.5px solid rgba(0, 0, 0, 0.5);
-  padding: 15px 35px 15px 35px;
   gap: 15px;
+  padding: 15px;
 `;
 
 const ShellsImageBox = styled.div`
@@ -30,7 +30,7 @@ const ShellImg = styled.img`
 const ShellsTextInfoBox = styled.div`
   display: flex;
   flex-direction: column;
-  flex-grow: 11;
+  flex-grow: 10;
   border: 0.5px solid rgba(0, 0, 0, 0.5);
   border-radius: 10px;
 `;

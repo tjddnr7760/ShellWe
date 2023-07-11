@@ -5,7 +5,7 @@ const MyShellsContainer = styled.div`
   justify-content: space-around;
   background-color: #ffffff;
   border-radius: 10px;
-  max-width: 700px;
+  max-width: 735px;
   width: 100%;
   height: fit-content;
   gap: 10px;
