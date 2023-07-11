@@ -3,7 +3,7 @@ import styled from 'styled-components';
 const OfferedShellsPageWrapper = styled.div`
   display: flex;
   flex-direction: row;
-  width: 1560px;
+  width: 100%;
 `;
 const PokedShellListWrapper = styled.div`
   flex-grow: 1;

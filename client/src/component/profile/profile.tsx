@@ -7,7 +7,7 @@ import {
   Box,
   Box2,
   UserImgBox,
-} from './profile.styled';
+} from './Profile.styled';
 import example from '../../asset/example.png'
 
 const profile = () => {

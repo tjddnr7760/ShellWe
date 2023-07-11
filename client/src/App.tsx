@@ -1,48 +1,59 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import React from 'react';
+import { RecoilRoot } from 'recoil';
+import { useState } from 'react';
 import './App.css';
 import GlobalStyle from './style/GlobalStyle.ts';
-
+import Header from './component/header/Header.tsx';
+import Footer from './component/footer/Footer.tsx';
+import Nav from './component/nav/Nav.tsx';
+import HomePage from './page/home/HomePage.tsx';
+import MainPage from './page/main/MainPage.tsx';
+import SignupPage from './page/signup/SignupPage.tsx';
+import AfterSignUp from './page/aftersignup/AfterSignUp.tsx';
+import LoginPage from './page/login/LoginPage.tsx';
 import ShellCreate from './page/shellcreate/ShellCreate.tsx';
 import ShellUpdate from './page/shellupdate/ShellUpdate.tsx';
-import AfterSignUp from './page/aftersignup/AfterSignUp.tsx';
-// import Sidebar from './Components/Common/Sidebar/Sidebar';
-// import Footer from './Components/Common/Footer/Footer';
-// import HomePage from './Pages/Common/HomePage/HomePage';
-// import MainPage from './Pages/Common/MainPage/MainPage';
-// import LoginPage from './Pages/LoginSignup/LoginPage.tsx';
-// import MyPage from './Pages/My/MyPage.jsx';
-// import OfferedShellsPage from './page/offeredshells/OfferedShellsPage.tsx';
-import SignupPage from './page/signup/SignupPage.tsx';
 import ProductShell from './page/productshell/ProductShell.tsx';
 import TalentShell from './page/talentshell/TalentShell.tsx';
-import { RecoilRoot } from 'recoil';
+import ShellDetailPage from './page/shelldetail/ShellDetailPage.tsx';
+import MyPage from './page/mypage/MyPage.tsx';
+import MyShellsPage from './page/myshells/MyShellsPage.tsx';
+import OfferedShellsPage from './page/offeredshells/OfferedShellsPage.tsx';
+import DirectMessage from './page/directmessage/DirectMessage.tsx';
 
 function App() {
+  const [isLogin, setIsLogin] = useState(true);
+
   return (
     <RecoilRoot>
       <BrowserRouter>
         <GlobalStyle />
-        <MainPage />
-        <main>
-          <Routes>
-
-
-          <Route path="/main" element={} /> // 메인페이지
-           // 로그인
-          <Route path="/signup/success" element={} /> // 회원가입 완료*/}
-          <Route path="/singup" element={<SignupPage />} />
-          {/* <Route path="/aftersignup" element={<AfterSignUp />} />
-            <Route path="/shelllist/product" element={<ProductShell />} />
-            <Route path="/shelllist/talent" element={<TalentShell />} />
-          <Route path="/member/:id" element={<MyPage />} /> // 마이 페이지
-          <Route path="/myshells/:id" element={<MyShellsPage />} /> // 마이 쉘 페이지
-            <Route path="/shellcreate" element={<ShellCreate />} />
-            <Route path="/shelldetail/:id" element={<ShellUpdate />} /> */}
-          {/*<Route path="/member/:id" element={} /> // 마이 페이지
-          <Route path="/dm/:id" element={} /> // DM 페이지
-          <Route path="/offer/:id" element={<OfferedShellsPage />} /> // 요청함 페이지 */}
-          </Routes>
+        <main className={isLogin ? 'login' : 'nologin'}>
+          {isLogin ? (
+            <>
+              <Nav />
+            </>
+          ) : null}
+          {isLogin ? null : <Header />}
+          <div className="inner">
+            <Routes>
+              <Route path="/" element={<HomePage />} />
+              <Route path="/main" element={<MainPage />} />
+              <Route path="/signup" element={<SignupPage />} />
+              <Route path="/aftersignup" element={<AfterSignUp />} />
+              <Route path="/login" element={<LoginPage />} />
+              <Route path="/shelllist/product" element={<ProductShell />} />
+              <Route path="/shelllist/talent" element={<TalentShell />} />
+              <Route path="/shellcreate" element={<ShellCreate />} />
+              <Route path="/shelldetail/:id/update" element={<ShellUpdate />} />
+              <Route path="/shelldetail/:id" element={<ShellDetailPage />} />
+              <Route path="/member/:id" element={<MyPage />} />
+              <Route path="/myshells/:id" element={<MyShellsPage />} />
+              <Route path="/offer/:id" element={<OfferedShellsPage />} />
+              <Route path="/dm/:id" element={<DirectMessage />} />
+            </Routes>
+          </div>
+          {isLogin ? null : <Footer />}
         </main>
       </BrowserRouter>
     </RecoilRoot>

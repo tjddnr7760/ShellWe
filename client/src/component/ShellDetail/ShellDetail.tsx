@@ -41,7 +41,7 @@ const ShellDetail = ({ handlePoke, handleOpenSidebar }: ShellDetailProps) => {
           body
           <Category>DEVICE</Category>
         </DefaultBody>
-        {/* <SeeMoreContent /> */}
+        <SeeMoreContent />
         <Div>tags</Div>
         <SeeMore>더 보기</SeeMore>
       </ShellInfoContainer>

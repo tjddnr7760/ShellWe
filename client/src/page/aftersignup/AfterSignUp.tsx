@@ -1,4 +1,4 @@
-import { SignUpBackground } from './afterSignUp.styled';
+import { SignUpBackground } from './AfterSignUp.styled';
 
 const AfterSignUp = () => {
   return (

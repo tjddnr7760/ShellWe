@@ -1,17 +1,18 @@
 import styled from 'styled-components';
 
 export const HeaderContainer = styled.div`
-  position: fixed;
+  position: sticky;
   top: 0;
   left: 0;
   display: flex;
   width: 100%;
   height: 80px;
   background-color: #fff;
-  border-bottom: 0.5px solid rgba(0, 0, 0, 0.1);
+  border-bottom: 0.5px solid rgba(0, 0, 0, 0.2);
   justify-content: space-between;
   align-items: center;
   z-index: 999;
+  padding: 15px;
 `;
 
 export const Button = styled.button`

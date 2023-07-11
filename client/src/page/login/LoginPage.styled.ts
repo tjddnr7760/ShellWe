@@ -4,7 +4,6 @@ export const LoginContainer = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  height: fit-content;
 `;
 
 export const LoginBox = styled.div`
@@ -49,7 +48,7 @@ export const EmailBox = styled.div`
   font-size: 20px;
   font-weight: 500;
   width: 100%;
-  gap: 10px;
+  gap: 3px;
 `;
 
 export const EmailInputBox = styled.div`

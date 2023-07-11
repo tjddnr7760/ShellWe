@@ -32,16 +32,15 @@ const DirectMessage: React.FC = () => {
             <MessageMyInfo>정찬영</MessageMyInfo>
             ChatList
           </MessageListHeader>
-
           <MessageListItem>
-            <Avatar />
+            <Avatar avatartype={'UserImg'} />
             <MessageListUserInfo>
               <MessageUserNickName>NickName</MessageUserNickName>
               <MessageUserLastText>UseText</MessageUserLastText>
             </MessageListUserInfo>
           </MessageListItem>
           <MessageListItem>
-            <Avatar />
+            <Avatar avatartype={'UserImg'} />
             <MessageListUserInfo>
               <MessageUserNickName>NickName</MessageUserNickName>
               <MessageUserLastText>
@@ -50,16 +49,16 @@ const DirectMessage: React.FC = () => {
             </MessageListUserInfo>
           </MessageListItem>
         </MessageListContainer>
-
         <MessageRoomContainer>
           <MessageLiftButton>상단바</MessageLiftButton>
           <MessageRoom>
             <Opponent>
-              <Avatar />
-
+              <Avatar avatartype={'UserImg'} />
               <OpponentChat>네 안녕하세요 ㅎㅎ</OpponentChat>
             </Opponent>
-            <MyChat>안녕하세요!</MyChat>
+            <MyChat>
+              안녕하세요!안녕하세요!안녕하세요!안녕하세요!안녕하세요!
+            </MyChat>
             <MyChat>안녕하세요!</MyChat>
             <MyChat>안녕하세요!</MyChat>
             <MyChat>안녕하세요!</MyChat>

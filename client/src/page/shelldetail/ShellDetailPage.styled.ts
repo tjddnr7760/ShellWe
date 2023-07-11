@@ -2,15 +2,14 @@ import styled from 'styled-components';
 
 const Wrapper = styled.div`
   width: 100%;
-  height: fit-content;
+  height: 100vh;
 `;
 
 const DetailPageContainer = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 1140px;
-  height: 930px;
+  padding: 50px;
 `;
 
 const PreviewDiv = styled.div`
@@ -22,15 +21,14 @@ const Div = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
-  width: 1000px;
   gap: 20px;
+  position: relative;
 `;
 
-const ContentDiv = styled(Div)`
+const ContentDiv = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
-  width: 670px;
   gap: 5px;
 `;
 

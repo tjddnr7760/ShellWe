@@ -21,7 +21,7 @@ const DropdownContainer = styled.div`
 `;
 
 const DropdownContent = styled.div`
-  left: 0px;
+  left: 0;
   position: absolute;
   display: flex;
   flex-direction: column;

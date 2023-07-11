@@ -13,14 +13,12 @@ const ShellListContainer = styled.div`
   height: 100%;
   flex-direction: column;
   gap: 10px;
-  margin: 30px 0px;
 `;
 
 const SeachToolbarWrapper = styled.div`
   display: flex;
   width: 100%;
   height: 10%;
-
   justify-content: center;
   align-items: center;
 `;

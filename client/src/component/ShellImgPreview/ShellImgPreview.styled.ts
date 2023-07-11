@@ -4,8 +4,6 @@ const ImageWrapper = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 665px;
-  height: 400px;
   border: 0.5px solid rgba(0, 0, 0, 0.5);
   border-radius: 10px;
   position: relative;
@@ -16,12 +14,14 @@ const ShellImgBox = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 665px;
+  width: 640px;
   height: 400px;
 `;
 
 const ShellImg = styled.img`
-  max-width: 100%;
+  object-fit: contain;
+  max-width: 640px;
+  width: auto;
   max-height: 100%;
   padding: 1px;
 `;

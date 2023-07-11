@@ -1,12 +1,11 @@
 import styled from 'styled-components';
 
 export const FooterContainer = styled.div`
-  position: fixed;
   bottom: 0;
   right: 0;
   display: flex;
-  border-top: 0.5px solid rgba(130, 130, 130, 0.5);
-  background: rgba(202, 240, 248, 0.5);
+  border-top: 0.5px solid rgba(0, 0, 0, 0.2);
+  background: #fff;
   width: 100%;
   height: 150px;
   padding: 37px 0px 36px 0px;

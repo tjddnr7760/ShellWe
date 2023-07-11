@@ -5,6 +5,7 @@ const MyShellsPageWrapper = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: flex-start;
+  width: 700px;
   padding: 35px;
 `;
 
@@ -12,7 +13,6 @@ const MyShellsPageContainer = styled.div`
   display: flex;
   flex-direction: column;
   width: 100%;
-  max-width: 700px;
   height: fit-content;
   gap: 10px;
 `;

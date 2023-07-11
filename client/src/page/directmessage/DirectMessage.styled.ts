@@ -94,6 +94,7 @@ export const OpponentChat = styled.div`
 
 export const MyChat = styled.div`
   margin: 8px 12px 15px 0px;
+  max-width: 500px;
   border-radius: 15px;
   display: flex;
   align-self: flex-end;
@@ -102,6 +103,7 @@ export const MyChat = styled.div`
   overflow: hidden;
   word-break: break-word;
   background-color: #bbe7ff;
+  line-height: 24px;
 `;
 
 export const ChatTextAreaContainer = styled.div`

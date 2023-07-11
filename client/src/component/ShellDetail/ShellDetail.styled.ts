@@ -3,9 +3,9 @@ import styled from 'styled-components';
 const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
-  width: 650px;
-  height: 400px;
   gap: 10px;
+  max-width: 640px;
+  flex-grow: 1;
 `;
 
 const ShellInfoContainer = styled.div`
@@ -13,8 +13,6 @@ const ShellInfoContainer = styled.div`
   flex-direction: column;
   border: 0.5px solid rgba(0, 0, 0, 0.3);
   border-radius: 10px;
-  width: 645px;
-  max-height: fit-content;
   background-color: rgba(202, 240, 248, 0.5);
   padding: 10px;
   gap: 10px;
@@ -23,7 +21,6 @@ const ShellInfoContainer = styled.div`
 const UserInfoAndHamburgerDiv = styled.div`
   display: flex;
   justify-content: space-between;
-  width: 650px;
 `;
 
 const UserInfoDiv = styled.div`
@@ -33,8 +30,6 @@ const UserInfoDiv = styled.div`
   gap: 40px;
   border: 0.5px solid rgba(0, 0, 0, 0.3);
   border-radius: 10px;
-  width: 210px;
-  height: 70px;
   background-color: #ffffff;
 `;
 
@@ -50,9 +45,7 @@ const Div = styled.div`
   border: 0.5px solid rgba(0, 0, 0, 0.3);
   border-radius: 10px;
   font-size: 16px;
-  width: 630px;
-  height: 50px;
-  padding-left: 10px;
+  padding: 10px;
   background-color: #ffffff;
 `;
 
@@ -68,7 +61,6 @@ const SeeMoreBody = styled.div`
   background-color: #ffffff;
   flex-direction: column;
   gap: 10px;
-  height: fit-content;
   line-height: 20px;
 `;
 
@@ -112,8 +104,6 @@ const SeeMore = styled.div`
 const PokeBox = styled.div`
   display: flex;
   justify-content: flex-end;
-  width: 665px;
-  height: 70px;
 `;
 
 const PokeButton = styled.button`

@@ -2,6 +2,8 @@
 import styled from 'styled-components';
 
 const Wrapper = styled.div`
+  position: absolute;
+  right: -185px;
   display: flex;
   flex-direction: column;
   justify-content: center;
