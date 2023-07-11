@@ -35,24 +35,22 @@ function App() {
             </>
           ) : null}
           {isLogin ? null : <Header />}
-          <div className="inner">
-            <Routes>
-              <Route path="/" element={<HomePage />} />
-              <Route path="/main" element={<MainPage />} />
-              <Route path="/signup" element={<SignupPage />} />
-              <Route path="/aftersignup" element={<AfterSignUp />} />
-              <Route path="/login" element={<LoginPage />} />
-              <Route path="/shelllist/product" element={<ProductShell />} />
-              <Route path="/shelllist/talent" element={<TalentShell />} />
-              <Route path="/shellcreate" element={<ShellCreate />} />
-              <Route path="/shelldetail/:id/update" element={<ShellUpdate />} />
-              <Route path="/shelldetail/:id" element={<ShellDetailPage />} />
-              <Route path="/member/:id" element={<MyPage />} />
-              <Route path="/myshells/:id" element={<MyShellsPage />} />
-              <Route path="/offer/:id" element={<OfferedShellsPage />} />
-              <Route path="/dm/:id" element={<DirectMessage />} />
-            </Routes>
-          </div>
+          <Routes>
+            <Route path="/" element={<HomePage />} />
+            <Route path="/main" element={<MainPage />} />
+            <Route path="/signup" element={<SignupPage />} />
+            <Route path="/aftersignup" element={<AfterSignUp />} />
+            <Route path="/login" element={<LoginPage />} />
+            <Route path="/shelllist/product" element={<ProductShell />} />
+            <Route path="/shelllist/talent" element={<TalentShell />} />
+            <Route path="/shellcreate" element={<ShellCreate />} />
+            <Route path="/shelldetail/:id/update" element={<ShellUpdate />} />
+            <Route path="/shelldetail/:id" element={<ShellDetailPage />} />
+            <Route path="/member/:id" element={<MyPage />} />
+            <Route path="/myshells/:id" element={<MyShellsPage />} />
+            <Route path="/offer/:id" element={<OfferedShellsPage />} />
+            <Route path="/dm/:id" element={<DirectMessage />} />
+          </Routes>
           {isLogin ? null : <Footer />}
         </main>
       </BrowserRouter>

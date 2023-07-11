@@ -6,8 +6,6 @@ export const ShellCreateContainer = styled.section`
   background: rgba(202, 240, 248, 0.5);
   display: flex;
   flex-direction: column;
-  margin-top: 100px;
-  align-items: stretch;
   justify-content: center;
   font-size: 20px;
   font-style: normal;
@@ -75,4 +73,10 @@ export const CreateImgImgListWrapper = styled(CreateTitleWrapper)`
 export const ButtonContainer = styled.div`
   display: flex;
   justify-content: center;
+`;
+
+export const ShellCreatePage = styled.div`
+  display: flex;
+  justify-content: center;
+  flex-grow: 1;
 `;

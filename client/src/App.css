@@ -12,10 +12,3 @@ main {
     justify-content: space-between;
     height: 100vh;
 }
-
-.inner {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-grow: 1;
-}

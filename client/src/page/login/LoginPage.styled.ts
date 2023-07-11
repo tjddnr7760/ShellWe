@@ -4,8 +4,8 @@ export const LoginContainer = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  margin: 50px 0;
 `;
-
 export const LoginBox = styled.div`
   display: flex;
   flex-direction: column;

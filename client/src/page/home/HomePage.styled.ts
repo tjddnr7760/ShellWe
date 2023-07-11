@@ -3,7 +3,6 @@ import styled from 'styled-components';
 const HomePageWrapper = styled.div`
   display: flex;
   flex-direction: column;
-  overflow-y: scroll;
 `;
 const ContentContainer = styled.div`
   display: flex;
