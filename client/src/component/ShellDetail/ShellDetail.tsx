@@ -1,3 +1,4 @@
+import { v4 as uuidv4 } from 'uuid';
 import { useState } from 'react';
 import DefaultBody from './DefaultBody';
 import SeeMoreBody from './SeeMoreBody';
@@ -16,6 +17,7 @@ import {
   PokeButton,
   PokeBox,
 } from './ShellDetail.styled';
+import TagBox from '../../common/tag/TagBox';
 
 interface ShellDetailProps {
   handlePoke: () => void; // Define the handlePoke prop
@@ -26,7 +28,7 @@ const ShellDetail = ({ handlePoke, handleOpenSidebar }: ShellDetailProps) => {
   const [seeMoreBody, setSeeMoreBody] = useState(false);
   const handleSeeMoreBody = () => {
     setSeeMoreBody(!seeMoreBody);
-  }
+  };
 
   return (
     <Wrapper>
@@ -42,7 +44,9 @@ const ShellDetail = ({ handlePoke, handleOpenSidebar }: ShellDetailProps) => {
         </UserInfoAndHamburgerDiv>
         <Div>title</Div>
         {seeMoreBody === false ? <DefaultBody /> : <SeeMoreBody />}
-        <Div>tags</Div>
+        <Div>
+          <AllTag />
+        </Div>
         <SeeMore onClick={handleSeeMoreBody}>
           {seeMoreBody === false ? '더 보기' : '접기'}
         </SeeMore>
@@ -58,3 +62,11 @@ const ShellDetail = ({ handlePoke, handleOpenSidebar }: ShellDetailProps) => {
 };
 
 export default ShellDetail;
+
+const AllTag = () => {
+  const tags = ['Device', 'Health', 'Tech'];
+
+  return (tags.map((tag) => {
+    return <TagBox key={uuidv4()} type="read" tag={tag} />;
+  }));
+};

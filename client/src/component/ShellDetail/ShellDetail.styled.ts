@@ -43,7 +43,6 @@ const Nickname = styled.span`
 
 const Div = styled.div`
   display: flex;
-  justify-content: space-between;
   align-items: center;
   border: 0.5px solid rgba(0, 0, 0, 0.3);
   border-radius: 10px;
