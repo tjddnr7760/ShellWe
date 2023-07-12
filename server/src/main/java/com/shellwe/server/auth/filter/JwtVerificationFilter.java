@@ -76,11 +76,12 @@ public class JwtVerificationFilter extends OncePerRequestFilter {
         String email = (String) claims.get("sub");
         String displayName = (String) claims.get("displayName");
         boolean emailVerificationStatus = (boolean) claims.get("emailVerificationStatus");
+        String profileUrl = (String) claims.get("profileUrl");
 
         List<EmailVerifiedAuthority> emailVerifiedAuthorities =
                 Collections.singletonList(new EmailVerifiedAuthority(emailVerificationStatus));
 
-        MemberContextInform memberContextInform = new MemberContextInform(id, email, displayName);
+        MemberContextInform memberContextInform = new MemberContextInform(id, email, displayName, profileUrl);
 
         Authentication authentication = new UsernamePasswordAuthenticationToken(memberContextInform, null, emailVerifiedAuthorities);
         SecurityContextHolder.getContext().setAuthentication(authentication);

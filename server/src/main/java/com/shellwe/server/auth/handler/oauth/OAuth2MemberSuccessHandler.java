@@ -36,20 +36,29 @@ public class OAuth2MemberSuccessHandler extends SimpleUrlAuthenticationSuccessHa
         OAuth2User principal = (OAuth2User) authentication.getPrincipal();
 
         String email = String.valueOf(principal.getAttributes().get("email"));
-        //이미지는 picture 도메인 구현후 추가
         String displayName = String.valueOf(principal.getAttributes().get("name"));
+        String profileUrl = String.valueOf(principal.getAttributes().get("picture"));
 
-        Member memberByOauth = memberFactory(email, displayName);
+        profileUrl = checkProfileUrlNull(profileUrl);
+        Member memberByOauth = memberFactory(email, displayName, profileUrl);
         oauthSignUpMember(memberByOauth);
 
         Member memberByDb = oAuthMemberService.oauthFindMemberByEmail(email);
         redirectToken(request, response, memberByDb);
     }
 
-    private Member memberFactory(String email, String displayName) {
+    private String checkProfileUrlNull(String profileUrl) {
+        if (profileUrl == null) {
+            profileUrl = "empty";
+        }
+        return profileUrl;
+    }
+
+    private Member memberFactory(String email, String displayName, String profileUrl) {
         Member member = Member.builder()
                 .email(email)
                 .displayName(displayName)
+                .profileUrl(profileUrl)
                 .build();
 
         member.emailVerificationCompleted();
@@ -84,7 +93,7 @@ public class OAuth2MemberSuccessHandler extends SimpleUrlAuthenticationSuccessHa
         claims.put("id", member.getId());
         claims.put("displayName", member.getDisplayName());
         claims.put("emailVerificationStatus", member.getEmailVerificationStatus());
-        //picture는 도메인 생성후 구현완료하면 추가하겠습니다.
+        claims.put("profileUrl", member.getProfileUrl());
 
         String subject = member.getEmail();
         Date expirations = jwtTokenizer.getTokenExpiration(jwtTokenizer.getAccessTokenExpirationMinutes());

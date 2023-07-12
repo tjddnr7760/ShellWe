@@ -68,7 +68,7 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
         claims.put("id", member.getId());
         claims.put("displayName", member.getDisplayName());
         claims.put("emailVerificationStatus", member.getEmailVerificationStatus());
-        //picture는 도메인 생성후 구현완료하면 추가하겠습니다.
+        claims.put("profileUrl", member.getProfileUrl());
 
         String subject = member.getEmail();
         Date expirations = jwtTokenizer.getTokenExpiration(jwtTokenizer.getAccessTokenExpirationMinutes());
