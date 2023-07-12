@@ -4,7 +4,7 @@ import com.shellwe.server.auth.memberDetails.MemberContextInform;
 import com.shellwe.server.domain.member.dto.request.DeleteRequestDto;
 import com.shellwe.server.domain.member.dto.request.SignUpRequestDto;
 import com.shellwe.server.domain.member.dto.request.UpdateRequestDto;
-import com.shellwe.server.domain.member.dto.response.FindResponseDto;
+import com.shellwe.server.domain.member.dto.response.FindResponseDtoIncludeOauth;
 import com.shellwe.server.domain.member.service.MemberService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
@@ -47,17 +48,17 @@ public class MemberController {
 
     @ResponseStatus(HttpStatus.OK)
     @GetMapping("/{memberId}")
-    public FindResponseDto getMemberById(@PathVariable long memberId, Authentication authentication) {
-        FindResponseDto memberById = memberService.findMemberById(getId(authentication), memberId);
-        return memberById;
+    public FindResponseDtoIncludeOauth getMemberById(@PathVariable long memberId, Authentication authentication) {
+        return memberService.findMemberById(getId(authentication), memberId);
     }
 
     @ResponseStatus(HttpStatus.OK)
     @PatchMapping("/{memberId}")
     public void updateMemberById(@PathVariable long memberId,
-                                 @RequestBody UpdateRequestDto updateRequestDto,
+                                 @Valid @RequestPart("update") UpdateRequestDto updateRequestDto,
+                                 @RequestPart("picture") MultipartFile picture,
                                  Authentication authentication) {
-        memberService.updateMember(getId(authentication), memberId, updateRequestDto);
+        memberService.updateMember(getId(authentication), memberId, updateRequestDto, picture);
     }
 
     @ResponseStatus(HttpStatus.NO_CONTENT)
