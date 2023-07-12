@@ -37,24 +37,27 @@ function App() {
               <Nav />
             </>
           ) : null}
+          {/* checkNav 함수를 페이지 url에 따라서 바뀌도록 설정 true false 결과값으로 */}
           {isLogin ? null : <Header />}
-          <Routes>
-            <Route path="/" element={<HomePage />} />
-            <Route path="/main" element={<MainPage />} />
-            <Route path="/signup" element={<SignupPage />} />
-            <Route path="/aftersignup" element={<AfterSignUp />} />
-            <Route path="/login" element={<LoginPage />} />
-            <Route path="/shelllist/product" element={<ProductShell />} />
-            <Route path="/shelllist/talent" element={<TalentShell />} />
-            <Route path="/shellcreate" element={<ShellCreate />} />
-            <Route path="/shelldetail/:id/update" element={<ShellUpdate />} />
-            <Route path="/shelldetail/:id" element={<ShellDetailPage />} />
-            <Route path="/member/:id" element={<MyPage />} />
-            <Route path="/myshells/:id" element={<MyShellsPage />} />
-            <Route path="/offer/:id" element={<OfferedShellsPage />} />
-            <Route path="/dm/:id" element={<DirectMessage />} />
-          </Routes>
-          {isLogin ? null : <Footer />}
+          <div className='inner'>
+            <Routes>
+              <Route path="/" element={<HomePage />} />
+              <Route path="/main" element={<MainPage />} />
+              <Route path="/signup" element={<SignupPage />} />
+              <Route path="/aftersignup" element={<AfterSignUp />} />
+              <Route path="/login" element={<LoginPage />} />
+              <Route path="/shelllist/product" element={<ProductShell />} />
+              <Route path="/shelllist/talent" element={<TalentShell />} />
+              <Route path="/shellcreate" element={<ShellCreate />} />
+              <Route path="/shelldetail/:id/update" element={<ShellUpdate />} />
+              <Route path="/shelldetail/:id" element={<ShellDetailPage />} />
+              <Route path="/member/:id" element={<MyPage />} />
+              <Route path="/myshells/:id" element={<MyShellsPage />} />
+              <Route path="/offer/:id" element={<OfferedShellsPage />} />
+              <Route path="/dm/:id" element={<DirectMessage />} />
+            </Routes>
+           <Footer />
+          </div>
         </main>
       </BrowserRouter>
       <ReactQueryDevtools initialIsOpen={false} />

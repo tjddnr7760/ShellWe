@@ -2,7 +2,6 @@ import styled from 'styled-components';
 
 const OfferedShellsPageWrapper = styled.div`
   display: flex;
-  flex-direction: row;
   width: 100%;
 `;
 const PokedShellListWrapper = styled.div`
@@ -12,13 +11,16 @@ const PokedShellListWrapper = styled.div`
 const ResponseElementWrapper = styled.div`
   display: flex;
   flex-direction: column;
-  justify-content: flex-end;
-  gap: 70px;
+  flex-grow: 2;
   align-items: center;
-  flex-grow: 0;
+`;
+
+const ShellImgPreviewWrapper = styled.div`
+  padding: 15px;
 `;
 
 export {
+  ShellImgPreviewWrapper,
   OfferedShellsPageWrapper,
   ResponseElementWrapper,
   PokedShellListWrapper,
