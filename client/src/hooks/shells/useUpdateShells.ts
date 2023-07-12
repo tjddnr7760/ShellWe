@@ -26,3 +26,6 @@ export const useUpdateShells = (id: number, requestData: FormData) => {
   );
   return { data, mutate };
 };
+
+//  queryClient.invalidateQueries("todos");
+//업데이트 후 "todos"라는 쿼리키릐 useQuery api 함수를 실행
