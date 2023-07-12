@@ -2,6 +2,7 @@ package com.shellwe.server.domain.member.dto.request;
 
 import lombok.Getter;
 import lombok.Setter;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
@@ -16,5 +17,7 @@ public class UpdateRequestDto {
     @Size(max = 8)
     private String displayName;
 
-    // 이미지 필드 현재단계 제외
+    private String introduction;
+
+    private MultipartFile pictureFile;
 }
