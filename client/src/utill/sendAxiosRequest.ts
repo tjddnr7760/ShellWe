@@ -19,9 +19,11 @@ ex)shell을 삭제하는 경우, "shellDeleteKey"를 퀴리키로.
 
 실제 사용예시:
 main페이지 get요청
-const { isLoading, data } = useGetRequest("mainListKey",requestConfig(mainPageAPI,"Get",null,false))
+const { isLoading, data } = 
+useGetRequest("mainListKey",requestConfig({mainPageAPI,"Get",null,false}))
 
 생성페이지의 post요청
-const {data, mutate} = useMutionRequest(requestConfig(shellDefaultAPI,"Post",requestData,true),onSuccessFunc)
+const {data, mutate} = 
+useMutionRequest(requestConfig(shellDefaultAPI,"Post",requestData,true),onSuccessFunc)
 
   */
