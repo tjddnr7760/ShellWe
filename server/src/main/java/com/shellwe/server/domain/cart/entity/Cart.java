@@ -27,4 +27,9 @@ public class Cart {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "SHELL_ID")
     private Shell shell;
+
+    public Cart(Member owner, Shell shell) {
+        this.owner = owner;
+        this.shell = shell;
+    }
 }
