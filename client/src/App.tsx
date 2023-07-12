@@ -2,6 +2,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { RecoilRoot } from 'recoil';
 import { useState } from 'react';
 import { ReactQueryDevtools } from 'react-query/devtools';
+import { CircularProgress } from '@mui/material';
 
 import './App.css';
 import GlobalStyle from './style/GlobalStyle.ts';
@@ -16,15 +17,17 @@ import LoginPage from './page/login/LoginPage.tsx';
 import ShellCreate from './page/shellcreate/ShellCreate.tsx';
 import ShellUpdate from './page/shellupdate/ShellUpdate.tsx';
 import ProductShell from './page/productshell/ProductShell.tsx';
+import { useIsFetching } from 'react-query';
 import TalentShell from './page/talentshell/TalentShell.tsx';
 import ShellDetailPage from './page/shelldetail/ShellDetailPage.tsx';
 import MyPage from './page/mypage/MyPage.tsx';
 import MyShellsPage from './page/myshells/MyShellsPage.tsx';
 import OfferedShellsPage from './page/offeredshells/OfferedShellsPage.tsx';
 import DirectMessage from './page/directmessage/DirectMessage.tsx';
-
+import Loading from './common/loading/Loading.tsx';
 function App() {
   const [isLogin, setIsLogin] = useState(true);
+  const isFetching = useIsFetching();
 
   return (
     <RecoilRoot>
@@ -55,6 +58,7 @@ function App() {
               <Route path="/offer/:id" element={<OfferedShellsPage />} />
               <Route path="/dm/:id" element={<DirectMessage />} />
             </Routes>
+            {isFetching ? <Loading /> : null}
             <Footer />
           </div>
         </main>
