@@ -1,6 +1,5 @@
 package com.shellwe.server.domain.shell.dto.request;
 
-import com.shellwe.server.domain.tag.entity.Tag;
 import com.shellwe.server.domain.types.ShellType;
 import com.shellwe.server.domain.types.category.ShellCategory;
 import lombok.Getter;
