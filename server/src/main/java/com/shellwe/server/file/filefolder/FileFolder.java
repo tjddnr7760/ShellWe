@@ -6,7 +6,6 @@ public enum FileFolder {
 
     private final String folderName;
 
-    // constructor
     FileFolder(String folderName) {
         this.folderName = folderName;
     }

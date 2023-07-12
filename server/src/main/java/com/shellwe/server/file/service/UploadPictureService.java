@@ -18,7 +18,6 @@ public interface UploadPictureService {
     //파일 URL 조회
     String getFileUrl(String fileName);
 
-
     //파일 다운로드
     byte[] downloadFile(String fileName) throws FileNotFoundException;
 

@@ -12,7 +12,7 @@ import com.shellwe.server.domain.shell.mapper.ShellMapper;
 import com.shellwe.server.domain.shell.repository.ShellRepository;
 import com.shellwe.server.domain.types.ShellType;
 import com.shellwe.server.domain.types.category.ShellCategory;
-import com.shellwe.server.file.UploadPictureService;
+import com.shellwe.server.file.service.UploadPictureService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
