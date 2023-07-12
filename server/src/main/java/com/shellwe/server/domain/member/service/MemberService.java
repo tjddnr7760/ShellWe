@@ -3,7 +3,6 @@ package com.shellwe.server.domain.member.service;
 import com.shellwe.server.domain.member.dto.request.DeleteRequestDto;
 import com.shellwe.server.domain.member.dto.request.SignUpRequestDto;
 import com.shellwe.server.domain.member.dto.request.UpdateRequestDto;
-import com.shellwe.server.domain.member.dto.response.FindResponseDto;
 import com.shellwe.server.domain.member.dto.response.FindResponseDtoIncludeOauth;
 import com.shellwe.server.domain.member.dto.response.GetMyShellListDto;
 import com.shellwe.server.domain.member.entity.Member;
