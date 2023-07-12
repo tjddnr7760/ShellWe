@@ -18,7 +18,7 @@ import java.util.stream.Collectors;
 
 @Component
 @RequiredArgsConstructor
-public class S3Service implements FileService{
+public class UploadPictureS3 implements UploadPictureService {
 
     private final S3Component s3Component;
     private final AmazonS3 amazonS3;
