@@ -1,4 +1,4 @@
-package com.shellwe.server.File;
+package com.shellwe.server.file;
 
 import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
