@@ -79,6 +79,8 @@ public class ShellService {
 
         if (member.getId() == memberId) {
             Shell requestShell = shellMapper.updateRequestDtoToShell(updateRequestDto);
+            Category category = categoryService.findOrCreate(updateRequestDto.getCategory());
+            requestShell.setCategory(category);
             shell.updateShellInformExceptPictureUrl(requestShell);
             List<String> shellPicturesUrl = uploadPictureService.severalPictureFilesToUrls(pictures);
             shell.deleteAllPictureUrls();

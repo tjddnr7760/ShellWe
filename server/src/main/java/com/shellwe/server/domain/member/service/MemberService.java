@@ -79,7 +79,7 @@ public class MemberService {
 
         if (contextId == null) {
             Member findMember = findById(memberId);
-            findResponseDtoIncludeOauth.setIsMeIdName(false, findMember.getId(), findMember.getDisplayName());
+            findResponseDtoIncludeOauth.setIsMeIdName(false, findMember.getId(), findMember.getDisplayName(), findMember.getProfileUrl());
             if (findMember.isPasswordNull()) {
                 findResponseDtoIncludeOauth.setOauthUser(true);
             }
@@ -87,12 +87,12 @@ public class MemberService {
         }
         if (!contextId.equals(memberId)) {
             Member findMember = findById(memberId);
-            findResponseDtoIncludeOauth.setIsMeIdName(false, findMember.getId(), findMember.getDisplayName());
+            findResponseDtoIncludeOauth.setIsMeIdName(false, findMember.getId(), findMember.getDisplayName(), findMember.getProfileUrl());
             return findResponseDtoIncludeOauth;
         }
         if (contextId.equals(memberId)) {
             Member findMember = findById(memberId);
-            findResponseDtoIncludeOauth.setIsMeIdName(true, findMember.getId(), findMember.getDisplayName());
+            findResponseDtoIncludeOauth.setIsMeIdName(true, findMember.getId(), findMember.getDisplayName(), findMember.getProfileUrl());
             if (findMember.isPasswordNull()) {
                 findResponseDtoIncludeOauth.setOauthUser(true);
             }
