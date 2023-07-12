@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 const Wrapper = styled.div`
   width: 100%;
-  height: 100vh;
+  height: 100%;
 `;
 
 const DetailPageContainer = styled.div`

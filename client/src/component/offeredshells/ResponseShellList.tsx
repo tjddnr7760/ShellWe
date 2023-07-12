@@ -2,6 +2,7 @@ import styled from 'styled-components';
 import ResponseShell from "./ResponseShell";
 
 const ResponseShellListWrapper = styled.div`
+width: 100%;
 max-height: 540px;
 overflow-y: scroll;
 `;

@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import {
   Wrapper,
   Div,
@@ -9,11 +10,18 @@ import { SmallButton3 } from '../../common/button/Button.styled.ts';
 import Toggle from './Toggle.tsx'
 
 const DetailPageSidebar = () => {
+  const navigate = useNavigate();
   const [toggleOn, setToggleOn] = useState(true);
 
   const handleClick = () => {
     setToggleOn((prevToggle) => !prevToggle);
   };
+
+  const id = 1;
+
+  const goToShellUpdatePage = () => {
+    navigate(`/shelldetail/${id}/update`)
+  }
 
   return (
     <Wrapper>
@@ -22,7 +30,7 @@ const DetailPageSidebar = () => {
         <Toggle toggleOn={toggleOn} handleClick={handleClick} />
       </DealState>
       <Div>
-        <SmallButton3>
+        <SmallButton3 onClick={goToShellUpdatePage}>
           <Text>수정</Text>
         </SmallButton3>
         {/* 수정 버튼 컴포넌트 붙이기 / 수정 클릭 시, 제품 수정 페이지로 리다이렉트(JS)*/}

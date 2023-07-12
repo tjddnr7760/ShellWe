@@ -16,6 +16,10 @@ const ShellImgBox = styled.div`
   align-items: center;
   width: 640px;
   height: 400px;
+  @media (max-width: 768px) {
+    width: 320px;
+    height: 200px;
+  }
 `;
 
 const ShellImg = styled.img`
