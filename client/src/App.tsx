@@ -1,6 +1,9 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { RecoilRoot } from 'recoil';
 import { useState } from 'react';
+import { QueryClient, QueryClientProvider } from 'react-query';
+import { ReactQueryDevtools } from 'react-query/devtools';
+
 import './App.css';
 import GlobalStyle from './style/GlobalStyle.ts';
 import Header from './component/header/Header.tsx';
@@ -54,6 +57,7 @@ function App() {
           {isLogin ? null : <Footer />}
         </main>
       </BrowserRouter>
+      <ReactQueryDevtools initialIsOpen={false} />
     </RecoilRoot>
   );
 }
