@@ -8,6 +8,8 @@ import apiErrorHandler from './utill/apiErrorHandler.ts';
 const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
+      keepPreviousData: true,
+      refetchOnWindowFocus: false,
       onError: apiErrorHandler,
       suspense: true,
     },
