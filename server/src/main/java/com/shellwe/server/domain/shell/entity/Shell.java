@@ -2,21 +2,23 @@ package com.shellwe.server.domain.shell.entity;
 
 import com.shellwe.server.domain.category.entity.Category;
 import com.shellwe.server.domain.member.entity.Member;
+import com.shellwe.server.domain.picture.entity.Picture;
 import com.shellwe.server.domain.tag.entity.Tag;
 import com.shellwe.server.domain.types.ShellType;
 import com.shellwe.server.domain.types.Status;
 import com.shellwe.server.utils.TimeTracker;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
+@Builder
 @Table(name = "SHELL")
 @Entity
 public class Shell extends TimeTracker {
@@ -38,22 +40,72 @@ public class Shell extends TimeTracker {
 
     private String body;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
     @JoinColumn(name = "CATEGORY_ID")
     private Category category;
 
-    @OneToMany
+    @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "SHELL_ID")
     private List<Tag> tags = new ArrayList<>();
+
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "SHELL_ID")
+    private List<Picture> pictureUrls = new ArrayList<>();
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "MEMBER_ID")
     private Member member;
 
+    public void statusActive() {
+        this.status = Status.ACTIVE;
+    }
+
+    public void statusInActive() {
+        this.status = Status.INACTIVE;
+    }
+
+    public void setStatus(Status status) {
+        this.status = status;
+    }
+
     public void setMember(Member member) {
         this.member = member;
         if (!member.getShells().contains(this)) {
             member.getShells().add(this);
+        }
+    }
+
+    public void setCategory(Category category) {
+        this.category = category;
+    }
+
+    public void setPictureUrls(List<String> pictureUrls) {
+        List<Picture> pictures = IntStream.range(0, pictureUrls.size())
+                .mapToObj(order -> new Picture(order, pictureUrls.get(order)))
+                .collect(Collectors.toList());
+
+        this.pictureUrls = pictures;
+    }
+
+    public void deleteAllPictureUrls() {
+        this.pictureUrls.clear();
+    }
+
+    public void updateShellInformExceptPictureUrl(Shell requestShell) {
+        if (requestShell.getTitle() != null) {
+            this.title = requestShell.getTitle();
+        }
+        if (requestShell.getBody() != null) {
+            this.body = requestShell.getBody();
+        }
+        if (requestShell.getShellType() != null) {
+            this.shellType = requestShell.getShellType();
+        }
+        if (requestShell.getCategory() != null) {
+            this.category = requestShell.getCategory();
+        }
+        if (requestShell.getTags() != null) {
+            this.tags = requestShell.getTags();
         }
     }
 }

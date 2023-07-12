@@ -20,4 +20,8 @@ public class Tag {
 
     @Column(name = "TAG_NAME")
     private String tagName;
+
+    public void setTagName(String tagName) {
+        this.tagName = tagName;
+    }
 }
