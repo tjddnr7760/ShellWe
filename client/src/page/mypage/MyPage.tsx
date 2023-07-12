@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import Profile from '../../component/profile/Profile.tsx';
+import Profile from '../../component/profile/profile.tsx';
 import ProfileTab from '../../component/profile/ProfileTab';
 import EditProfile from '../../component/profile/EditProfile';
 import ChangePassword from '../../component/profile/ChangePassword';
