@@ -1,7 +1,6 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { RecoilRoot } from 'recoil';
 import { useState } from 'react';
-import { QueryClient, QueryClientProvider } from 'react-query';
 import { ReactQueryDevtools } from 'react-query/devtools';
 
 import './App.css';
@@ -39,7 +38,7 @@ function App() {
           ) : null}
           {/* checkNav 함수를 페이지 url에 따라서 바뀌도록 설정 true false 결과값으로 */}
           {isLogin ? null : <Header />}
-          <div className='inner'>
+          <div className="inner">
             <Routes>
               <Route path="/" element={<HomePage />} />
               <Route path="/main" element={<MainPage />} />
@@ -56,7 +55,7 @@ function App() {
               <Route path="/offer/:id" element={<OfferedShellsPage />} />
               <Route path="/dm/:id" element={<DirectMessage />} />
             </Routes>
-           <Footer />
+            <Footer />
           </div>
         </main>
       </BrowserRouter>
