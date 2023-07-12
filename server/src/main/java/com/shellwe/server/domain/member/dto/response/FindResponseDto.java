@@ -17,7 +17,7 @@ public class FindResponseDto {
 
     private String profileUrl;
 
-    public void setMeIdName(boolean isMe, Long id, String displayName) {
+    public void setIsMeIdName(boolean isMe, Long id, String displayName) {
         this.isMe = isMe;
         this.id = id;
         this.displayName = displayName;
