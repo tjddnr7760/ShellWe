@@ -1,23 +1,18 @@
 package com.shellwe.server.domain.shell.dto.response;
 
-import com.shellwe.server.domain.member.dto.response.FindResponseDto;
-import com.shellwe.server.domain.picture.dto.PictureResponseDto;
-import com.shellwe.server.domain.tag.dto.TagResponseDto;
+import com.shellwe.server.domain.member.dto.response.MemberDtoExceptIsMe;
 import com.shellwe.server.domain.types.ShellType;
 import com.shellwe.server.domain.types.Status;
 import com.shellwe.server.domain.types.category.ShellCategory;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.util.List;
 
 @Getter
 @Setter
 public class ShellResponseDto {
 
-    private Long shellId;
-
-    private int numberOfTrades;
+    private Long id;
 
     private ShellType type;
 
@@ -27,13 +22,9 @@ public class ShellResponseDto {
 
     private String createdAt;
 
-    private String modifiedAt;
-
     private ShellCategory category;
 
-    private List<TagResponseDto> tags;
+    private String picture;
 
-    private List<PictureResponseDto> pictures;
-
-    private FindResponseDto member;
+    private MemberDtoExceptIsMe member;
 }

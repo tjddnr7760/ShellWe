@@ -11,6 +11,7 @@ import com.shellwe.server.domain.shell.dto.response.*;
 import com.shellwe.server.domain.shell.entity.Shell;
 import com.shellwe.server.domain.tag.dto.TagResponseDto;
 import com.shellwe.server.domain.tag.entity.Tag;
+import com.shellwe.server.domain.trade.dto.response.UpdateTradeStatusResponseDto;
 import com.shellwe.server.domain.types.category.ShellCategory;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
@@ -40,14 +41,14 @@ public interface ShellMapper {
     @Mapping(target = "title", source = "registerRequestDto.title")
     @Mapping(target = "body", source = "registerRequestDto.body")
     @Mapping(target = "tags", source = "registerRequestDto.tags", qualifiedByName = "mapTagsToStringDto")
-    @Mapping(target = "category.shellCategory", source = "registerRequestDto.category")
+    @Mapping(target = "category.shellCategory", source = "registerRequestDto.category", ignore = true)
     Shell registerRequestDtoToShell(RegisterRequestDto registerRequestDto);
 
-    @Mapping(target = "shellType", source = "updateRequestDto.type", ignore = true)
-    @Mapping(target = "title", source = "updateRequestDto.title", ignore = true)
-    @Mapping(target = "body", source = "updateRequestDto.body", ignore = true)
-    @Mapping(target = "category", source = "updateRequestDto.category", qualifiedByName = "mapCategoryFromDto", ignore = true)
-    @Mapping(target = "tags", source = "updateRequestDto.tags", qualifiedByName = "mapTagsToStringDto", ignore = true)
+    @Mapping(target = "shellType", source = "updateRequestDto.type")
+    @Mapping(target = "title", source = "updateRequestDto.title")
+    @Mapping(target = "body", source = "updateRequestDto.body")
+    @Mapping(target = "category", source = "updateRequestDto.category", qualifiedByName = "mapCategoryFromDto")
+    @Mapping(target = "tags", source = "updateRequestDto.tags", qualifiedByName = "mapTagsToStringDto")
     Shell updateRequestDtoToShell(UpdateRequestDto updateRequestDto);
 
     @Mapping(target="type", source="shell.shellType")
@@ -69,30 +70,21 @@ public interface ShellMapper {
     @Mapping(target="member", source="shell.member", qualifiedByName="mapMemberToDto")
     RegisterResponseDto shellToRegisterResponseDto(Shell shell);
 
+    @Mapping(target="picture", expression="java(mapFirstPictureToDto(shell.getPictureUrls()))")
+    @Mapping(target="type", source="shell.shellType")
     @Mapping(target="category", source="shell.category.shellCategory")
     ShellResponseDto shellToShellResponseDto(Shell shell);
 
-    default InquiryResponseDto shellsToInquiryResponseDto(List<Shell> shells) {
-        InquiryResponseDto inquiryResponseDto = new InquiryResponseDto();
-
-        List<ShellResponseDto> shellResponseDtos = shells.stream()
-                .map(this::shellToShellResponseDto)
-                .collect(Collectors.toList());
-
-        inquiryResponseDto.setShells(shellResponseDtos);
-        return inquiryResponseDto;
+    default String mapFirstPictureToDto(List<Picture> pictures) {
+        if (pictures != null && !pictures.isEmpty()) {
+            return pictures.get(0).getUrl();
+        }
+        return null;
     }
 
-    default SearchResponseDto shellsToSearchResponseDto(List<Shell> shells) {
-        SearchResponseDto searchResponseDto = new SearchResponseDto();
+    List<ShellResponseDto> shellsToInquiryResponseDto(List<Shell> shells);
 
-        List<ShellResponseDto> shellResponseDtos = shells.stream()
-                .map(this::shellToShellResponseDto)
-                .collect(Collectors.toList());
-
-        searchResponseDto.setShells(shellResponseDtos);
-        return searchResponseDto;
-    }
+    List<ShellResponseDto> shellsToSearchResponseDto(List<Shell> shells);
 
     @Named("mapCategoryToShellCategory")
     default ShellCategory mapCategoryToShellCategory(Category category) {
