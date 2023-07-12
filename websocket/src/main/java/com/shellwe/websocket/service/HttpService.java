@@ -48,7 +48,9 @@ public class HttpService extends com.shellwe.websocket.service.Service {
 
         List<RoomDto.Response> response = memberRooms.stream().map(mr->{
             Long unreadCount = messageRepository.unReadCount(mr.getRoom().getId(), myId);
-            return roomMapper.memberRoomToWsResponse(mr, unreadCount);
+            Message message = messageRepository.findFirstByRoomOrderByIdDesc(mr.getRoom());
+
+            return roomMapper.memberRoomToWsResponse(mr, unreadCount, message.getPayload());
         }).collect(Collectors.toList());
 
         return response;
