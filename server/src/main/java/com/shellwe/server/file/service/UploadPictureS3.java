@@ -49,8 +49,6 @@ public class UploadPictureS3 implements UploadPictureService {
                 .collect(Collectors.toList());
     }
 
-
-
     //파일 이름 생성 로직
     private String createFileName(String originalFileName) {
         return UUID.randomUUID().toString().concat(getFileExtension(originalFileName));
@@ -65,7 +63,6 @@ public class UploadPictureS3 implements UploadPictureService {
         }
     }
 
-
     @Override
     public void deleteFile(String fileName) {
         amazonS3.deleteObject(new DeleteObjectRequest(s3Component.getBucket(), fileName));
@@ -76,11 +73,8 @@ public class UploadPictureS3 implements UploadPictureService {
         return amazonS3.getUrl(s3Component.getBucket(), fileName).toString();
     }
 
-
     @Override
     public byte[] downloadFile(String fileName) throws FileNotFoundException {
-
-        //파일 유무 확인
         validateFileExists(fileName);
 
         S3Object s3Object = amazonS3.getObject(s3Component.getBucket(), fileName);
@@ -110,7 +104,6 @@ public class UploadPictureS3 implements UploadPictureService {
         }
         return folder;
     }
-
 
     @Override
     public String onePictureFileToUrl(MultipartFile picture) {

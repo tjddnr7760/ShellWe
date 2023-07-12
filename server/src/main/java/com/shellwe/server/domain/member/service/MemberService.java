@@ -11,7 +11,7 @@ import com.shellwe.server.domain.member.repository.MemberRepository;
 import com.shellwe.server.domain.shell.entity.Shell;
 import com.shellwe.server.domain.types.Status;
 import com.shellwe.server.email.EmailSendable;
-import com.shellwe.server.file.UploadPictureService;
+import com.shellwe.server.file.service.UploadPictureService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
