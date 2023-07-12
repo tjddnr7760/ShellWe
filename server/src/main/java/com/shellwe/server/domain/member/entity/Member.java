@@ -1,6 +1,7 @@
 package com.shellwe.server.domain.member.entity;
 
 import com.shellwe.server.domain.shell.entity.Shell;
+import com.shellwe.server.domain.types.Status;
 import com.shellwe.server.utils.TimeTracker;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -11,6 +12,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -34,9 +36,11 @@ public class Member extends TimeTracker {
 
     private String displayName;
 
+    private String introduction = "";
+
     private String profileUrl;
 
-    @OneToMany(mappedBy = "member")
+    @OneToMany(mappedBy = "member", cascade = CascadeType.ALL)
     private List<Shell> shells = new ArrayList<>();
 
     public Member(Member member, String password) {
@@ -59,17 +63,41 @@ public class Member extends TimeTracker {
         this.emailVerificationStatus = true;
     }
 
-    public void updateMember(String password, String displayName, PasswordEncoder passwordEncoder) {
+    public void updateMember(String password, PasswordEncoder passwordEncoder,
+                             String displayName, String introduction,
+                             String profileUrl) {
         if (password != null) {
             this.password = passwordEncoder.encode(password);
         }
         if (displayName != null) {
             this.displayName = displayName;
         }
+        if (introduction != null) {
+            this.introduction = introduction;
+        }
+        if (profileUrl != null) {
+            this.profileUrl = profileUrl;
+        }
     }
 
     public void addShell(Shell shell) {
         this.shells.add(shell);
         shell.setMember(this);
+    }
+
+    public List<Shell> getActiveList() {
+        return this.shells.stream()
+                .filter(shell -> shell.getStatus() == Status.ACTIVE)
+                .collect(Collectors.toList());
+    }
+
+    public List<Shell> getInActiveList() {
+        return this.shells.stream()
+                .filter(shell -> shell.getStatus() == Status.INACTIVE)
+                .collect(Collectors.toList());
+    }
+
+    public boolean isPasswordNull() {
+        return this.password == null;
     }
 }
