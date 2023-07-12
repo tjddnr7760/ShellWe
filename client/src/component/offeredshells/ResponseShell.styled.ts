@@ -4,8 +4,8 @@ import { SmallButton4 } from '../../common/button/Button.styled';
 
 const ResponseShellWrapper = styled.div`
   display: flex;
-  width: 1115px;
-  height: 180px;
+  /* max-width: 1150px; */
+  height: fit-content;
   border-top: 0.5px solid rgba(0, 0, 0, 0.5);
   gap: 15px;
   padding: 15px;

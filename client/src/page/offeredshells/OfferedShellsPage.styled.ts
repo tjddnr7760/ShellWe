@@ -11,6 +11,7 @@ const PokedShellListWrapper = styled.div`
 const ResponseElementWrapper = styled.div`
   display: flex;
   flex-direction: column;
+  flex-grow: 2;
   align-items: center;
 `;
 

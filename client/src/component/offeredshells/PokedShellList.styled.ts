@@ -15,9 +15,11 @@ const IntroBox = styled.div`
 `;
 
 const IntroText1 = styled.div`
+  min-width: 150px;
   font-size: 20px;
 `;
 const IntroText2 = styled.div`
+  min-width: 150px;
   font-size: 16px;
 `;
 
