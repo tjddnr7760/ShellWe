@@ -19,4 +19,6 @@ const apiErrorHandler = (error: unknown): void => {
   }
 };
 
+//에러 코드로 만듬
+
 export default apiErrorHandler;
