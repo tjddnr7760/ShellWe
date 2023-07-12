@@ -1,4 +1,4 @@
-package com.shellwe.server.domain.shell.dto.request;
+package com.shellwe.server.domain.trade.dto.request;
 
 import com.shellwe.server.domain.types.Status;
 import lombok.Getter;

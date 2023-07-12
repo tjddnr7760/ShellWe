@@ -1,4 +1,4 @@
-package com.shellwe.server.domain.shell.dto.response;
+package com.shellwe.server.domain.trade.dto.response;
 
 import com.shellwe.server.domain.member.dto.response.FindResponseDto;
 import com.shellwe.server.domain.picture.dto.PictureResponseDto;

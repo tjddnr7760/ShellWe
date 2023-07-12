@@ -1,4 +1,4 @@
-package com.shellwe.server.domain.shell.dto.response;
+package com.shellwe.server.domain.trade.dto.response;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -9,5 +9,5 @@ import java.util.List;
 @Setter
 public class InquiryToMainResponseDto {
 
-    private List<ShellResponseDto> shells;
+    private List<MainPageResponseDto> shells;
 }

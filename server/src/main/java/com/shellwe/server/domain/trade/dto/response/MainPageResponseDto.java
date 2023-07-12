@@ -1,4 +1,4 @@
-package com.shellwe.server.domain.shell.dto.response;
+package com.shellwe.server.domain.trade.dto.response;
 
 import com.shellwe.server.domain.member.dto.response.MemberDtoExceptIsMe;
 import com.shellwe.server.domain.picture.dto.PictureResponseDto;
@@ -27,13 +27,9 @@ public class MainPageResponseDto {
 
     private String createdAt;
 
-    private String modifiedAt;
-
     private ShellCategory category;
 
-    private List<TagResponseDto> tags;
-
-    private List<PictureResponseDto> pictures;
+    private String picture;
 
     private MemberDtoExceptIsMe member;
 }
