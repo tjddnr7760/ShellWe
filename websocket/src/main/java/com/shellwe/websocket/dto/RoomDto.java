@@ -22,6 +22,7 @@ public class RoomDto {
     public static class Response{
         private long id;
         private long unread;
+        private String lastMessage;
         private MemberDto.Response member;
     }
 }

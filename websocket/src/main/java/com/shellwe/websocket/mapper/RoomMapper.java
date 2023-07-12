@@ -16,10 +16,11 @@ import java.util.List;
 public interface RoomMapper {
     MemberDto.Response memberToMemberResponse(Member member);
     MemberDto.Response memberContextToMemberResponse(MemberContextInform member);
-    default RoomDto.Response memberRoomToWsResponse(MemberRoom memberRoom, long unreadCount){
+    default RoomDto.Response memberRoomToWsResponse(MemberRoom memberRoom, long unreadCount, String message){
         return RoomDto.Response.builder()
                 .id(memberRoom.getRoom().getId())
                 .unread(unreadCount)
+                .lastMessage(message)
                 .member(memberToMemberResponse(memberRoom.getMember()))
                 .build();
     };

@@ -1,10 +1,7 @@
 package com.shellwe.websocket.service;
 
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.google.gson.Gson;
-import com.shellwe.websocket.auth.memberDetails.MemberContextInform;
 import com.shellwe.websocket.dto.*;
 import com.shellwe.websocket.entity.Member;
 import com.shellwe.websocket.entity.MemberRoom;
@@ -17,10 +14,7 @@ import com.shellwe.websocket.repository.MemberRepository;
 import com.shellwe.websocket.repository.MemberRoomRepository;
 import com.shellwe.websocket.repository.MessageRepository;
 import com.shellwe.websocket.repository.RoomRepository;
-import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.scheduling.annotation.Async;
-import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
 import org.springframework.web.socket.TextMessage;
 import org.springframework.web.socket.WebSocketSession;
@@ -35,19 +29,19 @@ import java.util.stream.Collectors;
 @Slf4j
 @Service
 @Transactional
-public class WsService extends com.shellwe.websocket.service.Service {
+public class WsChatService extends com.shellwe.websocket.service.Service {
     private final ObjectMapper objectMapper;
     private final AsyncService asyncService;
     private final WsRoomService wsRoomService;
     private static Map<Long, ChatRoom> chatMemberSessions = new LinkedHashMap<>();;
-    public WsService(MemberRoomRepository memberRoomRepository,
-                     MemberRepository memberRepository,
-                     RoomRepository roomRepository,
-                     MessageRepository messageRepository,
-                     RoomMapper roomMapper,
-                     ObjectMapper objectMapper,
-                     AsyncService asyncService,
-                     WsRoomService wsRoomService) {
+    public WsChatService(MemberRoomRepository memberRoomRepository,
+                         MemberRepository memberRepository,
+                         RoomRepository roomRepository,
+                         MessageRepository messageRepository,
+                         RoomMapper roomMapper,
+                         ObjectMapper objectMapper,
+                         AsyncService asyncService,
+                         WsRoomService wsRoomService) {
         super(memberRoomRepository, memberRepository, roomRepository, messageRepository, roomMapper);
         this.objectMapper = objectMapper;
         this.asyncService = asyncService;
@@ -59,9 +53,9 @@ public class WsService extends com.shellwe.websocket.service.Service {
         MemberDto.Response member = getMemberResponse(session);
         asyncService.saveMessage(chatMemberSessions, message, roomId, member.getId());
         sendMessage(session, message, member, roomId);
-        sendRoomInfo(session, roomId);
+        sendRoomInfo(session, message, roomId);
     }
-    private void sendRoomInfo(WebSocketSession session, long roomId){
+    private void sendRoomInfo(WebSocketSession session, TextMessage message, long roomId){
         if(chatMemberSessions.get(roomId).getSessions().size()==1){
             ChatRoom chatRoom = wsRoomService.chatRoomSessions.get(roomId);
             MemberDto.Response loggedInMember = getMemberResponse(session);
@@ -73,6 +67,7 @@ public class WsService extends com.shellwe.websocket.service.Service {
                         .id(roomId)
                         .member(loggedInMember)
                         .unread(messageRepository.unReadCount(roomId,getMemberResponse(s).getId())+1)
+                        .lastMessage(message.getPayload())
                         .build();
                 try {
                     s.sendMessage(new TextMessage(objectMapper.writeValueAsString(response)));
