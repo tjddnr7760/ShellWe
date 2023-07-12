@@ -4,11 +4,9 @@ import com.shellwe.server.domain.types.category.ShellCategory;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.ToString;
 
 import javax.persistence.*;
 
-@ToString
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
