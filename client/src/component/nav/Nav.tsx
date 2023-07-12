@@ -1,15 +1,13 @@
  import {
-  NavWrapper,
-  NavContainer,
-  Logo,
-  NavItems,
-  NavItem,
-  NavItemContent,
-  LogoutButtonContainer,
-  LogoutButton,
-} from './Nav.styled';
+   NavWrapper,
+   NavContainer,
+   Logo,
+   NavItems,
+   NavItem,
+   NavItemContent,
+   ProductTalent,
+ } from './Nav.styled';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faDoorOpen } from '@fortawesome/free-solid-svg-icons';
 import { faPen } from '@fortawesome/free-solid-svg-icons';
 import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
 import { faBox } from '@fortawesome/free-solid-svg-icons';
@@ -34,7 +32,7 @@ const Nav: React.FC = () => {
               <FontAwesomeIcon icon={faMagnifyingGlass} />
               Find Shells
             </NavItem>
-            <div>
+            <ProductTalent>
               <NavItemContent>
                 <FontAwesomeIcon icon={faBox} />
                 Product
@@ -43,7 +41,7 @@ const Nav: React.FC = () => {
                 <FontAwesomeIcon icon={faPersonRunning} />
                 Talent
               </NavItemContent>
-            </div>
+            </ProductTalent>
             <NavItem>
               <FontAwesomeIcon icon={faHandPointRight} />
               Offerd Shells
@@ -61,11 +59,6 @@ const Nav: React.FC = () => {
             </NavItem>
           </NavItems>
         </NavContainer>
-        <LogoutButtonContainer>
-          <LogoutButton>
-            <FontAwesomeIcon icon={faDoorOpen} />
-          </LogoutButton>
-        </LogoutButtonContainer>
       </NavWrapper>
   );
 };

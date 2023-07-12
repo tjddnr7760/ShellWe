@@ -11,14 +11,14 @@ import plus from '../../asset/plus.svg';
 const OfferModal = () => {
   const navigate = useNavigate();
 
-  const goToCreateShellPage = () => {
+  const goToShellCreatePage = () => {
     navigate('/shellcreate');
   }
 
   return (
     <Wrapper>
       <Div>
-        <CreateShellButton onClick={goToCreateShellPage}>
+        <CreateShellButton onClick={goToShellCreatePage}>
           <img src={plus} alt="create-newshell" />
         </CreateShellButton>
       </Div>

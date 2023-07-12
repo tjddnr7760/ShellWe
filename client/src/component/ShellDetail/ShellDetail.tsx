@@ -1,5 +1,6 @@
+import axios from 'axios';
 import { v4 as uuidv4 } from 'uuid';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import DefaultBody from './DefaultBody';
 import SeeMoreBody from './SeeMoreBody';
 import Avatar from '../../common/avatar/Avatar';
@@ -23,12 +24,45 @@ interface ShellDetailProps {
   handlePoke: () => void; // Define the handlePoke prop
   handleOpenSidebar: () => void;
 }
-
+interface ShellData {
+  id: number,
+  title: string,
+  body: string,
+  category: string,
+}
+  
+  
 const ShellDetail = ({ handlePoke, handleOpenSidebar }: ShellDetailProps) => {
+  const [shellDetailData, setShellDetailData] = useState<ShellData>();
   const [seeMoreBody, setSeeMoreBody] = useState(false);
   const handleSeeMoreBody = () => {
     setSeeMoreBody(!seeMoreBody);
   };
+
+  const getShellDetailData = async () => {
+    try {
+      const url = 'https://a850-211-205-212-176.ngrok-free.app/shells/1';
+      const res = await axios.get(url, {
+        headers: {
+          'ngrok-skip-browser-warning': '69420',
+        },
+      });
+      if (res.status !== 200) {
+        // throw new Error (`Response status is `${res.status}``)
+      }
+
+      if (res.status === 200) {
+        setShellDetailData(res.data);
+        console.log(res.data);
+      }
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
+  useEffect(() => {
+    getShellDetailData();
+  }, []);
 
   return (
     <Wrapper>
@@ -36,7 +70,7 @@ const ShellDetail = ({ handlePoke, handleOpenSidebar }: ShellDetailProps) => {
         <UserInfoAndHamburgerDiv>
           <UserInfoDiv>
             <Avatar avatartype={'Icon'} />
-            <Nickname>nickname</Nickname>
+            <Nickname>title</Nickname>
           </UserInfoDiv>
           <Hamburger onClick={handleOpenSidebar}>
             <img src={Ellipsis} alt="hamburger" />
@@ -66,7 +100,7 @@ export default ShellDetail;
 const AllTag = () => {
   const tags = ['Device', 'Health', 'Tech'];
 
-  return (tags.map((tag) => {
+  return tags.map((tag) => {
     return <TagBox key={uuidv4()} type="read" tag={tag} />;
-  }));
+  });
 };
