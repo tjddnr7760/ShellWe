@@ -11,6 +11,10 @@ import com.shellwe.server.domain.member.repository.MemberRepository;
 import com.shellwe.server.domain.shell.entity.Shell;
 import com.shellwe.server.domain.types.Status;
 import com.shellwe.server.email.EmailSendable;
+import com.shellwe.server.exception.customexception.EmailLogicException;
+import com.shellwe.server.exception.customexception.MemberLogicException;
+import com.shellwe.server.exception.exceptioncode.EmailExceptionCode;
+import com.shellwe.server.exception.exceptioncode.MemberExceptionCode;
 import com.shellwe.server.file.service.UploadPictureService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -57,7 +61,7 @@ public class MemberService {
                 emailSendable.send(new String[]{member.getEmail()}, "ShellWe 회원가입 인증",
                         member.getEmail(), "email-registration-member");
             } catch (InterruptedException e) {
-                throw new RuntimeException(e);
+                throw new EmailLogicException(EmailExceptionCode.EMAIL_NOT_SEND);
             }
         }).start();
         log.info("sent email and sign-up in service layer done");
@@ -115,7 +119,7 @@ public class MemberService {
                     updateRequestDto.getDisplayName(), updateRequestDto.getIntroduction(), profileUrl);
             memberRepository.save(findMember);
         } else {
-            throw new IllegalStateException("자신의 아이디만 수정 가능합니다.");
+            throw new MemberLogicException(MemberExceptionCode.MEMBER_NOT_MY_ID);
         }
 
         log.info("update member in service layer end");
@@ -128,7 +132,7 @@ public class MemberService {
         if (memberId == contextId && passwordEncoder.matches(deleteRequestDto.getPassword(), findMember.getPassword())) {
             memberRepository.delete(findMember);
         } else {
-            throw new IllegalStateException("자신의 아이디만 삭제 가능합니다.");
+            throw new MemberLogicException(MemberExceptionCode.MEMBER_NOT_MY_ID);
         }
 
         log.info("delete member in service layer end");
@@ -153,7 +157,7 @@ public class MemberService {
                 getMyShellListDto.setShells(memberMapper.shellListToGetMyShellListDto(activeShellList));
             }
         } else {
-            throw new IllegalStateException("자신의 쉘만 조회할 수 있습니다.");
+            throw new MemberLogicException(MemberExceptionCode.MEMBER_NOT_MY_ID);
         }
         return getMyShellListDto;
     }
@@ -176,13 +180,13 @@ public class MemberService {
 
     private Member findByEmail(String email) {
         Optional<Member> byEmail = memberRepository.findByEmail(email);
-        Member member = byEmail.orElseThrow(() -> new IllegalStateException());
+        Member member = byEmail.orElseThrow(() -> new MemberLogicException(MemberExceptionCode.FAILED_FIND_BY_EMAIL));
         return member;
     }
 
     private Member findById(long memberId) {
         Optional<Member> byId = memberRepository.findById(memberId);
-        Member member = byId.orElseThrow(() -> new IllegalStateException());
+        Member member = byId.orElseThrow(() -> new MemberLogicException(MemberExceptionCode.FAILED_FIND_BY_ID));
         return member;
     }
 

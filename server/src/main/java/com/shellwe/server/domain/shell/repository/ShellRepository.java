@@ -9,6 +9,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface ShellRepository extends JpaRepository<Shell, Long> {
     @Query("select s from Shell s " +
@@ -30,6 +31,9 @@ public interface ShellRepository extends JpaRepository<Shell, Long> {
     List<Shell> searchShells(@Param("title") String title,
                              @Param("cursor") Long cursor,
                              Pageable pageable);
+
+    @Query("SELECT MAX(s.id) FROM Shell s")
+    Optional<Long> findMaxId();
 }
 
 
