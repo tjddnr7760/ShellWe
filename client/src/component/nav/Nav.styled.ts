@@ -34,8 +34,6 @@ export const NavItems = styled.div`
   flex-direction: column;
 `;
 
-export const ProductTalent = styled.div``;
-
 export const NavItem = styled.div`
   display: flex;
   align-items: center;
@@ -63,6 +61,7 @@ export const NavItem = styled.div`
     background-color: #c8f5ff;
   }
 `;
+export const NavItemContentWrapper = styled.div``;
 
 export const NavItemContent = styled.div`
   display: flex;

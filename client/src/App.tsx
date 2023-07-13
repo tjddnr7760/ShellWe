@@ -2,7 +2,6 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { RecoilRoot } from 'recoil';
 import { useEffect, useState } from 'react';
 import { ReactQueryDevtools } from 'react-query/devtools';
-import { CircularProgress } from '@mui/material';
 
 import './App.css';
 import GlobalStyle from './style/GlobalStyle.ts';
