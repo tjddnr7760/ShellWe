@@ -62,7 +62,7 @@ const Hamburger = styled.div`
 `;
 const DefaultBodyWrapper = styled.div`
   display: flex;
-  justify-content: space-between;
+  align-items: center;
   gap: 10px;
   border: 0.5px solid rgba(0, 0, 0, 0.3);
   border-radius: 10px;
