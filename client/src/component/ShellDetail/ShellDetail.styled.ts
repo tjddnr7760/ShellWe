@@ -25,19 +25,19 @@ const UserInfoAndHamburgerDiv = styled.div`
 
 const UserInfoDiv = styled.div`
   display: flex;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
   width: fit-content;
   gap: 10px;
   height: 45px;
-  padding: 5px;
+  padding: 10px;
   border: 0.5px solid rgba(0, 0, 0, 0.3);
   border-radius: 10px;
   background-color: #ffffff;
 `;
 
-const Nickname = styled.span`
-  text-align: center;
+const DisplayName = styled.span`
+  min-width: 50px;
   font-size: 16px;
 `;
 
@@ -139,7 +139,7 @@ export {
   ShellInfoContainer,
   UserInfoAndHamburgerDiv,
   UserInfoDiv,
-  Nickname,
+  DisplayName,
   Div,
   DefaultBodyWrapper,
   SeeMoreBodyWrapper,

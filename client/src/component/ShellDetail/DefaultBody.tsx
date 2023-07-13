@@ -1,8 +1,7 @@
 import { DefaultBodyWrapper, Category } from './ShellDetail.styled';
-import { BodyProps } from './ShellDetail';
+import { BodyProps } from '../../dataset/ShellDetailType.ts';
 
 const DefaultBody = ({ category, body }: BodyProps) => {
-  
   const MakePartOfBodyText = (body: string) => {
     // 한글로 띄어쓰기 없이 꽉 채운 글자 수 72개
     if (body.length < 72) {
