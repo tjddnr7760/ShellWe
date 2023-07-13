@@ -19,6 +19,7 @@ const ShellDetailPage = () => {
   const shellDetailData = data.data;
   const [modalVisible, setModalVisible] = useState(false);
   const [sidebarOpen, setSidebarOpen] = useState(false);
+  const shellStatus: string = shellDetailData.status;
 
   const handleOpenSidebar = () => {
     setSidebarOpen(!sidebarOpen);
@@ -41,7 +42,7 @@ const ShellDetailPage = () => {
               handleOpenSidebar={handleOpenSidebar}
               shellDetailData={shellDetailData}
             />
-            {sidebarOpen && <DetailPageSidebar />}
+            {sidebarOpen && <DetailPageSidebar shellStatus={shellStatus} />}
           </Div>
         </ContentDiv>
         {modalVisible && <OfferModal />}

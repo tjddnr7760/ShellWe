@@ -58,3 +58,7 @@ export interface BodyProps {
   category: string;
   body: string;
 }
+
+export interface ShellStatus {
+  status: string;
+}
