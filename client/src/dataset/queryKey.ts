@@ -8,9 +8,9 @@ export enum queryKeys {
   search = 'search',
   oauth = 'oauth',
   inactive = 'inactive',
-  active = 'active',
-  speare = 'speare',
-  members = 'members',
+  apeare = 'speare',
+  mctive = 'active',
+  sembers = 'members',
   cart = 'cart',
   email = 'email',
 }
