@@ -85,7 +85,7 @@ public class HttpService extends com.shellwe.websocket.service.Service {
         // 프론트엔드와 상의 후 response 다시 정의
         return ResponseDto.builder()
                 .roomsUrl("http://localhost:8080/chat")
-                .roomUrl("ws://localhost:8080/chat?roomId="+ room.getId() + "&memberId="+ myId)
+                .roomUrl("ws://localhost:8080/chat?roomId="+ room.getId())
                 .build();
     }
 
