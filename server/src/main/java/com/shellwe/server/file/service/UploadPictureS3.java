@@ -3,6 +3,8 @@ package com.shellwe.server.file.service;
 import com.amazonaws.services.s3.AmazonS3;
 import com.amazonaws.services.s3.model.*;
 import com.amazonaws.util.IOUtils;
+import com.shellwe.server.exception.customexception.FileUploadLogicException;
+import com.shellwe.server.exception.exceptioncode.FileUploadExceptionCode;
 import com.shellwe.server.file.filefolder.FileFolder;
 import com.shellwe.server.file.s3component.S3Component;
 import lombok.RequiredArgsConstructor;
@@ -36,7 +38,7 @@ public class UploadPictureS3 implements UploadPictureService {
                             .withCannedAcl(CannedAccessControlList.PublicReadWrite)
             );
         } catch (IOException e) {
-            throw new IllegalArgumentException(String.format("Error occurred while converting file: %s", file.getOriginalFilename()));
+            throw new FileUploadLogicException(FileUploadExceptionCode.NOT_SUPPORTED_FILE_FORM);
         }
 
         return fileName;
@@ -49,17 +51,15 @@ public class UploadPictureS3 implements UploadPictureService {
                 .collect(Collectors.toList());
     }
 
-    //파일 이름 생성 로직
     private String createFileName(String originalFileName) {
         return UUID.randomUUID().toString().concat(getFileExtension(originalFileName));
     }
 
-    //파일의 확장자명을 가져오는 로직
     private String getFileExtension(String fileName){
         try{
             return fileName.substring(fileName.lastIndexOf("."));
         }catch(StringIndexOutOfBoundsException e) {
-            throw new IllegalArgumentException(String.format("잘못된 형식의 파일 (%s) 입니다.",fileName));
+            throw new FileUploadLogicException(FileUploadExceptionCode.FILE_CONVERT_ERROR);
         }
     }
 
