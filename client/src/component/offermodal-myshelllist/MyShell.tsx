@@ -1,27 +1,16 @@
-import { MyShellContainer, ImgBox, Title, ShellInfo, ButtonDiv } from './MyShell.styled'
+import {
+  MyShellContainer,
+  ImgBox,
+  Title,
+  ShellInfo,
+  ButtonDiv,
+} from './MyShell.styled';
 import { SmallButton3 } from '../../common/button/Button.styled.ts';
+import { MyShells } from '../../dataset/ShellDetailType.ts';
 import Poke from '../../asset/poke.svg';
 
-interface myShellProps {
-  shellId: number;
-  numberOfTrades: number;
-  type: string;
-  status: string;
-  title: string;
-  createdAt: string;
-  modifiedAt: string;
-  category: string;
-  tags: string[];
-  shellPhotos: string[];
-  member: {
-    memberId: number;
-    displayName: string;
-    profilePhoto: string;
-  };
-};
-
-const MyShell = ({ shell }: { shell: myShellProps }) => {
-  const picture = shell.shellPhotos[0];
+const MyShell = ({ shell }: { shell: MyShells }) => {
+  const picture = shell.picture;
   const title = shell.title;
 
   return (

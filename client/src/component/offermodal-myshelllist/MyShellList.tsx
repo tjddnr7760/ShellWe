@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import dummydata from '../../mock/mock.tsx';
+import { MyShellsDataProps, MyShells } from '../../dataset/ShellDetailType.ts';
 import MyShell from './MyShell.tsx';
 
 const MyShellListWrapper = styled.div`
@@ -14,13 +14,15 @@ const MyShellListWrapper = styled.div`
   overflow-y: scroll; /* Add scrollbar when content overflows */
 `;
 
-const MyShellList = () => {
-  const myShellArray = dummydata.shells.slice(0, 10);
+const MyShellList = ({ myShellsData }: MyShellsDataProps) => {
+  // 문제: myShellsData를 props로 받아서 렌더링했는데 오류가 발생한다.
+  const myShellArray = myShellsData;
+  console.log(myShellArray);
 
   return (
     <MyShellListWrapper>
       {myShellArray.map((shell) => {
-        return <MyShell key={shell.shellId} shell={shell} />;
+        return <MyShell key={shell.id} shell={shell} />;
       })}
     </MyShellListWrapper>
   );
