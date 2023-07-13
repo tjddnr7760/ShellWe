@@ -12,6 +12,8 @@ import com.shellwe.server.domain.trade.entity.Trade;
 import com.shellwe.server.domain.trade.mapper.TradeMapper;
 import com.shellwe.server.domain.trade.respository.TradeRepository;
 import com.shellwe.server.domain.types.Status;
+import com.shellwe.server.exception.customexception.TradeLogicException;
+import com.shellwe.server.exception.exceptioncode.TradeExceptionCode;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -77,7 +79,7 @@ public class TradeService {
                 tradeRepository.deleteAllBySellerId(shell.getId());
             }
         } else {
-            throw new IllegalStateException("자신의 아이디만 거래상태수정 가능합니다.");
+            throw new TradeLogicException(TradeExceptionCode.TRADE_NOT_MY_ID);
         }
     }
 

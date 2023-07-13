@@ -12,6 +12,8 @@ import com.shellwe.server.domain.shell.mapper.ShellMapper;
 import com.shellwe.server.domain.shell.repository.ShellRepository;
 import com.shellwe.server.domain.types.ShellType;
 import com.shellwe.server.domain.types.category.ShellCategory;
+import com.shellwe.server.exception.customexception.ShellLogicException;
+import com.shellwe.server.exception.exceptioncode.ShellExceptionCode;
 import com.shellwe.server.file.service.UploadPictureService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -87,7 +89,7 @@ public class ShellService {
             shell.setPictureUrls(shellPicturesUrl);
             shellIdDto.setId(shellRepository.save(shell).getId());
         } else {
-            throw new IllegalStateException("자신의 아이디만 수정 가능합니다.");
+            throw new ShellLogicException(ShellExceptionCode.SHELL_NOT_MY_ID);
         }
         return shellIdDto;
     }
@@ -98,12 +100,15 @@ public class ShellService {
         if (shell.getMember().getId() == memberId) {
             shellRepository.delete(shell);
         } else {
-            throw new IllegalStateException("자신의 아이디만 삭제 가능합니다.");
+            throw new ShellLogicException(ShellExceptionCode.SHELL_NOT_MY_ID);
         }
     }
 
     @Transactional(readOnly = true)
     public InquiryResponseDto inquiry(int limit, Long cursor, ShellType shellType, ShellCategory shellCategory) {
+        if (cursor == 0) {
+            cursor = shellRepository.findMaxId().orElse(0L) + 1;
+        }
         Pageable pageable = PageRequest.of(0, limit);
         List<Shell> shells = shellRepository.findShells(cursor, shellType, shellCategory, pageable);
         InquiryResponseDto inquiryResponseDto = new InquiryResponseDto();
@@ -115,6 +120,9 @@ public class ShellService {
 
     @Transactional(readOnly = true)
     public SearchResponseDto search(int limit, Long cursor, String title) {
+        if (cursor == 0) {
+            cursor = shellRepository.findMaxId().orElse(0L) + 1;
+        }
         Pageable pageable = PageRequest.of(0, limit);
         List<Shell> shells = shellRepository.searchShells("%" + title + "%", cursor, pageable);
         SearchResponseDto searchResponseDto = new SearchResponseDto();

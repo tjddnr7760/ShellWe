@@ -3,6 +3,8 @@ package com.shellwe.server.file.service;
 import com.amazonaws.services.s3.AmazonS3;
 import com.amazonaws.services.s3.model.*;
 import com.amazonaws.util.IOUtils;
+import com.shellwe.server.exception.customexception.FileUploadLogicException;
+import com.shellwe.server.exception.exceptioncode.FileUploadExceptionCode;
 import com.shellwe.server.file.filefolder.FileFolder;
 import com.shellwe.server.file.s3component.S3Component;
 import lombok.RequiredArgsConstructor;
@@ -24,6 +26,19 @@ public class UploadPictureS3 implements UploadPictureService {
     private final AmazonS3 amazonS3;
 
     @Override
+    public String onePictureFileToUrl(MultipartFile picture) {
+        String fileName = uploadFile(picture, FileFolder.MEMBER_FOLDER);
+        return getFileUrl(fileName);
+    }
+
+    @Override
+    public List<String> severalPictureFilesToUrls(List<MultipartFile> pictures) {
+        return uploadFiles(pictures, FileFolder.SHELL_FOLDER)
+                .stream()
+                .map(this::getFileUrl)
+                .collect(Collectors.toList());
+    }
+
     public String uploadFile(MultipartFile file, FileFolder fileFolder) {
         String fileName = getFileFolder(fileFolder) + createFileName(file.getOriginalFilename());
         ObjectMetadata objectMetadata = new ObjectMetadata();
@@ -36,44 +51,34 @@ public class UploadPictureS3 implements UploadPictureService {
                             .withCannedAcl(CannedAccessControlList.PublicReadWrite)
             );
         } catch (IOException e) {
-            throw new IllegalArgumentException(String.format("Error occurred while converting file: %s", file.getOriginalFilename()));
+            throw new FileUploadLogicException(FileUploadExceptionCode.NOT_SUPPORTED_FILE_FORM);
         }
 
         return fileName;
     }
 
-    @Override
     public List<String> uploadFiles(List<MultipartFile> files, FileFolder fileFolder) {
         return files.stream()
                 .map(file -> uploadFile(file, fileFolder))
                 .collect(Collectors.toList());
     }
 
-    //파일 이름 생성 로직
     private String createFileName(String originalFileName) {
         return UUID.randomUUID().toString().concat(getFileExtension(originalFileName));
     }
 
-    //파일의 확장자명을 가져오는 로직
     private String getFileExtension(String fileName){
         try{
             return fileName.substring(fileName.lastIndexOf("."));
         }catch(StringIndexOutOfBoundsException e) {
-            throw new IllegalArgumentException(String.format("잘못된 형식의 파일 (%s) 입니다.",fileName));
+            throw new FileUploadLogicException(FileUploadExceptionCode.FILE_CONVERT_ERROR);
         }
     }
 
-    @Override
-    public void deleteFile(String fileName) {
-        amazonS3.deleteObject(new DeleteObjectRequest(s3Component.getBucket(), fileName));
-    }
-
-    @Override
     public String getFileUrl(String fileName) {
         return amazonS3.getUrl(s3Component.getBucket(), fileName).toString();
     }
 
-    @Override
     public byte[] downloadFile(String fileName) throws FileNotFoundException {
         validateFileExists(fileName);
 
@@ -92,7 +97,6 @@ public class UploadPictureS3 implements UploadPictureService {
             throw new FileNotFoundException();
     }
 
-    @Override
     public String getFileFolder(FileFolder fileFolder) {
 
         String folder = "";
@@ -103,19 +107,5 @@ public class UploadPictureS3 implements UploadPictureService {
             folder = s3Component.getShellFolder();
         }
         return folder;
-    }
-
-    @Override
-    public String onePictureFileToUrl(MultipartFile picture) {
-        String fileName = uploadFile(picture, FileFolder.MEMBER_FOLDER);
-        return getFileUrl(fileName);
-    }
-
-    @Override
-    public List<String> severalPictureFilesToUrls(List<MultipartFile> pictures) {
-        return uploadFiles(pictures, FileFolder.SHELL_FOLDER)
-                .stream()
-                .map(this::getFileUrl)
-                .collect(Collectors.toList());
     }
 }
