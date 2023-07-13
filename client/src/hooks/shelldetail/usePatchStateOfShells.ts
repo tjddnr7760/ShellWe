@@ -1,10 +1,7 @@
 import { useMutation } from 'react-query';
 import { useNavigate } from 'react-router-dom';
 import { axiosInstance, getHeader } from '../../utill/axiosInstance';
-
-interface ShellStatus {
-  status: string;
-}
+import { ShellStatus } from '../../dataset/ShellDetailType';
 
 const patchStatusofShells = async (
   shellId: number,
@@ -20,7 +17,7 @@ const patchStatusofShells = async (
 };
 
 //제품 업데이트
-export const usePatchStateOfShells = (
+export const usePatchStateOfShell = (
   shellId: number,
   requestData: ShellStatus
 ) => {

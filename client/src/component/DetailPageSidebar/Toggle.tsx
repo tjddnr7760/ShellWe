@@ -1,7 +1,4 @@
-import {
-  ToggleBody,
-  ToggleRetangle,
-} from './DetailPageSidebar.styled';
+import { ToggleBody, ToggleRetangle } from './DetailPageSidebar.styled';
 
 interface ToggleProps {
   toggleOn: boolean;

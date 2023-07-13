@@ -1,27 +1,37 @@
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import {
-  Wrapper,
-  Div,
-  DealState,
-  Text
-} from './DetailPageSidebar.styled.ts';
+import { useNavigate, useParams } from 'react-router-dom';
+import { useDeleteShells } from '../../hooks/shelldetail/useDeleteShells.ts';
+import { Wrapper, Div, DealState, Text } from './DetailPageSidebar.styled.ts';
 import { SmallButton3 } from '../../common/button/Button.styled.ts';
-import Toggle from './Toggle.tsx'
+import Toggle from './Toggle.tsx';
+import { usePatchStateOfShell } from '../../hooks/shelldetail/usePatchStateOfShells.ts';
 
-const DetailPageSidebar = () => {
+const DetailPageSidebar = ({ shellStatus }: { shellStatus: string }) => {
   const navigate = useNavigate();
-  const [toggleOn, setToggleOn] = useState(true);
+
+  const { id } = useParams();
+  const paramsShellId = Number(id);
+
+  const { mutate: deleteShell } = useDeleteShells(paramsShellId);
+  const { mutate: patchStateOfShell } = usePatchStateOfShell(paramsShellId, {
+    status: shellStatus,
+  });
+
+  const toggleStatus = shellStatus === 'active' ? true : false;
+  const [toggleOn, setToggleOn] = useState(toggleStatus);
 
   const handleClick = () => {
+    patchStateOfShell(); // 거래 상태 수정
     setToggleOn((prevToggle) => !prevToggle);
   };
 
-  const id = 1;
+  const DeleteShellhandler = () => {
+    deleteShell(); // 게시글 삭제
+  };
 
   const goToShellUpdatePage = () => {
-    navigate(`/shelldetail/${id}/update`)
-  }
+    navigate(`/shelldetail/${id}/update`);
+  };
 
   return (
     <Wrapper>
@@ -33,17 +43,14 @@ const DetailPageSidebar = () => {
         <SmallButton3 onClick={goToShellUpdatePage}>
           <Text>수정</Text>
         </SmallButton3>
-        {/* 수정 버튼 컴포넌트 붙이기 / 수정 클릭 시, 제품 수정 페이지로 리다이렉트(JS)*/}
       </Div>
       <Div>
-        <SmallButton3>
+        <SmallButton3 onClick={DeleteShellhandler}>
           <Text>삭제</Text>
         </SmallButton3>
-        {/* 삭제 버튼 컴포넌트 붙이기 / 삭제 클릭 시, 해당 Shell Delete 요청(JS)*/}
       </Div>
     </Wrapper>
   );
 };
-
 
 export default DetailPageSidebar;
