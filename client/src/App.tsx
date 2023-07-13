@@ -1,6 +1,6 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { RecoilRoot } from 'recoil';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { ReactQueryDevtools } from 'react-query/devtools';
 import { CircularProgress } from '@mui/material';
 
@@ -25,9 +25,11 @@ import MyShellsPage from './page/myshells/MyShellsPage.tsx';
 import OfferedShellsPage from './page/offeredshells/OfferedShellsPage.tsx';
 import DirectMessage from './page/directmessage/DirectMessage.tsx';
 import Loading from './common/loading/Loading.tsx';
+import { useGetShells } from './hooks/shells/useShellsId.ts';
 function App() {
   const [isLogin, setIsLogin] = useState(true);
   const isFetching = useIsFetching();
+  const { data } = useGetShells(1);
 
   return (
     <RecoilRoot>

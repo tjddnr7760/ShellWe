@@ -21,7 +21,7 @@ const getShellId: GetShellsArgs = async (id, method, isHeader = false) => {
 //제품 상세 조회
 export const useGetShells = (id: number) => {
   const { data = {} } = useQuery(queryKeys.shellsDetail, () =>
-    getShellId(id, 'get')
+    getShellId(id, 'get', true)
   );
 
   return { data };
