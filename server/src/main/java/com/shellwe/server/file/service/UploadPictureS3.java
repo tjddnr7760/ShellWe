@@ -26,6 +26,19 @@ public class UploadPictureS3 implements UploadPictureService {
     private final AmazonS3 amazonS3;
 
     @Override
+    public String onePictureFileToUrl(MultipartFile picture) {
+        String fileName = uploadFile(picture, FileFolder.MEMBER_FOLDER);
+        return getFileUrl(fileName);
+    }
+
+    @Override
+    public List<String> severalPictureFilesToUrls(List<MultipartFile> pictures) {
+        return uploadFiles(pictures, FileFolder.SHELL_FOLDER)
+                .stream()
+                .map(this::getFileUrl)
+                .collect(Collectors.toList());
+    }
+
     public String uploadFile(MultipartFile file, FileFolder fileFolder) {
         String fileName = getFileFolder(fileFolder) + createFileName(file.getOriginalFilename());
         ObjectMetadata objectMetadata = new ObjectMetadata();
@@ -44,7 +57,6 @@ public class UploadPictureS3 implements UploadPictureService {
         return fileName;
     }
 
-    @Override
     public List<String> uploadFiles(List<MultipartFile> files, FileFolder fileFolder) {
         return files.stream()
                 .map(file -> uploadFile(file, fileFolder))
@@ -63,17 +75,10 @@ public class UploadPictureS3 implements UploadPictureService {
         }
     }
 
-    @Override
-    public void deleteFile(String fileName) {
-        amazonS3.deleteObject(new DeleteObjectRequest(s3Component.getBucket(), fileName));
-    }
-
-    @Override
     public String getFileUrl(String fileName) {
         return amazonS3.getUrl(s3Component.getBucket(), fileName).toString();
     }
 
-    @Override
     public byte[] downloadFile(String fileName) throws FileNotFoundException {
         validateFileExists(fileName);
 
@@ -92,7 +97,6 @@ public class UploadPictureS3 implements UploadPictureService {
             throw new FileNotFoundException();
     }
 
-    @Override
     public String getFileFolder(FileFolder fileFolder) {
 
         String folder = "";
@@ -103,19 +107,5 @@ public class UploadPictureS3 implements UploadPictureService {
             folder = s3Component.getShellFolder();
         }
         return folder;
-    }
-
-    @Override
-    public String onePictureFileToUrl(MultipartFile picture) {
-        String fileName = uploadFile(picture, FileFolder.MEMBER_FOLDER);
-        return getFileUrl(fileName);
-    }
-
-    @Override
-    public List<String> severalPictureFilesToUrls(List<MultipartFile> pictures) {
-        return uploadFiles(pictures, FileFolder.SHELL_FOLDER)
-                .stream()
-                .map(this::getFileUrl)
-                .collect(Collectors.toList());
     }
 }

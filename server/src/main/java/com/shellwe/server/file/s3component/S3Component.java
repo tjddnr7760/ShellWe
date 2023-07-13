@@ -7,6 +7,7 @@ import org.springframework.stereotype.Component;
 @Component
 @Getter
 public class S3Component {
+
     @Value("${cloud.s3.bucket}")
     private String bucket;
 
