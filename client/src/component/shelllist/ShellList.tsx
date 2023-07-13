@@ -1,5 +1,7 @@
-import React, { useState, useEffect } from 'react';
-import { useSetRecoilState, useRecoilState } from 'recoil';
+import { useState } from 'react';
+import { v4 as uuidv4 } from 'uuid';
+import InfiniteScroll from 'react-infinite-scroller';
+
 import CategoryList from '../categorylist/CategoryList.tsx';
 import {
   CategoryListWrapper,
@@ -8,47 +10,47 @@ import {
   ShellsWrapper,
   ShellsContainer,
 } from './ShellList.styled.ts';
-import { catagoryState, shellPageState } from '../../recoil/atom.ts';
 import SearchToolbar from '../searchtoolbar/SearchToolbar.tsx';
 import LiftBtn from '../../common/liftbtn/LiftBtn.tsx';
 import Shell from '../../common/shell/Shell.tsx';
+import { useInfiniteScroll } from '../../hooks/shells/useInfiniteScroll';
+import { ShellType } from '../../common/shell/Shell.tsx';
 
-const ShellList = ({ initialcategory, initialshellpage }: ShellListProps) => {
-  const catagoryTypeHandler = useSetRecoilState<string>(catagoryState);
-  const [shellPage, shellPageHandler] = useRecoilState<string>(shellPageState);
-
-  useEffect(() => {
-    catagoryTypeHandler(initialcategory);
-    shellPageHandler(initialshellpage);
-  }, []);
+const ShellList = ({ pagetype }: { pagetype: string }) => {
+  const [category, setCategory] = useState(
+    pagetype === 'product' ? 'p_all' : 't_all'
+  );
+  const { ShellsListData, hasNextPage, loadMore } = useInfiniteScroll(
+    2,
+    pagetype,
+    category
+  );
 
   return (
-    shellPage && (
+    <InfiniteScroll loadMore={loadMore} hasMore={hasNextPage}>
       <ShellListContainer>
         <SeachToolbarWrapper>
           <SearchToolbar />
         </SeachToolbarWrapper>
         <CategoryListWrapper>
-          <CategoryList />
+          <CategoryList
+            pagetype={pagetype}
+            category={category}
+            setCategory={setCategory}
+          />
         </CategoryListWrapper>
-        <ShellsWrapper>
-          <Shell /> <Shell />
-          <Shell />
-          <Shell />
-          <Shell />
-          <Shell />
-          <Shell />
-          <Shell />
-          <Shell />
-        </ShellsWrapper>
+        <ShellsContainer>
+          <ShellsWrapper>
+            {ShellsListData.map((shell: ShellType) => (
+              <Shell key={uuidv4()} shell={shell} />
+            ))}
+          </ShellsWrapper>
+        </ShellsContainer>
+
         <LiftBtn />
       </ShellListContainer>
-    )
+    </InfiniteScroll>
   );
 };
 
 export default ShellList;
-interface ShellListProps {
-  initialcategory: string;
-  initialshellpage: string;
-}

@@ -10,28 +10,50 @@ import {
   ShellTitleInfo,
 } from './Shell.stlyled';
 import Avatar from '../avatar/Avatar';
-const Shell = () => {
+const Shell = ({ shell }: ShellProps) => {
   const [selecedShell, setSelecedShell] = useState(false);
-
+  console.log('shell111', shell);
   const handleLikeCilck = () => {
     setSelecedShell((prev) => !prev);
   };
 
   return (
     <ShellContainer>
-      <ShellImgWrapper>
-        <ShellImg src="/dummyimg.svg" />
-        <LikeShellIcon
-          src={selecedShell ? LikeSelectedShell : LikeDefaultShell}
-          onClick={handleLikeCilck}
-        />
-      </ShellImgWrapper>
-      <ShellInfoWrapper>
-        <Avatar avatartype="UserImg" />
-        <ShellTitleInfo>제목목제목제</ShellTitleInfo>
-      </ShellInfoWrapper>
+      {shell && (
+        <>
+          <ShellImgWrapper>
+            <ShellImg src={shell.picture} />
+            <LikeShellIcon
+              src={selecedShell ? LikeSelectedShell : LikeDefaultShell}
+              onClick={handleLikeCilck}
+            />
+          </ShellImgWrapper>
+          <ShellInfoWrapper>
+            <Avatar avatartype="UserImg" member={shell.member} />
+
+            <ShellTitleInfo>{shell.title}</ShellTitleInfo>
+          </ShellInfoWrapper>
+        </>
+      )}
     </ShellContainer>
   );
 };
 
+export type ShellType = {
+  id: number;
+  type: string;
+  status: string;
+  title: string;
+  createdAt: string;
+  category: string;
+  picture: string;
+  member: {
+    id: number;
+    displayName: string;
+    profileUrl: string;
+  };
+};
+interface ShellProps {
+  shell: ShellType; // ShellType은 적절한 타입으로 대체되어야 합니다.
+}
 export default Shell;
