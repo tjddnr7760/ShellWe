@@ -1,10 +1,10 @@
 import { useState } from 'react';
-import Profile from '../../component/profile/Profile.tsx';
+import Profile from '../../component/profile/profile.tsx';
 import ProfileTab from '../../component/profile/ProfileTab';
 import EditProfile from '../../component/profile/EditProfile';
 import ChangePassword from '../../component/profile/ChangePassword';
 import DeleteProfile from '../../component/profile/DeleteProfile';
-import { MyPageContainer, MyPageWrapper} from './MyPage.styled.tsx';
+import { MyPageContainer, MyPageWrapper } from './MyPage.styled.tsx';
 
 const MyPage = () => {
   const [selectedComponent, setSelectedComponent] = useState('edit');
@@ -13,15 +13,15 @@ const MyPage = () => {
     setSelectedComponent(componentName);
   };
   return (
-      <MyPageWrapper>
-        <MyPageContainer>
-          <Profile />
-          <ProfileTab handleComponent={handelComponent}></ProfileTab>
-          {selectedComponent === 'edit' && <EditProfile></EditProfile>}
-          {selectedComponent === 'change' && <ChangePassword></ChangePassword>}
-          {selectedComponent === 'delete' && <DeleteProfile></DeleteProfile>}
-        </MyPageContainer>
-      </MyPageWrapper>
+    <MyPageWrapper>
+      <MyPageContainer>
+        <Profile />
+        <ProfileTab handleComponent={handelComponent}></ProfileTab>
+        {selectedComponent === 'edit' && <EditProfile></EditProfile>}
+        {selectedComponent === 'change' && <ChangePassword></ChangePassword>}
+        {selectedComponent === 'delete' && <DeleteProfile></DeleteProfile>}
+      </MyPageContainer>
+    </MyPageWrapper>
   );
 };
 

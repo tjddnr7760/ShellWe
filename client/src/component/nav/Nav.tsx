@@ -75,14 +75,14 @@ const Nav: React.FC = () => {
             </NavItemContentWrapper>
           )}
 
-          <Link to="/offer/:id" style={{ textDecoration: 'none' }}>
+          <Link to="/offer/1" style={{ textDecoration: 'none' }}>
             <NavItem>
               <FontAwesomeIcon icon={faHandPointRight} />
               Offerd Shells
             </NavItem>
           </Link>
 
-          <Link to="/dm/:id" style={{ textDecoration: 'none' }}>
+          <Link to="/dm/1" style={{ textDecoration: 'none' }}>
             <NavItem>
               <FontAwesomeIcon icon={faMessage} />
               Message
@@ -94,7 +94,7 @@ const Nav: React.FC = () => {
               Login
             </NavItem>
           </Link>
-          <Link to="/member/:id" style={{ textDecoration: 'none' }}>
+          <Link to="/member/1" style={{ textDecoration: 'none' }}>
             <NavItem>
               <img
                 src="https://www.acnmoda.com.br/img/user-default.png"
@@ -104,7 +104,7 @@ const Nav: React.FC = () => {
             </NavItem>
           </Link>
 
-          <Link to="/myshells/:id" style={{ textDecoration: 'none' }}>
+          <Link to="/myshells/1" style={{ textDecoration: 'none' }}>
             <NavItem>
               <FontAwesomeIcon icon={faPeopleCarryBox} />
               My Shell
