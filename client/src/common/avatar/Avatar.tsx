@@ -1,7 +1,5 @@
-/* eslint-disable jsx-a11y/img-redundant-alt */
 import { useNavigate } from 'react-router-dom';
 import { Icon, UserImg } from './Avatar.styled.ts';
-import userimg from '../../asset/avatar/userimg.svg';
 import noprofile from '../../asset/avatar/noprofile.svg';
 
 interface Member {
@@ -18,7 +16,7 @@ const Avatar = ({
   avatartype: string;
 }) => {
   const navigate = useNavigate();
-  const userImg = userimg;
+  const userImg = member.profileUrl;
   const id = member.id;
 
   const goToMyShellsPage = () => {
@@ -27,11 +25,11 @@ const Avatar = ({
 
   return avatartype === 'UserImg' ? (
     <UserImg onClick={goToMyShellsPage}>
-      <img src={userImg !== '' ? userimg : noprofile} alt="user-image" />
+      <img src={userImg !== null ? userImg : noprofile} alt="userphoto" />
     </UserImg>
   ) : (
     <Icon onClick={goToMyShellsPage}>
-      <img src={userImg ? userimg : noprofile} alt="user-icon" />
+      <img src={userImg !== null ? userImg : noprofile} alt="userphoto" />
     </Icon>
   );
 };
