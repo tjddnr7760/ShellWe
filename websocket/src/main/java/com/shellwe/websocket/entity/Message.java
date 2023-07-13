@@ -8,7 +8,7 @@ import javax.persistence.*;
 @Getter
 @Setter
 @Entity
-//@Builder
+@Builder
 @AllArgsConstructor
 public class Message extends TimeTracker{
     @Id

@@ -1,11 +1,10 @@
 package com.shellwe.websocket.handler;
 
-import com.shellwe.websocket.service.WsChatService;
+import com.shellwe.websocket.service.WsRoomService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 import org.springframework.web.socket.CloseStatus;
-import org.springframework.web.socket.TextMessage;
 import org.springframework.web.socket.WebSocketSession;
 import org.springframework.web.socket.handler.TextWebSocketHandler;
 
@@ -16,21 +15,16 @@ import java.io.IOException;
 @RequiredArgsConstructor
 @Component
 @Transactional
-public class WebSockChatHandler extends TextWebSocketHandler {
-    private final WsChatService wsChatService;
+public class WebSockRoomHandler extends TextWebSocketHandler {
+    private final WsRoomService wsRoomService;
 
     @Override
     public void afterConnectionEstablished(WebSocketSession session) throws Exception, IOException{
-        wsChatService.getPreviousMessages(session);
-    }
-
-    @Override
-    protected void handleTextMessage(WebSocketSession session, TextMessage message) throws Exception {
-        wsChatService.handleMessage(session,message);
+        wsRoomService.getRoomInfo(session);
     }
 
     public void afterConnectionClosed(WebSocketSession session, CloseStatus status) throws Exception {
-        wsChatService.terminateSession(session);
+        wsRoomService.terminateSession(session);
     }
 }
 

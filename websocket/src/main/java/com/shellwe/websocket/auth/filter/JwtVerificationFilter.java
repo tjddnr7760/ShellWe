@@ -3,6 +3,8 @@ package com.shellwe.websocket.auth.filter;
 import com.shellwe.websocket.auth.authority.EmailVerifiedAuthority;
 import com.shellwe.websocket.auth.jwt.JwtTokenizer;
 import com.shellwe.websocket.auth.memberDetails.MemberContextInform;
+import com.shellwe.websocket.exception.businessLogicException.BusinessLogicException;
+import com.shellwe.websocket.exception.businessLogicException.ExceptionCode;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jws;
 import lombok.extern.slf4j.Slf4j;
@@ -17,9 +19,11 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 @Slf4j
 public class JwtVerificationFilter extends OncePerRequestFilter {
@@ -48,21 +52,27 @@ public class JwtVerificationFilter extends OncePerRequestFilter {
 
 
     private Jws<Claims> verifyJws(HttpServletRequest request) {
-        String accessToken= "eyJhbGciOiJIUzM4NCJ9.eyJwcm9maWxlVXJsIjoiZW1wdHkiLCJkaXNwbGF5TmFtZSI6IuydvOuwmOuhnOq3uOyduOyduCIsImlkIjoxLCJlbWFpbFZlcmlmaWNhdGlvblN0YXR1cyI6dHJ1ZSwic3ViIjoibHRzODkwMzAzQGdvb2dsZS5jb20iLCJpYXQiOjE2ODg5NjM3ODUsImV4cCI6MTY4ODk5Mzc4NX0.fbaJDU9blzCPvX0sghw4gRX_xEMjXJCHkimAfcFm3CQbVUP8453TvdkVFhIgIv57";
-
-//        if(request.getRequestURI().startsWith("/ws")) accessToken = request.getHeader("sec-websocket-protocol");
-//        else accessToken = request.getHeader("Authorization").replace("Bearer ", "");
-
+        String accessToken = getAccessToken(request);
         String base64EncodedSecretKey = jwtTokenizer.encodeBase64SecretKey(jwtTokenizer.getSecretKey());
-
         Jws<Claims> claims = jwtTokenizer.getClaims(accessToken, base64EncodedSecretKey);
-
         for (Map.Entry<String, Object> entry : claims.getBody().entrySet()) {
             String key = entry.getKey();
             Object value = entry.getValue();
             log.info("access token information key = {}, value = {}", key, value);
         }
         return claims;
+    }
+
+    private String getAccessToken(HttpServletRequest request){
+        if(request.getRequestURI().startsWith("/ws"))
+            return
+                Arrays.stream(request.getHeader("cookie")
+                                .split("; "))
+                        .filter(a->a.startsWith("Authorization"))
+                        .collect(Collectors.toList())
+                        .get(0)
+                        .replace("Authorization=Bearer ","");
+        else return request.getHeader("Authorization").replace("Bearer ", "");
     }
 
     private void setAuthenticationToContext(Map<String, Object> claims) {

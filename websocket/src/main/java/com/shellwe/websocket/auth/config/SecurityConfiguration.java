@@ -52,6 +52,7 @@ public class SecurityConfiguration {
         configuration.setAllowedMethods(Arrays.asList("GET", "POST", "DELETE", "OPTIONS", "PATCH"));
         configuration.setAllowedHeaders(Arrays.asList("*"));
         configuration.addExposedHeader("Authorization");
+        configuration.addExposedHeader("cookie");
         configuration.setAllowCredentials(true);
 
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
@@ -88,9 +89,7 @@ public class SecurityConfiguration {
                     .apply(new CustomFilterConfigurer())
                 .and()
                     .authorizeHttpRequests(authorize -> authorize
-//                            .antMatchers("/ws/*").permitAll()
                             .anyRequest().authenticated()
-//                                    .anyRequest().permitAll()
                     );
 
         return http.build();

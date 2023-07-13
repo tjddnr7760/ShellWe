@@ -25,10 +25,11 @@ import org.springframework.web.socket.WebSocketSession;
 import javax.transaction.Transactional;
 import java.io.IOException;
 import java.util.*;
+import java.util.stream.Collectors;
 
 @Slf4j
 @Service
-//@Transactional
+@Transactional
 public class HttpService extends com.shellwe.websocket.service.Service {
     @Value("${client-server.url}")
     private String url;
@@ -42,20 +43,21 @@ public class HttpService extends com.shellwe.websocket.service.Service {
     }
 
     public List<RoomDto.Response> findAllRoom() {
-        long myId = 1; // security context holder 접근 필요
+        long myId = getLoggedInMemberId();
         List<MemberRoom> memberRooms = memberRoomRepository.findAllMyRoomsWithSeller(myId);
 
-        return roomMapper.memberRoomsToWsResponses(memberRooms);
-    }
+        List<RoomDto.Response> response = memberRooms.stream().map(mr->{
+            Long unreadCount = messageRepository.unReadCount(mr.getRoom().getId(), myId);
+            Message message = messageRepository.findFirstByRoomOrderByIdDesc(mr.getRoom());
 
-    public ChatRoom findRoomById(Long roomId) {
-        // db에서 룸 검색, 이후 메세지 unread true만 리턴
+            return roomMapper.memberRoomToWsResponse(mr, unreadCount, message.getPayload());
+        }).collect(Collectors.toList());
 
-        return null;
+        return response;
     }
 
     public void deleteRoom(long roomId){
-        long memberId = 1L; // context holder 연결 필요
+        long memberId = getLoggedInMemberId();
 
         MemberRoom memberRoom = findExistsMemberRoom(roomId, memberId);
 
@@ -64,7 +66,7 @@ public class HttpService extends com.shellwe.websocket.service.Service {
     }
     public ResponseDto createRoom(RoomDto.Post requestBody) {
         Room room = roomRepository.save(new Room());
-        long myId = 1; // security context holder 접근 필요
+        long myId = getLoggedInMemberId();
         long sellerId = requestBody.getSellerMemberId();
 
         // 생성된 룸과 멤버들 연결
@@ -83,7 +85,7 @@ public class HttpService extends com.shellwe.websocket.service.Service {
         // 프론트엔드와 상의 후 response 다시 정의
         return ResponseDto.builder()
                 .roomsUrl("http://localhost:8080/chat")
-                .roomUrl("ws://localhost:8080/chat?roomId="+ room.getId() + "&memberId="+ myId)
+                .roomUrl("ws://localhost:8080/chat?roomId="+ room.getId())
                 .build();
     }
 
