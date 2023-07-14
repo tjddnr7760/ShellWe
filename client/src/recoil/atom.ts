@@ -1,13 +1,8 @@
 import { atom } from 'recoil';
 
-export const catagoryState = atom({
-  key: 'catagoryState',
-  default: '',
-});
-
-export const shellPageState = atom({
-  key: 'shellPageState',
-  default: '',
+export const selectedOptionAtom = atom({
+  key: 'selectedOption',
+  default: 'newest',
 });
 
 export const isLogInState = atom({
