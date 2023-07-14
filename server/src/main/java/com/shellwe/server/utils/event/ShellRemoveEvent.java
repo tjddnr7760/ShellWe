@@ -1,2 +1,11 @@
-package com.shellwe.server.utils.event;public class ShellRemoveEvent {
+package com.shellwe.server.utils.event;
+
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+
+@AllArgsConstructor
+@Getter
+public class ShellRemoveEvent {
+
+    private final long Id;
 }
