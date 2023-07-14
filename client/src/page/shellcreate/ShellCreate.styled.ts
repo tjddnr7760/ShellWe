@@ -66,7 +66,7 @@ export const CreateMainImgWrapper = styled(CreateTitleWrapper)`
   width: fit-content;
 `;
 
-export const CreateImgImgListWrapper = styled(CreateTitleWrapper)`
+export const CreateImgListWrapper = styled(CreateTitleWrapper)`
   min-height: 400px;
 `;
 

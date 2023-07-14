@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import {
   CreateCateoryWrapper,
@@ -20,8 +20,11 @@ interface CategoryType {
   categoryid: string;
   id: number;
 }
-
-const CreateCateory: React.FC = () => {
+interface CreateCateoryProps {
+  category: string;
+  setCategory: (newCategory: string) => void;
+}
+const CreateCateory = ({ category, setCategory }: CreateCateoryProps) => {
   const [isOpenCategory, setIsOpenCategory] = useState(false);
   const [selectedCateory, setSelectedCateory] = useState({
     name: '카테고리',
@@ -39,6 +42,7 @@ const CreateCateory: React.FC = () => {
       categoryid: item.categoryid,
       type: itemType,
     });
+    setCategory(selectedCateory.categoryid);
   };
   return (
     <CreateCateoryWrapper onClick={handleClickMenuOpen}>
