@@ -15,14 +15,17 @@ import com.shellwe.server.domain.types.category.ShellCategory;
 import com.shellwe.server.exception.customexception.ShellLogicException;
 import com.shellwe.server.exception.exceptioncode.ShellExceptionCode;
 import com.shellwe.server.file.service.UploadPictureService;
+import com.shellwe.server.utils.event.ShellRemoveEvent;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -36,15 +39,18 @@ public class ShellService {
     private final CategoryService categoryService;
     private final UploadPictureService uploadPictureService;
     private final ShellMapper shellMapper;
+    private final ApplicationEventPublisher eventPublisher;
 
     @Autowired
     public ShellService(ShellRepository shellRepository, MemberService memberService,
-                        CategoryService categoryService, ShellMapper shellMapper, UploadPictureService uploadPictureService) {
+                        CategoryService categoryService, ShellMapper shellMapper, UploadPictureService uploadPictureService,
+                        ApplicationEventPublisher eventPublisher) {
         this.shellRepository = shellRepository;
         this.memberService = memberService;
         this.categoryService = categoryService;
         this.shellMapper = shellMapper;
         this.uploadPictureService = uploadPictureService;
+        this.eventPublisher = eventPublisher;
     }
 
     public ShellIdDto register(RegisterRequestDto registerRequestDto, long memberId, List<MultipartFile> pictures) {
@@ -98,6 +104,7 @@ public class ShellService {
         Shell shell = findById(shellId);
 
         if (shell.getMember().getId() == memberId) {
+            eventPublisher.publishEvent(new ShellRemoveEvent(shell.getId()));
             shellRepository.delete(shell);
         } else {
             throw new ShellLogicException(ShellExceptionCode.SHELL_NOT_MY_ID);
@@ -110,7 +117,12 @@ public class ShellService {
             cursor = shellRepository.findMaxId().orElse(0L) + 1;
         }
         Pageable pageable = PageRequest.of(0, limit);
-        List<Shell> shells = shellRepository.findShells(cursor, shellType, shellCategory, pageable);
+        List<Shell> shells = null;
+        if (shellCategory == ShellCategory.P_ALL || shellCategory == ShellCategory.T_ALL) {
+            shells = shellRepository.findAllCategoryShells(cursor, shellType, pageable);
+        } else {
+            shells = shellRepository.findShells(cursor, shellType, shellCategory, pageable);
+        }
         InquiryResponseDto inquiryResponseDto = new InquiryResponseDto();
 
         List<ShellResponseDto> shellsDto = shellMapper.shellsToInquiryResponseDto(shells);

@@ -49,7 +49,7 @@ public class Shell extends TimeTracker {
     @JoinColumn(name = "CATEGORY_ID")
     private Category category;
 
-    @OneToMany(cascade = CascadeType.ALL)
+    @OneToMany(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "SHELL_ID")
     private List<Tag> tags = new ArrayList<>();
 

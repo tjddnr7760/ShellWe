@@ -14,8 +14,11 @@ import com.shellwe.server.domain.trade.respository.TradeRepository;
 import com.shellwe.server.domain.types.Status;
 import com.shellwe.server.exception.customexception.TradeLogicException;
 import com.shellwe.server.exception.exceptioncode.TradeExceptionCode;
+import com.shellwe.server.utils.event.MemberRemoveEvent;
+import com.shellwe.server.utils.event.ShellRemoveEvent;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -42,12 +45,17 @@ public class TradeService {
     }
 
     public void trade(TradeRequestDto tradeRequestDto, long sellerId, long buyerId) {
-        Member seller = memberService.getMemberByOtherLayer(sellerId);
         Member buyer = memberService.getMemberByOtherLayer(buyerId);
+        Member seller = memberService.getMemberByOtherLayer(sellerId);
+
         Shell buyerShell = shellService.getShellByOtherLayer(tradeRequestDto.getBuyerShellId());
         Shell sellerShell = shellService.getShellByOtherLayer(tradeRequestDto.getSellerShellId());
 
-        tradeRepository.save(new Trade(seller, buyer, buyerShell, sellerShell));
+        if (buyerShell.getMember().getId() != buyer.getId() || sellerShell.getMember().getId() != seller.getId()) {
+            throw new TradeLogicException(TradeExceptionCode.TRADE_FAILED);
+        } else {
+            tradeRepository.save(new Trade(seller, buyer, buyerShell, sellerShell));
+        }
     }
 
     @Transactional(readOnly = true)
@@ -99,5 +107,17 @@ public class TradeService {
         IntStream.range(0, shells.size())
                 .forEach(i -> inquiryToMainResponseDto.getShells().get(i).setNumberOfTrades(shellCounts.get(i)));
         return inquiryToMainResponseDto;
+    }
+
+    @EventListener
+    public void handleShellRemoveEvent(ShellRemoveEvent shellRemoveEvent) {
+        tradeRepository.deleteAllByBuyerShellId(shellRemoveEvent.getId());
+        tradeRepository.deleteAllBySellerShellId(shellRemoveEvent.getId());
+    }
+
+    @EventListener
+    public void handleMemberRemoveEvent(MemberRemoveEvent memberRemoveEvent) {
+        tradeRepository.deleteAllBySellerId(memberRemoveEvent.getId());
+        tradeRepository.deleteAllByBuyerId(memberRemoveEvent.getId());
     }
 }

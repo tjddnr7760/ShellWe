@@ -32,6 +32,15 @@ public interface ShellRepository extends JpaRepository<Shell, Long> {
                              @Param("cursor") Long cursor,
                              Pageable pageable);
 
+    @Query("select s from Shell s " +
+            "join fetch s.member m " +
+            "where s.id < :cursor " +
+            "and s.shellType = :shellType " +
+            "order by s.id desc")
+    List<Shell> findAllCategoryShells(@Param("cursor") Long cursor,
+                           @Param("shellType") ShellType shellType,
+                           Pageable pageable);
+
     @Query("SELECT MAX(s.id) FROM Shell s")
     Optional<Long> findMaxId();
 }
