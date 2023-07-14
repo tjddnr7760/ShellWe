@@ -41,9 +41,10 @@ const ShellList = ({ pagetype }: { pagetype: string }) => {
         </CategoryListWrapper>
         <ShellsContainer>
           <ShellsWrapper>
-            {ShellsListData.map((shell: ShellType) => (
-              <Shell key={uuidv4()} shell={shell} />
-            ))}
+            {ShellsListData &&
+              ShellsListData.map((shell: ShellType) => (
+                <Shell key={uuidv4()} shell={shell} />
+              ))}
           </ShellsWrapper>
         </ShellsContainer>
 

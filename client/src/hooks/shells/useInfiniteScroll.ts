@@ -14,8 +14,8 @@ const getShells = async (
     params: {
       limit,
       cursor,
-      type: category,
-      category: pagetype,
+      type: pagetype,
+      category: category,
     },
     headers: getHeader(),
   });
@@ -48,13 +48,7 @@ export const useInfiniteScroll = (
     await fetchNextPage();
   }, [hasNextPage, isFetching, fetchNextPage]);
 
-  const ShellsListData = data?.pages.flatMap((page) => page.shells) ?? [];
-
-  useEffect(() => {
-    if (!hasNextPage && isFetching) {
-      queryClient.cancelQueries(['shellList', category, pagetype]); // fetching 중인 쿼리 종료
-    }
-  }, [hasNextPage, isFetching, queryClient, category, pagetype]);
+  const ShellsListData = data?.pages.flatMap((page) => page.shells);
 
   return {
     ShellsListData,

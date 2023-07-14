@@ -20,7 +20,7 @@ export const PRODUCT_CATEGORIES_DATA = [
   {
     id: 4,
     name: 'Health',
-    categoryid: 'p_healthproduct',
+    categoryid: 'p_health',
     categoryimg: '/categoryimage/Health.svg',
   },
   {
@@ -66,7 +66,7 @@ export const TALENT_CATEGORIES_DATA = [
   {
     id: 104,
     name: 'Health',
-    categoryid: 't_healthtalent',
+    categoryid: 't_health',
     categoryimg: '/categoryimage/Health.svg',
   },
   {

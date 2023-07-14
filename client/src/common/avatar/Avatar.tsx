@@ -1,6 +1,5 @@
 // import { useEffect } from 'react';
 import { Icon, UserImg } from './Avatar.styled.ts';
-import userimg from '../../asset/avatar/userimg.svg';
 import noprofile from '../../asset/avatar/noprofile.svg';
 interface memberProps {
   id: number;
@@ -26,11 +25,11 @@ const Avatar = ({
 
   return avatartype === 'UserImg' ? (
     <UserImg>
-      <img src={userImg !== '' ? userimg : noprofile} alt="user-img" />
+      <img src={userImg ? userImg : noprofile} alt="user-img" />
     </UserImg>
   ) : (
     <Icon>
-      <img src={userImg ? userimg : noprofile} alt="user-icon" />
+      <img src={userImg ? userImg : noprofile} alt="user-icon" />
       {/* member.picture data 없을 경우, noprofile image로 대체 */}
     </Icon>
   );
