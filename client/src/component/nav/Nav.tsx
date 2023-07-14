@@ -39,6 +39,12 @@ const Nav: React.FC = () => {
     setIsNavItemContent(false);
   };
 
+  const handleClick = () => {
+    if (!isLogIn) {
+      alert('로그인 후 접근할 수 있습니다.');
+    }
+  };
+
   return (
     <NavWrapper>
       <NavContainer>
@@ -130,11 +136,12 @@ const Nav: React.FC = () => {
             </>
           ) : (
             <Link to="/login" style={{ textDecoration: 'none' }}>
-              <NavItem>
+              <NavItem onClick={handleClick}>
                 <FontAwesomeIcon icon={faPen} />
                 Create Shells
               </NavItem>
               <NavItem
+                onClick={handleClick}
                 onMouseEnter={handleNavItemHover}
                 onMouseLeave={handleNavItemNotHover}
               >
@@ -146,24 +153,24 @@ const Nav: React.FC = () => {
                   onMouseEnter={handleNavItemHover}
                   onMouseLeave={handleNavItemNotHover}
                 >
-                  <NavItemContent>
+                  <NavItemContent onClick={handleClick}>
                     <FontAwesomeIcon icon={faBox} />
                     Product
                   </NavItemContent>
 
-                  <NavItemContent>
+                  <NavItemContent onClick={handleClick}>
                     <FontAwesomeIcon icon={faPersonRunning} />
                     Talent
                   </NavItemContent>
                 </NavItemContentWrapper>
               )}
 
-              <NavItem>
+              <NavItem onClick={handleClick}>
                 <FontAwesomeIcon icon={faHandPointRight} />
                 Offered Shells
               </NavItem>
 
-              <NavItem>
+              <NavItem onClick={handleClick}>
                 <FontAwesomeIcon icon={faMessage} />
                 Message
               </NavItem>
