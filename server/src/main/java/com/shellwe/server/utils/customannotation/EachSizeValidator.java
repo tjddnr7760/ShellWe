@@ -1,4 +1,4 @@
-package com.shellwe.server.utils;
+package com.shellwe.server.utils.customannotation;
 
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
