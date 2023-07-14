@@ -4,15 +4,29 @@ import {
   ShellImage,
   TextBox,
 } from './ShellInfo.styled';
-import product from '../../asset/product.jpg';
 
-const ShellInfo = () => {
+interface MyShells {
+  id: number;
+  type: string;
+  status: string;
+  title: string;
+  createdAt: string;
+  category: string;
+  picture: string;
+  member: {
+    id: number;
+    displayName: string;
+    profileUrl: string;
+  };
+}
+
+const ShellInfo = ({ shell }: { shell: MyShells }) => {
   return (
     <ShellInfoContainer>
       <ImageBox>
-        <ShellImage src={product} />
+        <ShellImage src={shell.picture} />
       </ImageBox>
-      <TextBox>Title</TextBox>
+      <TextBox>{shell.title}</TextBox>
     </ShellInfoContainer>
   );
 };

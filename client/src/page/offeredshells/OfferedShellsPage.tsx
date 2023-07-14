@@ -7,12 +7,15 @@ import {
   PokedShellListWrapper,
   ResponseElementWrapper,
 } from './OfferedShellsPage.styled';
+import { useMyShellsList } from '../../hooks/offer/useMyShellsList.ts';
 
 const OfferedShellsPage = () => {
+  const { data: myPokedShellsData } = useMyShellsList();
+
   return (
     <OfferedShellsPageWrapper>
       <PokedShellListWrapper>
-        <PokedShellList />
+        <PokedShellList myPokedShellsData={myPokedShellsData} />
       </PokedShellListWrapper>
       <ResponseElementWrapper>
         <ShellImgPreviewWrapper>

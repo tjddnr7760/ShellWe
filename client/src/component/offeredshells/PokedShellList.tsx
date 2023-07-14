@@ -7,7 +7,33 @@ import {
   ShellInfoListContainer,
 } from './PokedShellList.styled.ts';
 
-const PokedShellList = () => {
+interface MyPokedShellDataProps {
+  myPokedShellsData: ShellsList;
+}
+
+interface ShellsList {
+  shells: MyShells[];
+}
+
+interface MyShells {
+  id: number;
+  type: string;
+  status: string;
+  title: string;
+  createdAt: string;
+  category: string;
+  picture: string;
+  member: {
+    id: number;
+    displayName: string;
+    profileUrl: string;
+  };
+}
+
+const PokedShellList = ({ myPokedShellsData }: MyPokedShellDataProps) => {
+  console.log(myPokedShellsData);
+  const pokedShellsArray: MyShells[] = myPokedShellsData.shells;
+
   return (
     <PokedShellListContainer>
       <IntroBox>
@@ -15,17 +41,9 @@ const PokedShellList = () => {
         <IntroText2>Find great shells!</IntroText2>
       </IntroBox>
       <ShellInfoListContainer>
-        <ShellInfo />
-        <ShellInfo />
-        <ShellInfo />
-        <ShellInfo />
-        <ShellInfo />
-        <ShellInfo />
-        <ShellInfo />
-        <ShellInfo />
-        <ShellInfo />
-        <ShellInfo />
-        <ShellInfo />
+        {pokedShellsArray.map((shell) => {
+          return <ShellInfo key={shell.id} shell={shell} />;
+        })}
       </ShellInfoListContainer>
     </PokedShellListContainer>
   );
