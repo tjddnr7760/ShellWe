@@ -42,12 +42,21 @@ const Nav: React.FC = () => {
   return (
     <NavWrapper>
       <NavContainer>
-        <Link to="/main">
-          <Logo
-            src="https://cdn-icons-png.flaticon.com/512/499/499857.png"
-            alt="Logo"
-          ></Logo>
-        </Link>
+        {isLogIn ? (
+          <Link to="/main">
+            <Logo
+              src="https://cdn-icons-png.flaticon.com/512/499/499857.png"
+              alt="Logo"
+            ></Logo>
+          </Link>
+        ) : (
+          <Link to="/">
+            <Logo
+              src="https://cdn-icons-png.flaticon.com/512/499/499857.png"
+              alt="Logo"
+            ></Logo>
+          </Link>
+        )}
 
         <NavItems>
           {isLogIn ? (
