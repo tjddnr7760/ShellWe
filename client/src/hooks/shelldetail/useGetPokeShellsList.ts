@@ -15,9 +15,8 @@ const getPokedShellId: GetShellsArgs = async (memberId, method) => {
   return { data };
 };
 
-//제품 상세 조회(GET)
 export const useGetMyShellToPoke = (memberId: number) => {
-  const { data = {} } = useQuery(queryKeys.shellsDetail, () =>
+  const { data = {} } = useQuery(queryKeys.tradesList, () =>
     getPokedShellId(memberId, 'get')
   );
 

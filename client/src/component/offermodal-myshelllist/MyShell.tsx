@@ -1,3 +1,4 @@
+import { useParams } from 'react-router-dom';
 import {
   MyShellContainer,
   ImgBox,
@@ -10,14 +11,21 @@ import { MyShells } from '../../dataset/ShellDetailType.ts';
 import Poke from '../../asset/poke.svg';
 
 const MyShell = ({ shell }: { shell: MyShells }) => {
-  const picture = shell.picture;
-  const title = shell.title;
+  const { id } = useParams();
+  const numberTypeofsellerShellId = Number(id);
+  const buyerShellId: number = shell.id;
+  const sellerShellId: number = numberTypeofsellerShellId;
+
+  const requestBodyForPoke = {
+    buyerShellId: buyerShellId,
+    sellerShellId: sellerShellId,
+  };
 
   return (
     <MyShellContainer>
       <ShellInfo>
-        <ImgBox src={picture} alt="shell-image" />
-        <Title>{title}</Title>
+        <ImgBox src={shell.picture} alt="shell-image" />
+        <Title>{shell.title}</Title>
       </ShellInfo>
       <SmallButton3>
         <ButtonDiv>

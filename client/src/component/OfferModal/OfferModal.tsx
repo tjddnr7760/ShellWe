@@ -1,5 +1,4 @@
 import { useNavigate } from 'react-router-dom';
-import { useGetMyShellToPoke } from '../../hooks/shelldetail/usePokeShells.ts';
 import MyShellList from '../offermodal-myshelllist/MyShellList.tsx';
 import {
   CreateShellButton,
@@ -8,13 +7,9 @@ import {
   Div,
 } from './OfferModal.styled.ts';
 import plus from '../../asset/plus.svg';
+import { MyShellsDataProps } from '../../dataset/ShellDetailType.ts';
 
-const OfferModal = () => {
-  // 추후 수정 사항: useGetMyShellToPoke에 recoil에서 memberId를 넣어야 한다.(login된 본인 계정의 memberId)
-  const { data } = useGetMyShellToPoke(7);
-  const myShellsData = data.data;
-  console.log(myShellsData);
-
+const OfferModal = ({ myShellListsData }: MyShellsDataProps) => {
   const navigate = useNavigate();
   const goToShellCreatePage = () => {
     navigate('/shellcreate');
@@ -28,7 +23,7 @@ const OfferModal = () => {
         </CreateShellButton>
       </Div>
       <ShellListContainer>
-        <MyShellList myShellsData={myShellsData} />
+        <MyShellList myShellListsData={myShellListsData} />
       </ShellListContainer>
     </Wrapper>
   );

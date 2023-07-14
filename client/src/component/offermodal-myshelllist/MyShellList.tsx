@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { MyShellsDataProps, MyShells } from '../../dataset/ShellDetailType.ts';
+import { MyShellsDataProps } from '../../dataset/ShellDetailType.ts';
 import MyShell from './MyShell.tsx';
 
 const MyShellListWrapper = styled.div`
@@ -11,13 +11,11 @@ const MyShellListWrapper = styled.div`
   height: 500px;
   padding-top: 25px;
   padding-bottom: 15px;
-  overflow-y: scroll; /* Add scrollbar when content overflows */
+  overflow-y: scroll;
 `;
 
-const MyShellList = ({ myShellsData }: MyShellsDataProps) => {
-  // 문제: myShellsData를 props로 받아서 렌더링했는데 오류가 발생한다.
-  const myShellArray = myShellsData;
-  console.log(myShellArray);
+const MyShellList = ({ myShellListsData }: MyShellsDataProps) => {
+  const myShellArray = myShellListsData;
 
   return (
     <MyShellListWrapper>

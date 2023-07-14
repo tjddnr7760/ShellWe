@@ -1,6 +1,6 @@
 // MyShellList, MyShell of OfferModal
 export interface MyShellsDataProps {
-  myShellsData: MyShells[];
+  myShellListsData: MyShells[];
 }
 
 export interface MyShells {

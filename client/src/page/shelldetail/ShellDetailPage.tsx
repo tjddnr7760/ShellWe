@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 // import { useParams } from 'react-router-dom';
 import { useGetShellDetail } from '../../hooks/shelldetail/useShellsDetailId.ts';
 import ShellImgPreview from '../../component/shellimgpreview/ShellImgPreview';
@@ -12,13 +12,22 @@ import {
   ContentDiv,
   PreviewDiv,
 } from './ShellDetailPage.styled';
+import { ShellDetailDataProps } from '../../dataset/ShellDetailType.ts';
+import { useGetMyShellToPoke } from '../../hooks/shelldetail/useGetPokeShellsList.ts';
 
 const ShellDetailPage = () => {
-  // const { id } = useParams; 추후에 id를 useGetShellDetail의 인자로 넣어주기.
-  const { data } = useGetShellDetail(4);
-  const shellDetailData = data.data;
+  // 인자: const { id } = useParams; 판매자의 shellId
+  const { data } = useGetShellDetail(3);
+  const shellDetailData: ShellDetailDataProps = data.data;
+
+  // 인자: recoil login 상태 memberId; 구매자의 memberId
+  const { data: modaldata } = useGetMyShellToPoke(2);
+  const myShellListsData = modaldata.data.shells; // 추후 타입 정의해야 함
+
   const [modalVisible, setModalVisible] = useState(false);
   const [sidebarOpen, setSidebarOpen] = useState(false);
+  const [modalData, setModalData] = useState([]);
+
   const shellStatus: string = shellDetailData.status;
 
   const handleOpenSidebar = () => {
@@ -29,10 +38,16 @@ const ShellDetailPage = () => {
     setModalVisible(!modalVisible);
   };
 
+  useEffect(() => {
+    if (modalVisible) {
+      setModalData(myShellListsData); // 모달이 열릴 때 데이터 가져오기
+    }
+  }, [modalVisible]);
+
   return (
     <Wrapper>
       <DetailPageContainer>
-        <ContentDiv className="middle">
+        <ContentDiv>
           <PreviewDiv>
             <ShellImgPreview />
           </PreviewDiv>
@@ -45,16 +60,10 @@ const ShellDetailPage = () => {
             {sidebarOpen && <DetailPageSidebar shellStatus={shellStatus} />}
           </Div>
         </ContentDiv>
-        {modalVisible && <OfferModal />}
+        {modalVisible && <OfferModal myShellListsData={modalData} />}
       </DetailPageContainer>
     </Wrapper>
   );
 };
 
 export default ShellDetailPage;
-// 현재 페이지의 id는 2개가 존재할 수 있다.
-// shellid, memberId
-// shell 페이지에서 useParams를 사용하면, shell의 Id이다.
-// 하지만, 모달창의 경우에는 shell의 id를 사용하는게 아니라,
-// 구매자의 입장인 내가 가진 Shell의 정보를 불러오는 것이다.
-// 따라서, 로그인된 memberId를 입력해야 한다.
