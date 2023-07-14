@@ -22,9 +22,8 @@ public class WithMockCustomUserSecurityContextFactory implements WithSecurityCon
                 Collections.singletonList(new EmailVerifiedAuthority(true));
 
         Authentication authentication = new UsernamePasswordAuthenticationToken(mockUser, null, emailVerifiedAuthorities);
-
         context.setAuthentication(authentication);
-        System.out.println(context.getAuthentication().getPrincipal());
+
         return context;
     }
     private MemberContextInform mockUserInfo(){
