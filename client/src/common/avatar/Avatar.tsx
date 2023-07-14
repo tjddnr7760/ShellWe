@@ -2,18 +2,18 @@ import { useNavigate } from 'react-router-dom';
 import { Icon, UserImg } from './Avatar.styled.ts';
 import noprofile from '../../asset/avatar/noprofile.svg';
 
-interface Member {
+interface MemberProps {
   id: number;
   displayName: string;
   profileUrl: string;
 }
 
 const Avatar = ({
-  member,
   avatartype,
+  member,
 }: {
-  member: Member;
   avatartype: string;
+  member: MemberProps;
 }) => {
   const navigate = useNavigate();
   const userImg = member.profileUrl;
