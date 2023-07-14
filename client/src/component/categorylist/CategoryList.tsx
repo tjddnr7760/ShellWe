@@ -1,7 +1,6 @@
 import CategoryItem from '../../common/categoryitem/CategoryItem.tsx';
 import { CategoryContainer } from './CategoryList.styled.ts';
-import { shellPageState } from '../../recoil/atom.ts';
-import { useRecoilValue } from 'recoil';
+
 import {
   PRODUCT_CATEGORIES_DATA,
   TALENT_CATEGORIES_DATA,

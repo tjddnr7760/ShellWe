@@ -1,14 +1,17 @@
-import { useInfiniteQuery, useQueryClient } from 'react-query';
+import { useInfiniteQuery } from 'react-query';
+import { useRecoilValue } from 'recoil';
 
 import { axiosInstance, getHeader } from '../../utill/axiosInstance';
-import { useCallback, useEffect } from 'react';
+import { useCallback } from 'react';
 import { queryKeys } from '../../dataset/queryKey';
+import { selectedOptionAtom } from '../../recoil/atom.ts';
 
 const getShells = async (
   limit: number,
   cursor: number,
   category: string,
-  pagetype: string
+  pagetype: string,
+  selectedOption: string
 ) => {
   const { data } = await axiosInstance.get('/shells', {
     params: {
@@ -16,6 +19,7 @@ const getShells = async (
       cursor,
       type: pagetype,
       category: category,
+      sort: selectedOption,
     },
     headers: getHeader(),
   });
@@ -27,11 +31,11 @@ export const useInfiniteScroll = (
   pagetype: string,
   category: string
 ) => {
-  const queryClient = useQueryClient();
-
+  const selectedOption = useRecoilValue(selectedOptionAtom);
   const { data, hasNextPage, fetchNextPage, isFetching } = useInfiniteQuery(
     [queryKeys.shellList, category, pagetype], // 변경된 값들을 쿼리 키에 포함
-    ({ pageParam = 0 }) => getShells(limit, pageParam, category, pagetype),
+    ({ pageParam = 0 }) =>
+      getShells(limit, pageParam, category, pagetype, selectedOption),
     {
       getNextPageParam: (lastPage) =>
         lastPage.shells?.length

@@ -12,7 +12,6 @@ import {
 import Avatar from '../avatar/Avatar';
 const Shell = ({ shell }: ShellProps) => {
   const [selecedShell, setSelecedShell] = useState(false);
-  console.log('shell111', shell);
   const handleLikeCilck = () => {
     setSelecedShell((prev) => !prev);
   };

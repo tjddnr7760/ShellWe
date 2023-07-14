@@ -27,30 +27,30 @@ const ShellList = ({ pagetype }: { pagetype: string }) => {
   );
 
   return (
-    <InfiniteScroll loadMore={loadMore} hasMore={hasNextPage}>
-      <ShellListContainer>
-        <SeachToolbarWrapper>
-          <SearchToolbar />
-        </SeachToolbarWrapper>
-        <CategoryListWrapper>
-          <CategoryList
-            pagetype={pagetype}
-            category={category}
-            setCategory={setCategory}
-          />
-        </CategoryListWrapper>
-        <ShellsContainer>
+    <ShellListContainer>
+      <SeachToolbarWrapper>
+        <SearchToolbar />
+      </SeachToolbarWrapper>
+      <CategoryListWrapper>
+        <CategoryList
+          pagetype={pagetype}
+          category={category}
+          setCategory={setCategory}
+        />
+      </CategoryListWrapper>
+      <ShellsContainer>
+        <InfiniteScroll loadMore={loadMore} hasMore={hasNextPage}>
           <ShellsWrapper>
             {ShellsListData &&
               ShellsListData.map((shell: ShellType) => (
                 <Shell key={uuidv4()} shell={shell} />
               ))}
           </ShellsWrapper>
-        </ShellsContainer>
+        </InfiniteScroll>
+      </ShellsContainer>
 
-        <LiftBtn />
-      </ShellListContainer>
-    </InfiniteScroll>
+      <LiftBtn />
+    </ShellListContainer>
   );
 };
 

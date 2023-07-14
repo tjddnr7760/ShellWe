@@ -23,6 +23,7 @@ import MyShellsPage from './page/myshells/MyShellsPage.tsx';
 import OfferedShellsPage from './page/offeredshells/OfferedShellsPage.tsx';
 import DirectMessage from './page/directmessage/DirectMessage.tsx';
 import Loading from './common/loading/Loading.tsx';
+import SearchPage from './page/searchpage/SearchPage.tsx';
 
 function App() {
   const isFetching = useIsFetching();
@@ -50,6 +51,7 @@ function App() {
               <Route path="/myshells/:id" element={<MyShellsPage />} />
               <Route path="/offer/:id" element={<OfferedShellsPage />} />
               <Route path="/dm/:id" element={<DirectMessage />} />
+              <Route path="/search" Component={SearchPage} />
             </Routes>
             {isFetching ? <Loading /> : null}
             <Footer />

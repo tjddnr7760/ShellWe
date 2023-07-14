@@ -1,12 +1,17 @@
 import { useEffect, useState } from 'react';
+import { useRecoilState } from 'recoil';
+
 import {
   DropdownContainer,
   DropdownBTN,
   DropdownContent,
 } from './DropDownMenu.styled';
+import { selectedOptionAtom } from '../../recoil/atom.ts';
+
 const DropDownMenu = () => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
-  const [selectedOption, setSelectedOption] = useState('Newest'); //recoil로 변경
+  const [selectedOption, setSelectedOption] =
+    useRecoilState(selectedOptionAtom);
 
   const handleMenuHover = () => {
     setIsDropdownOpen(true);
@@ -33,7 +38,7 @@ const DropDownMenu = () => {
             <input
               type="radio"
               name="sort"
-              value="Newest"
+              value="newest"
               checked={selectedOption === 'Newest'} // 선택 상태에 따라 체크 여부 결정
               onChange={handleRadioChange}
             />
@@ -43,7 +48,7 @@ const DropDownMenu = () => {
             <input
               type="radio"
               name="sort"
-              value="Oldest"
+              value="oldest"
               checked={selectedOption === 'Oldest'} // 선택 상태에 따라 체크 여부 결정
               onChange={handleRadioChange}
             />
