@@ -25,28 +25,29 @@ const ShellDetail = ({
   handleOpenSidebar,
   shellDetailData,
 }: ShellDetailProps) => {
+  const [seeMoreBody, setSeeMoreBody] = useState(false);
+  // tags, category 서버 데이터 가공
   const tags = shellDetailData.tags.map((tag: Tag) => tag.tagName);
   const category: string = shellDetailData.category.slice(2).toUpperCase();
 
-  const [seeMoreBody, setSeeMoreBody] = useState(false);
+  // (recoil memberId 완료 시, 수정 필요)
+  // 제품 상세 페이지에서, 게시글의 memberId와 현재 로그인된 유저의 memberId가 일치하는지 확인하고 햄버거 렌더링.
+  // recoil의 memberId를 myMemberId 변수에 할당해서 사용한다.
+  const myMemberId = 1;
+
   const handleSeeMoreBody = () => {
     setSeeMoreBody(!seeMoreBody);
   };
-
-  // (recoil memberId 완료 시, 수정 필요)
-  // 제품 상세 페이지에서, 게시글의 memberId와 현재 로그인된 유저의 memberId가 일치하는지 확인하고 햄버거 렌더링.
-  // recoil의 memberId를 loginMemberId 변수에 할당해서 사용한다.
-  const loginMemberId = 3;
 
   return (
     <Wrapper>
       <ShellInfoContainer>
         <UserInfoAndHamburgerDiv>
           <UserInfoDiv>
-            <Avatar avatartype={'Icon'} />
+            <Avatar avatartype={'Icon'} member={shellDetailData.member} />
             <DisplayName>{shellDetailData.member.displayName}</DisplayName>
           </UserInfoDiv>
-          {loginMemberId === shellDetailData.member.id && (
+          {myMemberId === shellDetailData.member.id && (
             <Hamburger onClick={handleOpenSidebar}>
               <img src={Ellipsis} alt="hamburger" />
             </Hamburger>
