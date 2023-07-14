@@ -11,6 +11,10 @@ import javax.persistence.*;
 @Setter
 @Entity
 public class MemberRoom {
+    public MemberRoom(Room room) {
+        this.room = room;
+    }
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "MEMBER_ROOM_ID")
