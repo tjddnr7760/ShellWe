@@ -25,7 +25,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -69,7 +68,7 @@ public class ShellService {
     }
 
     @Transactional(readOnly = true)
-    public FindDetailsResponseDto findDetails(Long shellId, Long memberId) {
+    public FindDetailsResponseDto findDetails(Long shellId, long memberId) {
         Shell shell = findById(shellId);
         FindDetailsResponseDto findDetailsResponseDto = shellMapper.shellToFindDetailsResponseDto(shell);
         findDetailsResponseDto.getMember().setMe(false);
@@ -112,22 +111,49 @@ public class ShellService {
     }
 
     @Transactional(readOnly = true)
-    public InquiryResponseDto inquiry(int limit, Long cursor, ShellType shellType, ShellCategory shellCategory) {
+    public InquiryResponseDto inquiry(int limit, Long cursor, ShellType shellType, ShellCategory shellCategory, String sort) {
         if (cursor == 0) {
             cursor = shellRepository.findMaxId().orElse(0L) + 1;
         }
+        String sortOrder = checkSortType(sort);
         Pageable pageable = PageRequest.of(0, limit);
-        List<Shell> shells = null;
-        if (shellCategory == ShellCategory.P_ALL || shellCategory == ShellCategory.T_ALL) {
-            shells = shellRepository.findAllCategoryShells(cursor, shellType, pageable);
-        } else {
-            shells = shellRepository.findShells(cursor, shellType, shellCategory, pageable);
-        }
+
+        List<Shell> shells = findShellsCondition(cursor, shellType, shellCategory, sortOrder, pageable);
         InquiryResponseDto inquiryResponseDto = new InquiryResponseDto();
 
         List<ShellResponseDto> shellsDto = shellMapper.shellsToInquiryResponseDto(shells);
         inquiryResponseDto.setShells(shellsDto);
         return inquiryResponseDto;
+    }
+
+    private List<Shell> findShellsCondition(Long cursor, ShellType shellType, ShellCategory shellCategory, String sortOrder, Pageable pageable) {
+        List<Shell> shells = null;
+        if (shellCategory == ShellCategory.P_ALL || shellCategory == ShellCategory.T_ALL) {
+            if (sortOrder.equals("desc")) {
+                shells = shellRepository.findAllCategoryShellsDesc(cursor, shellType, pageable);
+            } else {
+                shells = shellRepository.findAllCategoryShellsAsc(cursor, shellType, pageable);
+            }
+        } else {
+            if (sortOrder.equals("desc")) {
+                shells = shellRepository.findShellsDesc(cursor, shellType, shellCategory, pageable);
+            } else {
+                shells = shellRepository.findShellsAsc(cursor, shellType, shellCategory, pageable);
+            }
+        }
+        return shells;
+    }
+
+    private String checkSortType(String sort) {
+        String sortOrder;
+        if (sort.equals("newest")) {
+            sortOrder = "desc";
+        } else if (sort.equals("oldest")) {
+            sortOrder = "asc";
+        } else {
+            throw new ShellLogicException(ShellExceptionCode.NOT_SUPPORT_TYPE);
+        }
+        return sortOrder;
     }
 
     @Transactional(readOnly = true)

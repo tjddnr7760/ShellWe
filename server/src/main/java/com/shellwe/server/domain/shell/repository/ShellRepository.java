@@ -65,3 +65,4 @@ public interface ShellRepository extends JpaRepository<Shell, Long> {
     @Query("SELECT MAX(s.id) FROM Shell s")
     Optional<Long> findMaxId();
 }
+
