@@ -63,8 +63,9 @@ public class ShellController {
     public InquiryResponseDto inquiryShells(@RequestParam("limit") int limit,
                                             @RequestParam("cursor") Long cursor,
                                             @RequestParam("type") String shellType,
-                                            @RequestParam("category") String shellCategory) {
-        return shellService.inquiry(limit, cursor, ShellType.valueOf(shellType.toUpperCase()), ShellCategory.valueOf(shellCategory.toUpperCase()));
+                                            @RequestParam("category") String shellCategory,
+                                            @RequestParam("sort") String sort) {
+        return shellService.inquiry(limit, cursor, ShellType.valueOf(shellType.toUpperCase()), ShellCategory.valueOf(shellCategory.toUpperCase()), sort);
     }
 
     @ResponseStatus(HttpStatus.OK)
