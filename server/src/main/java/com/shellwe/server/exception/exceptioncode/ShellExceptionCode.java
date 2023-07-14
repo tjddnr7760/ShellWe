@@ -5,7 +5,8 @@ import lombok.Getter;
 @Getter
 public enum ShellExceptionCode {
 
-    SHELL_NOT_MY_ID(400, "Shell Id Error");
+    SHELL_NOT_MY_ID(400, "Shell Id Error"),
+    NOT_SUPPORT_TYPE(400, "Shell Sort Type Error");
 
     private int status;
 
