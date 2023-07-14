@@ -9,3 +9,8 @@ export const shellPageState = atom({
   key: 'shellPageState',
   default: '',
 });
+
+export const isLogInState = atom({
+  key: 'isLogInState',
+  default: false,
+});
