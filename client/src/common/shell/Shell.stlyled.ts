@@ -8,6 +8,7 @@ export const ShellContainer = styled.div`
   box-shadow: 1px 1px 1px 0px rgba(0, 0, 0, 0.25);
   background-color: #caf0f8;
   border-radius: 10px;
+  cursor: pointer;
 `;
 export const ShellImgWrapper = styled.div`
   position: relative;

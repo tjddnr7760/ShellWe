@@ -1,4 +1,6 @@
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+
 import LikeDefaultShell from '../../asset/likeshells/LikeDefaultShell.svg';
 import LikeSelectedShell from '../../asset/likeshells/LikeSelectedShell.svg';
 import {
@@ -12,15 +14,20 @@ import {
 import Avatar from '../avatar/Avatar';
 const Shell = ({ shell }: ShellProps) => {
   const [selecedShell, setSelecedShell] = useState(false);
+  const navigate = useNavigate();
+
   const handleLikeCilck = () => {
     setSelecedShell((prev) => !prev);
   };
 
+  const handleDetailCilck = (id: number) => {
+    navigate(`/shelldetail/${id}}`);
+  };
   return (
     <ShellContainer>
       {shell && (
         <>
-          <ShellImgWrapper>
+          <ShellImgWrapper onClick={() => handleDetailCilck(shell.id)}>
             <ShellImg src={shell.picture} />
             <LikeShellIcon
               src={selecedShell ? LikeSelectedShell : LikeDefaultShell}
