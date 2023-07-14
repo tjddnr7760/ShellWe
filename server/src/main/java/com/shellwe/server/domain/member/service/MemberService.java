@@ -16,8 +16,10 @@ import com.shellwe.server.exception.customexception.MemberLogicException;
 import com.shellwe.server.exception.exceptioncode.EmailExceptionCode;
 import com.shellwe.server.exception.exceptioncode.MemberExceptionCode;
 import com.shellwe.server.file.service.UploadPictureService;
+import com.shellwe.server.utils.event.MemberRemoveEvent;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -36,16 +38,18 @@ public class MemberService {
     private final PasswordEncoder passwordEncoder;
     private final EmailSendable emailSendable;
     private final UploadPictureService uploadPictureService;
+    private final ApplicationEventPublisher eventPublisher;
 
     @Autowired
     public MemberService(MemberRepository memberRepository, MemberMapper memberMapper,
                          PasswordEncoder passwordEncoder, EmailSendable emailSendable,
-                         UploadPictureService uploadPictureService) {
+                         UploadPictureService uploadPictureService, ApplicationEventPublisher eventPublisher) {
         this.memberRepository = memberRepository;
         this.memberMapper = memberMapper;
         this.passwordEncoder = passwordEncoder;
         this.emailSendable = emailSendable;
         this.uploadPictureService = uploadPictureService;
+        this.eventPublisher = eventPublisher;
     }
 
     public void signUpMember(SignUpRequestDto signUpRequestDto) throws InterruptedException {
@@ -130,6 +134,7 @@ public class MemberService {
         Member findMember = findById(contextId);
 
         if (memberId == contextId && passwordEncoder.matches(deleteRequestDto.getPassword(), findMember.getPassword())) {
+            eventPublisher.publishEvent(new MemberRemoveEvent(findMember.getId()));
             memberRepository.delete(findMember);
         } else {
             throw new MemberLogicException(MemberExceptionCode.MEMBER_NOT_MY_ID);

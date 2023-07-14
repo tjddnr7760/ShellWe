@@ -7,7 +7,10 @@ import com.shellwe.server.domain.member.dto.response.GetMyShellListDto;
 import com.shellwe.server.domain.member.service.MemberService;
 import com.shellwe.server.domain.shell.entity.Shell;
 import com.shellwe.server.domain.shell.service.ShellService;
+import com.shellwe.server.utils.event.MemberRemoveEvent;
+import com.shellwe.server.utils.event.ShellRemoveEvent;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -47,7 +50,7 @@ public class CartService {
     public GetMyShellListDto getMyCartShells(long memberId) {
         GetMyShellListDto getMyShellListDto = new GetMyShellListDto();
 
-        List<Cart> carts = cartRepository.findAllByOwner_Id(memberId);
+        List<Cart> carts = cartRepository.findAllByOwnerId(memberId);
         List<Shell> cartShellList = new ArrayList<>();
         for (Cart cart : carts) {
             cartShellList.add(cart.getShell());
@@ -55,5 +58,15 @@ public class CartService {
         getMyShellListDto.setShells(cartMapper.shellListToGetMyShellListDto(cartShellList));
 
         return getMyShellListDto;
+    }
+
+    @EventListener
+    public void handleShellRemoveEvent(ShellRemoveEvent shellRemoveEvent) {
+        cartRepository.deleteAllByShellId(shellRemoveEvent.getId());
+    }
+
+    @EventListener
+    public void handleMemberRemoveEvent(MemberRemoveEvent memberRemoveEvent) {
+        cartRepository.deleteAllByOwnerId(memberRemoveEvent.getId());
     }
 }

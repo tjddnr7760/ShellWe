@@ -9,5 +9,7 @@ public interface CartRepository extends JpaRepository<Cart, Long> {
 
     void deleteAllByShellId(long shellId);
 
-    List<Cart> findAllByOwner_Id(long memberId);
+    void deleteAllByOwnerId(long memberId);
+
+    List<Cart> findAllByOwnerId(long memberId);
 }
