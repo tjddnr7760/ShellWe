@@ -17,9 +17,8 @@ import { useGetMyShellToPoke } from '../../hooks/shelldetail/useGetPokeShellsLis
 
 const ShellDetailPage = () => {
   // 인자: const { id } = useParams; 판매자의 shellId
-  const { data } = useGetShellDetail(3);
+  const { data } = useGetShellDetail(5);
   const shellDetailData: ShellDetailDataProps = data.data;
-
   // 인자: recoil login 상태 memberId; 구매자의 memberId
   const { data: modaldata } = useGetMyShellToPoke(2);
   const myShellListsData = modaldata.data.shells; // 추후 타입 정의해야 함

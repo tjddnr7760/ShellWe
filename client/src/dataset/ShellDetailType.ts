@@ -62,3 +62,16 @@ export interface BodyProps {
 export interface ShellStatus {
   status: string;
 }
+
+// API request
+// usePokeShell.ts MyShell.ts
+export interface RequestBodyForPoke {
+  buyerShellId: number;
+  sellerShellId: number;
+}
+
+// API response
+// usePokeShell.ts
+export interface ApiResponseOfPokeShell {
+  redirectUrl: string;
+}
