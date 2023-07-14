@@ -143,6 +143,6 @@ public class ShellService {
 
     private Shell findById(long shellId) {
         Optional<Shell> byId = shellRepository.findById(shellId);
-        return byId.orElseThrow(() -> new IllegalStateException());
+        return byId.orElseThrow(() -> new ShellLogicException(ShellExceptionCode.SHELL_NOT_MY_ID));
     }
 }
