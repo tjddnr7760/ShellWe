@@ -10,6 +10,7 @@ import com.shellwe.server.utils.TimeTracker;
 import lombok.*;
 
 import javax.persistence.*;
+import javax.validation.constraints.Size;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -36,8 +37,12 @@ public class Shell extends TimeTracker {
     @Column(name = "STATUS")
     private Status status;
 
+    @Column(name = "TITLE", length = 60)
+    @Size(max = 30)
     private String title;
 
+    @Column(name = "BODY", columnDefinition = "TEXT")
+    @Size(max = 1500)
     private String body;
 
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)

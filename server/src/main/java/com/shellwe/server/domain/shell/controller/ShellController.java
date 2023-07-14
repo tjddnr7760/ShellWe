@@ -14,6 +14,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @Slf4j
@@ -30,7 +31,7 @@ public class ShellController {
 
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping
-    public ShellIdDto registerShell(@RequestPart("register") RegisterRequestDto registerRequestDto,
+    public ShellIdDto registerShell(@Valid  @RequestPart("register") RegisterRequestDto registerRequestDto,
                                              @RequestPart("pictures") List<MultipartFile> pictures,
                                              Authentication authentication) {
         return shellService.register(registerRequestDto, getId(authentication), pictures);
@@ -44,7 +45,7 @@ public class ShellController {
 
     @ResponseStatus(HttpStatus.OK)
     @PatchMapping("/{shellId}/update")
-    public ShellIdDto updateShell(@PathVariable long shellId,
+    public ShellIdDto updateShell(@Valid @PathVariable long shellId,
                                          @RequestPart("update") UpdateRequestDto updateRequestDto,
                                          @RequestPart("pictures") List<MultipartFile> pictures,
                                          Authentication authentication) {
