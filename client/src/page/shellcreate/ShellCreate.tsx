@@ -12,16 +12,27 @@ import {
   CreateImgListWrapper,
   ButtonContainer,
   ShellCreatePage,
+  TitleImg,
+  Logo,
+  LogoWrapper,
 } from './ShellCreate.styled.js';
 import Tag from '../../common/tag/Tag.js';
 import { ImageUploader } from '../../component/imageuploader/ImageUploder.tsx';
+import { useCreateShells } from '../../hooks/shells/useCreateShells.ts';
 
 const ShellCreate: React.FC = () => {
   const [uploadedImages, setUploadedImages] = useState<File[]>([]);
-  const [category, setCategory] = useState<string>('');
+  const [selectedCateory, setSelectedCateory] = useState({
+    name: '카테고리',
+    categoryid: '',
+    type: '',
+  });
+  const formData = new FormData();
+  const { mutate } = useCreateShells();
 
   const [title, setTitle] = useState<string>('');
   const [content, setContent] = useState<string>('');
+  const [tagList, setTagList] = useState<string[]>([]);
 
   const handleInputChange = (
     e:
@@ -37,34 +48,30 @@ const ShellCreate: React.FC = () => {
   };
 
   const handleContentSubmit = async () => {
-    try {
-      const formData = new FormData();
-      const register = {
-        title: 'shell1',
-        body: 'shell body',
-        type: 'product',
-        category: 'p_device',
-        tags: ['laptop', 'Iphone'],
-      };
+    const register = {
+      title: title,
+      body: content,
+      type: selectedCateory.type,
+      category: selectedCateory.categoryid,
+      tags: tagList,
+    };
 
-      formData.append('register', JSON.stringify(register));
-      uploadedImages.forEach((image) => {
-        formData.append(`pictures `, image); // 이미지 파일 추가
-      });
-
-      // formData를 사용하여 서버로 데이터 전송
-      // 필요한 로직을 작성해주세요
-      console.log('서버로 전송:', formData);
-    } catch (error) {
-      console.error('전송 실패:', error);
-    }
+    formData.append('register', JSON.stringify(register));
+    uploadedImages.forEach((image) => {
+      formData.append(`pictures `, image); // 이미지 파일 추가
+    });
+    mutate(formData);
   };
-
   return (
     <ShellCreatePage>
       <ShellCreateContainer>
-        <img src="/createLogo.svg" alt="createLogo" />
-        <CreateCateory category={category} setCategory={setCategory} />
+        <LogoWrapper>
+          <Logo src="/createLogo.svg" alt="createLogo" />
+        </LogoWrapper>
+        <CreateCateory
+          selectedCateory={selectedCateory}
+          setSelectedCateory={setSelectedCateory}
+        />
         <CreateTitleWrapper>
           <CreateInput
             value={title}
@@ -74,7 +81,14 @@ const ShellCreate: React.FC = () => {
           />
         </CreateTitleWrapper>
         <CreateImgContainer>
-          <CreateMainImgWrapper />
+          <CreateMainImgWrapper>
+            {uploadedImages[0] && (
+              <TitleImg
+                src={URL.createObjectURL(uploadedImages[0])}
+                alt="title_img"
+              />
+            )}
+          </CreateMainImgWrapper>
           <CreateImgListWrapper>
             <ImageUploader setUploadedImages={setUploadedImages} />
           </CreateImgListWrapper>
@@ -88,7 +102,7 @@ const ShellCreate: React.FC = () => {
             placeholder="내용을 입력하세요"
           />
         </CreateBodyWrapper>
-        <Tag />
+        <Tag tagList={tagList} setTagList={setTagList} />
         <ButtonContainer>
           <SmallButton6 onClick={handleContentSubmit}>수정</SmallButton6>
         </ButtonContainer>

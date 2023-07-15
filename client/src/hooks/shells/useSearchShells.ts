@@ -18,7 +18,6 @@ const getSearchShells: getSearchShellsArgs = async (searchQuery) => {
 
 //제품 상세 조회
 export const useSearchShells = (searchQuery: string | null) => {
-  console.log('searchQuery222', searchQuery);
   if (searchQuery === null) {
     return null;
   }

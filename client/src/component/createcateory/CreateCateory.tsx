@@ -21,16 +21,23 @@ interface CategoryType {
   id: number;
 }
 interface CreateCateoryProps {
-  category: string;
-  setCategory: (newCategory: string) => void;
+  selectedCateory: {
+    name: string;
+    categoryid: string;
+    type: string;
+  };
+  setSelectedCateory: (category: {
+    name: string;
+    categoryid: string;
+    type: string;
+  }) => void;
 }
-const CreateCateory = ({ category, setCategory }: CreateCateoryProps) => {
+
+const CreateCateory = ({
+  selectedCateory,
+  setSelectedCateory,
+}: CreateCateoryProps) => {
   const [isOpenCategory, setIsOpenCategory] = useState(false);
-  const [selectedCateory, setSelectedCateory] = useState({
-    name: '카테고리',
-    categoryid: '',
-    type: '',
-  });
 
   const handleClickMenuOpen = () => {
     setIsOpenCategory(!isOpenCategory);
@@ -42,8 +49,8 @@ const CreateCateory = ({ category, setCategory }: CreateCateoryProps) => {
       categoryid: item.categoryid,
       type: itemType,
     });
-    setCategory(selectedCateory.categoryid);
   };
+
   return (
     <CreateCateoryWrapper onClick={handleClickMenuOpen}>
       <CategoryMenuWrapper>
@@ -54,25 +61,29 @@ const CreateCateory = ({ category, setCategory }: CreateCateoryProps) => {
         <CategoryDropdown>
           <CategoryText>Product</CategoryText>
           {PRODUCT_CATEGORIES_DATA.map((item: CategoryType) => {
-            return (
-              <CategoryItem
-                key={item.id}
-                onClick={() => handleClickChangeCategery(item, 'product')}
-              >
-                {item.name}
-              </CategoryItem>
-            );
+            if (item.name !== 'All') {
+              return (
+                <CategoryItem
+                  key={item.id}
+                  onClick={() => handleClickChangeCategery(item, 'product')}
+                >
+                  {item.name}
+                </CategoryItem>
+              );
+            }
           })}
           <CategoryText>Talent</CategoryText>
           {TALENT_CATEGORIES_DATA.map((item: CategoryType) => {
-            return (
-              <CategoryItem
-                key={item.id}
-                onClick={() => handleClickChangeCategery(item, 'talent')}
-              >
-                {item.name}
-              </CategoryItem>
-            );
+            if (item.name !== 'All') {
+              return (
+                <CategoryItem
+                  key={item.id}
+                  onClick={() => handleClickChangeCategery(item, 'talent')}
+                >
+                  {item.name}
+                </CategoryItem>
+              );
+            }
           })}
         </CategoryDropdown>
       )}

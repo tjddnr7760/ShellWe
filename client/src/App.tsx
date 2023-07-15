@@ -1,6 +1,6 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { RecoilRoot } from 'recoil';
-import { useEffect, useState } from 'react';
+import { Suspense, useEffect, useState } from 'react';
 import { ReactQueryDevtools } from 'react-query/devtools';
 
 import './App.css';
@@ -36,24 +36,28 @@ function App() {
           <Nav />
           {/* checkNav 함수를 페이지 url에 따라서 바뀌도록 설정 true false 결과값으로 */}
           <div className="inner">
-            <Routes>
-              <Route path="/" element={<HomePage />} />
-              <Route path="/main" element={<MainPage />} />
-              <Route path="/signup" element={<SignupPage />} />
-              <Route path="/aftersignup" element={<AfterSignUp />} />
-              <Route path="/login" element={<LoginPage />} />
-              <Route path="/shelllist/product" element={<ProductShell />} />
-              <Route path="/shelllist/talent" element={<TalentShell />} />
-              <Route path="/shellcreate" element={<ShellCreate />} />
-              <Route path="/shelldetail/:id/update" element={<ShellUpdate />} />
-              <Route path="/shelldetail/:id" element={<ShellDetailPage />} />
-              <Route path="/member/:id" element={<MyPage />} />
-              <Route path="/myshells/:id" element={<MyShellsPage />} />
-              <Route path="/offer/:id" element={<OfferedShellsPage />} />
-              <Route path="/dm/:id" element={<DirectMessage />} />
-              <Route path="/search" Component={SearchPage} />
-            </Routes>
-            {isFetching ? <Loading /> : null}
+            <Suspense fallback={<Loading />}>
+              <Routes>
+                <Route path="/" element={<HomePage />} />
+                <Route path="/main" element={<MainPage />} />
+                <Route path="/signup" element={<SignupPage />} />
+                <Route path="/aftersignup" element={<AfterSignUp />} />
+                <Route path="/login" element={<LoginPage />} />
+                <Route path="/shelllist/product" element={<ProductShell />} />
+                <Route path="/shelllist/talent" element={<TalentShell />} />
+                <Route path="/shellcreate" element={<ShellCreate />} />
+                <Route
+                  path="/shelldetail/:id/update"
+                  element={<ShellUpdate />}
+                />
+                <Route path="/shelldetail/:id" element={<ShellDetailPage />} />
+                <Route path="/member/:id" element={<MyPage />} />
+                <Route path="/myshells/:id" element={<MyShellsPage />} />
+                <Route path="/offer/:id" element={<OfferedShellsPage />} />
+                <Route path="/dm/:id" element={<DirectMessage />} />
+                <Route path="/search" Component={SearchPage} />
+              </Routes>
+            </Suspense>
             <Footer />
           </div>
         </main>
