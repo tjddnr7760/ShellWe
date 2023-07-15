@@ -1,6 +1,11 @@
 import { useNavigate } from 'react-router-dom';
 import { Icon, UserImg } from './Avatar.styled.ts';
 import noprofile from '../../asset/avatar/noprofile.svg';
+interface memberProps {
+  id: number;
+  displayName: string;
+  profileUrl: string;
+}
 
 interface MemberProps {
   id: number;
@@ -30,6 +35,7 @@ const Avatar = ({
   ) : (
     <Icon onClick={goToMyShellsPage}>
       <img src={userImg !== null ? userImg : noprofile} alt="userphoto" />
+
     </Icon>
   );
 };

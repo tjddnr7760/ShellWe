@@ -25,13 +25,12 @@ interface ShellDetailProps {
   handleOpenSidebar: () => void;
 }
 interface ShellData {
-  id: number,
-  title: string,
-  body: string,
-  category: string,
+  id: number;
+  title: string;
+  body: string;
+  category: string;
 }
-  
-  
+
 const ShellDetail = ({ handlePoke, handleOpenSidebar }: ShellDetailProps) => {
   const [shellDetailData, setShellDetailData] = useState<ShellData>();
   const [seeMoreBody, setSeeMoreBody] = useState(false);
