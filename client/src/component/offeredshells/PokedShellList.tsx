@@ -9,6 +9,7 @@ import {
 
 interface MyPokedShellDataProps {
   myPokedShellsData: ShellsList;
+  HandleClickedShell: (shellId: number) => void;
 }
 
 interface ShellsList {
@@ -30,8 +31,10 @@ interface MyShells {
   };
 }
 
-const PokedShellList = ({ myPokedShellsData }: MyPokedShellDataProps) => {
-  console.log(myPokedShellsData);
+const PokedShellList = ({
+  myPokedShellsData,
+  HandleClickedShell,
+}: MyPokedShellDataProps) => {
   const pokedShellsArray: MyShells[] = myPokedShellsData.shells;
 
   return (
@@ -41,9 +44,16 @@ const PokedShellList = ({ myPokedShellsData }: MyPokedShellDataProps) => {
         <IntroText2>Find great shells!</IntroText2>
       </IntroBox>
       <ShellInfoListContainer>
-        {pokedShellsArray.map((shell) => {
-          return <ShellInfo key={shell.id} shell={shell} />;
-        })}
+        {pokedShellsArray &&
+          pokedShellsArray.map((shell) => {
+            return (
+              <ShellInfo
+                key={shell.id}
+                shell={shell}
+                HandleClickedShell={HandleClickedShell}
+              />
+            );
+          })}
       </ShellInfoListContainer>
     </PokedShellListContainer>
   );

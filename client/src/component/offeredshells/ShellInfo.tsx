@@ -19,10 +19,19 @@ interface MyShells {
     profileUrl: string;
   };
 }
+interface HandleClickedShellProps {
+  HandleClickedShell: (shellId: number) => void;
+}
+const ShellInfo = ({
+  shell,
+  HandleClickedShell,
+}: { shell: MyShells } & HandleClickedShellProps) => {
+  const HandleClick = () => {
+    HandleClickedShell(shell.id);
+  };
 
-const ShellInfo = ({ shell }: { shell: MyShells }) => {
   return (
-    <ShellInfoContainer>
+    <ShellInfoContainer onClick={HandleClick}>
       <ImageBox>
         <ShellImage src={shell.picture} />
       </ImageBox>
