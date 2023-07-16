@@ -22,10 +22,9 @@ const Avatar = ({
 }) => {
   const navigate = useNavigate();
   const userImg = member.profileUrl;
-  const id = member.id;
 
   const goToMyShellsPage = () => {
-    navigate(`/myshells/${id}`);
+    navigate(`/myshells/${member.id}`);
   };
 
   return avatartype === 'UserImg' ? (
