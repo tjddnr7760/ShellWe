@@ -29,7 +29,13 @@ interface Picture {
   url: string;
 }
 
-const ResponseShellList = ({ clickedShellId }: { clickedShellId: number }) => {
+const ResponseShellList = ({
+  clickedShellId,
+  HandleShellPreview,
+}: {
+  clickedShellId: number;
+  HandleShellPreview: any;
+}) => {
   const { data: myOfferedShellsData } = useOfferedShellsList(clickedShellId);
   const offeredShellsArray: MyShells[] = myOfferedShellsData?.shells || [];
 
@@ -43,6 +49,7 @@ const ResponseShellList = ({ clickedShellId }: { clickedShellId: number }) => {
               key={shell.id}
               shell={shell}
               clickedShellId={clickedShellId}
+              HandleShellPreview={HandleShellPreview}
             />
           );
         })}

@@ -35,23 +35,26 @@ interface Picture {
 const ResponseShell = ({
   shell,
   clickedShellId,
+  HandleShellPreview,
 }: {
   shell: MyShells;
   clickedShellId: number;
+  HandleShellPreview: any;
 }) => {
+  // mutation 호출
   const { mutate: acceptShell } = useAcceptShell();
-
+  // request body
   const requestBodyForAccept = {
-    myShellId: shell.id,
-    sellerShellId: clickedShellId,
-    sellerMemberId: 1, // sellerMemberId -> recoil 현재 로그인된 memberId
+    myShellId: clickedShellId,
+    sellerShellId: shell.id,
+    sellerMemberId: shell.member.id,
   };
-
+  // mutation handler
   const AcceptHandler = () => {
     acceptShell(requestBodyForAccept);
   };
 
-  // shelldetail 머지 시, (body, 글자 제한)을 인자로 두고, 함수 재사용.
+  // shelldetailpage, offeredpage 머지 시, 함수 재사용.
   const MakePartOfBodyText = (body: string) => {
     if (body.length < 123) {
       return body;
@@ -62,9 +65,15 @@ const ResponseShell = ({
         : slicebody + '..';
     }
   };
+  // 미리보기 상태에 사진 저장
+  const HandlePreview = () => {
+    console.log(shell.id);
+    console.log(shell.pictures);
+    HandleShellPreview(shell.pictures);
+  };
 
   return (
-    <ResponseShellWrapper>
+    <ResponseShellWrapper onClick={HandlePreview}>
       <ShellsImageBox>
         <ShellImg
           src={shell.pictures && shell.pictures[0]?.url}

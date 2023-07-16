@@ -1,15 +1,12 @@
 import { useState } from 'react';
-import ShellImgPreview from '../../component/shellimgpreview/ShellImgPreview';
+import { useMyShellsList } from '../../hooks/offer/useMyShellsList.ts';
 import PokedShellList from '../../component/offeredshells/PokedShellList';
-import ResponseShellList from '../../component/offeredshells/ResponseShellList';
+import OfferedShell from '../../component/offeredshells/OfferedShell.tsx';
 import {
   Wrapper,
-  ShellImgPreviewWrapper,
   OfferedShellsPageWrapper,
   PokedShellListWrapper,
-  ResponseElementWrapper,
 } from './OfferedShellsPage.styled';
-import { useMyShellsList } from '../../hooks/offer/useMyShellsList.ts';
 
 export interface RequestBodyForAccept {
   myShellId: number;
@@ -41,14 +38,7 @@ const OfferedShellsPage = () => {
             HandleClickedShell={HandleClickedShell}
           />
         </PokedShellListWrapper>
-        {offeredVisible && (
-          <ResponseElementWrapper>
-            <ShellImgPreviewWrapper>
-              <ShellImgPreview />
-            </ShellImgPreviewWrapper>
-            <ResponseShellList clickedShellId={clickedShellId} />
-          </ResponseElementWrapper>
-        )}
+        {offeredVisible && <OfferedShell clickedShellId={clickedShellId} />}
       </OfferedShellsPageWrapper>
     </Wrapper>
   );
