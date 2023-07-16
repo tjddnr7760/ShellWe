@@ -46,10 +46,7 @@ function App() {
                 <Route path="/shelllist/product" element={<ProductShell />} />
                 <Route path="/shelllist/talent" element={<TalentShell />} />
                 <Route path="/shellcreate" element={<ShellCreate />} />
-                <Route
-                  path="/shelldetail/:id/update"
-                  element={<ShellUpdate />}
-                />
+                <Route path="/shellupdate/:id" element={<ShellUpdate />} />
                 <Route path="/shelldetail/:id" element={<ShellDetailPage />} />
                 <Route path="/member/:id" element={<MyPage />} />
                 <Route path="/myshells/:id" element={<MyShellsPage />} />
