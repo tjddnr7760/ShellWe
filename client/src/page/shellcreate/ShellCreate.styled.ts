@@ -74,11 +74,8 @@ export const CreateImgContainer = styled.div`
   gap: 10px;
 `;
 export const CreateMainImgWrapper = styled(CreateTitleWrapper)`
-  width: 250px;
+  width: 350px;
   display: flex;
-`;
-export const TitleImg = styled.img`
-  width: 100%;
 `;
 
 export const CreateImgListWrapper = styled(CreateTitleWrapper)`
@@ -93,4 +90,22 @@ export const ButtonContainer = styled.div`
 export const ShellCreatePage = styled.div`
   display: flex;
   justify-content: center;
+`;
+export const TitleExplanation = styled.div`
+  background-color: #f5fdff;
+  border-radius: 25px;
+  padding: 10px;
+  font-size: 20px;
+  word-break: keep-all;
+  border: 2px solid #82c0fa;
+`;
+export const TitleImgWrapper = styled.div`
+  border-radius: 25px;
+  padding: 10px;
+  flex-grow: 1;
+  display: flex;
+  justify-content: center;
+`;
+export const TitleImg = styled.img`
+  width: 200px;
 `;

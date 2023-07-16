@@ -8,7 +8,6 @@ export const UploadedImageWrapper = styled.div`
 
 export const UploadedImage = styled.img`
   width: 100%;
-  height: 100%;
   object-fit: cover;
 `;
 
@@ -38,15 +37,31 @@ export const Container = styled.div`
 
 export const DropzoneWrapper = styled.div`
   position: relative;
-  height: 100%;
+
   width: 100%;
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
+  gap: 20px;
 `;
 
 export const UploadZone = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  border-radius: 15px;
+  width: 100%;
+  height: 320px;
+  border: 2px solid #82c0fa;
+  white-space: nowrap;
+`;
+
+export const UploadExplanation = styled.div`
+  background-color: #f5fdff;
+  border-radius: 25px;
+  white-space: nowrap;
+
+  padding: 10px 70px;
+  border: 2px solid #82c0fa;
 `;

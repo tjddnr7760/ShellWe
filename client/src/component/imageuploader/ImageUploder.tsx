@@ -1,5 +1,6 @@
 import { FileWithPath, useDropzone } from 'react-dropzone';
 import { useState } from 'react';
+
 import { compareFiles } from '../../utill/compareFiles';
 import { moveItemToStart } from '../../utill/moveItemToStart';
 import {
@@ -9,7 +10,9 @@ import {
   UploadZone,
   UploadedImage,
   UploadedImageWrapper,
+  UploadExplanation,
 } from './ImageUploder.styled';
+
 interface ImageUploaderProps {
   uploadedImages: File[];
   setUploadedImages: React.Dispatch<React.SetStateAction<FileWithPath[]>>;
@@ -19,46 +22,27 @@ export const ImageUploader = ({
   uploadedImages,
   setUploadedImages,
 }: ImageUploaderProps) => {
-  const [uploadedPreviewImages, setUploadedPreviewImages] = useState<string[]>(
-    []
-  );
-
   const handleImageUpload = async (acceptedFiles: FileWithPath[]) => {
-    const selectedFile = acceptedFiles[0];
+    const uniqueFiles = acceptedFiles
+      .filter((_file, index) => index < 4)
+      .filter(
+        (selectedFile) =>
+          !uploadedImages.some((image) => compareFiles(image, selectedFile))
+      );
 
-    // 이미지가 중복되는지 확인
-    const isDuplicate = uploadedImages.some((image) =>
-      compareFiles(image, selectedFile)
-    );
-    if (isDuplicate) {
-      return;
-    }
-
-    setUploadedImages((prevImages: FileWithPath[]) => [
-      ...prevImages,
-      selectedFile,
-    ]);
-
-    // 이미지 미리보기 생성
-    const objectUrl = URL.createObjectURL(selectedFile);
-    setUploadedPreviewImages((prevPreviewImages: string[]) => [
-      ...prevPreviewImages,
-      objectUrl,
-    ]);
+    setUploadedImages([...uploadedImages, ...uniqueFiles]);
   };
 
-  const handleImageDelete = (index: number) => {
-    setUploadedImages((prevImages: FileWithPath[]) => {
-      const updatedImages = [...prevImages];
-      updatedImages.splice(index, 1);
-      return updatedImages;
-    });
+  const { getRootProps } = useDropzone({
+    onDrop: handleImageUpload,
+    noClick: true,
+    multiple: true,
+  });
 
-    setUploadedPreviewImages((prevPreviewImages: string[]) => {
-      const updatedPreviewImages = [...prevPreviewImages];
-      updatedPreviewImages.splice(index, 1);
-      return updatedPreviewImages;
-    });
+  const handleImageDelete = (index: number) => {
+    const updatedImages = [...uploadedImages];
+    updatedImages.splice(index, 1);
+    setUploadedImages(updatedImages);
   };
 
   const handleTitleImageChange = (index: number) => {
@@ -70,42 +54,34 @@ export const ImageUploader = ({
       const updatedImages = moveItemToStart<FileWithPath>(prevImages, index);
       return updatedImages;
     });
-
-    setUploadedPreviewImages((prevPreviewImages: string[]) => {
-      const updatedPreviewImages = moveItemToStart<string>(
-        prevPreviewImages,
-        index
-      );
-      return updatedPreviewImages;
-    });
   };
-
-  const { getRootProps } = useDropzone({
-    onDrop: handleImageUpload,
-    noClick: true,
-  });
 
   return (
     <Container {...getRootProps()}>
       <DropzoneWrapper>
         <UploadZone>
-          {uploadedPreviewImages[0] ? (
-            uploadedPreviewImages.map((image, index) => (
-              <UploadedImageWrapper key={index}>
-                <UploadedImage
-                  src={image}
-                  alt={`Preview ${index}`}
-                  onClick={() => handleTitleImageChange(index)}
-                />
-                <DeleteButton onClick={() => handleImageDelete(index)}>
-                  X
-                </DeleteButton>
-              </UploadedImageWrapper>
-            ))
+          {uploadedImages[0] ? (
+            uploadedImages.map((image, index) => {
+              return (
+                <UploadedImageWrapper key={index}>
+                  <UploadedImage
+                    src={URL.createObjectURL(image)}
+                    alt={`Preview ${index}`}
+                    onClick={() => handleTitleImageChange(index)}
+                  />
+                  <DeleteButton onClick={() => handleImageDelete(index)}>
+                    X
+                  </DeleteButton>
+                </UploadedImageWrapper>
+              );
+            })
           ) : (
-            <div>이미지를 올려주세요</div>
+            <div>이미지를 드래그해서 올려주세요(최대 4개)</div>
           )}
         </UploadZone>
+        <UploadExplanation>
+          이미지 클릭시 대표이미지를 변경할 수 있습니다.
+        </UploadExplanation>
       </DropzoneWrapper>
     </Container>
   );

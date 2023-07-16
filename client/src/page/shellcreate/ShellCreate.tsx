@@ -15,6 +15,8 @@ import {
   TitleImg,
   Logo,
   LogoWrapper,
+  TitleExplanation,
+  TitleImgWrapper,
 } from './ShellCreate.styled.js';
 import Tag from '../../common/tag/Tag.js';
 import { ImageUploader } from '../../component/imageuploader/ImageUploder.tsx';
@@ -83,15 +85,18 @@ const ShellCreate: React.FC = () => {
         </CreateTitleWrapper>
         <CreateImgContainer>
           <CreateMainImgWrapper>
-            {uploadedImages[0] ? (
-              <>
+            <TitleImgWrapper>
+              {uploadedImages[0] ? (
                 <TitleImg
                   src={URL.createObjectURL(uploadedImages[0])}
                   alt="title_img"
                 />
-                <div>대표 이미지</div>
-              </>
-            ) : null}
+              ) : null}{' '}
+            </TitleImgWrapper>
+            <TitleExplanation>
+              물건이 명확하게 보이거나 자신의 재능을 표현할 수 있는 사진을
+              올려주세요
+            </TitleExplanation>
           </CreateMainImgWrapper>
           <CreateImgListWrapper>
             <ImageUploader
