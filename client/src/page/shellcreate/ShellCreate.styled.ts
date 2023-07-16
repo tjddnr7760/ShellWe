@@ -74,10 +74,12 @@ export const CreateImgContainer = styled.div`
   gap: 10px;
 `;
 export const CreateMainImgWrapper = styled(CreateTitleWrapper)`
-  width: 300px;
+  width: 250px;
   display: flex;
 `;
-export const TitleImg = styled.img``;
+export const TitleImg = styled.img`
+  width: 100%;
+`;
 
 export const CreateImgListWrapper = styled(CreateTitleWrapper)`
   min-height: 400px;

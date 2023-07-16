@@ -21,15 +21,14 @@ import { ImageUploader } from '../../component/imageuploader/ImageUploder.tsx';
 import { useCreateShells } from '../../hooks/shells/useCreateShells.ts';
 
 const ShellCreate: React.FC = () => {
+  const formData = new FormData();
+  const { mutate } = useCreateShells();
   const [uploadedImages, setUploadedImages] = useState<File[]>([]);
   const [selectedCateory, setSelectedCateory] = useState({
     name: '카테고리',
     categoryid: '',
     type: '',
   });
-  const formData = new FormData();
-  const { mutate } = useCreateShells();
-
   const [title, setTitle] = useState<string>('');
   const [content, setContent] = useState<string>('');
   const [tagList, setTagList] = useState<string[]>([]);
@@ -39,11 +38,10 @@ const ShellCreate: React.FC = () => {
       | React.ChangeEvent<HTMLInputElement>
       | React.ChangeEvent<HTMLTextAreaElement>
   ) => {
-    const { name, value } = e.target;
-    if (name === 'title') {
-      setTitle(value);
-    } else if (name === 'content') {
-      setContent(value);
+    if (e.target instanceof HTMLInputElement) {
+      setTitle(e.target.value);
+    } else if (e.target instanceof HTMLTextAreaElement) {
+      setContent(e.target.value);
     }
   };
 
@@ -56,7 +54,10 @@ const ShellCreate: React.FC = () => {
       tags: tagList,
     };
 
-    formData.append('register', JSON.stringify(register));
+    formData.append(
+      'register',
+      new Blob([JSON.stringify(register)], { type: 'application/json' })
+    );
     uploadedImages.forEach((image) => {
       formData.append(`pictures `, image); // 이미지 파일 추가
     });
@@ -82,15 +83,21 @@ const ShellCreate: React.FC = () => {
         </CreateTitleWrapper>
         <CreateImgContainer>
           <CreateMainImgWrapper>
-            {uploadedImages[0] && (
-              <TitleImg
-                src={URL.createObjectURL(uploadedImages[0])}
-                alt="title_img"
-              />
-            )}
+            {uploadedImages[0] ? (
+              <>
+                <TitleImg
+                  src={URL.createObjectURL(uploadedImages[0])}
+                  alt="title_img"
+                />
+                <div>대표 이미지</div>
+              </>
+            ) : null}
           </CreateMainImgWrapper>
           <CreateImgListWrapper>
-            <ImageUploader setUploadedImages={setUploadedImages} />
+            <ImageUploader
+              uploadedImages={uploadedImages}
+              setUploadedImages={setUploadedImages}
+            />
           </CreateImgListWrapper>
         </CreateImgContainer>
 

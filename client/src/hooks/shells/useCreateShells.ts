@@ -1,13 +1,13 @@
 import { useMutation } from 'react-query';
 import { useNavigate } from 'react-router-dom';
-import { axiosInstance, getHeader } from '../../utill/axiosInstance';
+import { axiosInstance, getPostHeader } from '../../utill/axiosInstance';
 
 const getShell = async (requestData: FormData) => {
   const { data } = await axiosInstance({
     url: `/shells`,
     method: 'post',
     data: requestData,
-    headers: getHeader(),
+    headers: getPostHeader(),
   });
   return { data };
 };
