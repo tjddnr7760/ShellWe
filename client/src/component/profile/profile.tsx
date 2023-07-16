@@ -1,30 +1,28 @@
 import {
   ProfileContainer,
   UserImg,
-  Nickname,
+  DisplayName,
   Introduction,
-  AllLikeCategorys,
-  Box,
-  Box2,
+  ImgandNameContainer,
+  IntroductionContainer,
   UserImgBox,
-} from './Profile.styled';
-import example from '../../asset/example.png'
+} from './profile.styled';
+import { Member } from '../../hooks/profile/useGetMember';
 
-const profile = () => {
+const Profile = ({ memberInfo }: { memberInfo: Member }) => {
   return (
     <ProfileContainer>
-      <Box>
+      <ImgandNameContainer>
         <UserImgBox>
-          <UserImg src={example} alt='product'></UserImg>
+          <UserImg src={memberInfo.profileUrl} alt="product"></UserImg>
         </UserImgBox>
-        <Nickname>Nickname</Nickname>
-      </Box>
-      <Box2>
-        <Introduction>Introduction</Introduction>
-        <AllLikeCategorys>All Like Categorys</AllLikeCategorys>
-      </Box2>
+        <DisplayName>{memberInfo.displayName}</DisplayName>
+      </ImgandNameContainer>
+      <IntroductionContainer>
+        <Introduction>{memberInfo.introduction}</Introduction>
+      </IntroductionContainer>
     </ProfileContainer>
   );
 };
 
-export default profile;
+export default Profile;
