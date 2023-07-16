@@ -3,19 +3,33 @@ package com.shellwe.server.domain.member.service;
 import com.shellwe.server.domain.member.dto.request.DeleteRequestDto;
 import com.shellwe.server.domain.member.dto.request.SignUpRequestDto;
 import com.shellwe.server.domain.member.dto.request.UpdateRequestDto;
-import com.shellwe.server.domain.member.dto.response.FindResponseDto;
+import com.shellwe.server.domain.member.dto.response.FindResponseDtoIncludeOauth;
+import com.shellwe.server.domain.member.dto.response.GetMyShellListDto;
 import com.shellwe.server.domain.member.entity.Member;
 import com.shellwe.server.domain.member.mapper.MemberMapper;
 import com.shellwe.server.domain.member.repository.MemberRepository;
+import com.shellwe.server.domain.shell.entity.Shell;
+import com.shellwe.server.domain.types.Status;
 import com.shellwe.server.email.EmailSendable;
+import com.shellwe.server.exception.customexception.EmailLogicException;
+import com.shellwe.server.exception.customexception.MemberLogicException;
+import com.shellwe.server.exception.exceptioncode.EmailExceptionCode;
+import com.shellwe.server.exception.exceptioncode.MemberExceptionCode;
+import com.shellwe.server.file.service.UploadPictureService;
+import com.shellwe.server.utils.event.MemberRemoveEvent;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.util.List;
 import java.util.Optional;
 
 @Slf4j
+@Transactional
 @Service
 public class MemberService {
 
@@ -23,14 +37,19 @@ public class MemberService {
     private final MemberMapper memberMapper;
     private final PasswordEncoder passwordEncoder;
     private final EmailSendable emailSendable;
+    private final UploadPictureService uploadPictureService;
+    private final ApplicationEventPublisher eventPublisher;
 
     @Autowired
     public MemberService(MemberRepository memberRepository, MemberMapper memberMapper,
-                         PasswordEncoder passwordEncoder, EmailSendable emailSendable) {
+                         PasswordEncoder passwordEncoder, EmailSendable emailSendable,
+                         UploadPictureService uploadPictureService, ApplicationEventPublisher eventPublisher) {
         this.memberRepository = memberRepository;
         this.memberMapper = memberMapper;
         this.passwordEncoder = passwordEncoder;
         this.emailSendable = emailSendable;
+        this.uploadPictureService = uploadPictureService;
+        this.eventPublisher = eventPublisher;
     }
 
     public void signUpMember(SignUpRequestDto signUpRequestDto) throws InterruptedException {
@@ -46,7 +65,7 @@ public class MemberService {
                 emailSendable.send(new String[]{member.getEmail()}, "ShellWe 회원가입 인증",
                         member.getEmail(), "email-registration-member");
             } catch (InterruptedException e) {
-                throw new RuntimeException(e);
+                throw new EmailLogicException(EmailExceptionCode.EMAIL_NOT_SEND);
             }
         }).start();
         log.info("sent email and sign-up in service layer done");
@@ -61,38 +80,50 @@ public class MemberService {
         log.info("email verification completed");
     }
 
-    public FindResponseDto findMemberById(Long contextId, Long memberId) {
+    @Transactional(readOnly = true)
+    public FindResponseDtoIncludeOauth findMemberById(Long contextId, Long memberId) {
         log.info("find member in service layer by Id start, memberId : {}", memberId);
-        FindResponseDto findResponseDto = new FindResponseDto();
+        FindResponseDtoIncludeOauth findResponseDtoIncludeOauth = new FindResponseDtoIncludeOauth();
 
         if (contextId == null) {
             Member findMember = findById(memberId);
-            findResponseDto.setMeIdName(false, findMember.getId(), findMember.getDisplayName());
-            return findResponseDto;
+            findResponseDtoIncludeOauth.setIsMeIdName(false, findMember.getId(), findMember.getDisplayName(), findMember.getProfileUrl());
+            if (findMember.isPasswordNull()) {
+                findResponseDtoIncludeOauth.setOauthUser(true);
+            }
+            return findResponseDtoIncludeOauth;
         }
         if (!contextId.equals(memberId)) {
             Member findMember = findById(memberId);
-            findResponseDto.setMeIdName(false, findMember.getId(), findMember.getDisplayName());
-            return findResponseDto;
+            findResponseDtoIncludeOauth.setIsMeIdName(false, findMember.getId(), findMember.getDisplayName(), findMember.getProfileUrl());
+            return findResponseDtoIncludeOauth;
         }
         if (contextId.equals(memberId)) {
             Member findMember = findById(memberId);
-            findResponseDto.setMeIdName(true, findMember.getId(), findMember.getDisplayName());
-            return findResponseDto;
+            findResponseDtoIncludeOauth.setIsMeIdName(true, findMember.getId(), findMember.getDisplayName(), findMember.getProfileUrl());
+            if (findMember.isPasswordNull()) {
+                findResponseDtoIncludeOauth.setOauthUser(true);
+            }
+            return findResponseDtoIncludeOauth;
         }
 
-        return findResponseDto;
+        return findResponseDtoIncludeOauth;
     }
 
-    public void updateMember(long contextId, long memberId, UpdateRequestDto updateRequestDto) {
+    public void updateMember(long contextId, long memberId, UpdateRequestDto updateRequestDto, MultipartFile picture) {
         log.info("update member in service layer start");
+        String profileUrl = null;
 
         if (memberId == contextId) {
             Member findMember = findById(memberId);
-            findMember.updateMember(updateRequestDto.getPassword(), updateRequestDto.getDisplayName(), passwordEncoder);
+            if (!picture.isEmpty()) {
+                profileUrl = uploadPictureService.onePictureFileToUrl(picture);
+            }
+            findMember.updateMember(updateRequestDto.getPassword(), passwordEncoder,
+                    updateRequestDto.getDisplayName(), updateRequestDto.getIntroduction(), profileUrl);
             memberRepository.save(findMember);
         } else {
-            throw new IllegalStateException("자신의 아이디만 수정 가능합니다.");
+            throw new MemberLogicException(MemberExceptionCode.MEMBER_NOT_MY_ID);
         }
 
         log.info("update member in service layer end");
@@ -103,23 +134,64 @@ public class MemberService {
         Member findMember = findById(contextId);
 
         if (memberId == contextId && passwordEncoder.matches(deleteRequestDto.getPassword(), findMember.getPassword())) {
+            eventPublisher.publishEvent(new MemberRemoveEvent(findMember.getId()));
             memberRepository.delete(findMember);
         } else {
-            throw new IllegalStateException("자신의 아이디만 삭제 가능합니다.");
+            throw new MemberLogicException(MemberExceptionCode.MEMBER_NOT_MY_ID);
         }
 
         log.info("delete member in service layer end");
     }
 
+    @Transactional(readOnly = true)
+    public Member getMemberByOtherLayer(long memberId) {
+        return findById(memberId);
+    }
+
+    @Transactional(readOnly = true)
+    public GetMyShellListDto myShellList(long memberId, Status status, long contextId) {
+        GetMyShellListDto getMyShellListDto = new GetMyShellListDto();
+        if (memberId == contextId) {
+            Member member = findById(memberId);
+            if (status == Status.ACTIVE) {
+                List<Shell> activeShellList = member.getActiveList();
+                getMyShellListDto.setShells(memberMapper.shellListToGetMyShellListDto(activeShellList));
+            }
+            if (status == Status.INACTIVE) {
+                List<Shell> activeShellList = member.getInActiveList();
+                getMyShellListDto.setShells(memberMapper.shellListToGetMyShellListDto(activeShellList));
+            }
+        } else {
+            throw new MemberLogicException(MemberExceptionCode.MEMBER_NOT_MY_ID);
+        }
+        return getMyShellListDto;
+    }
+
+    @Transactional(readOnly = true)
+    public GetMyShellListDto myShellListUnAuthentication(long memberId, Status status) {
+        GetMyShellListDto getMyShellListDto = new GetMyShellListDto();
+
+        Member member = findById(memberId);
+        if (status == Status.ACTIVE) {
+            List<Shell> activeShellList = member.getActiveList();
+            getMyShellListDto.setShells(memberMapper.shellListToGetMyShellListDto(activeShellList));
+        }
+        if (status == Status.INACTIVE) {
+            List<Shell> activeShellList = member.getInActiveList();
+            getMyShellListDto.setShells(memberMapper.shellListToGetMyShellListDto(activeShellList));
+        }
+        return getMyShellListDto;
+    }
+
     private Member findByEmail(String email) {
         Optional<Member> byEmail = memberRepository.findByEmail(email);
-        Member member = byEmail.orElseThrow(() -> new IllegalStateException());
+        Member member = byEmail.orElseThrow(() -> new MemberLogicException(MemberExceptionCode.FAILED_FIND_BY_EMAIL));
         return member;
     }
 
     private Member findById(long memberId) {
         Optional<Member> byId = memberRepository.findById(memberId);
-        Member member = byId.orElseThrow(() -> new IllegalStateException());
+        Member member = byId.orElseThrow(() -> new MemberLogicException(MemberExceptionCode.FAILED_FIND_BY_ID));
         return member;
     }
 

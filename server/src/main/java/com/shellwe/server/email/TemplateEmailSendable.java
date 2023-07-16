@@ -1,5 +1,7 @@
 package com.shellwe.server.email;
 
+import com.shellwe.server.exception.customexception.EmailLogicException;
+import com.shellwe.server.exception.exceptioncode.EmailExceptionCode;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
@@ -38,7 +40,7 @@ public class TemplateEmailSendable implements EmailSendable {
             javaMailSender.send(mimeMessage);
             log.info("mail sent");
         } catch (MessagingException e) {
-            throw new RuntimeException(e);
+            throw new EmailLogicException(EmailExceptionCode.EMAIL_NOT_SEND);
         }
     }
 }

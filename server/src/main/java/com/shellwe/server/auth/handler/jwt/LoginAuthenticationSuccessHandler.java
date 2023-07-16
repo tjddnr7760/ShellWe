@@ -25,7 +25,7 @@ public class LoginAuthenticationSuccessHandler implements AuthenticationSuccessH
         Member member = (Member) authentication.getPrincipal();
 
         Map<String, Object> userInfo = new HashMap<>();
-        userInfo.put("memberId", member.getId());
+        userInfo.put("id", member.getId());
         userInfo.put("displayName", member.getDisplayName());
         userInfo.put("isMe", true);
 

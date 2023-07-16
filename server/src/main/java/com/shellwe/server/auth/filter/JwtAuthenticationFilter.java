@@ -32,9 +32,7 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
 
     @Override
     public Authentication attemptAuthentication(HttpServletRequest request, HttpServletResponse response) {
-        ObjectMapper objectMapper = new ObjectMapper();
-
-        LoginRequestDto loginRequestDto = toLoginDto(request, objectMapper);
+        LoginRequestDto loginRequestDto = toLoginDto(request, new ObjectMapper());
         UsernamePasswordAuthenticationToken authenticationToken =
                 new UsernamePasswordAuthenticationToken(loginRequestDto.getEmail(), loginRequestDto.getPassword());
 

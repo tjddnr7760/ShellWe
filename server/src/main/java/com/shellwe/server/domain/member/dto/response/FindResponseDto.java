@@ -11,15 +11,15 @@ public class FindResponseDto {
     @JsonProperty("isMe")
     private boolean isMe;
 
-    private Long memberId;
+    private Long id;
 
     private String displayName;
 
-    // 이미지 필드 현재단계 제외
+    private String profileUrl;
 
-    public void setMeIdName(boolean isMe, Long memberId, String displayName) {
+    public void setIsMeIdName(boolean isMe, Long id, String displayName) {
         this.isMe = isMe;
-        this.memberId = memberId;
+        this.id = id;
         this.displayName = displayName;
     }
 }
