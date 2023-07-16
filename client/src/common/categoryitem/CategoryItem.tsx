@@ -3,27 +3,30 @@ import {
   CategoryIcon,
   Categorytext,
 } from './CategoryItem.styled.ts';
-import { useRecoilState } from 'recoil';
-import { catagoryState } from '../../recoil/atom.ts';
 
 interface CategoryItemProps {
   name: string;
   categoryid: string;
   categoryimg: string;
+  setCategory: (newCategory: string) => void;
+  category: string;
 }
 
-const CategoryItem = ({ name, categoryid, categoryimg }: CategoryItemProps) => {
-  const [catagoryType, catagoryTypeHandler] =
-    useRecoilState<string>(catagoryState);
-
+const CategoryItem = ({
+  name,
+  categoryid,
+  categoryimg,
+  setCategory,
+  category,
+}: CategoryItemProps) => {
   const handleClickChangeCategory = (categoryid: string) => {
-    catagoryTypeHandler(categoryid);
+    setCategory(categoryid);
   };
 
   return (
     <CategoryWrapper onClick={() => handleClickChangeCategory(categoryid)}>
       <CategoryIcon src={categoryimg} />
-      <Categorytext className={catagoryType === categoryid ? 'selected' : ''}>
+      <Categorytext className={category === categoryid ? 'selected' : ''}>
         {name}
       </Categorytext>
     </CategoryWrapper>

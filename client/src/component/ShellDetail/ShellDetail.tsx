@@ -25,6 +25,7 @@ const ShellDetail = ({
   handleOpenSidebar,
   shellDetailData,
 }: ShellDetailProps) => {
+
   const [seeMoreBody, setSeeMoreBody] = useState(false);
   // tags, category 서버 데이터 가공
   const tags = shellDetailData.tags.map((tag: Tag) => tag.tagName);

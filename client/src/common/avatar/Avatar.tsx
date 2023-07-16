@@ -1,25 +1,35 @@
 // import { useEffect } from 'react';
 import { Icon, UserImg } from './Avatar.styled.ts';
-import userimg from '../../asset/avatar/userimg.svg';
 import noprofile from '../../asset/avatar/noprofile.svg';
+interface memberProps {
+  id: number;
+  displayName: string;
+  profileUrl: string;
+}
 
-const Avatar = ({ avatartype }: { avatartype: string }) => {
+const Avatar = ({
+  avatartype,
+  member,
+}: {
+  avatartype: string;
+  member: memberProps;
+}) => {
   // useEffect(() => {
   //         // 비동기 함수 재사용
   //         // method: GET
   //         // api url:
   //     })
 
-  const userImg = userimg;
+  const userImg = member.profileUrl;
   // response 객체 data인 member.picture를 넣을 예정
 
   return avatartype === 'UserImg' ? (
     <UserImg>
-      <img src={userImg !== '' ? userimg : noprofile} alt="user-image" />
+      <img src={userImg ? userImg : noprofile} alt="user-img" />
     </UserImg>
   ) : (
     <Icon>
-      <img src={userImg ? userimg : noprofile} alt="user-icon" />
+      <img src={userImg ? userImg : noprofile} alt="user-icon" />
       {/* member.picture data 없을 경우, noprofile image로 대체 */}
     </Icon>
   );
