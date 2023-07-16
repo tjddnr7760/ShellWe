@@ -23,7 +23,7 @@ const ContentBox = styled.div`
 `;
 
 const Title = styled.div`
-  font-size: 16px;
+  font-size: 20px;
 `;
 
 const Notice = styled.div`
@@ -39,4 +39,30 @@ const ButtonBox = styled.div`
   gap: 10px;
 `;
 
-export { Wrapper, ContentBox, Title, Notice, ButtonBox };
+const PasswordInputModal = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  div {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+  }
+`;
+
+const PasswordInput = styled.input`
+  border-radius: 5px;
+  width: 250px;
+  height: 30px;
+  font-size: 26px;
+`;
+
+export {
+  Wrapper,
+  ContentBox,
+  Title,
+  Notice,
+  ButtonBox,
+  PasswordInputModal,
+  PasswordInput,
+};

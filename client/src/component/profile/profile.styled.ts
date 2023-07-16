@@ -7,13 +7,13 @@ const ProfileContainer = styled.div`
   gap: 20px;
 `;
 
-const Box = styled.div`
+const ImgandNameContainer = styled.div`
   display: flex;
   flex-direction: column;
   gap: 10px;
 `;
 
-const Box2 = styled.div`
+const IntroductionContainer = styled.div`
   display: flex;
   flex-direction: column;
   gap: 10px;
@@ -41,7 +41,7 @@ const UserImg = styled.img`
   width: 100%;
 `;
 
-const Nickname = styled.div`
+const DisplayName = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
@@ -89,10 +89,10 @@ const AllLikeCategorys = styled.div`
 export {
   ProfileContainer,
   UserImg,
-  Nickname,
+  DisplayName,
   Introduction,
   AllLikeCategorys,
-  Box,
-  Box2,
+  ImgandNameContainer,
+  IntroductionContainer,
   UserImgBox,
 };
