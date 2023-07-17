@@ -2,10 +2,7 @@
 import { useQuery } from 'react-query';
 import { axiosInstance, getHeader } from '../../utill/axiosInstance';
 import { queryKeys } from '../../dataset/queryKey';
-
-interface GetMyShellsArgs {
-  (memberId?: number, method?: string, isHeader?: boolean): Promise<any>;
-}
+import { GetMyShellsArgs } from '../../dataset/TypesOfferedShell';
 
 const getMyShellsListId: GetMyShellsArgs = async () => {
   const { data } = await axiosInstance({

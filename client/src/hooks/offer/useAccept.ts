@@ -1,16 +1,10 @@
 import { useMutation } from 'react-query';
 import { useNavigate } from 'react-router-dom';
 import { axiosInstance, getHeader } from '../../utill/axiosInstance';
-
-export interface RequestBodyForAccept {
-  myShellId: number;
-  sellerShellId: number;
-  sellerMemberId: number;
-}
-
-export interface ApiResponseOfAcceptShell {
-  redirectUrl: string;
-}
+import {
+  RequestBodyForAccept,
+  ApiResponseOfAcceptShell,
+} from '../../dataset/TypesOfferedShell.ts';
 
 const postAcceptShell = async (
   requestBody: RequestBodyForAccept

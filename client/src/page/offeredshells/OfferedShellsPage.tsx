@@ -7,14 +7,7 @@ import {
   OfferedShellsPageWrapper,
   PokedShellListWrapper,
   NoticeClickPokedShell,
-  PreviewNotice,
 } from './OfferedShellsPage.styled';
-
-export interface RequestBodyForAccept {
-  myShellId: number;
-  sellerShellId: number;
-  sellerMemberId: number;
-}
 
 const OfferedShellsPage = () => {
   const [offeredVisible, setOfferedVisible] = useState(false);
@@ -22,7 +15,7 @@ const OfferedShellsPage = () => {
 
   const { data: myPokedShellsData } = useMyShellsList();
 
-  const HandleClickedShell = (id: number): void => {
+  const HandleClickPokedShell = (id: number): void => {
     if (clickedShellId === id) {
       setOfferedVisible(!offeredVisible);
     } else {
@@ -37,7 +30,7 @@ const OfferedShellsPage = () => {
         <PokedShellListWrapper>
           <PokedShellList
             myPokedShellsData={myPokedShellsData}
-            HandleClickedShell={HandleClickedShell}
+            HandleClickPokedShell={HandleClickPokedShell}
           />
         </PokedShellListWrapper>
         {offeredVisible === true ? (

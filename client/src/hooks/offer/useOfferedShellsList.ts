@@ -2,10 +2,7 @@
 import { useQuery } from 'react-query';
 import { axiosInstance, getHeader } from '../../utill/axiosInstance';
 import { queryKeys } from '../../dataset/queryKey';
-
-interface GetPokedShellIdArgs {
-  (shellId: number): Promise<any>;
-}
+import { GetPokedShellIdArgs } from '../../dataset/TypesOfferedShell';
 
 const getPokedShellId: GetPokedShellIdArgs = async (shellId) => {
   const { data } = await axiosInstance({
