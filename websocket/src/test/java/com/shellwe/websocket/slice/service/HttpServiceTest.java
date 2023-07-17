@@ -84,7 +84,8 @@ public class HttpServiceTest {
     public void findAllRoom() throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
         MemberRoom memberRoom = new MemberRoom(new Room(1L));
 
-        Message message = Message.builder().payload("마지막 메세지").build();
+        Message message = new Message();
+        message.setPayload("마지막 메세지");
 
         given(memberRoomRepository.findAllMyRoomsWithSeller(Mockito.anyLong())).willReturn(List.of(memberRoom));
         given(messageRepository.unReadCount(Mockito.anyLong(),Mockito.anyLong())).willReturn(1L);
