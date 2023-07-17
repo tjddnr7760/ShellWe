@@ -10,6 +10,7 @@ import com.shellwe.server.domain.shell.entity.Shell;
 import com.shellwe.server.domain.tag.dto.TagResponseDto;
 import com.shellwe.server.domain.tag.entity.Tag;
 import com.shellwe.server.domain.trade.dto.response.MainPageResponseDto;
+import com.shellwe.server.domain.trade.dto.response.ShellForMyTradeResponseDetails;
 import com.shellwe.server.domain.trade.dto.response.UpdateTradeStatusResponseDto;
 import com.shellwe.server.domain.types.category.ShellCategory;
 import org.mapstruct.Mapper;
@@ -37,6 +38,13 @@ public interface TradeMapper {
     List<ShellResponseDto> sellerTradeListToMyTradeResponseDto(List<Shell> sellerShells);
 
     List<ShellResponseDto> buyerTradeListToMyTradeResponseDto(List<Shell> buyerShells);
+
+    @Mapping(target = "pictures", source = "shell.pictureUrls", qualifiedByName = "mapPicturesToDto")
+    @Mapping(target = "type", source = "shell.shellType")
+    @Mapping(target = "category", source = "shell.category.shellCategory")
+    ShellForMyTradeResponseDetails shellToShellForMyTradeResponseDetails(Shell shell);
+
+    List<ShellForMyTradeResponseDetails> buyerTradeListToMyTradeResponseDtoDetails(List<Shell> buyerShells);
 
     @Mapping(target = "picture", expression = "java(mapFirstPictureToDto(shell.getPictureUrls()))")
     @Mapping(target = "type", source = "shell.shellType")

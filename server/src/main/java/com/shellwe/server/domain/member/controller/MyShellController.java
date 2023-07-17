@@ -2,8 +2,11 @@ package com.shellwe.server.domain.member.controller;
 
 import com.shellwe.server.auth.memberDetails.MemberContextInform;
 import com.shellwe.server.domain.member.dto.response.GetMyShellListDto;
+import com.shellwe.server.domain.member.dto.response.GetMyShellListDtoTags;
 import com.shellwe.server.domain.member.service.MemberService;
 import com.shellwe.server.domain.types.Status;
+import com.shellwe.server.exception.customexception.AccessTokenException;
+import com.shellwe.server.exception.exceptioncode.AccessTokenExceptionCode;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -32,15 +35,15 @@ public class MyShellController {
 
     @ResponseStatus(HttpStatus.OK)
     @GetMapping("/{memberId}/shells")
-    public GetMyShellListDto getShellListNotAuthentication(@PathVariable long memberId,
-                                            @RequestParam(value = "status") String status) {
+    public GetMyShellListDtoTags getShellListNotAuthentication(@PathVariable long memberId,
+                                                               @RequestParam(value = "status") String status) {
         return memberService.myShellListUnAuthentication(memberId, Status.valueOf(status.toUpperCase()));
     }
 
     private Long getId(Authentication authentication) {
         Long id;
         if (authentication == null) {
-            id = null;
+            throw new AccessTokenException(AccessTokenExceptionCode.TOKEN_EXPIRED);
         } else {
             MemberContextInform memberInform = (MemberContextInform) authentication.getPrincipal();
             id = memberInform.getId();

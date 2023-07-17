@@ -3,6 +3,8 @@ package com.shellwe.server.domain.cart.controller;
 import com.shellwe.server.auth.memberDetails.MemberContextInform;
 import com.shellwe.server.domain.cart.service.CartService;
 import com.shellwe.server.domain.member.dto.response.GetMyShellListDto;
+import com.shellwe.server.exception.customexception.AccessTokenException;
+import com.shellwe.server.exception.exceptioncode.AccessTokenExceptionCode;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -44,7 +46,7 @@ public class CartController {
     private Long getId(Authentication authentication) {
         Long id;
         if (authentication == null) {
-            id = null;
+            throw new AccessTokenException(AccessTokenExceptionCode.TOKEN_EXPIRED);
         } else {
             MemberContextInform memberInform = (MemberContextInform) authentication.getPrincipal();
             id = memberInform.getId();

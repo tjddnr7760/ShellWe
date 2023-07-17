@@ -68,7 +68,7 @@ public class ShellService {
     }
 
     @Transactional(readOnly = true)
-    public FindDetailsResponseDto findDetails(Long shellId, Long memberId) {
+    public FindDetailsResponseDto findDetails(Long shellId, long memberId) {
         Shell shell = findById(shellId);
         FindDetailsResponseDto findDetailsResponseDto = shellMapper.shellToFindDetailsResponseDto(shell);
         findDetailsResponseDto.getMember().setMe(false);

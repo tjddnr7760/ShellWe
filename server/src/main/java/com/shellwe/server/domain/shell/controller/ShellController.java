@@ -7,6 +7,8 @@ import com.shellwe.server.domain.shell.dto.response.*;
 import com.shellwe.server.domain.shell.service.ShellService;
 import com.shellwe.server.domain.types.ShellType;
 import com.shellwe.server.domain.types.category.ShellCategory;
+import com.shellwe.server.exception.customexception.AccessTokenException;
+import com.shellwe.server.exception.exceptioncode.AccessTokenExceptionCode;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -79,7 +81,7 @@ public class ShellController {
     private Long getId(Authentication authentication) {
         Long id;
         if (authentication == null) {
-            id = null;
+            throw new AccessTokenException(AccessTokenExceptionCode.TOKEN_EXPIRED);
         } else {
             MemberContextInform memberInform = (MemberContextInform) authentication.getPrincipal();
             id = memberInform.getId();
