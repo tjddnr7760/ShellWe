@@ -7,10 +7,9 @@ const MyShellListWrapper = styled.div`
   flex-direction: column;
   align-items: center;
   gap: 20px;
-  width: 590px;
+  width: auto;
   height: 500px;
-  padding-top: 25px;
-  padding-bottom: 15px;
+  padding: 15px;
   overflow-y: scroll;
 `;
 
