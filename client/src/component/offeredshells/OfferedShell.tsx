@@ -1,10 +1,11 @@
 import { useState } from 'react';
 import ResponseShellList from '../../component/offeredshells/ResponseShellList';
 import ShellImgPreview from '../../component/shellimgpreview/ShellImgPreview';
-
+import { ShellImgBox } from '../shellimgpreview/ShellImgPreview.styled';
 import {
   ShellImgPreviewWrapper,
   ResponseElementWrapper,
+  PreviewNotice,
 } from '../../page/offeredshells/OfferedShellsPage.styled';
 
 const OfferedShell = ({ clickedShellId }: { clickedShellId: number }) => {
@@ -25,8 +26,14 @@ const OfferedShell = ({ clickedShellId }: { clickedShellId: number }) => {
   return (
     <ResponseElementWrapper>
       <ShellImgPreviewWrapper>
-        {previewVisible && (
-          <ShellImgPreview clickedShellPictures={clickedShellPictures} />
+        {previewVisible === true ? (
+          <ShellImgPreview
+          // clickedShellPictures={clickedShellPictures}
+          />
+        ) : (
+          <PreviewNotice>
+            <ShellImgBox>Click below Shell!</ShellImgBox>
+          </PreviewNotice>
         )}
       </ShellImgPreviewWrapper>
       <ResponseShellList

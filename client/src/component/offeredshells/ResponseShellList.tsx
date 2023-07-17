@@ -4,7 +4,7 @@ import { useOfferedShellsList } from '../../hooks/offer/useOfferedShellsList';
 
 const ResponseShellListWrapper = styled.div`
   width: 100%;
-  max-height: 540px;
+  height: 100%;
   overflow-y: scroll;
 `;
 

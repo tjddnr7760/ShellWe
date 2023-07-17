@@ -6,6 +6,8 @@ import {
   Wrapper,
   OfferedShellsPageWrapper,
   PokedShellListWrapper,
+  NoticeClickPokedShell,
+  PreviewNotice,
 } from './OfferedShellsPage.styled';
 
 export interface RequestBodyForAccept {
@@ -38,7 +40,14 @@ const OfferedShellsPage = () => {
             HandleClickedShell={HandleClickedShell}
           />
         </PokedShellListWrapper>
-        {offeredVisible && <OfferedShell clickedShellId={clickedShellId} />}
+        {offeredVisible === true ? (
+          <OfferedShell clickedShellId={clickedShellId} />
+        ) : (
+          <NoticeClickPokedShell>
+            Click your Shell!
+            <div>요청받은 쉘을 확인해보세요</div>
+          </NoticeClickPokedShell>
+        )}
       </OfferedShellsPageWrapper>
     </Wrapper>
   );

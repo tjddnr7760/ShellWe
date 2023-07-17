@@ -5,7 +5,7 @@ const ImageWrapper = styled.div`
   justify-content: center;
   align-items: center;
   border: 0.5px solid rgba(0, 0, 0, 0.5);
-  border-radius: 10px;
+  border-radius: 15px;
   position: relative;
   z-index: 0;
 `;
