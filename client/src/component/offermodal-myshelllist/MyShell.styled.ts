@@ -31,12 +31,4 @@ const Title = styled.span`
   font-size: 20px;
 `;
 
-const ButtonDiv = styled.div`
-  display: flex;
-  align-items: center;
-  gap: 4px;
-  padding-left: 2px;
-  font-weight: 400;
-`;
-
-export { MyShellContainer, ImgBox, Title, ShellInfo, ButtonDiv };
+export { MyShellContainer, ImgBox, Title, ShellInfo };

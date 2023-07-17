@@ -1,6 +1,6 @@
 import styled from 'styled-components';
-import dummydata from '../../mock/mock.tsx';
 import MyShell from './MyShell.tsx';
+import { MyShellDataProps } from '../../dataset/TypeOfMyShells.ts';
 
 const MyShellListWrapper = styled.div`
   display: flex;
@@ -11,16 +11,16 @@ const MyShellListWrapper = styled.div`
   height: 500px;
   padding-top: 25px;
   padding-bottom: 15px;
-  overflow-y: scroll; /* Add scrollbar when content overflows */
+  overflow-y: scroll;
 `;
 
-const MyShellList = () => {
-  const myShellArray = dummydata.shells.slice(0, 10);
+const MyShellList = ({ data }: { data: MyShellDataProps }) => {
+  const myShellArray = data.shells;
 
   return (
     <MyShellListWrapper>
       {myShellArray.map((shell) => {
-        return <MyShell key={shell.shellId} shell={shell} />;
+        return <MyShell key={shell.id} shell={shell} />;
       })}
     </MyShellListWrapper>
   );
