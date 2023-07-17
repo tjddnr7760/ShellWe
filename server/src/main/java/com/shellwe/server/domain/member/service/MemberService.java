@@ -5,6 +5,7 @@ import com.shellwe.server.domain.member.dto.request.SignUpRequestDto;
 import com.shellwe.server.domain.member.dto.request.UpdateRequestDto;
 import com.shellwe.server.domain.member.dto.response.FindResponseDtoIncludeOauth;
 import com.shellwe.server.domain.member.dto.response.GetMyShellListDto;
+import com.shellwe.server.domain.member.dto.response.GetMyShellListDtoTags;
 import com.shellwe.server.domain.member.entity.Member;
 import com.shellwe.server.domain.member.mapper.MemberMapper;
 import com.shellwe.server.domain.member.repository.MemberRepository;
@@ -81,26 +82,20 @@ public class MemberService {
     }
 
     @Transactional(readOnly = true)
-    public FindResponseDtoIncludeOauth findMemberById(Long contextId, Long memberId) {
+    public FindResponseDtoIncludeOauth findMemberById(long contextId, long memberId) {
         log.info("find member in service layer by Id start, memberId : {}", memberId);
         FindResponseDtoIncludeOauth findResponseDtoIncludeOauth = new FindResponseDtoIncludeOauth();
 
-        if (contextId == null) {
+        if (contextId != memberId) {
             Member findMember = findById(memberId);
-            findResponseDtoIncludeOauth.setIsMeIdName(false, findMember.getId(), findMember.getDisplayName(), findMember.getProfileUrl());
-            if (findMember.isPasswordNull()) {
-                findResponseDtoIncludeOauth.setOauthUser(true);
-            }
+            findResponseDtoIncludeOauth.setIsMeIdName(false, findMember.getId(),
+                    findMember.getDisplayName(), findMember.getProfileUrl(), findMember.getIntroduction());
             return findResponseDtoIncludeOauth;
         }
-        if (!contextId.equals(memberId)) {
+        if (contextId == memberId) {
             Member findMember = findById(memberId);
-            findResponseDtoIncludeOauth.setIsMeIdName(false, findMember.getId(), findMember.getDisplayName(), findMember.getProfileUrl());
-            return findResponseDtoIncludeOauth;
-        }
-        if (contextId.equals(memberId)) {
-            Member findMember = findById(memberId);
-            findResponseDtoIncludeOauth.setIsMeIdName(true, findMember.getId(), findMember.getDisplayName(), findMember.getProfileUrl());
+            findResponseDtoIncludeOauth.setIsMeIdName(true, findMember.getId(),
+                    findMember.getDisplayName(), findMember.getProfileUrl(), findMember.getIntroduction());
             if (findMember.isPasswordNull()) {
                 findResponseDtoIncludeOauth.setOauthUser(true);
             }
@@ -168,19 +163,19 @@ public class MemberService {
     }
 
     @Transactional(readOnly = true)
-    public GetMyShellListDto myShellListUnAuthentication(long memberId, Status status) {
-        GetMyShellListDto getMyShellListDto = new GetMyShellListDto();
+    public GetMyShellListDtoTags myShellListUnAuthentication(long memberId, Status status) {
+        GetMyShellListDtoTags getMyShellListDtoTags = new GetMyShellListDtoTags();
 
         Member member = findById(memberId);
         if (status == Status.ACTIVE) {
             List<Shell> activeShellList = member.getActiveList();
-            getMyShellListDto.setShells(memberMapper.shellListToGetMyShellListDto(activeShellList));
+            getMyShellListDtoTags.setShells(memberMapper.shellListToGetMyShellListDtoTags(activeShellList));
         }
         if (status == Status.INACTIVE) {
             List<Shell> activeShellList = member.getInActiveList();
-            getMyShellListDto.setShells(memberMapper.shellListToGetMyShellListDto(activeShellList));
+            getMyShellListDtoTags.setShells(memberMapper.shellListToGetMyShellListDtoTags(activeShellList));
         }
-        return getMyShellListDto;
+        return getMyShellListDtoTags;
     }
 
     private Member findByEmail(String email) {

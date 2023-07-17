@@ -3,16 +3,14 @@ package com.shellwe.server.exception.exceptioncode;
 import lombok.Getter;
 
 @Getter
-public enum ShellExceptionCode {
-
-    SHELL_NOT_MY_ID(400, "Shell Id Error"),
-    NOT_SUPPORT_TYPE(400, "Shell Sort Type Error");
+public enum AccessTokenExceptionCode {
+    TOKEN_EXPIRED(400, "Token Expired, Check Your Token");
 
     private int status;
 
     private String message;
 
-    ShellExceptionCode(int status, String message) {
+    AccessTokenExceptionCode(int status, String message) {
         this.status = status;
         this.message = message;
     }

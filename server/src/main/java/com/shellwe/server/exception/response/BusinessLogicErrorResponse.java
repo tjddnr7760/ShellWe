@@ -32,6 +32,10 @@ public class BusinessLogicErrorResponse {
         return new BusinessLogicErrorResponse(Error.of(tradeLogicException));
     }
 
+    public static BusinessLogicErrorResponse of(AccessTokenException accessTokenException) {
+        return new BusinessLogicErrorResponse(Error.of(accessTokenException));
+    }
+
     @Getter
     public static class Error {
 
@@ -61,6 +65,10 @@ public class BusinessLogicErrorResponse {
 
         public static Error of(TradeLogicException tradeLogicException) {
             return new Error(tradeLogicException.getMessage(), tradeLogicException.getTradeExceptionCode().getStatus());
+        }
+
+        public static Error of(AccessTokenException accessTokenException) {
+            return new Error(accessTokenException.getMessage(), accessTokenException.getAccessTokenExceptionCode().getStatus());
         }
     }
 }

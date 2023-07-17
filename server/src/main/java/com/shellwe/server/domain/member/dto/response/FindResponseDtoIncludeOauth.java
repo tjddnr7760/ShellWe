@@ -19,10 +19,13 @@ public class FindResponseDtoIncludeOauth {
 
     private String profileUrl;
 
-    public void setIsMeIdName(boolean isMe, Long id, String displayName, String profileUrl) {
+    private String introduction;
+
+    public void setIsMeIdName(boolean isMe, Long id, String displayName, String profileUrl, String introduction) {
         this.isMe = isMe;
         this.id = id;
         this.displayName = displayName;
         this.profileUrl = profileUrl;
+        this.introduction = introduction;
     }
 }
