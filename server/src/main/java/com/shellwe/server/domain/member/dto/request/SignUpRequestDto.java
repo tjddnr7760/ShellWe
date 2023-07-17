@@ -13,7 +13,7 @@ import javax.validation.constraints.Size;
 public class SignUpRequestDto {
 
     @NotBlank
-    @Email
+    @Email(message = "Incorrect Email Form")
     private String email;
 
     private Boolean emailVerificationStatus = false;
@@ -24,6 +24,6 @@ public class SignUpRequestDto {
     private String password;
 
     @NotBlank
-    @Size(min = 1, max = 8, message = "The displayname size must be greater than 0 and less than 8.")
+    @Size(min = 1, max = 10, message = "The displayname size must be greater than 0 and less than 10.")
     private String displayName;
 }
