@@ -15,7 +15,6 @@ import LoginPage from './page/login/LoginPage.tsx';
 import ShellCreate from './page/shellcreate/ShellCreate.tsx';
 import ShellUpdate from './page/shellupdate/ShellUpdate.tsx';
 import ProductShell from './page/productshell/ProductShell.tsx';
-import { useIsFetching } from 'react-query';
 import TalentShell from './page/talentshell/TalentShell.tsx';
 import ShellDetailPage from './page/shelldetail/ShellDetailPage.tsx';
 import MyPage from './page/mypage/MyPage.tsx';
@@ -26,8 +25,6 @@ import Loading from './common/loading/Loading.tsx';
 import SearchPage from './page/searchpage/SearchPage.tsx';
 
 function App() {
-  const isFetching = useIsFetching();
-
   return (
     <RecoilRoot>
       <BrowserRouter>

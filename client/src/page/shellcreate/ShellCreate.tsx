@@ -22,18 +22,19 @@ import Tag from '../../common/tag/Tag.js';
 import { ImageUploader } from '../../component/imageuploader/ImageUploder.tsx';
 import { useCreateShells } from '../../hooks/shells/useCreateShells.ts';
 
-const ShellCreate: React.FC = () => {
-  const formData = new FormData();
-  const { mutate } = useCreateShells();
-  const [uploadedImages, setUploadedImages] = useState<File[]>([]);
+const ShellCreate = () => {
   const [selectedCateory, setSelectedCateory] = useState({
     name: '카테고리',
     categoryid: '',
     type: '',
   });
+  const formData = new FormData();
+  const { mutate: handleCreateMutate } = useCreateShells();
+
   const [title, setTitle] = useState<string>('');
   const [content, setContent] = useState<string>('');
   const [tagList, setTagList] = useState<string[]>([]);
+  const [uploadedImages, setUploadedImages] = useState<File[]>([]);
 
   const handleInputChange = (
     e:
@@ -63,7 +64,8 @@ const ShellCreate: React.FC = () => {
     uploadedImages.forEach((image) => {
       formData.append(`pictures `, image); // 이미지 파일 추가
     });
-    mutate(formData);
+
+    handleCreateMutate(formData);
   };
   return (
     <ShellCreatePage>
@@ -116,7 +118,7 @@ const ShellCreate: React.FC = () => {
         </CreateBodyWrapper>
         <Tag tagList={tagList} setTagList={setTagList} />
         <ButtonContainer>
-          <SmallButton6 onClick={handleContentSubmit}>수정</SmallButton6>
+          <SmallButton6 onClick={handleContentSubmit}>등록</SmallButton6>
         </ButtonContainer>
       </ShellCreateContainer>
     </ShellCreatePage>

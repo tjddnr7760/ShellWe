@@ -1,6 +1,4 @@
 import { FileWithPath, useDropzone } from 'react-dropzone';
-import { useState } from 'react';
-
 import { compareFiles } from '../../utill/compareFiles';
 import { moveItemToStart } from '../../utill/moveItemToStart';
 import {
@@ -16,6 +14,7 @@ import {
 interface ImageUploaderProps {
   uploadedImages: File[];
   setUploadedImages: React.Dispatch<React.SetStateAction<FileWithPath[]>>;
+  updateInitalImages?: string[];
 }
 
 export const ImageUploader = ({
@@ -60,7 +59,7 @@ export const ImageUploader = ({
     <Container {...getRootProps()}>
       <DropzoneWrapper>
         <UploadZone>
-          {uploadedImages[0] ? (
+          {uploadedImages.length > 0 ? (
             uploadedImages.map((image, index) => {
               return (
                 <UploadedImageWrapper key={index}>
