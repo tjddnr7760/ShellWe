@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 import {
   LoginContainer,
@@ -22,6 +22,7 @@ const SignupPage: React.FC = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [checkPassword, setCheckPassword] = useState('');
+  const [isSignupDisabled, setIsSignupDisabled] = useState(true);
 
   const isNicknameValid =
     nickname.length <= 8 && /^[a-zA-Z가-힣]+$/.test(nickname);
@@ -31,6 +32,16 @@ const SignupPage: React.FC = () => {
       password
     );
   const isCheckPasswordValid = isPasswordValid && password === checkPassword;
+  const isEmailValid = /^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/.test(email);
+
+  useEffect(() => {
+    setIsSignupDisabled(
+      !isNicknameValid ||
+        !isPasswordValid ||
+        !isCheckPasswordValid ||
+        !isEmailValid
+    );
+  }, [isNicknameValid, isPasswordValid, isCheckPasswordValid, isEmailValid]);
 
   return (
     <LoginContainer>
@@ -74,9 +85,9 @@ const SignupPage: React.FC = () => {
                 }
               />
             </DivInputBox>
-            <CheckPosible>사용 가능한 이메일입니다.</CheckPosible>
-            <CheckError>중복된 이메일입니다.</CheckError>
-            <CheckError>유효하지 않는 이메일입니다.</CheckError>
+            {!isEmailValid && email.length > 0 && (
+              <CheckError>유효하지 않는 이메일입니다.</CheckError>
+            )}
           </DivBox>
           <DivBox>
             <div>Password</div>
@@ -97,7 +108,6 @@ const SignupPage: React.FC = () => {
               <CheckPosible>사용 가능한 비밀번호입니다.</CheckPosible>
             )}
           </DivBox>
-
           <DivBox>
             <div>Password 확인</div>
             <DivInputBox>
@@ -119,8 +129,7 @@ const SignupPage: React.FC = () => {
             )}
           </DivBox>
         </UserinfoContainer>
-
-        <LoginButton>Sign up</LoginButton>
+        <LoginButton disabled={isSignupDisabled}>Sign up</LoginButton>
       </LoginBox>
     </LoginContainer>
   );
