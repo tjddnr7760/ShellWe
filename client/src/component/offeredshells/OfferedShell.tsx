@@ -7,17 +7,21 @@ import {
   ResponseElementWrapper,
   PreviewNotice,
 } from '../../page/offeredshells/OfferedShellsPage.styled';
+import { Pictures } from '../../dataset/TypesOfferedShell';
 
 const OfferedShell = ({ clickedShellId }: { clickedShellId: number }) => {
   const [previewVisible, setPreviewVisible] = useState(false);
-  const [clickedShellPictures, setClickedShellPictures] = useState([]);
+  const [clickedShellPictures, setClickedShellPictures] = useState<Pictures[]>([
+    {
+      order: 0,
+      url: '',
+    },
+  ]);
 
-  const HandleShellPreview = (pictures: any) => {
+  const HandleShellPreview = (pictures: Pictures[]): void => {
     if (clickedShellPictures === pictures) {
-      console.log('같은 사진입니다.');
       setPreviewVisible(!previewVisible);
     } else {
-      console.log('다른 사진입니다.');
       setPreviewVisible(true);
       setClickedShellPictures(pictures);
     }
@@ -27,9 +31,7 @@ const OfferedShell = ({ clickedShellId }: { clickedShellId: number }) => {
     <ResponseElementWrapper>
       <ShellImgPreviewWrapper>
         {previewVisible === true ? (
-          <ShellImgPreview
-          // clickedShellPictures={clickedShellPictures}
-          />
+          <ShellImgPreview clickedShellPictures={clickedShellPictures} />
         ) : (
           <PreviewNotice>
             <ShellImgBox>Click below Shell!</ShellImgBox>

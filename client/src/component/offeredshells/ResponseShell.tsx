@@ -10,48 +10,23 @@ import {
   AcceptButton,
 } from './ResponseShell.styled';
 import { useAcceptShell } from '../../hooks/offer/useAccept';
-
-interface MyShells {
-  id: number;
-  type: string;
-  status: string;
-  title: string;
-  body?: string;
-  createdAt: string;
-  category: string;
-  pictures?: Picture[];
-  member: {
-    id: number;
-    displayName: string;
-    profileUrl: string;
-  };
-}
-
-interface Picture {
-  order: number;
-  url: string;
-}
+import { OfferedShells } from '../../dataset/TypesOfferedShell';
+import { Pictures } from '../../dataset/TypesOfferedShell';
 
 const ResponseShell = ({
   shell,
   clickedShellId,
   HandleShellPreview,
 }: {
-  shell: MyShells;
+  shell: OfferedShells;
   clickedShellId: number;
-  HandleShellPreview: any;
+  HandleShellPreview: (picture: Pictures[]) => void;
 }) => {
-  // mutation 호출
   const { mutate: acceptShell } = useAcceptShell();
-  // request body
   const requestBodyForAccept = {
     myShellId: clickedShellId,
     sellerShellId: shell.id,
     sellerMemberId: shell.member.id,
-  };
-  // mutation handler
-  const AcceptHandler = () => {
-    acceptShell(requestBodyForAccept);
   };
 
   // shelldetailpage, offeredpage 머지 시, 함수 재사용.
@@ -65,11 +40,13 @@ const ResponseShell = ({
         : slicebody + '..';
     }
   };
-  // 미리보기 상태에 사진 저장
+
   const HandlePreview = () => {
-    console.log(shell.id);
-    console.log(shell.pictures);
-    HandleShellPreview(shell.pictures);
+    shell.pictures && HandleShellPreview(shell.pictures);
+  };
+
+  const AcceptHandler = () => {
+    acceptShell(requestBodyForAccept);
   };
 
   return (

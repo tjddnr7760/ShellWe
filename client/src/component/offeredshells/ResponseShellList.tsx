@@ -1,46 +1,20 @@
-import styled from 'styled-components';
+import { ResponseShellListWrapper } from './ResponseShell.styled';
 import ResponseShell from './ResponseShell';
 import { useOfferedShellsList } from '../../hooks/offer/useOfferedShellsList';
-
-const ResponseShellListWrapper = styled.div`
-  width: 100%;
-  height: 100%;
-  overflow-y: scroll;
-`;
-
-interface MyShells {
-  id: number;
-  type: string;
-  status: string;
-  title: string;
-  body?: string;
-  createdAt: string;
-  category: string;
-  pictures?: Picture[];
-  member: {
-    id: number;
-    displayName: string;
-    profileUrl: string;
-  };
-}
-
-interface Picture {
-  order: number;
-  url: string;
-}
+import { OfferedShells } from '../../dataset/TypesOfferedShell';
+import { Pictures } from '../../dataset/TypesOfferedShell';
 
 const ResponseShellList = ({
   clickedShellId,
   HandleShellPreview,
 }: {
   clickedShellId: number;
-  HandleShellPreview: any;
+  HandleShellPreview: (picture: Pictures[]) => void;
 }) => {
   const { data: myOfferedShellsData } = useOfferedShellsList(clickedShellId);
-  const offeredShellsArray: MyShells[] = myOfferedShellsData?.shells || [];
+  const offeredShellsArray: OfferedShells[] = myOfferedShellsData?.shells || [];
 
   return (
-    // {/* 만약에 빈 배열이면, 아직 게시물이 없습니다. 렌더링 */}
     <ResponseShellListWrapper>
       {offeredShellsArray &&
         offeredShellsArray.map((shell) => {

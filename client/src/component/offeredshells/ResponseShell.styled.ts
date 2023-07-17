@@ -1,6 +1,12 @@
 import styled from 'styled-components';
 import { SmallButton4 } from '../../common/button/Button.styled';
 
+const ResponseShellListWrapper = styled.div`
+  width: 100%;
+  height: 100%;
+  overflow-y: scroll;
+`;
+
 const ResponseShellWrapper = styled.div`
   display: flex;
   height: fit-content;
@@ -77,6 +83,7 @@ const AcceptButton = styled(SmallButton4)`
 `;
 
 export {
+  ResponseShellListWrapper,
   ResponseShellWrapper,
   ShellsImageBox,
   ShellImg,
