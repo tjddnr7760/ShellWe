@@ -4,34 +4,19 @@ import {
   ShellImage,
   TextBox,
 } from './ShellInfo.styled';
+import { PokedShells } from '../../dataset/TypesOfferedShell';
+import { HandleClickPokedShellProps } from '../../dataset/TypesOfferedShell';
 
-interface MyShells {
-  id: number;
-  type: string;
-  status: string;
-  title: string;
-  createdAt: string;
-  category: string;
-  picture: string;
-  member: {
-    id: number;
-    displayName: string;
-    profileUrl: string;
-  };
-}
-interface HandleClickedShellProps {
-  HandleClickedShell: (shellId: number) => void;
-}
 const ShellInfo = ({
   shell,
-  HandleClickedShell,
-}: { shell: MyShells } & HandleClickedShellProps) => {
-  const HandleClick = () => {
-    HandleClickedShell(shell.id);
+  HandleClickPokedShell,
+}: { shell: PokedShells } & HandleClickPokedShellProps) => {
+  const ClickHandler = () => {
+    HandleClickPokedShell(shell.id);
   };
 
   return (
-    <ShellInfoContainer onClick={HandleClick}>
+    <ShellInfoContainer onClick={ClickHandler}>
       <ImageBox>
         <ShellImage src={shell.picture} />
       </ImageBox>

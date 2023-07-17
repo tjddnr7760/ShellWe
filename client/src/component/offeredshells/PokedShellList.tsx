@@ -6,36 +6,16 @@ import {
   IntroText2,
   ShellInfoListContainer,
 } from './PokedShellList.styled.ts';
-
-interface MyPokedShellDataProps {
-  myPokedShellsData: ShellsList;
-  HandleClickedShell: (shellId: number) => void;
-}
-
-interface ShellsList {
-  shells: MyShells[];
-}
-
-interface MyShells {
-  id: number;
-  type: string;
-  status: string;
-  title: string;
-  createdAt: string;
-  category: string;
-  picture: string;
-  member: {
-    id: number;
-    displayName: string;
-    profileUrl: string;
-  };
-}
+import {
+  MyPokedShellDataProps,
+  PokedShells,
+} from '../../dataset/TypesOfferedShell.ts';
 
 const PokedShellList = ({
   myPokedShellsData,
-  HandleClickedShell,
+  HandleClickPokedShell,
 }: MyPokedShellDataProps) => {
-  const pokedShellsArray: MyShells[] = myPokedShellsData.shells;
+  const pokedShellsArray: PokedShells[] = myPokedShellsData.shells;
 
   return (
     <PokedShellListContainer>
@@ -50,7 +30,7 @@ const PokedShellList = ({
               <ShellInfo
                 key={shell.id}
                 shell={shell}
-                HandleClickedShell={HandleClickedShell}
+                HandleClickPokedShell={HandleClickPokedShell}
               />
             );
           })}
