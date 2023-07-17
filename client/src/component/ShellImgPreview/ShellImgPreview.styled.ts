@@ -18,7 +18,11 @@ const ShellImgContainer = styled.div`
 `;
 
 const ShellImgBox = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
   width: 640px;
+  height: 400px;
   @media (max-width: 768px) {
     width: 320px;
     height: 200px;
