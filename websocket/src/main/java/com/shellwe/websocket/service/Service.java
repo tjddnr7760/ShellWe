@@ -45,6 +45,14 @@ public abstract class Service {
         return optionalMemberRoom.orElseThrow(()->new BusinessLogicException(ExceptionCode.MEMBER_ROOM_NOT_FOUND));
     }
 
+    protected void verifyExistsMemberRoom(long myShellId, long traderShellId){
+        Optional<MemberRoom> memberRoom = memberRoomRepository.findFirstByMyShellIdAndTraderShellId(myShellId,traderShellId);
+
+        memberRoom.ifPresent((mr)->{
+            if(mr.isActive()) throw new BusinessLogicException(ExceptionCode.MEMBER_ROOM_EXISTS);
+        });
+    }
+
     protected ChatRoom joinRoom(WebSocketSession session, Map<Long, ChatRoom> chatRooms,long roomId){
         if(chatRooms.containsKey(roomId)){
             chatRooms.get(roomId).setSessions(session);

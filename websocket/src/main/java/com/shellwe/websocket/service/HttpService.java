@@ -65,22 +65,23 @@ public class HttpService extends com.shellwe.websocket.service.Service {
         memberRoomRepository.save(memberRoom);
     }
     public ResponseDto createRoom(RoomDto.Post requestBody) {
+        long myShellId = requestBody.getMyShellId();
+        long traderShellId = requestBody.getSellerShellId();
+
+        verifyExistsMemberRoom(myShellId, traderShellId);
+
         Room room = roomRepository.save(new Room());
         long myId = getLoggedInMemberId();
-        long sellerId = requestBody.getSellerMemberId();
+        long traderId = requestBody.getSellerMemberId();
 
         // 생성된 룸과 멤버들 연결
-        linkMemberToRoom(room, myId);
-
+        linkMemberToRoom(room, myId, myShellId, traderShellId);
         // 상대 멤버 존재하는지 체크
-        linkMemberToRoom(room, sellerId);
-
-        long myShellId = requestBody.getMyShellId();
-        long sellerShellId = requestBody.getSellerMemberId();
+        linkMemberToRoom(room, traderId, traderShellId, myShellId);
 
         // 생성된 룸에 상품정보 메세지 생성
         createInitMessage(room,myId,myShellId);
-        createInitMessage(room,sellerId,sellerShellId);
+        createInitMessage(room,traderId,traderShellId);
 
         // 프론트엔드와 상의 후 response 다시 정의
         return ResponseDto.builder()
@@ -89,21 +90,21 @@ public class HttpService extends com.shellwe.websocket.service.Service {
                 .build();
     }
 
-    private void linkMemberToRoom(Room room, long memberId){
-        Member member = new Member(memberId);
+    private void linkMemberToRoom(Room room, long memberId, long myShellId, long traderShellId){
         MemberRoom memberRoom = new MemberRoom();
-        memberRoom.setRoom(room);
-        memberRoom.setMember(member);
+                memberRoom.setMember(new Member(memberId));
+                memberRoom.setMyShellId(myShellId);
+                memberRoom.setTraderShellId(traderShellId);
+                memberRoom.setRoom(room);
         memberRoomRepository.save(memberRoom);
-
     }
 
     private void createInitMessage(Room room, long memberId, long shellId){
         Member member = findExistsMember(memberId);
         Message message = new Message();
-        message.setRoom(room);
-        message.setNotification(true);
-        message.setPayload(member.getDisplayName()+"님께서 거래하실 Shell : " + url +"/shells/"+shellId);
+                message.setRoom(room);
+                message.setNotification(true);
+                message.setPayload(member.getDisplayName()+"님께서 거래하실 Shell : " + url +"/shells/"+shellId);
         messageRepository.save(message);
     }
 }

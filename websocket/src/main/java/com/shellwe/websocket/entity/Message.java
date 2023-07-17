@@ -8,8 +8,6 @@ import javax.persistence.*;
 @Getter
 @Setter
 @Entity
-@Builder
-@AllArgsConstructor
 public class Message extends TimeTracker{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -23,7 +21,7 @@ public class Message extends TimeTracker{
     private boolean unread;
 
     @Column
-    private boolean Notification;
+    private boolean notification;
 
     @ManyToOne
     @JoinColumn(name = "member_id")

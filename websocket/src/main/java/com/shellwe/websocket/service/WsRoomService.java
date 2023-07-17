@@ -31,7 +31,6 @@ public class WsRoomService extends Service{
     public void getRoomInfo(WebSocketSession session) throws IOException {
         long roomId = getRoomId(session);
         joinRoom(session, chatRoomSessions, roomId);
-        session.sendMessage(new TextMessage(session.getId()));
     }
 
     public void terminateSession(WebSocketSession session){

@@ -21,4 +21,6 @@ public interface MemberRoomRepository extends JpaRepository<MemberRoom, Long> {
     List<MemberRoom> findAllMyRoomsWithSeller(Long memberId);
     Optional<MemberRoom> findByRoomAndMemberAndActiveTrue(Room room, Member member);
     Optional<MemberRoom> findByRoom(Room room);
+
+    Optional<MemberRoom> findFirstByMyShellIdAndTraderShellId(Long myShellId, Long traderShellId);
 }
