@@ -27,7 +27,7 @@ const UserImgBox = styled.div`
   background-color: #ffffff;
   max-width: 200px;
   max-height: fit-content;
-  border: 0.5px solid rgba(0, 0, 0, 0.5);
+  border: 0.5px solid rgba(0, 0, 0, 0.2);
   border-radius: 10px;
   font-size: 20px;
   overflow: hidden;
@@ -48,7 +48,7 @@ const Nickname = styled.div`
   background-color: #ffffff;
   max-width: 200px;
   max-height: fit-content;
-  border: 0.5px solid rgba(0, 0, 0, 0.5);
+  border: 0.5px solid rgba(0, 0, 0, 0.2);
   border-radius: 10px;
   font-size: 20px;
   padding: 10px;
@@ -62,7 +62,7 @@ const Introduction = styled.div`
   align-items: center;
   justify-content: flex-start;
   background-color: #ffffff;
-  border: 0.5px solid rgba(0, 0, 0, 0.5);
+  border: 0.5px solid rgba(0, 0, 0, 0.2);
   border-radius: 10px;
   font-size: 20px;
   padding: 10px;
@@ -72,15 +72,15 @@ const Introduction = styled.div`
   }
 `;
 
-const AllLikeCategorys = styled.div`
+const AllCurrentTags = styled.div`
   display: flex;
   align-items: center;
   justify-content: flex-start;
   background-color: #ffffff;
-  border: 0.5px solid rgba(0, 0, 0, 0.5);
+  /* border: 0.5px solid rgba(0, 0, 0, 0.2); */
   border-radius: 10px;
   font-size: 20px;
-  padding: 10px;
+  /* padding: 5px; */
   @media (max-width: 768px) {
     font-size: 16px;
   }
@@ -91,7 +91,7 @@ export {
   UserImg,
   Nickname,
   Introduction,
-  AllLikeCategorys,
+  AllCurrentTags,
   Box,
   Box2,
   UserImgBox,
