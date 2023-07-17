@@ -46,4 +46,11 @@ public class BusinessExceptionHandler {
         log.error("trade logic exception", tradeLogicException);
         return BusinessLogicErrorResponse.of(tradeLogicException);
     }
+
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    @ExceptionHandler
+    public BusinessLogicErrorResponse handleAccessTokenException(AccessTokenException accessTokenException) {
+        log.error("access token exception", accessTokenException);
+        return BusinessLogicErrorResponse.of(accessTokenException);
+    }
 }
