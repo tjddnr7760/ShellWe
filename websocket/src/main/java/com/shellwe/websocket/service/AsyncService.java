@@ -24,12 +24,10 @@ public class AsyncService {
     @Async("threadPoolTaskExecutor")
     public void saveMessage(Map<Long, ChatRoom> chatRooms, TextMessage textMessage, long roomId, long memberId){
         long joinedMemberNumber = chatRooms.get(roomId).getSessions().size();
-        Message message = Message.builder()
-                .room(new Room(roomId))
-                .member(new Member(memberId))
-                .payload(textMessage.getPayload())
-                .build();
-
+        Message message = new Message();
+                message.setRoom(new Room(roomId));
+                message.setMember(new Member(memberId));
+                message.setPayload(textMessage.getPayload());
         if(joinedMemberNumber<2) message.setUnread(true);
 
         messageRepository.save(message);

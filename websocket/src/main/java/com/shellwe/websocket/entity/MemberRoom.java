@@ -1,15 +1,13 @@
 package com.shellwe.websocket.entity;
 
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
 
 @NoArgsConstructor
 @Getter
-@Setter
 @Entity
+@Setter
 public class MemberRoom {
     public MemberRoom(Room room) {
         this.room = room;
@@ -22,6 +20,12 @@ public class MemberRoom {
 
     @Column
     private boolean active = true;
+
+    @Column
+    private Long myShellId;
+
+    @Column
+    private Long traderShellId;
 
     @ManyToOne
     @JoinColumn(name = "member_id")
