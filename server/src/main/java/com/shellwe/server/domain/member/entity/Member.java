@@ -36,7 +36,7 @@ public class Member extends TimeTracker {
 
     private String displayName;
 
-    private String introduction = "";
+    private String introduction;
 
     private String profileUrl;
 

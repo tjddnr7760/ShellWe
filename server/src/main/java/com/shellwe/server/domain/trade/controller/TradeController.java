@@ -4,8 +4,11 @@ import com.shellwe.server.auth.memberDetails.MemberContextInform;
 import com.shellwe.server.domain.trade.dto.request.UpdateTradeStatusRequestDto;
 import com.shellwe.server.domain.trade.dto.response.InquiryToMainResponseDto;
 import com.shellwe.server.domain.trade.dto.request.TradeRequestDto;
+import com.shellwe.server.domain.trade.dto.response.MyTradeResponseDetailsDto;
 import com.shellwe.server.domain.trade.dto.response.MyTradeResponseDto;
 import com.shellwe.server.domain.trade.service.TradeService;
+import com.shellwe.server.exception.customexception.AccessTokenException;
+import com.shellwe.server.exception.exceptioncode.AccessTokenExceptionCode;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -38,15 +41,15 @@ public class TradeController {
 
     @ResponseStatus(HttpStatus.OK)
     @GetMapping("/{shellId}")
-    public MyTradeResponseDto getMySpecificShellTrades(@PathVariable long shellId, Authentication authentication) {
+    public MyTradeResponseDetailsDto getMySpecificShellTrades(@PathVariable long shellId, Authentication authentication) {
         return tradeService.mySpecificShellTrade(shellId, getId(authentication));
     }
 
     @ResponseStatus(HttpStatus.OK)
     @PatchMapping("/{shellId}")
     public void updateShellTradeStatus(@PathVariable long shellId,
-                                                               @RequestBody UpdateTradeStatusRequestDto updateTradeStatusRequestDto,
-                                                               Authentication authentication) {
+                                       @RequestBody UpdateTradeStatusRequestDto updateTradeStatusRequestDto,
+                                       Authentication authentication) {
         tradeService.updateTradeStatus(shellId, updateTradeStatusRequestDto, getId(authentication));
     }
 
@@ -59,7 +62,7 @@ public class TradeController {
     private Long getId(Authentication authentication) {
         Long id;
         if (authentication == null) {
-            id = null;
+            throw new AccessTokenException(AccessTokenExceptionCode.TOKEN_EXPIRED);
         } else {
             MemberContextInform memberInform = (MemberContextInform) authentication.getPrincipal();
             id = memberInform.getId();

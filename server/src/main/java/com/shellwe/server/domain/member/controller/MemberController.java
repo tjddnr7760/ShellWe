@@ -6,6 +6,8 @@ import com.shellwe.server.domain.member.dto.request.SignUpRequestDto;
 import com.shellwe.server.domain.member.dto.request.UpdateRequestDto;
 import com.shellwe.server.domain.member.dto.response.FindResponseDtoIncludeOauth;
 import com.shellwe.server.domain.member.service.MemberService;
+import com.shellwe.server.exception.customexception.AccessTokenException;
+import com.shellwe.server.exception.exceptioncode.AccessTokenExceptionCode;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -72,7 +74,7 @@ public class MemberController {
     private Long getId(Authentication authentication) {
         Long id;
         if (authentication == null) {
-            id = null;
+            throw new AccessTokenException(AccessTokenExceptionCode.TOKEN_EXPIRED);
         } else {
             MemberContextInform memberInform = (MemberContextInform) authentication.getPrincipal();
             id = memberInform.getId();

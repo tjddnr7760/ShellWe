@@ -7,6 +7,7 @@ import com.shellwe.server.domain.trade.dto.response.InquiryToMainResponseDto;
 import com.shellwe.server.domain.shell.entity.Shell;
 import com.shellwe.server.domain.shell.service.ShellService;
 import com.shellwe.server.domain.trade.dto.request.TradeRequestDto;
+import com.shellwe.server.domain.trade.dto.response.MyTradeResponseDetailsDto;
 import com.shellwe.server.domain.trade.dto.response.MyTradeResponseDto;
 import com.shellwe.server.domain.trade.entity.Trade;
 import com.shellwe.server.domain.trade.mapper.TradeMapper;
@@ -69,13 +70,13 @@ public class TradeService {
     }
 
     @Transactional(readOnly = true)
-    public MyTradeResponseDto mySpecificShellTrade(long shellId, long memberId) {
+    public MyTradeResponseDetailsDto mySpecificShellTrade(long shellId, long memberId) {
         List<Long> buyerShellsId = tradeRepository.getSellerTradesByShellIdAndMemberId(memberId, shellId);
         List<Shell> buyerShells = shellService.getShellsByOtherLayer(buyerShellsId);
 
-        MyTradeResponseDto myTradeResponseDto = new MyTradeResponseDto();
-        myTradeResponseDto.setShells(tradeMapper.buyerTradeListToMyTradeResponseDto(buyerShells));
-        return myTradeResponseDto;
+        MyTradeResponseDetailsDto myTradeResponseDetailsDto = new MyTradeResponseDetailsDto();
+        myTradeResponseDetailsDto.setShells(tradeMapper.buyerTradeListToMyTradeResponseDtoDetails(buyerShells));
+        return myTradeResponseDetailsDto;
     }
 
     public void updateTradeStatus(long shellId, UpdateTradeStatusRequestDto updateTradeStatusRequestDto, long memberId) {
