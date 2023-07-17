@@ -3,16 +3,16 @@ import {
   LoginContainer,
   LoginBox,
   Logo,
-  Oath,
+  OathContainer,
   OathImg,
+  OathText,
   UserinfoContainer,
-  EmailBox,
-  EmailInputBox,
-  EmailInput,
-  EmailError,
+  DivBox,
+  DivInputBox,
+  DivInput,
+  CheckError,
   LoginButton,
 } from './LoginPage.styled';
-import btn_google from '../../asset/btn_google.png';
 
 const LoginPage: React.FC = () => {
   return (
@@ -22,24 +22,25 @@ const LoginPage: React.FC = () => {
           src="https://cdn-icons-png.flaticon.com/512/499/499857.png"
           alt="Logo"
         ></Logo>
-        <Oath>
-          <OathImg src={btn_google} alt="GoogleLogoImg"></OathImg>
-        </Oath>
+        <OathContainer>
+          <OathImg></OathImg>
+          <OathText>Log in with Google</OathText>
+        </OathContainer>
         <UserinfoContainer>
-          <EmailBox>
+          <DivBox>
             <div> Email</div>
-            <EmailInputBox>
-              <EmailInput type="email" />
-            </EmailInputBox>
-            <EmailError>유효하지 않은 사용자입니다..</EmailError>
-          </EmailBox>
-          <EmailBox>
+            <DivInputBox>
+              <DivInput type="email" />
+            </DivInputBox>
+            <CheckError>유효하지 않은 사용자입니다..</CheckError>
+          </DivBox>
+          <DivBox>
             <div> Password</div>
-            <EmailInputBox>
-              <EmailInput type="password" />
-            </EmailInputBox>
-            <EmailError>비밀번호를 확인해주세요 </EmailError>
-          </EmailBox>
+            <DivInputBox>
+              <DivInput type="password" />
+            </DivInputBox>
+            <CheckError>비밀번호를 확인해주세요 </CheckError>
+          </DivBox>
         </UserinfoContainer>
         <LoginButton>Log in</LoginButton>
       </LoginBox>

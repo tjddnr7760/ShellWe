@@ -1,20 +1,37 @@
-import { EmailOverlapCheck } from './SignupPage.styled';
+import { useState } from 'react';
+
 import {
   LoginContainer,
   LoginBox,
   Logo,
-  Oath,
+  OathContainer,
   OathImg,
+  OathText,
   UserinfoContainer,
-  EmailBox,
-  EmailInputBox,
-  EmailInput,
-  EmailError,
+  DivBox,
+  DivInputBox,
+  DivInput,
+  CheckError,
+  CheckPosible,
   LoginButton,
 } from '../login/LoginPage.styled';
-import btn_google from '../../asset/btn_google.png';
+import googlelogo from '../../asset/googlelogo.png';
 
 const SignupPage: React.FC = () => {
+  const [nickname, setNickname] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [checkPassword, setCheckPassword] = useState('');
+
+  const isNicknameValid =
+    nickname.length <= 8 && /^[a-zA-Z가-힣]+$/.test(nickname);
+  const isPasswordValid =
+    password.length >= 10 &&
+    /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{10,}$/.test(
+      password
+    );
+  const isCheckPasswordValid = isPasswordValid && password === checkPassword;
+
   return (
     <LoginContainer>
       <LoginBox>
@@ -22,41 +39,87 @@ const SignupPage: React.FC = () => {
           src="https://cdn-icons-png.flaticon.com/512/499/499857.png"
           alt="Logo"
         ></Logo>
-        <Oath>
-          <OathImg src={btn_google} alt="GoogleLogoImg"></OathImg>
-        </Oath>
+        <OathContainer>
+          <OathImg src={googlelogo}></OathImg>
+          <OathText>Sign up with Google</OathText>
+        </OathContainer>
         <UserinfoContainer>
-          <EmailBox>
-            <div>NickName </div>
-            <EmailInputBox>
-              <EmailInput type="text" name="nickname" />
-            </EmailInputBox>
-            <EmailError>닉네임은 8글자 이하이어야 합니다.</EmailError>
-          </EmailBox>
-          <EmailBox>
-            <div> Email</div>
-            <EmailInputBox>
-              <EmailInput type="email" />
-              <EmailOverlapCheck>중복확인</EmailOverlapCheck>
-            </EmailInputBox>
-            <EmailError>중복된 이메일입니다.</EmailError>
-          </EmailBox>
-          <EmailBox>
-            <div> Password</div>
-            <EmailInputBox>
-              <EmailInput type="password" />
-            </EmailInputBox>
-            <EmailError>비밀번호를 확인해주세요 </EmailError>
-          </EmailBox>
+          <DivBox>
+            <div>NickName</div>
+            <DivInputBox>
+              <DivInput
+                type="text"
+                name="nickname"
+                value={nickname}
+                onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                  setNickname(e.target.value)
+                }
+              />
+            </DivInputBox>
+            {!isNicknameValid && nickname.length >= 8 && (
+              <CheckError>닉네임은 8글자 이하이어야 합니다.</CheckError>
+            )}
+            {isNicknameValid && nickname && (
+              <CheckPosible>사용 가능한 닉네임입니다.</CheckPosible>
+            )}
+          </DivBox>
+          <DivBox>
+            <div>Email</div>
+            <DivInputBox>
+              <DivInput
+                type="email"
+                value={email}
+                onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                  setEmail(e.target.value)
+                }
+              />
+            </DivInputBox>
+            <CheckPosible>사용 가능한 이메일입니다.</CheckPosible>
+            <CheckError>중복된 이메일입니다.</CheckError>
+            <CheckError>유효하지 않는 이메일입니다.</CheckError>
+          </DivBox>
+          <DivBox>
+            <div>Password</div>
+            <DivInputBox>
+              <DivInput
+                placeholder="대소문자 (알파벳), 숫자, 특수문자 조합 10글자 이상"
+                type="password"
+                value={password}
+                onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                  setPassword(e.target.value)
+                }
+              />
+            </DivInputBox>
+            {password.length > 10 && !isPasswordValid && (
+              <CheckError>비밀번호를 확인해주세요.</CheckError>
+            )}
+            {isPasswordValid && password && (
+              <CheckPosible>사용 가능한 비밀번호입니다.</CheckPosible>
+            )}
+          </DivBox>
 
-          <EmailBox>
-            <div> Password 확인</div>
-            <EmailInputBox>
-              <EmailInput type="password" />
-            </EmailInputBox>
-            <EmailError>비밀번호가 다릅니다.</EmailError>
-          </EmailBox>
+          <DivBox>
+            <div>Password 확인</div>
+            <DivInputBox>
+              <DivInput
+                type="password"
+                value={checkPassword}
+                onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                  setCheckPassword(e.target.value)
+                }
+              />
+            </DivInputBox>
+            {!isCheckPasswordValid &&
+              isPasswordValid &&
+              checkPassword.length > 0 && (
+                <CheckError>비밀번호가 다릅니다.</CheckError>
+              )}
+            {isCheckPasswordValid && checkPassword && (
+              <CheckPosible>비밀번호가 일치합니다.</CheckPosible>
+            )}
+          </DivBox>
         </UserinfoContainer>
+
         <LoginButton>Sign up</LoginButton>
       </LoginBox>
     </LoginContainer>
