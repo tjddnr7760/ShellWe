@@ -2,7 +2,7 @@ spring:
   datasource:
     url: jdbc:mysql://localhost:3306/shellweprototype?useSSL=false
     username: root
-    password: db1234
+    password: ${MYSQL_ROOT_PASSWORD}
     driverClassName: com.mysql.cj.jdbc.Driver
   jpa:
     database-platform: org.hibernate.dialect.MySQL8Dialect
@@ -26,8 +26,8 @@ spring:
       client:
         registration:
           google:
-            clientId: fake-id
-            clientSecret: fake-secret-key
+            clientId: ${GOOGLE_OAUTH_CLIENT_ID}
+            clientSecret: ${GOOGLE_OAUTH_SECRET_KEY}
             scope:
               - profile
               - email
@@ -35,8 +35,8 @@ mail:
   smtp:
     host: smtp.gmail.com
     port: 587
-    username: fake-id
-    password: fake-secret-key
+    username: ${GMAIL_SMTP_USERNAME}
+    password: ${GMAIL_SMTP_PASSWORD}
     auth: true
     starttls:
       enable: true
@@ -59,7 +59,7 @@ server:
     encoding:
       force-response: true
 jwt:
-  key: "kevin12341234123412341234123412341234"
+  key: ${JWT_SECRET_KEY}
   access-token-expiration-minutes: 500
   refresh-token-expiration-minutes: 600
 
@@ -75,8 +75,8 @@ cloud:
     stack:
       auto: false
     credentials:
-      accesskey: ${AWS_ACCESS_KEY}
-      secretkey: ${AWS_SECRET_KEY}
+      accesskey: ${AWS_IAM_ACCESS_KEY}
+      secretkey: ${AWS_IAM_SECRET_KEY}
   s3:
     bucket: shellwepicture
     folder:
