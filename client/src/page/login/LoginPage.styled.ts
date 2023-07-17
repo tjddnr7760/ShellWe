@@ -6,7 +6,7 @@ export const LoginContainer = styled.div`
   align-items: center;
   margin: 50px 0;
 `;
-export const LoginBox = styled.div`
+export const LoginBox = styled.form`
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -64,7 +64,7 @@ export const DivBox = styled.div`
 export const DivInputBox = styled.div`
   border-radius: 16px;
   display: flex;
-  align-items: center;
+  flex-direction: column;
   justify-content: stretch;
 `;
 
@@ -105,10 +105,7 @@ export const LoginButton = styled.button`
   width: 100%;
   min-width: 300px;
   height: 40px;
-  &:hover {
-    color: #023e8a;
-    background-color: #90e0ef;
-  }
+
   &:active {
     transform: translateY(2px);
   }

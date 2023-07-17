@@ -13,6 +13,7 @@ import {
   CheckError,
   LoginButton,
 } from './LoginPage.styled';
+import googlelogo from '../../asset/googlelogo.png';
 
 const LoginPage: React.FC = () => {
   return (
@@ -23,8 +24,8 @@ const LoginPage: React.FC = () => {
           alt="Logo"
         ></Logo>
         <OathContainer>
-          <OathImg></OathImg>
-          <OathText>Log in with Google</OathText>
+          <OathImg src={googlelogo}></OathImg>
+          <OathText>Sign up with Google</OathText>
         </OathContainer>
         <UserinfoContainer>
           <DivBox>
