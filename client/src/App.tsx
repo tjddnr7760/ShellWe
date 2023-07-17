@@ -5,7 +5,6 @@ import { ReactQueryDevtools } from 'react-query/devtools';
 
 import './App.css';
 import GlobalStyle from './style/GlobalStyle.ts';
-import Header from './component/header/Header.tsx';
 import Footer from './component/footer/Footer.tsx';
 import Nav from './component/nav/Nav.tsx';
 import HomePage from './page/home/HomePage.tsx';
@@ -24,24 +23,18 @@ import MyShellsPage from './page/myshells/MyShellsPage.tsx';
 import OfferedShellsPage from './page/offeredshells/OfferedShellsPage.tsx';
 import DirectMessage from './page/directmessage/DirectMessage.tsx';
 import Loading from './common/loading/Loading.tsx';
-import { useGetShells } from './hooks/shells/useShellsId.ts';
+import SearchPage from './page/searchpage/SearchPage.tsx';
+
 function App() {
-  const [isLogin, setIsLogin] = useState(true);
   const isFetching = useIsFetching();
-  const { data } = useGetShells(1);
 
   return (
     <RecoilRoot>
       <BrowserRouter>
         <GlobalStyle />
-        <main className={isLogin ? 'login' : 'nologin'}>
-          {isLogin ? (
-            <>
-              <Nav />
-            </>
-          ) : null}
+        <main>
+          <Nav />
           {/* checkNav 함수를 페이지 url에 따라서 바뀌도록 설정 true false 결과값으로 */}
-          {isLogin ? null : <Header />}
           <div className="inner">
             <Routes>
               <Route path="/" element={<HomePage />} />
@@ -58,6 +51,7 @@ function App() {
               <Route path="/myshells/:id" element={<MyShellsPage />} />
               <Route path="/offer/:id" element={<OfferedShellsPage />} />
               <Route path="/dm/:id" element={<DirectMessage />} />
+              <Route path="/search" Component={SearchPage} />
             </Routes>
             {isFetching ? <Loading /> : null}
             <Footer />
