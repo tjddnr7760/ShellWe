@@ -24,7 +24,6 @@ function processData(data: ShellDetailData) {
       (picture: { order: number; url: string }) => picture.url
     ),
   };
-  console.log(updatedData.pictures);
   return updatedData;
 }
 export default processData;

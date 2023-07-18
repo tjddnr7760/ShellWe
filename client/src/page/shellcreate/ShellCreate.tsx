@@ -93,7 +93,7 @@ const ShellCreate = () => {
                   src={URL.createObjectURL(uploadedImages[0])}
                   alt="title_img"
                 />
-              ) : null}{' '}
+              ) : null}
             </TitleImgWrapper>
             <TitleExplanation>
               물건이 명확하게 보이거나 자신의 재능을 표현할 수 있는 사진을
