@@ -3,16 +3,20 @@ import {
   LoginContainer,
   LoginBox,
   Logo,
-  Oath,
+  OathContainer,
   OathImg,
+  OathText,
   UserinfoContainer,
-  EmailBox,
-  EmailInputBox,
-  EmailInput,
-  EmailError,
+  DivBox,
+  DivInputBox,
+  DivInput,
+  CheckError,
+  CheckPosible,
   LoginButton,
+  LoginSubFuntionBox,
+  LoginSubFuntion,
 } from '../login/LoginPage.styled';
-import btn_google from '../../asset/btn_google.png';
+import googlelogo from '../../asset/googlelogo.png';
 
 const SignupPage: React.FC = () => {
   return (
@@ -22,40 +26,41 @@ const SignupPage: React.FC = () => {
           src="https://cdn-icons-png.flaticon.com/512/499/499857.png"
           alt="Logo"
         ></Logo>
-        <Oath>
-          <OathImg src={btn_google} alt="GoogleLogoImg"></OathImg>
-        </Oath>
+        <OathContainer>
+          <OathImg src={googlelogo}></OathImg>
+          <OathText>Sign up with Google</OathText>
+        </OathContainer>
         <UserinfoContainer>
-          <EmailBox>
+          <DivBox>
             <div>NickName </div>
-            <EmailInputBox>
-              <EmailInput type="text" name="nickname" />
-            </EmailInputBox>
-            <EmailError>닉네임은 8글자 이하이어야 합니다.</EmailError>
-          </EmailBox>
-          <EmailBox>
+            <DivInputBox>
+              <DivInput type="text" name="nickname" />
+            </DivInputBox>
+            <CheckError>닉네임은 8글자 이하이어야 합니다.</CheckError>
+          </DivBox>
+          <DivBox>
             <div> Email</div>
-            <EmailInputBox>
-              <EmailInput type="email" />
+            <DivInputBox>
+              <DivInput type="email" />
               <EmailOverlapCheck>중복확인</EmailOverlapCheck>
-            </EmailInputBox>
-            <EmailError>중복된 이메일입니다.</EmailError>
-          </EmailBox>
-          <EmailBox>
+            </DivInputBox>
+            <CheckError>중복된 이메일입니다.</CheckError>
+          </DivBox>
+          <DivBox>
             <div> Password</div>
-            <EmailInputBox>
-              <EmailInput type="password" />
-            </EmailInputBox>
-            <EmailError>비밀번호를 확인해주세요 </EmailError>
-          </EmailBox>
+            <DivInputBox>
+              <DivInput type="password" />
+            </DivInputBox>
+            <CheckError>비밀번호를 확인해주세요 </CheckError>
+          </DivBox>
 
-          <EmailBox>
+          <DivBox>
             <div> Password 확인</div>
-            <EmailInputBox>
-              <EmailInput type="password" />
-            </EmailInputBox>
-            <EmailError>비밀번호가 다릅니다.</EmailError>
-          </EmailBox>
+            <DivInputBox>
+              <DivInput type="password" />
+            </DivInputBox>
+            <CheckError>비밀번호가 다릅니다.</CheckError>
+          </DivBox>
         </UserinfoContainer>
         <LoginButton>Sign up</LoginButton>
       </LoginBox>
