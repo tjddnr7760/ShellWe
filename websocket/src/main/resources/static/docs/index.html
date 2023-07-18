@@ -474,7 +474,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div class="listingblock">
 <div class="title">curl-request</div>
 <div class="content">
-<pre class="prettyprint highlight"><code data-lang="bash">$ curl 'http://localhost:8080/chat?_csrf=52f01d11-7607-4f47-9647-b594d580edc4' -i -X POST \
+<pre class="prettyprint highlight"><code data-lang="bash">$ curl 'http://localhost:8080/chat?_csrf=82c3a8bd-626e-44a1-8ab6-f4e1f4ef465a' -i -X POST \
     -H 'Content-Type: application/json;charset=UTF-8' \
     -H 'Accept: application/json' \
     -H 'Authorization: Bearer qwmdkqlmdkaend.qmnedkmqwkdmqkwmdk...' \
@@ -489,12 +489,12 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div class="listingblock">
 <div class="title">http-request</div>
 <div class="content">
-<pre class="prettyprint highlight nowrap"><code data-lang="http">POST /chat?_csrf=52f01d11-7607-4f47-9647-b594d580edc4 HTTP/1.1
+<pre class="prettyprint highlight nowrap"><code data-lang="http">POST /chat?_csrf=82c3a8bd-626e-44a1-8ab6-f4e1f4ef465a HTTP/1.1
 Content-Type: application/json;charset=UTF-8
 Accept: application/json
 Authorization: Bearer qwmdkqlmdkaend.qmnedkmqwkdmqkwmdk...
 Refresh: qdwnjqnwdjc.ewhsndjnq...
-Content-Length: 72
+Content-Length: 68
 Host: localhost:8080
 
 {
@@ -570,7 +570,7 @@ Cache-Control: no-cache, no-store, max-age=0, must-revalidate
 Pragma: no-cache
 Expires: 0
 X-Frame-Options: DENY
-Content-Length: 101
+Content-Length: 98
 
 {
   "roomsUrl" : "http://localhost:8080/chat",
@@ -659,7 +659,7 @@ Cache-Control: no-cache, no-store, max-age=0, must-revalidate
 Pragma: no-cache
 Expires: 0
 X-Frame-Options: DENY
-Content-Length: 178
+Content-Length: 169
 
 [ {
   "id" : 1,
@@ -726,7 +726,7 @@ Content-Length: 178
 <div class="listingblock">
 <div class="title">curl-request</div>
 <div class="content">
-<pre class="prettyprint highlight"><code data-lang="bash">$ curl 'http://localhost:8080/chat/1?_csrf=a9448493-611a-47be-9e6f-6f745b62b849' -i -X DELETE \
+<pre class="prettyprint highlight"><code data-lang="bash">$ curl 'http://localhost:8080/chat/1?_csrf=bcd7c9ba-066e-4cea-8b1c-cbfa0d462a44' -i -X DELETE \
     -H 'Authorization: Bearer qwmdkqlmdkaend.qmnedkmqwkdmqkwmdk...' \
     -H 'Refresh: qdwnjqnwdjc.ewhsndjnq...'</code></pre>
 </div>
@@ -734,7 +734,7 @@ Content-Length: 178
 <div class="listingblock">
 <div class="title">http-request</div>
 <div class="content">
-<pre class="prettyprint highlight nowrap"><code data-lang="http">DELETE /chat/1?_csrf=a9448493-611a-47be-9e6f-6f745b62b849 HTTP/1.1
+<pre class="prettyprint highlight nowrap"><code data-lang="http">DELETE /chat/1?_csrf=bcd7c9ba-066e-4cea-8b1c-cbfa0d462a44 HTTP/1.1
 Authorization: Bearer qwmdkqlmdkaend.qmnedkmqwkdmqkwmdk...
 Refresh: qdwnjqnwdjc.ewhsndjnq...
 Host: localhost:8080</code></pre>
@@ -801,7 +801,7 @@ X-Frame-Options: DENY</code></pre>
 <div id="footer">
 <div id="footer-text">
 Version 0.0.1-SNAPSHOT<br>
-Last updated 2023-07-17 13:21:55 +0900
+Last updated 2023-07-18 04:28:06 UTC
 </div>
 </div>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prettify/r298/prettify.min.css">

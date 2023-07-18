@@ -64,15 +64,17 @@ public class JwtVerificationFilter extends OncePerRequestFilter {
     }
 
     private String getAccessToken(HttpServletRequest request){
-        String token = Arrays.stream(request.getQueryString().split("&")).filter(s->s.startsWith("token"))
-                .collect(Collectors.toList())
-                .get(0)
-                .replace("token=Bearer%20","");
-
-        if(request.getRequestURI().startsWith("/ws")&& !token.startsWith("token"))
-            return token;
-
-        else return request.getHeader("Authorization").replace("Bearer ", "");
+        if(request.getRequestURI().startsWith("/ws")){
+            String token = Arrays.stream(request.getQueryString().split("&")).filter(s->s.startsWith("token"))
+                    .collect(Collectors.toList())
+                    .get(0)
+                    .replace("token=Bearer%20","");
+            if(!token.startsWith("token")) return token;
+            else throw new BusinessLogicException(ExceptionCode.MEMBER_NOT_FOUND);
+        }
+        else {
+            return request.getHeader("Authorization").replace("Bearer ", "");
+        }
     }
 
     private void setAuthenticationToContext(Map<String, Object> claims) {
