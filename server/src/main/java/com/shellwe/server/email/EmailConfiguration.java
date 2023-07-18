@@ -26,14 +26,17 @@ public class EmailConfiguration {
     private String password;
 
     @Value("${mail.smtp.auth}")
-    private  String auth;
+    private String auth;
 
     @Value("${mail.smtp.starttls.enable}")
-    private  String tlsEnable;
+    private String tlsEnable;
+
+    @Value("${mail.url}")
+    private String url;
 
     @Bean
     public EmailSendable templateEmailSendable(TemplateEngine templateEngine) {
-        return new TemplateEmailSendable(javaMailSender(), templateEngine, new Context());
+        return new TemplateEmailSendable(javaMailSender(), templateEngine, new Context(), url);
     }
 
     @Bean
