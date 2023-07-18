@@ -2,6 +2,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { RecoilRoot } from 'recoil';
 import { Suspense, useEffect, useState } from 'react';
 import { ReactQueryDevtools } from 'react-query/devtools';
+import { useEffect, useState } from 'react';
 
 import './App.css';
 import GlobalStyle from './style/GlobalStyle.ts';
@@ -22,16 +23,31 @@ import MyShellsPage from './page/myshells/MyShellsPage.tsx';
 import OfferedShellsPage from './page/offeredshells/OfferedShellsPage.tsx';
 import DirectMessage from './page/directmessage/DirectMessage.tsx';
 import Loading from './common/loading/Loading.tsx';
+import { useGetShells } from './hooks/shells/useShellsId.ts';
+import { useRecoilState } from 'recoil';
+import { userState } from './recoil/atom.ts';
+
 import SearchPage from './page/searchpage/SearchPage.tsx';
 
 function App() {
+
+
+  const [user, setUser] = useRecoilState(userState);
+
+  useEffect(() => {
+    const accessToken = localStorage.getItem('accessToken');
+    if (accessToken !== null && accessToken !== undefined) {
+      const userData = localStorage.getItem('userData');
+      if (userData) {
+        setUser(userData);
+      }
+    }
+  }, []);
   return (
-    <RecoilRoot>
-      <BrowserRouter>
-        <GlobalStyle />
-        <main>
-          <Nav />
-          {/* checkNav 함수를 페이지 url에 따라서 바뀌도록 설정 true false 결과값으로 */}
+    <BrowserRouter>
+      <GlobalStyle />
+      <main>
+            <Nav />
           <div className="inner">
             <Suspense fallback={<Loading />}>
               <Routes>
@@ -49,15 +65,15 @@ function App() {
                 <Route path="/myshells/:id" element={<MyShellsPage />} />
                 <Route path="/offer/:id" element={<OfferedShellsPage />} />
                 <Route path="/dm/:id" element={<DirectMessage />} />
-                <Route path="/search" Component={SearchPage} />
+                <Route path="/search" element={<SearchPage/>} />
+
               </Routes>
             </Suspense>
             <Footer />
           </div>
         </main>
       </BrowserRouter>
-      <ReactQueryDevtools initialIsOpen={false} />
-    </RecoilRoot>
+
   );
 }
 

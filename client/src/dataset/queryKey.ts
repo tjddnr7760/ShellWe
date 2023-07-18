@@ -15,4 +15,5 @@ export enum queryKeys {
   sembers = 'members',
   cart = 'cart',
   email = 'email',
+  myshells = 'myshells',
 }
