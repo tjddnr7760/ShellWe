@@ -23,15 +23,21 @@ const ContentBox = styled.div`
 `;
 
 const Title = styled.div`
-  font-size: 20px;
+  font-size: 26px;
 `;
 
 const Notice = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
   background-color: #fff;
   border-radius: 5px;
   border: 0.5px solid rgba(0, 0, 0, 0.5);
   padding: 20px;
-  line-height: 120%;
+  width: 300px;
+  height: 150px;
+  line-height: 150%;
+  font-size: 20px;
 `;
 
 const ButtonBox = styled.div`

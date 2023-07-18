@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import Profile from '../../component/profile/profile.tsx';
+import Profile from '../../component/profile/Profile.tsx';
 import ProfileTab from '../../component/profile/ProfileTab';
 import EditProfile from '../../component/profile/EditProfile';
 import ChangePassword from '../../component/profile/ChangePassword';
@@ -11,8 +11,8 @@ import { Member } from '../../hooks/profile/useGetMember';
 const MyPage = () => {
   const [selectedComponent, setSelectedComponent] = useState('edit');
 
-  // useGetMember(memberId) <= login recoil memberId
-  const { data } = useGetMember(2);
+  // useGetMember(memberId) <= login recoil memberId로 수정
+  const { data } = useGetMember(1);
   const memberInfo: Member = data.data;
   const handelComponent = (componentName: string) => {
     setSelectedComponent(componentName);

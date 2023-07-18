@@ -6,7 +6,7 @@ import {
   ImgandNameContainer,
   IntroductionContainer,
   UserImgBox,
-} from './profile.styled';
+} from './Profile.styled';
 import { Member } from '../../hooks/profile/useGetMember';
 
 const Profile = ({ memberInfo }: { memberInfo: Member }) => {

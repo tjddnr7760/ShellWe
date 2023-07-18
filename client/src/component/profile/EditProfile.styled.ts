@@ -1,4 +1,3 @@
-/* eslint-disable import/no-unresolved */
 import styled from 'styled-components';
 import { SmallButton6 } from '../../common/button/Button.styled';
 
@@ -21,27 +20,45 @@ const ContentBox = styled.div`
   flex-direction: column;
   gap: 10px;
 `;
+const ProfileImageBox = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  width: 250px;
+  height: auto;
+`;
 
 const ProfileImage = styled.div`
   display: flex;
   flex-direction: column;
-  justify-content: flex-end;
+  justify-content: center;
   align-items: center;
-  max-width: 150px;
-  max-height: fit-content;
+  width: 250px;
+  height: 250px;
   background-color: #ffffff;
   border: 0.5px solid rgba(0, 0, 0, 0.5);
-  border-radius: 10px;
+  border-radius: 10px 10px 0px 0px;
   font-size: 20px;
   overflow: hidden;
 `;
 
-const Image = styled.img`
+const ImageBox = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
   width: 100%;
-  height: fit-content; // img 밑에 텍스트인 "change picture" 요소의 높이를 15% 줬기 때문입니다.
+  height: auto;
 `;
 
-const Title = styled.div``;
+const Image = styled.img`
+  width: 100%;
+  height: 100%;
+`;
+
+const Title = styled.div`
+  font-size: 20px;
+`;
 
 const TextDiv = styled.div`
   display: flex;
@@ -50,22 +67,31 @@ const TextDiv = styled.div`
   align-items: center;
   text-align: center;
   background-color: #023e8a;
-  font-size: 16px;
+  font-size: 20px;
   color: #fff;
   border-radius: 0px 0px 10px 10px;
-  padding: 5px;
+  padding: 10px;
 `;
 
-const NicknameInput = styled.input`
+const DisplayNameInput = styled.input`
+  font-size: 20px;
   min-width: 100px;
   max-width: 320px;
+  height: 30px;
+  border-radius: 5px;
+  border: 0.5px solid rgba(0, 0, 0, 0.5);
+  padding: 10px;
 `;
 
-const IntroductionInput = styled.input`
+const IntroductionInput = styled.textarea`
+  font-size: 20px;
   min-width: 100px;
-  max-width: 320px;
+  max-width: 600px;
   min-height: 150px;
   max-height: fit-content;
+  border-radius: 5px;
+  border: 0.5px solid rgba(0, 0, 0, 0.5);
+  padding: 10px;
 `;
 
 const SaveButton = styled(SmallButton6)`
@@ -86,13 +112,15 @@ const ButtonBox = styled(ContentBox)`
 export {
   Wrapper,
   ProfileImage,
+  ProfileImageBox,
   Title,
   TextDiv,
   ContentBox,
-  NicknameInput,
+  DisplayNameInput,
   IntroductionInput,
   SaveButton,
   CancelButton,
   ButtonBox,
   Image,
+  ImageBox,
 };

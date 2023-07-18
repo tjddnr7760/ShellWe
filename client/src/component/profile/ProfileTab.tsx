@@ -32,13 +32,13 @@ const TabButton = styled.div`
   }
 `;
 
-export { TabButton, TabContainer, Wrapper }
+export { TabButton, TabContainer, Wrapper };
 
 interface ProfileTabProps {
   handleComponent: (componentName: string) => void;
 }
 
-const ProfileTab = ( {handleComponent}: ProfileTabProps) => {
+const ProfileTab = ({ handleComponent }: ProfileTabProps) => {
   const [selectedTab, setSelectedTab] = useState('edit');
 
   const handleTabClick = (Tab: string) => {
