@@ -38,31 +38,6 @@ const ShellDetail = ({ handlePoke, handleOpenSidebar }: ShellDetailProps) => {
     setSeeMoreBody(!seeMoreBody);
   };
 
-  const getShellDetailData = async () => {
-    try {
-      const url = 'https://a850-211-205-212-176.ngrok-free.app/shells/1';
-      const res = await axios.get(url, {
-        headers: {
-          'ngrok-skip-browser-warning': '69420',
-        },
-      });
-      if (res.status !== 200) {
-        // throw new Error (`Response status is `${res.status}``)
-      }
-
-      if (res.status === 200) {
-        setShellDetailData(res.data);
-        console.log(res.data);
-      }
-    } catch (err) {
-      console.error(err);
-    }
-  };
-
-  useEffect(() => {
-    getShellDetailData();
-  }, []);
-
   return (
     <Wrapper>
       <ShellInfoContainer>

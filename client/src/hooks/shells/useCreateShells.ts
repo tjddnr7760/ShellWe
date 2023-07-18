@@ -1,28 +1,33 @@
 import { useMutation } from 'react-query';
 import { useNavigate } from 'react-router-dom';
-import { axiosInstance, getHeader } from '../../utill/axiosInstance';
+import { axiosInstance, getPostHeader } from '../../utill/axiosInstance';
 
 const getShell = async (requestData: FormData) => {
   const { data } = await axiosInstance({
     url: `/shells`,
     method: 'post',
     data: requestData,
-    headers: getHeader(),
+    headers: getPostHeader(),
   });
   return { data };
 };
 
 //제품 생성
-export const useCreateShells = (requestData: FormData) => {
+export const useCreateShells = () => {
   const navigate = useNavigate();
 
-  const { data = {}, mutate } = useMutation(() => getShell(requestData), {
-    onSuccess: (responseData) => {
-      navigate(`shelldetail/${responseData?.data?.id}`);
-    },
-  });
-
-  return { data, mutate };
+  const { mutate } = useMutation(
+    (requestData: FormData) => getShell(requestData),
+    {
+      onSuccess: (responseData) => {
+        navigate(`shelldetail/${responseData?.data?.id}`);
+      },
+    }
+  );
+  const handleMutate = (requestData: FormData) => {
+    mutate(requestData);
+  };
+  return { mutate: handleMutate };
 };
 
 //사용 예

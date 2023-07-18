@@ -1,4 +1,7 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { RecoilRoot } from 'recoil';
+import { Suspense, useEffect, useState } from 'react';
+import { ReactQueryDevtools } from 'react-query/devtools';
 import { useEffect, useState } from 'react';
 
 import './App.css';
@@ -13,7 +16,6 @@ import LoginPage from './page/login/LoginPage.tsx';
 import ShellCreate from './page/shellcreate/ShellCreate.tsx';
 import ShellUpdate from './page/shellupdate/ShellUpdate.tsx';
 import ProductShell from './page/productshell/ProductShell.tsx';
-import { useIsFetching } from 'react-query';
 import TalentShell from './page/talentshell/TalentShell.tsx';
 import ShellDetailPage from './page/shelldetail/ShellDetailPage.tsx';
 import MyPage from './page/mypage/MyPage.tsx';
@@ -28,6 +30,7 @@ import { userState } from './recoil/atom.ts';
 import SearchPage from './page/searchpage/SearchPage.tsx';
 
 function App() {
+
 
   const [user, setUser] = useRecoilState(userState);
 
@@ -46,26 +49,31 @@ function App() {
       <main>
             <Nav />
           <div className="inner">
-          <Routes>
-            <Route path="/" element={<HomePage />} />
-            <Route path="/main" element={<MainPage />} />
-            <Route path="/signup" element={<SignupPage />} />
-            <Route path="/aftersignup" element={<AfterSignUp />} />
-            <Route path="/login" element={<LoginPage />} />
-            <Route path="/shelllist/product" element={<ProductShell />} />
-            <Route path="/shelllist/talent" element={<TalentShell />} />
-            <Route path="/shellcreate" element={<ShellCreate />} />
-            <Route path="/shelldetail/:id/update" element={<ShellUpdate />} />
-            <Route path="/shelldetail/:id" element={<ShellDetailPage />} />
-            <Route path="/member/:id" element={<MyPage />} />
-            <Route path="/myshells/:id" element={<MyShellsPage />} />
-            <Route path="/offer/:id" element={<OfferedShellsPage />} />
-            <Route path="/dm/:id" element={<DirectMessage />} />
-          </Routes>
-          <Footer />
-        </div>
-      </main>
-    </BrowserRouter>
+            <Suspense fallback={<Loading />}>
+              <Routes>
+                <Route path="/" element={<HomePage />} />
+                <Route path="/main" element={<MainPage />} />
+                <Route path="/signup" element={<SignupPage />} />
+                <Route path="/aftersignup" element={<AfterSignUp />} />
+                <Route path="/login" element={<LoginPage />} />
+                <Route path="/shelllist/product" element={<ProductShell />} />
+                <Route path="/shelllist/talent" element={<TalentShell />} />
+                <Route path="/shellcreate" element={<ShellCreate />} />
+                <Route path="/shellupdate/:id" element={<ShellUpdate />} />
+                <Route path="/shelldetail/:id" element={<ShellDetailPage />} />
+                <Route path="/member/:id" element={<MyPage />} />
+                <Route path="/myshells/:id" element={<MyShellsPage />} />
+                <Route path="/offer/:id" element={<OfferedShellsPage />} />
+                <Route path="/dm/:id" element={<DirectMessage />} />
+                <Route path="/search" element={<SearchPage/>} />
+
+              </Routes>
+            </Suspense>
+            <Footer />
+          </div>
+        </main>
+      </BrowserRouter>
+
   );
 }
 

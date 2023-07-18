@@ -9,34 +9,116 @@ import {
   CreateBody,
   CreateImgContainer,
   CreateMainImgWrapper,
-  CreateImgImgListWrapper,
+  CreateImgListWrapper,
   ButtonContainer,
   ShellCreatePage,
+  TitleImg,
+  Logo,
+  LogoWrapper,
+  TitleExplanation,
+  TitleImgWrapper,
 } from './ShellCreate.styled.js';
 import Tag from '../../common/tag/Tag.js';
-const ShellCreate: React.FC = () => {
+import { ImageUploader } from '../../component/imageuploader/ImageUploder.tsx';
+import { useCreateShells } from '../../hooks/shells/useCreateShells.ts';
+
+const ShellCreate = () => {
+  const [selectedCateory, setSelectedCateory] = useState({
+    name: '카테고리',
+    categoryid: '',
+    type: '',
+  });
+  const formData = new FormData();
+  const { mutate: handleCreateMutate } = useCreateShells();
+
+  const [title, setTitle] = useState<string>('');
+  const [content, setContent] = useState<string>('');
+  const [tagList, setTagList] = useState<string[]>([]);
+  const [uploadedImages, setUploadedImages] = useState<File[]>([]);
+
+  const handleInputChange = (
+    e:
+      | React.ChangeEvent<HTMLInputElement>
+      | React.ChangeEvent<HTMLTextAreaElement>
+  ) => {
+    if (e.target instanceof HTMLInputElement) {
+      setTitle(e.target.value);
+    } else if (e.target instanceof HTMLTextAreaElement) {
+      setContent(e.target.value);
+    }
+  };
+
+  const handleContentSubmit = async () => {
+    const register = {
+      title: title,
+      body: content,
+      type: selectedCateory.type,
+      category: selectedCateory.categoryid,
+      tags: tagList,
+    };
+
+    formData.append(
+      'register',
+      new Blob([JSON.stringify(register)], { type: 'application/json' })
+    );
+    uploadedImages.forEach((image) => {
+      formData.append(`pictures `, image); // 이미지 파일 추가
+    });
+
+    handleCreateMutate(formData);
+  };
   return (
     <ShellCreatePage>
       <ShellCreateContainer>
-        <img src="/createLogo.svg" alt="createLogo" />
-        <CreateCateory />
+        <LogoWrapper>
+          <Logo src="/createLogo.svg" alt="createLogo" />
+        </LogoWrapper>
+        <CreateCateory
+          selectedCateory={selectedCateory}
+          setSelectedCateory={setSelectedCateory}
+        />
         <CreateTitleWrapper>
           <CreateInput
+            value={title}
+            onChange={handleInputChange}
             type="text"
             placeholder="제목을 입력하세요"
-          ></CreateInput>
+          />
         </CreateTitleWrapper>
         <CreateImgContainer>
-          <CreateMainImgWrapper />
-          <CreateImgImgListWrapper />
+          <CreateMainImgWrapper>
+            <TitleImgWrapper>
+              {uploadedImages[0] ? (
+                <TitleImg
+                  src={URL.createObjectURL(uploadedImages[0])}
+                  alt="title_img"
+                />
+              ) : null}
+            </TitleImgWrapper>
+            <TitleExplanation>
+              물건이 명확하게 보이거나 자신의 재능을 표현할 수 있는 사진을
+              올려주세요
+            </TitleExplanation>
+          </CreateMainImgWrapper>
+          <CreateImgListWrapper>
+            <ImageUploader
+              uploadedImages={uploadedImages}
+              setUploadedImages={setUploadedImages}
+            />
+          </CreateImgListWrapper>
         </CreateImgContainer>
 
         <CreateBodyWrapper>
-          <CreateBody minRows={10} placeholder="내용을 입력하세요" />
+          <CreateBody
+            value={content}
+            onChange={handleInputChange}
+            minRows={10}
+            placeholder="내용을 입력하세요"
+          />
         </CreateBodyWrapper>
-        <Tag />
+        <Tag tagList={tagList} setTagList={setTagList} />
         <ButtonContainer>
-          <SmallButton6>수정</SmallButton6>
+          <SmallButton6 onClick={handleContentSubmit}>등록</SmallButton6>
         </ButtonContainer>
       </ShellCreateContainer>
     </ShellCreatePage>

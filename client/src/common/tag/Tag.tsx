@@ -1,10 +1,12 @@
-import React, { ChangeEvent, useState } from 'react';
+import React, { ChangeEvent, Dispatch, SetStateAction, useState } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 import { TagContainer, TagInput } from './Tag.styled';
 import TagBox from './TagBox.tsx';
-
-const Tag: React.FC = () => {
-  const [tags, setTags] = useState<string[]>([]);
+interface TagProps {
+  tagList: string[];
+  setTagList: Dispatch<SetStateAction<string[]>>;
+}
+const Tag = ({ tagList, setTagList }: TagProps) => {
   const [inputTagValue, setInputTagValue] = useState<string>('');
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -16,22 +18,22 @@ const Tag: React.FC = () => {
       e.preventDefault();
       const tag = inputTagValue.trim();
 
-      if (tag !== '' && tags.length < 4) {
-        setTags([...tags, tag]);
+      if (tag !== '' && tagList.length < 4) {
+        setTagList([...tagList, tag]);
       }
       setInputTagValue('');
     }
   };
 
   const handleRemove = (index: number) => {
-    const updatedTags = [...tags];
+    const updatedTags = [...tagList];
     updatedTags.splice(index, 1);
-    setTags(updatedTags);
+    setTagList(updatedTags);
   };
 
   return (
     <TagContainer>
-      {tags.map((tag, index) => (
+      {tagList.map((tag, index) => (
         <TagBox
           key={uuidv4()}
           index={index}
