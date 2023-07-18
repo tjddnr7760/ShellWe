@@ -21,7 +21,7 @@ const ShellList = ({ pagetype }: { pagetype: string }) => {
     pagetype === 'product' ? 'p_all' : 't_all'
   );
   const { ShellsListData, hasNextPage, loadMore } = useInfiniteScroll(
-    2,
+    8,
     pagetype,
     category
   );

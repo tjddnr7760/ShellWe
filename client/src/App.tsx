@@ -51,7 +51,7 @@ function App() {
               <Route path="/myshells/:id" element={<MyShellsPage />} />
               <Route path="/offer/:id" element={<OfferedShellsPage />} />
               <Route path="/dm/:id" element={<DirectMessage />} />
-              <Route path="/search" Component={SearchPage} />
+              <Route path="/search" element={<SearchPage />} />
             </Routes>
             {isFetching ? <Loading /> : null}
             <Footer />
