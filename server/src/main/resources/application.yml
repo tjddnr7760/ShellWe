@@ -75,8 +75,8 @@ cloud:
     stack:
       auto: false
     credentials:
-      accesskey: ${AWS_ACCESS_KEY}
-      secretkey: ${AWS_SECRET_KEY}
+      accesskey: ${AWS_IAM_ACCESS_KEY}
+      secretkey: ${AWS_IAM_SECRET_KEY}
   s3:
     bucket: shellwepicture
     folder:
