@@ -1,5 +1,11 @@
-import { MyShellsContainer, ImgBox, ShellImg, ShellInfoBox , Text} from "./MyShells.styled";
-import example from '../../asset/example.png'
+import {
+  MyShellsContainer,
+  ImgBox,
+  ShellImg,
+  ShellInfoBox,
+  Text,
+} from './MyShells.styled';
+import example from '../../asset/example.png';
 
 const MyShells = () => {
   return (

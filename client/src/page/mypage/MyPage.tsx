@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import Profile from '../../component/profile/profile.tsx';
+import Profile from '../../component/profile/Profile.tsx';
 import ProfileTab from '../../component/profile/ProfileTab';
 import EditProfile from '../../component/profile/EditProfile';
 import ChangePassword from '../../component/profile/ChangePassword';
@@ -15,7 +15,7 @@ const MyPage = () => {
   return (
     <MyPageWrapper>
       <MyPageContainer>
-        <Profile />
+        <Profile showTags={false} />
         <ProfileTab handleComponent={handelComponent}></ProfileTab>
         {selectedComponent === 'edit' && <EditProfile></EditProfile>}
         {selectedComponent === 'change' && <ChangePassword></ChangePassword>}

@@ -1,5 +1,6 @@
 export enum queryKeys {
   shells = 'shells',
+  shellList = 'shellList',
   shellsDetail = 'shellsDetail',
   home = 'home',
   main = 'main',
@@ -13,4 +14,5 @@ export enum queryKeys {
   sembers = 'members',
   cart = 'cart',
   email = 'email',
+  myshells = 'myshells',
 }

@@ -3,7 +3,6 @@ import { useEffect, useState } from 'react';
 
 import './App.css';
 import GlobalStyle from './style/GlobalStyle.ts';
-import Header from './component/header/Header.tsx';
 import Footer from './component/footer/Footer.tsx';
 import Nav from './component/nav/Nav.tsx';
 import HomePage from './page/home/HomePage.tsx';
@@ -25,10 +24,11 @@ import Loading from './common/loading/Loading.tsx';
 import { useGetShells } from './hooks/shells/useShellsId.ts';
 import { useRecoilState } from 'recoil';
 import { userState } from './recoil/atom.ts';
+
+import SearchPage from './page/searchpage/SearchPage.tsx';
+
 function App() {
-  const [isLogin, setIsLogin] = useState(true);
-  const isFetching = useIsFetching();
-  const { data } = useGetShells(1);
+
   const [user, setUser] = useRecoilState(userState);
 
   useEffect(() => {
@@ -43,15 +43,9 @@ function App() {
   return (
     <BrowserRouter>
       <GlobalStyle />
-      <main className={isLogin ? 'login' : 'nologin'}>
-        {isLogin ? (
-          <>
+      <main>
             <Nav />
-          </>
-        ) : null}
-        {/* checkNav 함수를 페이지 url에 따라서 바뀌도록 설정 true false 결과값으로 */}
-        {isLogin ? null : <Header />}
-        <div className="inner">
+          <div className="inner">
           <Routes>
             <Route path="/" element={<HomePage />} />
             <Route path="/main" element={<MainPage />} />
@@ -68,7 +62,6 @@ function App() {
             <Route path="/offer/:id" element={<OfferedShellsPage />} />
             <Route path="/dm/:id" element={<DirectMessage />} />
           </Routes>
-          {isFetching ? <Loading /> : null}
           <Footer />
         </div>
       </main>
