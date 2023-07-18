@@ -1,0 +1,84 @@
+spring:
+  datasource:
+    url: jdbc:mysql://localhost:3306/shellweprototype?useSSL=false
+    username: root
+    password: ${MYSQL_ROOT_PASSWORD}
+    driverClassName: com.mysql.cj.jdbc.Driver
+  jpa:
+    database-platform: org.hibernate.dialect.MySQL8Dialect
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+        jdbc:
+          time_zone: Asia/Seoul
+  servlet:
+    multipart:
+      max-file-size: 25MB
+      max-request-size: 25MB
+  sql:
+    init:
+      data-locations: classpath*:db/mysql/data.sql
+  security:
+    oauth2:
+      client:
+        registration:
+          google:
+            clientId: ${GOOGLE_OAUTH_CLIENT_ID}
+            clientSecret: ${GOOGLE_OAUTH_SECRET_KEY}
+            scope:
+              - profile
+              - email
+mail:
+  smtp:
+    host: smtp.gmail.com
+    port: 587
+    username: ${GMAIL_SMTP_USERNAME}
+    password: ${GMAIL_SMTP_PASSWORD}
+    auth: true
+    starttls:
+      enable: true
+  subject:
+    member:
+      registration: Welcome to ShellWe Project
+  template:
+    name:
+      member:
+        join: email-registration-member
+logging:
+  level:
+    org:
+      springframework:
+        orm:
+          jpa: DEBUG
+
+server:
+  servlet:
+    encoding:
+      force-response: true
+jwt:
+  key: ${JWT_SECRET_KEY}
+  access-token-expiration-minutes: 2000
+  refresh-token-expiration-minutes: 600
+
+redirect:
+  # 이메일 인증 성공시, 아직 url 페이지 없음, 이메일 인증 성공시 white error 뜰 예정(이메일 인증은 성공)
+  email-verification-success-url : "/login"
+# S3 연결 설정
+cloud:
+  aws:
+    region:
+      use-default-aws-region-chain: false
+      static: ap-northeast-2
+    stack:
+      auto: false
+    credentials:
+      accesskey: ${AWS_IAM_ACCESS_KEY}
+      secretkey: ${AWS_IAM_SECRET_KEY}
+  s3:
+    bucket: shellwepicture
+    folder:
+      folderName1: member/
+      folderName2: shell/

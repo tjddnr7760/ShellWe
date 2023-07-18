@@ -1,0 +1,28 @@
+package com.shellwe.websocket.dto;
+
+import lombok.Builder;
+import lombok.Getter;
+
+import javax.validation.constraints.Positive;
+
+public class RoomDto {
+    @Builder
+    @Getter
+    public static class Post{
+        @Positive
+        private long myShellId;
+        @Positive
+        private long sellerShellId;
+        @Positive
+        private long sellerMemberId;
+    }
+
+    @Builder
+    @Getter
+    public static class Response{
+        private long id;
+        private long unread;
+        private String lastMessage;
+        private MemberDto.Response member;
+    }
+}
