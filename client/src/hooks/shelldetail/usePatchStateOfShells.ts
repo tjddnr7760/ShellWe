@@ -1,10 +1,10 @@
 import { useMutation } from 'react-query';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { axiosInstance, getHeader } from '../../utill/axiosInstance';
 import { ShellStatus } from '../../dataset/ShellDetailType';
 
 const patchStatusofShells = async (
-  shellId: number,
+  shellId: string,
   requestData: ShellStatus
 ) => {
   const { data } = await axiosInstance({
@@ -17,17 +17,15 @@ const patchStatusofShells = async (
 };
 
 //제품 업데이트
-export const usePatchStateOfShell = (
-  shellId: number,
-  requestData: ShellStatus
-) => {
+export const usePatchStateOfShell = (requestData: ShellStatus) => {
   const navigate = useNavigate();
+  const { id } = useParams();
 
   const { data = {}, mutate } = useMutation(
-    () => patchStatusofShells(shellId, requestData),
+    () => patchStatusofShells(id as string, requestData),
     {
       onSuccess: () => {
-        navigate(`shelldetail/${shellId}`);
+        navigate(`/shelldetail/${id}`);
       },
     }
   );

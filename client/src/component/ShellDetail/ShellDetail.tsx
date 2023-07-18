@@ -25,10 +25,10 @@ const ShellDetail = ({
   handleOpenSidebar,
   shellDetailData,
 }: ShellDetailProps) => {
-
   const [seeMoreBody, setSeeMoreBody] = useState(false);
   // tags, category 서버 데이터 가공
   const tags = shellDetailData.tags.map((tag: Tag) => tag.tagName);
+  console.log(tags);
   const category: string = shellDetailData.category.slice(2).toUpperCase();
 
   // (recoil memberId 완료 시, 수정 필요)
@@ -60,21 +60,28 @@ const ShellDetail = ({
         ) : (
           <SeeMoreBody category={category} body={shellDetailData.body} />
         )}
-        <Div>
-          {tags.map((tag: string) => (
-            <TagBox key={uuidv4()} type="read" tag={tag} />
-          ))}
-        </Div>
+        {tags[0] !== null && (
+          <Div>
+            <span>Hope to change</span>
+            <div>
+              {tags.map((tag: string) => (
+                <TagBox key={uuidv4()} type="read" tag={tag} />
+              ))}
+            </div>
+          </Div>
+        )}
         <SeeMore onClick={handleSeeMoreBody}>
           {seeMoreBody === false ? '더 보기' : '접기'}
         </SeeMore>
       </ShellInfoContainer>
-      <PokeBox>
-        <PokeButton onClick={handlePoke}>
-          <img src={Poke} alt="pokeicon" />
-          찌르기
-        </PokeButton>
-      </PokeBox>
+      {myMemberId !== shellDetailData.member.id && (
+        <PokeBox>
+          <PokeButton onClick={handlePoke}>
+            <img src={Poke} alt="pokeicon" />
+            찌르기
+          </PokeButton>
+        </PokeBox>
+      )}
     </Wrapper>
   );
 };

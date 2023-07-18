@@ -8,12 +8,10 @@ import { usePatchStateOfShell } from '../../hooks/shelldetail/usePatchStateOfShe
 
 const DetailPageSidebar = ({ shellStatus }: { shellStatus: string }) => {
   const navigate = useNavigate();
-
   const { id } = useParams();
-  const paramsShellId = Number(id);
 
-  const { mutate: deleteShell } = useDeleteShells(paramsShellId);
-  const { mutate: patchStateOfShell } = usePatchStateOfShell(paramsShellId, {
+  const { mutate: deleteShell } = useDeleteShells();
+  const { mutate: patchStateOfShell } = usePatchStateOfShell({
     status: shellStatus,
   });
 

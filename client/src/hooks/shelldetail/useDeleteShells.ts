@@ -1,9 +1,9 @@
 import { useMutation } from 'react-query';
 import { axiosInstance, getHeader } from '../../utill/axiosInstance';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 
 interface GetShellsArgs {
-  (shellId: number, method: string, isHeader?: boolean): Promise<any>;
+  (shellId: string, method: string, isHeader?: boolean): Promise<any>;
 }
 
 const deleteShells: GetShellsArgs = async (shellId, method) => {
@@ -15,15 +15,15 @@ const deleteShells: GetShellsArgs = async (shellId, method) => {
   return { data };
 };
 
-// 제품 삭제(DELETE)
-export const useDeleteShells = (shellId: number) => {
+export const useDeleteShells = () => {
   const navigate = useNavigate();
+  const { id } = useParams();
 
   const { data = {}, mutate } = useMutation(
-    () => deleteShells(shellId, 'delete'),
+    () => deleteShells(id as string, 'delete'),
     {
       onSuccess: () => {
-        navigate(`main`);
+        navigate(`/main`);
       },
     }
   );

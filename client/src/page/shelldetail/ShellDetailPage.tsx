@@ -1,10 +1,9 @@
 import { useState, useEffect } from 'react';
-// import { useParams } from 'react-router-dom';
 import { useGetShellDetail } from '../../hooks/shelldetail/useShellsDetailId.ts';
-import ShellImgPreview from '../../component/shellimgpreview/ShellImgPreview';
-import ShellDetail from '../../component/shelldetail/ShellDetail';
-import DetailPageSidebar from '../../component/detailpagesidebar/DetailPageSidebar';
-import OfferModal from '../../component/offermodal/OfferModal';
+import ShellImgPreview from '../../component/shellimgpreview/ShellImgPreview.tsx';
+import ShellDetail from '../../component/ShellDetail/ShellDetail.tsx';
+import DetailPageSidebar from '../../component/DetailPageSidebar/DetailPageSidebar.tsx';
+import OfferModal from '../../component/OfferModal/OfferModal.tsx';
 import {
   DetailPageContainer,
   Div,
@@ -16,9 +15,9 @@ import { ShellDetailDataProps } from '../../dataset/ShellDetailType.ts';
 import { useGetMyShellToPoke } from '../../hooks/shelldetail/useGetPokeShellsList.ts';
 
 const ShellDetailPage = () => {
-  // 인자: const { id } = useParams; 판매자의 shellId
-  const { data } = useGetShellDetail(5);
+  const { data } = useGetShellDetail();
   const shellDetailData: ShellDetailDataProps = data.data;
+
   // 인자: recoil login 상태 memberId; 구매자의 memberId
   const { data: modaldata } = useGetMyShellToPoke(2);
   const myShellListsData = modaldata.data.shells; // 추후 타입 정의해야 함
@@ -26,7 +25,6 @@ const ShellDetailPage = () => {
   const [modalVisible, setModalVisible] = useState(false);
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [modalData, setModalData] = useState([]);
-
   const shellStatus: string = shellDetailData.status;
 
   const handleOpenSidebar = () => {
@@ -48,7 +46,7 @@ const ShellDetailPage = () => {
       <DetailPageContainer>
         <ContentDiv>
           <PreviewDiv>
-            <ShellImgPreview />
+            <ShellImgPreview clickedShellPictures={shellDetailData.pictures} />
           </PreviewDiv>
           <Div>
             <ShellDetail

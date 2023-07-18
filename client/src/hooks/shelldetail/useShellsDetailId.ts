@@ -1,9 +1,10 @@
 import { useQuery } from 'react-query';
+import { useParams } from 'react-router-dom';
 import { axiosInstance, getHeader } from '../../utill/axiosInstance';
 import { queryKeys } from '../../dataset/queryKey';
 
 interface GetShellsArgs {
-  (shellId: number, method: string, isHeader?: boolean): Promise<any>;
+  (shellId: string, method: string, isHeader?: boolean): Promise<any>;
 }
 
 const getShellId: GetShellsArgs = async (shellId, method, isHeader = false) => {
@@ -17,10 +18,10 @@ const getShellId: GetShellsArgs = async (shellId, method, isHeader = false) => {
   return { data };
 };
 
-//제품 상세 조회(GET)
-export const useGetShellDetail = (shellId: number) => {
+export const useGetShellDetail = () => {
+  const { id } = useParams();
   const { data = {} } = useQuery(queryKeys.shellsDetail, () =>
-    getShellId(shellId, 'get', true)
+    getShellId(id as string, 'get', true)
   );
 
   return { data };

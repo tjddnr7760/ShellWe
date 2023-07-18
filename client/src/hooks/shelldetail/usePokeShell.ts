@@ -1,5 +1,5 @@
 import { useMutation } from 'react-query';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { axiosInstance, getHeader } from '../../utill/axiosInstance';
 import {
   RequestBodyForPoke,
@@ -21,13 +21,15 @@ const postBuyerShellsId = async (
 
 export const usePokeShell = (sellerMemberId: number) => {
   const navigate = useNavigate();
+  const { id } = useParams();
+
   const { mutate } = useMutation(
     (requestBodyForPoke: RequestBodyForPoke) =>
       postBuyerShellsId(requestBodyForPoke, sellerMemberId),
     {
-      onSuccess: (data: ApiResponseOfPokeShell) => {
-        const redirectUrl = data.redirectUrl;
-        navigate(`${redirectUrl}`);
+      onSuccess: () => {
+        navigate(`/shelldetail/${id}`);
+        window.location.reload();
       },
     }
   );

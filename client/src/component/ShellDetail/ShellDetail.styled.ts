@@ -43,12 +43,19 @@ const DisplayName = styled.span`
 
 const Div = styled.div`
   display: flex;
-  align-items: center;
+  flex-direction: column;
   border: 0.5px solid rgba(0, 0, 0, 0.3);
   border-radius: 10px;
-  font-size: 16px;
+  font-size: 20px;
   padding: 10px;
   background-color: #ffffff;
+  gap: 5px;
+
+  div {
+    display: flex;
+    gap: 10px;
+    margin: 0;
+  }
 `;
 
 const Hamburger = styled.div`
