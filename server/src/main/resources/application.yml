@@ -61,8 +61,8 @@ server:
       force-response: true
 jwt:
   key: ${JWT_SECRET_KEY}
-  access-token-expiration-minutes: 500
-  refresh-token-expiration-minutes: 600
+  access-token-expiration-minutes: 10000
+  refresh-token-expiration-minutes: 5000
 
 redirect:
   # 이메일 인증 성공시, 아직 url 페이지 없음, 이메일 인증 성공시 white error 뜰 예정(이메일 인증은 성공)
