@@ -10,7 +10,7 @@ const postAcceptShell = async (
   requestBody: RequestBodyForAccept
 ): Promise<ApiResponseOfAcceptShell> => {
   const { data } = await axiosInstance({
-    url: `chat`,
+    url: `/chat`,
     method: 'post',
     data: requestBody,
     headers: getHeader(),
