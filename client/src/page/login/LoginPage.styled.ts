@@ -110,3 +110,15 @@ export const LoginButton = styled.button`
     transform: translateY(2px);
   }
 `;
+
+export const LoginSubFuntionBox = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 130px;
+`;
+export const LoginSubFuntion = styled.div`
+  color: gray;
+  font-size: 12px;
+  cursor: pointer;
+`;

@@ -16,6 +16,8 @@ import {
   CheckError,
   CheckPosible,
   LoginButton,
+  LoginSubFuntionBox,
+  LoginSubFuntion,
 } from '../login/LoginPage.styled';
 import googlelogo from '../../asset/googlelogo.png';
 
@@ -85,6 +87,7 @@ const SignupPage = () => {
       }
     }
   };
+
 
   return (
     <LoginContainer>
