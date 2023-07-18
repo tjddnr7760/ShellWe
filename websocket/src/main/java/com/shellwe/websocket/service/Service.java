@@ -26,6 +26,7 @@ import org.springframework.web.socket.WebSocketSession;
 
 import javax.transaction.Transactional;
 import java.util.*;
+import java.util.stream.Collectors;
 
 @Slf4j
 @RequiredArgsConstructor
@@ -76,6 +77,14 @@ public abstract class Service {
         return member.getId();
     }
     protected long getRoomId(WebSocketSession session){
-        return Long.parseLong(session.getUri().getQuery().replace("roomId=",""));
+        try{
+            String roomId = Arrays.stream(session.getUri().getQuery().split("&")).filter(s->s.startsWith("roomId"))
+                    .collect(Collectors.toList())
+                    .get(0)
+                    .replace("roomId=","");
+            return Long.parseLong(roomId);
+        }catch(Exception e){
+            throw new BusinessLogicException(ExceptionCode.WRONG_ROOM_NUMBER);
+        }
     }
 }
