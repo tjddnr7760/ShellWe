@@ -194,7 +194,7 @@ public class MemberService {
         Optional<Member> member = memberRepository.findByEmail(email);
 
         if (member.isPresent()) {
-            throw new IllegalStateException();
+            throw new MemberLogicException(MemberExceptionCode.EMAIL_DUPLICATED);
         }
     }
 }
