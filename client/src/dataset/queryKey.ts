@@ -10,10 +10,12 @@ export enum queryKeys {
   search = 'search',
   oauth = 'oauth',
   inactive = 'inactive',
-  apeare = 'speare',
+  speare = 'speare',
   mctive = 'active',
   sembers = 'members',
   cart = 'cart',
   email = 'email',
   myshells = 'myshells',
+  chatList = 'chatList',
+  chatRoom = 'chatRoom',
 }
