@@ -1,22 +1,34 @@
-import styled from 'styled-components';
-import ResponseShell from "./ResponseShell";
+import { ResponseShellListWrapper } from './ResponseShell.styled';
+import ResponseShell from './ResponseShell';
+import { useOfferedShellsList } from '../../hooks/offer/useOfferedShellsList';
+import { OfferedShells } from '../../dataset/TypesOfferedShell';
+import { Pictures } from '../../dataset/TypesOfferedShell';
 
-const ResponseShellListWrapper = styled.div`
-width: 100%;
-max-height: 540px;
-overflow-y: scroll;
-`;
+const ResponseShellList = ({
+  clickedShellId,
+  HandleShellPreview,
+}: {
+  clickedShellId: number;
+  HandleShellPreview: (picture: Pictures[]) => void;
+}) => {
+  const { data: myOfferedShellsData } = useOfferedShellsList(clickedShellId);
+  const offeredShellsArray: OfferedShells[] = myOfferedShellsData?.shells || [];
 
-const ResponseShellList = () => {
-    return (
-      <ResponseShellListWrapper>
-        <ResponseShell />
-        <ResponseShell />
-        <ResponseShell />
-        <ResponseShell />
-        <ResponseShell />
-      </ResponseShellListWrapper>
-    );
-}
+  return (
+    <ResponseShellListWrapper>
+      {offeredShellsArray &&
+        offeredShellsArray.map((shell) => {
+          return (
+            <ResponseShell
+              key={shell.id}
+              shell={shell}
+              clickedShellId={clickedShellId}
+              HandleShellPreview={HandleShellPreview}
+            />
+          );
+        })}
+    </ResponseShellListWrapper>
+  );
+};
 
 export default ResponseShellList;

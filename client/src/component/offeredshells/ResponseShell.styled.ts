@@ -1,14 +1,19 @@
-/* eslint-disable import/no-unresolved */
 import styled from 'styled-components';
 import { SmallButton4 } from '../../common/button/Button.styled';
 
+const ResponseShellListWrapper = styled.div`
+  width: 100%;
+  height: 100%;
+  overflow-y: scroll;
+`;
+
 const ResponseShellWrapper = styled.div`
   display: flex;
-  /* max-width: 1150px; */
   height: fit-content;
   border-top: 0.5px solid rgba(0, 0, 0, 0.5);
-  gap: 15px;
-  padding: 15px;
+  gap: 30px;
+  padding: 30px;
+  align-items: center;
 `;
 
 const ShellsImageBox = styled.div`
@@ -17,10 +22,12 @@ const ShellsImageBox = styled.div`
   justify-content: center;
   align-items: center;
   max-width: 150px;
+  min-width: 145px;
   height: fit-content;
   overflow: hidden;
   border: 0.5px solid rgba(0, 0, 0, 0.5);
   border-radius: 10px;
+  flex-grow: 1;
 `;
 
 const ShellImg = styled.img`
@@ -30,16 +37,18 @@ const ShellImg = styled.img`
 const ShellsTextInfoBox = styled.div`
   display: flex;
   flex-direction: column;
-  flex-grow: 10;
+  max-width: 640px;
   border: 0.5px solid rgba(0, 0, 0, 0.5);
   border-radius: 10px;
+  font-size: 20px;
+  line-height: 25px;
 `;
 
 const TextBox = styled.div`
   display: flex;
   align-items: center;
   flex-grow: 1;
-  padding-left: 5px;
+  padding: 10px;
   border-bottom: 0.5px solid rgba(0, 0, 0, 0.5);
 `;
 
@@ -48,6 +57,7 @@ const BodyBox = styled.div`
   align-items: center;
   padding-left: 5px;
   flex-grow: 3;
+  padding: 10px;
 `;
 
 const AcceptInfo = styled.div`
@@ -73,6 +83,7 @@ const AcceptButton = styled(SmallButton4)`
 `;
 
 export {
+  ResponseShellListWrapper,
   ResponseShellWrapper,
   ShellsImageBox,
   ShellImg,
