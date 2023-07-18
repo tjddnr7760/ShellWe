@@ -53,7 +53,9 @@ public class WsChatService extends com.shellwe.websocket.service.Service {
         MemberDto.Response member = getMemberResponse(session);
         asyncService.saveMessage(chatMemberSessions, message, roomId, member.getId());
         sendMessage(session, message, member, roomId);
-        sendRoomInfo(session, message, roomId);
+
+//읽지않은 메세지 정보 표시 기능(보류하기로 결정)
+//        sendRoomInfo(session, message, roomId);
     }
     private void sendRoomInfo(WebSocketSession session, TextMessage message, long roomId){
         if(chatMemberSessions.get(roomId).getSessions().size()==1){
