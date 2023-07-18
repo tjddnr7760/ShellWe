@@ -17,10 +17,16 @@ const getImageFile = async (imageUrl: string) => {
   const file = new File([blob], `${uuidv4()}.jpg`, { type: blob.type });
   return file;
 };
-export const useImageUpload = (updateInitalImages: string) => {
-  const { data } = useQuery([queryKeys.imageData, updateInitalImages], () =>
-    getImageFile(updateInitalImages)
+export const useImageUpload = (updateInitalImages: string[]) => {
+  const queryResults = useQueries(
+    updateInitalImages.map((imageUrl) => ({
+      queryKey: ['convert to image file', imageUrl],
+      queryFn: () => {
+        console.log('re calling api with', imageUrl);
+        return getImageFile(imageUrl);
+      },
+    })) as readonly { queryKey: string[]; queryFn: () => Promise<File> }[]
   );
-  console.log(data);
-  return data;
+
+  return queryResults;
 };

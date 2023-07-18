@@ -25,7 +25,6 @@ import CreateCateory from '../../component/createcateory/CreateCateory.tsx';
 import { ImageUploader } from '../../component/imageuploader/ImageUploder.tsx';
 import { useUpdateShells } from '../../hooks/shells/useUpdateShells.ts';
 import { useImageUpload } from '../../hooks/shells/useImageUpload.ts';
-import { FileWithPath } from 'react-dropzone';
 import processData from '../../utill/processData.ts';
 
 const ShellUpdate: React.FC = () => {
@@ -36,6 +35,10 @@ const ShellUpdate: React.FC = () => {
   const urls = data?.data.pictures.map((item: { url: string }) => item.url);
   console.log(urls);
   const ImagesDate = useImageUpload(urls);
+  const s3UploadImages =
+    ImagesDate?.filter((queryResult) => Boolean(queryResult.data))?.map(
+      (queryResult) => queryResult.data
+    ) ?? [];
 
   const { mutate } = useUpdateShells();
   const [selectedCateory, setSelectedCateory] = useState({
@@ -46,7 +49,9 @@ const ShellUpdate: React.FC = () => {
   const [title, setTitle] = useState<string>('');
   const [content, setContent] = useState<string>('');
   const [tagList, setTagList] = useState<string[]>([]);
-  const [uploadedImages, setUploadedImages] = useState<File[]>([]);
+  const [uploadedImages, setUploadedImages] = useState<File[]>(
+    s3UploadImages as File[]
+  );
 
   console.log('ImagesDate', ImagesDate);
 
@@ -67,15 +72,15 @@ const ShellUpdate: React.FC = () => {
     }
   }, []);
 
-  useEffect(() => {
-    if (ImagesDate) {
-      // const files = ImagesDate.map((queryResult) => queryResult?.data).filter(
-      //   Boolean
-      // ) as FileWithPath[];
-      console.log(ImagesDate);
-      setUploadedImages([ImagesDate]);
-    }
-  }, [ImagesDate]);
+  // useEffect(() => {
+  //   if (ImagesDate) {
+  //     // const files = ImagesDate.map((queryResult) => queryResult?.data).filter(
+  //     //   Boolean
+  //     // ) as FileWithPath[];
+  //     console.log(ImagesDate);
+  //     setUploadedImages(ImagesDate);
+  //   }
+  // }, [ImagesDate]);
 
   const handleInputChange = (
     e:

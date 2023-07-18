@@ -8,7 +8,7 @@ interface MemberProps {
   profileUrl: string;
 }
 
-const Avatar = ({
+export const Avatar = ({
   avatartype,
   member,
 }: {
@@ -32,5 +32,3 @@ const Avatar = ({
     </Icon>
   );
 };
-
-export default Avatar;
