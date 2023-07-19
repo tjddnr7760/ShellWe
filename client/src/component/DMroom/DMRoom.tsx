@@ -13,6 +13,8 @@ import {
   SendButton,
   TextArea,
   TextAreaContainer,
+  Notificationtext,
+  NotificationContainer,
 } from './DMRoom.styled';
 import Avatar from '../../common/avatar/Avatar.tsx';
 import {
@@ -73,7 +75,11 @@ export const DMRoom = ({ id }: { id: number }) => {
           chats.map((chat) => {
             console.log('chats', chats);
             if (chat.notification) {
-              return <div key={uuidv4()}>{chat.payload}</div>;
+              return (
+                <NotificationContainer key={uuidv4()}>
+                  <Notificationtext>{chat.payload}</Notificationtext>
+                </NotificationContainer>
+              );
             }
             if (chat.mine) {
               return <MyChat key={uuidv4()}>{chat.payload}</MyChat>;
@@ -81,7 +87,7 @@ export const DMRoom = ({ id }: { id: number }) => {
               return (
                 <Opponent key={uuidv4()}>
                   {chat.member && (
-                    <Avatar avatartype={'UserImg'} member={chat.member} />
+                    <Avatar avatartype={'icon'} member={chat.member} />
                   )}
                   <OpponentChat>{chat.payload}</OpponentChat>
                 </Opponent>

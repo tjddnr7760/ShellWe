@@ -38,13 +38,11 @@ export const DirectMessage: React.FC = () => {
             ))}
           </MessageListBody>
         </MessageListWrapper>
-        <MessageRoomWrapper>
-          {ClickedRoomId ? (
-            <DMRoom id={ClickedRoomId} />
-          ) : (
-            <NoneClickedDMRoom>Click your message!</NoneClickedDMRoom>
-          )}
-        </MessageRoomWrapper>
+        {ClickedRoomId ? (
+          <DMRoom id={ClickedRoomId} />
+        ) : (
+          <NoneClickedDMRoom>Click your message!</NoneClickedDMRoom>
+        )}
       </MessageWrapper>
     </>
   );

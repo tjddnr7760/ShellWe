@@ -1,13 +1,31 @@
 import styled from 'styled-components';
 
 export const MessageRoomContainer = styled.div`
-  height: 600px;
+  height: 900px;
   width: 100%;
   display: flex;
   flex-direction: column;
-  margin: 0 30px;
+  justify-content: center;
+  margin: 130px 30px;
+  gap: 20px;
 `;
-
+export const NotificationContainer = styled.div`
+  display: flex;
+  justify-content: center;
+`;
+export const Notificationtext = styled.div`
+  margin: 8px 12px 15px 0px;
+  max-width: 500px;
+  border-radius: 15px;
+  display: flex;
+  align-self: flex-end;
+  align-items: center;
+  padding: 10px;
+  overflow: hidden;
+  word-break: break-word;
+  background-color: #70dfb4;
+  line-height: 24px;
+`;
 export const MessageRoom = styled.div`
   border-radius: 30px;
   background-color: #00000010;
@@ -29,7 +47,7 @@ export const OpponentChat = styled.div`
   display: flex;
   align-self: flex-start;
   align-items: center;
-  padding: 15px 18px 15px 18px;
+  padding: 20px;
   overflow: hidden;
   word-break: break-word;
   background-color: #6cedf599;
@@ -42,7 +60,7 @@ export const MyChat = styled.div`
   display: flex;
   align-self: flex-end;
   align-items: center;
-  padding: 15px 18px 15px 18px;
+  padding: 20px;
   overflow: hidden;
   word-break: break-word;
   background-color: #bbe7ff;
