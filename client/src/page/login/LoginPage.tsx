@@ -21,7 +21,6 @@ import {
   LoginSubFuntionBox,
   LoginSubFuntion,
 } from './LoginPage.styled';
-import googlelogoimg from '../../asset/googlelogo.png';
 
 const LoginPage: React.FC = () => {
   const [email, setEmail] = useState('');

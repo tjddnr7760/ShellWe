@@ -4,7 +4,7 @@ import noprofile from '../../asset/avatar/noprofile.svg';
 
 interface MemberProps {
   id: number;
-  displayName: string;
+  displayName?: string;
   profileUrl: string;
 }
 
@@ -24,11 +24,11 @@ const Avatar = ({
 
   return avatartype === 'UserImg' ? (
     <UserImg onClick={goToMyShellsPage}>
-      <img src={userImg !== null ? userImg : noprofile} alt="userphoto" />
+      <img src={userImg === 'empty' ? noprofile : userImg} alt="userphoto" />
     </UserImg>
   ) : (
     <Icon onClick={goToMyShellsPage}>
-      <img src={userImg !== null ? userImg : noprofile} alt="userphoto" />
+      <img src={userImg === 'empty' ? noprofile : userImg} alt="userphoto" />
     </Icon>
   );
 };

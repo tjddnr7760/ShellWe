@@ -1,45 +1,50 @@
+import { useState } from 'react';
 import {
+  MessageRoomWrapper,
+  MessageListBody,
+  MessageListWrapper,
   MessageWrapper,
-  MessageListContainer,
   MessageListHeader,
   MessageMyInfo,
-  MessageListItem,
-  MessageListUserInfo,
-  MessageUserNickName,
-  MessageUserLastText,
+  NoneClickedDMRoom,
 } from './DirectMessage.styled';
-
-import Avatar from '../../common/avatar/Avatar';
 import { DMRoom } from '../../component/DMroom/DMRoom';
+import DM from '../../component/dmlist/DM';
+import { useChatList } from '../../hooks/chat/useChatList';
 
 export const DirectMessage: React.FC = () => {
+  const { data: chatListData } = useChatList();
+  const [ClickedRoomId, setClickedRoomId] = useState<number>();
+  const chatList = chatListData?.data;
+
+  const handleClickRoom = (roomId: number): void => {
+    setClickedRoomId(roomId);
+  };
+
   return (
     <>
       <MessageWrapper>
-        <MessageListContainer>
+        <MessageListWrapper>
           <MessageListHeader>
-            <MessageMyInfo>정찬영</MessageMyInfo>
+            <MessageMyInfo>
+              displayName
+              {/* Recoil에 저장된 {displayName} */}
+            </MessageMyInfo>
             ChatList
           </MessageListHeader>
-          <MessageListItem>
-            {/* <Avatar avatartype={'UserImg'} /> */}
-            <MessageListUserInfo>
-              <MessageUserNickName>NickName</MessageUserNickName>
-              <MessageUserLastText>UseText</MessageUserLastText>
-            </MessageListUserInfo>
-          </MessageListItem>
-
-          {/* <MessageListItem>
-            <Avatar avatartype={'UserImg'} member={undefined} />
-            <MessageListUserInfo>
-              <MessageUserNickName>NickName</MessageUserNickName>
-              <MessageUserLastText>
-                UsessssssssssssrLddddddddddddddddddddddastTextdd
-              </MessageUserLastText>
-            </MessageListUserInfo>
-          </MessageListItem> */}
-        </MessageListContainer>
-        <DMRoom id={1} />
+          <MessageListBody>
+            {chatList?.map((chat) => (
+              <DM key={chat.id} chat={chat} handleClickRoom={handleClickRoom} />
+            ))}
+          </MessageListBody>
+        </MessageListWrapper>
+        <MessageRoomWrapper>
+          {ClickedRoomId ? (
+            <DMRoom id={ClickedRoomId} />
+          ) : (
+            <NoneClickedDMRoom>Click your message!</NoneClickedDMRoom>
+          )}
+        </MessageRoomWrapper>
       </MessageWrapper>
     </>
   );

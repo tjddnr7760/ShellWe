@@ -14,8 +14,7 @@ import {
   TextArea,
   TextAreaContainer,
 } from './DMRoom.styled';
-import Avatar from '../../common/avatar/Avatar.tsx';
-import { connectToWebSocket, closeWebSocket } from '../../utill/websocketUtils';
+import { Avatar } from '../../common/avatar/Avatar.tsx';
 
 interface socketMessage {
   roomId: number;
