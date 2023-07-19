@@ -23,10 +23,18 @@ const ContentBox = styled.div`
 `;
 
 const Title = styled.div`
-  font-size: 16px;
+  font-size: 20px;
 `;
 
-const Input = styled.input``;
+const Input = styled.input`
+  font-size: 20px;
+  min-width: 100px;
+  max-width: 320px;
+  height: 30px;
+  border-radius: 5px;
+  border: 0.5px solid rgba(0, 0, 0, 0.5);
+  padding: 5px;
+`;
 
 const ButtonBox = styled.div`
   display: flex;

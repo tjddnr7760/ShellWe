@@ -4,8 +4,17 @@ import { useEffect, useState } from 'react';
 import {
   ProfileContainer,
   UserImg,
-  Nickname,
+  DisplayName,
   Introduction,
+
+  ImgandNameContainer,
+  IntroductionContainer,
+  UserImgBox,
+} from './Profile.styled';
+import { Member } from '../../hooks/profile/useGetMember';
+
+const Profile = ({ memberInfo }: { memberInfo: Member }) => {
+
   AllCurrentTags,
   Box,
   Box2,
@@ -34,10 +43,20 @@ const Profile = ({ showTags, data }: MyShellsProfileProps) => {
 
   useEffect(() => MakeAllTags(), [id]);
 
+
   return (
     <ProfileContainer>
-      <Box>
+      <ImgandNameContainer>
         <UserImgBox>
+
+          <UserImg src={memberInfo.profileUrl} alt="product"></UserImg>
+        </UserImgBox>
+        <DisplayName>{memberInfo.displayName}</DisplayName>
+      </ImgandNameContainer>
+      <IntroductionContainer>
+        <Introduction>{memberInfo.introduction}</Introduction>
+      </IntroductionContainer>
+
           <UserImg src={example} alt="product"></UserImg>
         </UserImgBox>
         <Nickname>Nickname</Nickname>
@@ -52,6 +71,7 @@ const Profile = ({ showTags, data }: MyShellsProfileProps) => {
           </AllCurrentTags>
         )}
       </Box2>
+
     </ProfileContainer>
   );
 };
