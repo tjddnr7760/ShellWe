@@ -1,13 +1,23 @@
 import axios, { AxiosRequestConfig } from 'axios';
+import { v4 as uuidv4 } from 'uuid';
 
 export const getHeader = () => {
   return {
     'ngrok-skip-browser-warning': '69420',
     Authorization:
       'Bearer eyJhbGciOiJIUzM4NCJ9.eyJwcm9maWxlVXJsIjoiaHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUFjSFR0YzlqZGltaF91SkxzUWFMbDFKQ1l4cXZzSXFZTWhxN0tkYkVXY202SFRfQVZRPXM5Ni1jIiwiZGlzcGxheU5hbWUiOiJjczIxOTkiLCJpZCI6MiwiZW1haWxWZXJpZmljYXRpb25TdGF0dXMiOnRydWUsInN1YiI6InRqZGRucjA3NjBAZ21haWwuY29tIiwiaWF0IjoxNjg5NjcwMDMxLCJleHAiOjE2OTAyNzAwMzF9.fJFvAWr9uCGMn9ObviavThzSXi8V65Ys1IM7h6LSgI8LC9in0xbLDzsrXtm6McW0',
+
   };
 };
+export const getPostHeader = () => {
+  return {
+    'ngrok-skip-browser-warning': '69420',
+    Authorization:
+      'Bearer eyJhbGciOiJIUzI1NiJ9.eyJkaXNwbGF5TmFtZSI6InRqZGRuciIsImlkIjoxLCJlbWFpbFZlcmlmaWNhdGlvblN0YXR1cyI6dHJ1ZSwic3ViIjoidGpkZG5yNzc2MEBuYXZlci5jb20iLCJpYXQiOjE2ODkzNDgxMzEsImV4cCI6MTY4OTc4MDEzMX0.0XS7OQKM2uSRp6jfeoQKRnptdhxkXlOG7hcq0IVXoUE',
+    'Content-Type': `multipart/form-data; boundary=<${uuidv4}>`,
 
+  };
+};
 const config: AxiosRequestConfig = { baseURL: `${import.meta.env.VITE_KEY}` };
 
 export const axiosInstance = axios.create(config);

@@ -27,6 +27,7 @@ const ShellDetailPage = () => {
   const [modalData, setModalData] = useState([]);
   const shellStatus: string = shellDetailData.status;
 
+
   const handleOpenSidebar = () => {
     setSidebarOpen(!sidebarOpen);
   };

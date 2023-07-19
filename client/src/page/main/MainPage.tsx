@@ -13,17 +13,17 @@ const MainPage: React.FC = () => {
       <div>
         <MainShellImg src={MainShell} alt="mainshell"></MainShellImg>
       </div>
-        <ShellListContainer>
-          <Shell />
-          <Shell />
-          <Shell />
-          <Shell />
-          <Shell />
-          <Shell />
-          <Shell />
-          <Shell />
-        </ShellListContainer>
+      <ShellListContainer>
+        <Shell />
+        <Shell />
+        <Shell />
+        <Shell />
+        <Shell />
+        <Shell />
+        <Shell />
+        <Shell />
+      </ShellListContainer>
     </MainShellWrapper>
   );
-}
+};
 export default MainPage;
