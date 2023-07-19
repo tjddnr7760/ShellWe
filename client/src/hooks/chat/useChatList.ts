@@ -1,6 +1,7 @@
 import { useQuery } from 'react-query';
-import { axiosInstance, getHeader } from '../../utill/axiosInstance';
+import { axiosWebSocketInstance, getHeader } from '../../utill/axiosInstance';
 import { queryKeys } from '../../dataset/queryKey';
+import { queryClient } from '../../utill/queryClient';
 
 interface ChatListData {
   data: ChatList[];
@@ -20,7 +21,7 @@ interface Member {
 }
 
 const getChatList = async (): Promise<ChatListData> => {
-  const { data } = await axiosInstance({
+  const { data } = await axiosWebSocketInstance({
     url: `/chat`,
     method: 'get',
     headers: getHeader(),
@@ -30,5 +31,9 @@ const getChatList = async (): Promise<ChatListData> => {
 
 export const useChatList = () => {
   const { data } = useQuery([queryKeys.chatList], () => getChatList());
-  return { data };
+
+  const refreshChatList = async () => {
+    await queryClient.invalidateQueries(queryKeys.chatList);
+  };
+  return { data, refreshChatList };
 };

@@ -2,8 +2,9 @@ import styled from 'styled-components';
 
 export const MessageWrapper = styled.div`
   width: 100%;
-  height: 100%;
   display: flex;
+  gap: 20px;
+  margin: 10px;
 `;
 
 export const MessageListWrapper = styled.div`
@@ -11,7 +12,7 @@ export const MessageListWrapper = styled.div`
 `;
 export const MessageListContainer = styled.div`
   padding: 10px;
-  background-color: #caf0f8bf;
+  background-color: #bbe7ff;
   cursor: pointer;
 `;
 
@@ -21,6 +22,7 @@ export const MessageRoomWrapper = styled.div`
   justify-content: center;
   align-items: center;
   flex-grow: 1;
+  max-width: 780px;
 `;
 
 export const MessageListHeader = styled.div`
@@ -32,11 +34,15 @@ export const MessageListHeader = styled.div`
   font-size: 20px;
   padding-top: 20px;
   padding-left: 15px;
+  background-color: #bbe7ff;
+  border-radius: 15px 15px 0 0;
 `;
 
 export const MessageListBody = styled.div`
   overflow-y: scroll;
-  height: 900px;
+  height: 700px;
+  background-color: #bbe7ff;
+  border-radius: 0 0 15px 15px;
 `;
 
 export const MessageMyInfo = styled.div`
@@ -51,8 +57,7 @@ export const MessageListBox = styled.div`
 `;
 
 export const MessageContainer = styled.div`
-  width: 350px;
-  height: 80px;
+  width: 250px;
   border-radius: 15px;
   padding: 15px;
   background-color: white;
@@ -72,7 +77,7 @@ export const MessageHeader = styled.div`
 `;
 
 export const Unread = styled.div`
-  color: #828282;
+  color: red;
 `;
 
 export const HeaderLeft = styled.div`
@@ -87,6 +92,7 @@ export const DeleteButton = styled.button`
   border-radius: 5px;
   border: 0.1px solid #cdcdcd;
   background-color: #fff;
+  z-index: 99;
   cursor: pointer;
   &:hover {
     background-color: #90e0ef;

@@ -8,12 +8,11 @@ export const connectToWebSocket = (
     }`
   );
 
-  client.onopen = () => {
+  client.onopen = async () => {
     console.log('connected');
   };
 
   client.onmessage = (message) => {
-    console.log(message.data);
     messageCallback(message.data);
   };
 

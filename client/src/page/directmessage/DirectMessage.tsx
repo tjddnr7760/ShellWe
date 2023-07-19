@@ -13,12 +13,17 @@ import DM from '../../component/dmlist/DM';
 import { useChatList } from '../../hooks/chat/useChatList';
 
 export const DirectMessage: React.FC = () => {
-  const { data: chatListData } = useChatList();
+  const { data: chatListData, refreshChatList } = useChatList();
   const [ClickedRoomId, setClickedRoomId] = useState<number>();
-  const chatList = chatListData?.data;
+  const [isRoomOpened, setIsRoomOpened] = useState<boolean>();
 
   const handleClickRoom = (roomId: number): void => {
-    setClickedRoomId(roomId);
+    if (isRoomOpened && ClickedRoomId === roomId) {
+      setIsRoomOpened(false);
+    } else {
+      setIsRoomOpened(true);
+      setClickedRoomId(roomId);
+    }
   };
 
   return (
@@ -33,16 +38,27 @@ export const DirectMessage: React.FC = () => {
             ChatList
           </MessageListHeader>
           <MessageListBody>
-            {chatList?.map((chat) => (
-              <DM key={chat.id} chat={chat} handleClickRoom={handleClickRoom} />
+            {chatListData?.data?.map((chat) => (
+              <DM
+                key={chat.id}
+                chat={chat}
+                handleClickRoom={handleClickRoom}
+                isRoomOpened={isRoomOpened}
+                setIsRoomOpened={setIsRoomOpened}
+                setClickedRoomId={setClickedRoomId}
+                ClickedRoomId={ClickedRoomId}
+                refreshChatList={refreshChatList}
+              />
             ))}
           </MessageListBody>
         </MessageListWrapper>
-        {ClickedRoomId ? (
-          <DMRoom id={ClickedRoomId} />
-        ) : (
-          <NoneClickedDMRoom>Click your message!</NoneClickedDMRoom>
-        )}
+        <MessageRoomWrapper>
+          {isRoomOpened && ClickedRoomId ? (
+            <DMRoom id={ClickedRoomId} />
+          ) : (
+            <NoneClickedDMRoom>Click your message!</NoneClickedDMRoom>
+          )}
+        </MessageRoomWrapper>
       </MessageWrapper>
     </>
   );

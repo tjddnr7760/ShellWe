@@ -16,6 +16,11 @@ import { useDeleteChatRoom } from '../../hooks/chat/useDeleteChat';
 interface DMProps {
   chat: ChatList;
   handleClickRoom: (roomId: number) => void;
+  isRoomOpened: boolean | undefined;
+  ClickedRoomId: number | undefined;
+  setIsRoomOpened: (type: boolean | undefined) => void;
+  setClickedRoomId: (roomId: number | undefined) => void;
+  refreshChatList: () => Promise<void>;
 }
 
 interface ChatList {
@@ -31,15 +36,28 @@ interface Member {
   profileUrl: string;
 }
 
-const DM = ({ chat, handleClickRoom }: DMProps) => {
+const DM = ({
+  chat,
+  handleClickRoom,
+  isRoomOpened,
+  setIsRoomOpened,
+  setClickedRoomId,
+  ClickedRoomId,
+  refreshChatList,
+}: DMProps) => {
   const chatRoomId = chat.id;
   const { mutate: DeleteChatRoom } = useDeleteChatRoom(chatRoomId);
 
   const handleClick = () => {
     handleClickRoom(chatRoomId);
+    refreshChatList();
   };
 
   const handleDelete = () => {
+    if (isRoomOpened && ClickedRoomId === chat.id) {
+      setIsRoomOpened(false);
+      setClickedRoomId(undefined);
+    }
     DeleteChatRoom();
   };
 

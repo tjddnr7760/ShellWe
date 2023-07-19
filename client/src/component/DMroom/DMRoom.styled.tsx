@@ -1,13 +1,11 @@
 import styled from 'styled-components';
 
 export const MessageRoomContainer = styled.div`
-  height: 900px;
+  height: 850px;
   width: 100%;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  margin: 130px 30px;
-  gap: 20px;
 `;
 export const NotificationContainer = styled.div`
   display: flex;
@@ -100,13 +98,13 @@ export const TextArea = styled.input`
   &:focus {
     outline: none;
   }
-  padding: 16px;
+  padding: 10px;
 `;
 
 export const SendButton = styled.button`
   background-color: #48cae4;
   width: 50px;
-  height: 50px;
+  height: 40px;
   border-radius: 16px;
   font-weight: 300;
   cursor: pointer;
