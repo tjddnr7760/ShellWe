@@ -15,6 +15,7 @@ import {
   TextAreaContainer,
 } from './DMRoom.styled';
 import Avatar from '../../common/avatar/Avatar.tsx';
+import { connectToWebSocket, closeWebSocket } from '../../utill/websocketUtils';
 
 interface socketMessage {
   roomId: number;
@@ -34,31 +35,19 @@ export const DMRoom = ({ id }: { id: number }) => {
   const [chats, setChats] = useState<socketMessage[]>([]);
   const [text, setText] = useState<string>('');
   const messageContainerRef = useRef<HTMLDivElement>(null);
-
   useEffect(() => {
-    const client = new WebSocket(
-      `${import.meta.env.VITE_WEBSOCKET}/ws/chat?roomId=${id}&token=${
-        import.meta.env.VITE_TOKEN
-      }`
-    );
-
-    client.onopen = () => {
-      console.log('connected');
-    };
-
-    client.onmessage = (message) => {
-      console.log(message.data);
-      setChats((prevChats) => [...prevChats, JSON.parse(message.data)]);
-    };
+    // 웹소켓 연결
+    const client = connectToWebSocket(id, (messageData: string) => {
+      setChats((prevChats) => [...prevChats, JSON.parse(messageData)]);
+    });
 
     setWebsocket(client);
 
     return () => {
       setChats([]);
-
-      client.close();
+      closeWebSocket(client);
     };
-  }, []);
+  }, [id]);
 
   const handleClickSendMessage = () => {
     websocket?.send(text);
