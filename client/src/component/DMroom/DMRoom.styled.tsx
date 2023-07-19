@@ -1,24 +1,21 @@
 import styled from 'styled-components';
 
 export const MessageRoomContainer = styled.div`
-  flex-grow: 1;
+  height: 600px;
+  width: 100%;
   display: flex;
   flex-direction: column;
-  margin: 30px;
-`;
-
-export const MessageLiftButton = styled.div`
-  flex: 1;
+  margin: 0 30px;
 `;
 
 export const MessageRoom = styled.div`
   border-radius: 30px;
   background-color: #00000010;
   display: flex;
-  flex-direction: column-reverse;
+  flex-direction: column;
   align-items: stretch;
   overflow-y: scroll;
-  flex: 8;
+  flex: 1;
 `;
 export const Opponent = styled.div`
   display: flex;
@@ -69,13 +66,15 @@ export const TextAreaContainer = styled.div`
   border-radius: 25px;
   display: flex;
   justify-content: space-between;
+  align-items: center;
   border: 0.5px solid #00000020;
   margin-left: 15px;
-  width: fit-content;
   flex-grow: 1;
+
+  width: fit-content;
 `;
 
-export const TextArea = styled.textarea`
+export const TextArea = styled.input`
   border: none;
   flex-grow: 1;
   border-radius: 25px;
@@ -83,14 +82,13 @@ export const TextArea = styled.textarea`
   &:focus {
     outline: none;
   }
-  padding: 16px 0 0 10px;
-  resize: none;
+  padding: 16px;
 `;
 
 export const SendButton = styled.button`
   background-color: #48cae4;
-  width: 40px;
-  height: 40px;
+  width: 50px;
+  height: 50px;
   border-radius: 16px;
   font-weight: 300;
   cursor: pointer;

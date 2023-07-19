@@ -10,7 +10,7 @@ import {
 } from './DirectMessage.styled';
 
 import Avatar from '../../common/avatar/Avatar';
-import { DMRoom } from '../../component/DMroom/DMroom';
+import { DMRoom } from '../../component/DMroom/DMRoom';
 
 export const DirectMessage: React.FC = () => {
   return (
@@ -22,7 +22,7 @@ export const DirectMessage: React.FC = () => {
             ChatList
           </MessageListHeader>
           <MessageListItem>
-            <Avatar avatartype={'UserImg'} member={undefined} />
+            {/* <Avatar avatartype={'UserImg'} /> */}
             <MessageListUserInfo>
               <MessageUserNickName>NickName</MessageUserNickName>
               <MessageUserLastText>UseText</MessageUserLastText>
@@ -39,7 +39,7 @@ export const DirectMessage: React.FC = () => {
             </MessageListUserInfo>
           </MessageListItem> */}
         </MessageListContainer>
-        <DMRoom />
+        <DMRoom id={1} />
       </MessageWrapper>
     </>
   );

@@ -21,8 +21,7 @@ import {
   LoginSubFuntionBox,
   LoginSubFuntion,
 } from './LoginPage.styled';
-import googlelogo from '../../asset/googlelogo.png';
-
+import googlelogoimg from '../../asset/googlelogo.png';
 
 const LoginPage: React.FC = () => {
   const [email, setEmail] = useState('');
@@ -46,7 +45,7 @@ const LoginPage: React.FC = () => {
       `${import.meta.env.VITE_KEY}/auth/login`,
       {
         email: 'tjddnr7760@naver.com',
-        password: 'Abcde12345!',
+        password: 'qwerR1234!@#',
       }
     );
     if (response.status === 200) {
@@ -94,7 +93,7 @@ const LoginPage: React.FC = () => {
           alt="Logo"
         ></Logo>
         <OathContainer>
-          <OathImg src={googlelogo}></OathImg>
+          <OathImg src={googlelogoimg}></OathImg>
           <OathText>Login with Google</OathText>
         </OathContainer>
         <UserinfoContainer>

@@ -10,11 +10,11 @@ import {
   UploadedImageWrapper,
   UploadExplanation,
 } from './ImageUploder.styled';
+import { useEffect } from 'react';
 
 interface ImageUploaderProps {
   uploadedImages: File[];
   setUploadedImages: React.Dispatch<React.SetStateAction<FileWithPath[]>>;
-  updateInitalImages?: string[];
 }
 
 export const ImageUploader = ({
