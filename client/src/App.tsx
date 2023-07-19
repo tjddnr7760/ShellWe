@@ -27,15 +27,15 @@ import SearchPage from './page/searchpage/SearchPage.tsx';
 function App() {
   const [user, setUser] = useRecoilState(userState);
 
-  useEffect(() => {
-    const accessToken = localStorage.getItem('accessToken');
-    if (accessToken !== null && accessToken !== undefined) {
-      const userData = localStorage.getItem('userData');
-      if (userData) {
-        setUser(userData);
-      }
-    }
-  }, []);
+  // useEffect(() => {
+  //   const accessToken = localStorage.getItem('accessToken');
+  //   if (accessToken !== null && accessToken !== undefined) {
+  //     const userData = localStorage.getItem('userData');
+  //     if (userData) {
+  //       setUser(userData);
+  //     }
+  //   }
+  // }, []);
   return (
     <BrowserRouter>
       <GlobalStyle />

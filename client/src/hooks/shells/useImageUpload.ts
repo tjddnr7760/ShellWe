@@ -18,6 +18,8 @@ const getImageFile = async (imageUrl: string) => {
   return file;
 };
 export const useImageUpload = (updateInitalImages: string[]) => {
+  console.log('re ca');
+
   const queryResults = useQueries(
     updateInitalImages.map((imageUrl) => ({
       queryKey: ['convert to image file', imageUrl],
@@ -27,6 +29,8 @@ export const useImageUpload = (updateInitalImages: string[]) => {
       },
     })) as readonly { queryKey: string[]; queryFn: () => Promise<File> }[]
   );
-
-  return queryResults;
+  const s3UploadImages = queryResults
+    ?.filter((queryResult) => Boolean(queryResult.data))
+    ?.map((queryResult) => queryResult.data);
+  return s3UploadImages;
 };

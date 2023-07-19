@@ -17,10 +17,7 @@ import {
   NotificationContainer,
 } from './DMRoom.styled';
 import Avatar from '../../common/avatar/Avatar.tsx';
-import {
-  closeWebSocket,
-  connectToWebSocket,
-} from '../../utill/websocketUtils.ts';
+import { closeWebSocket, connectToWebSocket } from '../../utill/wesocket.ts';
 
 interface socketMessage {
   roomId: number;

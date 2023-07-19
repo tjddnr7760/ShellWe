@@ -30,15 +30,12 @@ import processData from '../../utill/processData.ts';
 const ShellUpdate: React.FC = () => {
   const { id } = useParams();
   const { data } = useGetShells(parseInt(id as string));
-  console.log(data);
+  console.log('data');
   const formData = new FormData();
   const urls = data?.data.pictures.map((item: { url: string }) => item.url);
-  console.log(urls);
-  const ImagesDate = useImageUpload(urls);
-  const s3UploadImages =
-    ImagesDate?.filter((queryResult) => Boolean(queryResult.data))?.map(
-      (queryResult) => queryResult.data
-    ) ?? [];
+  console.log('urls');
+  const ImagesDate = useImageUpload(urls); //삼항연산자로 분리
+  console.log(ImagesDate);
 
   const { mutate } = useUpdateShells();
   const [selectedCateory, setSelectedCateory] = useState({
@@ -49,9 +46,7 @@ const ShellUpdate: React.FC = () => {
   const [title, setTitle] = useState<string>('');
   const [content, setContent] = useState<string>('');
   const [tagList, setTagList] = useState<string[]>([]);
-  const [uploadedImages, setUploadedImages] = useState<File[]>(
-    s3UploadImages as File[]
-  );
+  const [uploadedImages, setUploadedImages] = useState<File[]>([]);
 
   console.log('ImagesDate', ImagesDate);
 
@@ -69,17 +64,17 @@ const ShellUpdate: React.FC = () => {
       setTitle(updatedData?.title as React.SetStateAction<string>);
       setContent(updatedData?.body as React.SetStateAction<string>);
       setTagList(updatedData?.tags as React.SetStateAction<string[]>);
+      setUploadedImages(ImagesDate as File[]);
     }
   }, []);
 
   // useEffect(() => {
+  //
+
   //   if (ImagesDate) {
-  //     // const files = ImagesDate.map((queryResult) => queryResult?.data).filter(
-  //     //   Boolean
-  //     // ) as FileWithPath[];
-  //     console.log(ImagesDate);
-  //     setUploadedImages(ImagesDate);
-  //   }
+  //                 setUploadedImages(ImagesDate as File[]);
+
+  //   } //usecallback 사용,useEffect x,usememo,react memo
   // }, [ImagesDate]);
 
   const handleInputChange = (

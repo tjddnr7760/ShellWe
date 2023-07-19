@@ -5,7 +5,7 @@ export const getHeader = () => {
   return {
     'ngrok-skip-browser-warning': '69420',
     Authorization:
-      'Bearer eyJhbGciOiJIUzM4NCJ9.eyJkaXNwbGF5TmFtZSI6IuyCrOyaqeyekCIsImlkIjoyLCJlbWFpbFZlcmlmaWNhdGlvblN0YXR1cyI6dHJ1ZSwic3ViIjoibHRzODkwMzAzQGdtYWlsLmNvbSIsImlhdCI6MTY4OTcwMzE2NywiZXhwIjoxNjg5ODIzMTY3fQ.4FpWLipMNZgld_MLqc6ZzJ5lom-5sFV8ATYfGy4I5NTIGxsZ_L_7POeKtPfVHaYm',
+      'Bearer eyJhbGciOiJIUzM4NCJ9.eyJkaXNwbGF5TmFtZSI6InRqZGRuciIsImlkIjoxLCJlbWFpbFZlcmlmaWNhdGlvblN0YXR1cyI6dHJ1ZSwic3ViIjoidGpkZG5yNzc2MEBuYXZlci5jb20iLCJpYXQiOjE2ODk2Njk5OTMsImV4cCI6MTY5MDI2OTk5M30.quApNU49HAmBHpm4jr2FC-BKHfpNY0m5TjcQzJ8EYxayGuByX5lLONRvASbQxujW',
   };
 };
 export const getPostHeader = () => {

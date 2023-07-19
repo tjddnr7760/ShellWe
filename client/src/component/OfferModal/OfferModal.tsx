@@ -13,7 +13,7 @@ const OfferModal = () => {
 
   const goToShellCreatePage = () => {
     navigate('/shellcreate');
-  }
+  };
 
   return (
     <Wrapper>
