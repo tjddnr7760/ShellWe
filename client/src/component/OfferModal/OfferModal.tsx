@@ -7,13 +7,13 @@ import {
   Div,
 } from './OfferModal.styled.ts';
 import plus from '../../asset/plus.svg';
+import { MyShellsDataProps } from '../../dataset/ShellDetailType.ts';
 
-const OfferModal = () => {
+const OfferModal = ({ myShellListsData }: MyShellsDataProps) => {
   const navigate = useNavigate();
-
   const goToShellCreatePage = () => {
     navigate('/shellcreate');
-  }
+  };
 
   return (
     <Wrapper>
@@ -23,7 +23,7 @@ const OfferModal = () => {
         </CreateShellButton>
       </Div>
       <ShellListContainer>
-        <MyShellList />
+        <MyShellList myShellListsData={myShellListsData} />
       </ShellListContainer>
     </Wrapper>
   );
