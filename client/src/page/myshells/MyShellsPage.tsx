@@ -12,16 +12,15 @@ import PastShells from '../../component/myshells/PastShells.tsx';
 import LikeShells from '../../component/myshells/LikeShells.tsx';
 import { useGetMember } from '../../hooks/profile/useGetMember';
 import { Member } from '../../hooks/profile/useGetMember';
+import { getMemberIdFromLocalStorage } from '../../utill/localstorageData.ts';
 
 const MyShellsPage = () => {
   const [selectedTab, setSelectedTab] = useState<string>('current');
-
   const { id } = useParams<{ id: string }>();
   const memberId = id !== undefined ? +id : 0;
-  const { data: shellsData } = useCurrentShells(memberId);
-  console.log(shellsData);
 
-  const { data: memberData } = useGetMember(1);
+  const { data: shellsData } = useCurrentShells(memberId);
+  const { data: memberData } = useGetMember(getMemberIdFromLocalStorage());
   const memberInfo: Member = memberData.data;
 
   const handleClickTab = (Tab: string) => {

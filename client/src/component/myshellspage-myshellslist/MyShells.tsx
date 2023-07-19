@@ -1,3 +1,4 @@
+import { useNavigate, useParams } from 'react-router';
 import {
   MyShellContainer,
   ImgBox,
@@ -6,17 +7,26 @@ import {
   Category,
 } from './MyShells.styled.ts';
 import { Shells } from '../../dataset/TypeOfMyShells.ts';
-import { useNavigate } from 'react-router';
 import { SmallButton3 } from '../../common/button/Button.styled.ts';
+import { useDeleteLikeShell } from '../../hooks/myshells/useDeleteLikeShell.ts';
+import { getMemberIdFromLocalStorage } from '../../utill/localstorageData.ts';
 
 const MyShells = ({ shell }: { shell: Shells }) => {
+  const { id } = useParams<{ id: string }>();
+  const urlId = id !== undefined ? +id : 0;
+
+  const { mutate: DeleteLikeShell } = useDeleteLikeShell(shell.id);
   const navigate = useNavigate();
   const goToShellDetail = () => {
     navigate(`/shelldetail/${shell.id}`);
   };
 
+  const handleDeleteLikeShell = () => {
+    DeleteLikeShell();
+  };
+
   return (
-    <MyShellContainer>
+    <MyShellContainer onClick={goToShellDetail}>
       <ShellInfo>
         <ImgBox src={shell.picture} alt="shell-image" />
         <div>
@@ -24,9 +34,13 @@ const MyShells = ({ shell }: { shell: Shells }) => {
           <Category>{shell.category}</Category>
         </div>
       </ShellInfo>
-      <div>
-        <SmallButton3 onClick={goToShellDetail}>Detail</SmallButton3>
-      </div>
+      {getMemberIdFromLocalStorage() === urlId && (
+        <div>
+          <SmallButton3 onClick={handleDeleteLikeShell}>
+            Cancel Like
+          </SmallButton3>
+        </div>
+      )}
     </MyShellContainer>
   );
 };

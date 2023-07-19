@@ -10,6 +10,9 @@ const MyShellContainer = styled.div`
   border: 0.5px solid #48cae4;
   border-radius: 10px;
   padding: 10px;
+  &:hover {
+    background-color: #c2edff;
+  }
 
   div {
     padding-right: 20px;
