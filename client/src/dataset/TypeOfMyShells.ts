@@ -16,6 +16,7 @@ export interface Member {
   id: number;
   displayName: string;
   profileUrl: string;
+  introduction: string;
 }
 
 export interface Tags {
@@ -25,9 +26,10 @@ export interface Tags {
 // Profile.tsx
 export interface MyShellsProfileProps {
   showTags?: boolean;
-  // data: MyShellDataProps;
+  data: MyShellDataProps;
+  memberInfo?: Member;
 }
 // AllTags.tsx
-export interface MyShellsProfileProps {
-  data: MyShellDataProps;
-}
+// export interface MyShellsProfileProps {
+//   data: MyShellDataProps;
+// }

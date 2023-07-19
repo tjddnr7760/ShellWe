@@ -6,7 +6,18 @@ const ProfileContainer = styled.div`
   height: fit-content;
   gap: 20px;
 `;
+const Box = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+`;
 
+const Box2 = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  flex-grow: 1;
+`;
 const ImgandNameContainer = styled.div`
   display: flex;
   flex-direction: column;
@@ -91,14 +102,10 @@ export {
   UserImg,
   DisplayName,
   Introduction,
-
-  AllLikeCategorys,
   ImgandNameContainer,
   IntroductionContainer,
-
   AllCurrentTags,
   Box,
   Box2,
-
   UserImgBox,
 };

@@ -10,13 +10,19 @@ import {
 import CurrentShells from '../../component/myshells/CurrentShells.tsx';
 import PastShells from '../../component/myshells/PastShells.tsx';
 import LikeShells from '../../component/myshells/LikeShells.tsx';
+import { useGetMember } from '../../hooks/profile/useGetMember';
+import { Member } from '../../hooks/profile/useGetMember';
 
 const MyShellsPage = () => {
   const [selectedTab, setSelectedTab] = useState<string>('current');
 
   const { id } = useParams<{ id: string }>();
   const memberId = id !== undefined ? +id : 0;
-  const { data } = useCurrentShells(memberId);
+  const { data: shellsData } = useCurrentShells(memberId);
+  console.log(shellsData);
+
+  const { data: memberData } = useGetMember(1);
+  const memberInfo: Member = memberData.data;
 
   const handleClickTab = (Tab: string) => {
     setSelectedTab(Tab);
@@ -25,7 +31,7 @@ const MyShellsPage = () => {
   return (
     <MyShellsPageWrapper>
       <MyShellsPageContainer>
-        <Profile showTags={true} data={data} />
+        <Profile showTags={true} data={shellsData} memberInfo={memberInfo} />
         <ShellsTab handleClickTab={handleClickTab} selectedTab={selectedTab} />
         {selectedTab === 'current' && <CurrentShells />}
         {selectedTab === 'past' && <PastShells />}

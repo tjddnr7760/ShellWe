@@ -1,6 +1,4 @@
 import styled from 'styled-components';
-import { MyShellsDataProps } from '../../dataset/ShellDetailType.ts';
-
 import MyShell from './MyShell.tsx';
 import { MyShellDataProps } from '../../dataset/TypeOfMyShells.ts';
 
@@ -11,20 +9,19 @@ const MyShellListWrapper = styled.div`
   gap: 20px;
   width: auto;
   height: 500px;
-  padding-top: 25px;
-  padding-bottom: 15px;
+  padding: 15px;
   overflow-y: scroll;
 `;
 
-const MyShellList = ({ myShellListsData }: MyShellsDataProps) => {
-  const myShellArray = myShellListsData;
-
+const MyShellList = ({ data }: { data: MyShellDataProps }) => {
+  const myShellArray = data.shells;
 
   return (
     <MyShellListWrapper>
-      {myShellArray.map((shell) => {
-        return <MyShell key={shell.id} shell={shell} />;
-      })}
+      {myShellArray &&
+        myShellArray.map((shell) => {
+          return <MyShell key={shell.id} shell={shell} />;
+        })}
     </MyShellListWrapper>
   );
 };
