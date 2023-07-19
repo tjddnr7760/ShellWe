@@ -1,6 +1,7 @@
 import { useMutation } from 'react-query';
 import { axiosInstance, getHeader } from '../../utill/axiosInstance';
-import { useNavigate } from 'react-router-dom';
+import { queryClient } from '../../utill/queryClient';
+import { queryKeys } from '../../dataset/queryKey';
 
 interface ChatListData {
   data: ChatList[];
@@ -44,14 +45,11 @@ const getChatRoomId: GetChatRoomIdArgs = async (
 
 // 챗룸 삭제
 export const useDeleteChatRoom = (chatRoomId: number) => {
-  const navigate = useNavigate();
-
   const { data = {}, mutate } = useMutation(
     () => getChatRoomId(chatRoomId, 'delete', true),
     {
-      onSuccess: () => {
-        window.location.reload();
-        navigate(`/chat`);
+      onSuccess: async () => {
+        await queryClient.invalidateQueries(queryKeys.chatList);
       },
     }
   );
