@@ -4,6 +4,7 @@ import lombok.Getter;
 
 @Getter
 public enum AccessTokenExceptionCode {
+
     TOKEN_EXPIRED(400, "Token Expired, Check Your Token");
 
     private int status;
