@@ -16,7 +16,22 @@ export const ShellCreateContainer = styled.section`
   width: fit-content;
   height: fit-content;
   min-width: 800px;
+  @media (max-width: 768px) {
+    min-width: 300px;
+  }
 `;
+
+export const LogoWrapper = styled.div`
+  display: flex;
+  justify-content: center;
+`;
+
+export const Logo = styled.img`
+  @media (max-width: 768px) {
+    max-width: 300px;
+  }
+`;
+
 export const CreateInput = styled.input`
   margin: 5px;
   border: none;
@@ -59,14 +74,11 @@ export const CreateImgContainer = styled.div`
   gap: 10px;
 `;
 export const CreateMainImgWrapper = styled(CreateTitleWrapper)`
-  min-height: 400px;
-  min-width: 200px;
-
-  height: 100%;
-  width: fit-content;
+  width: 350px;
+  display: flex;
 `;
 
-export const CreateImgImgListWrapper = styled(CreateTitleWrapper)`
+export const CreateImgListWrapper = styled(CreateTitleWrapper)`
   min-height: 400px;
 `;
 
@@ -78,5 +90,22 @@ export const ButtonContainer = styled.div`
 export const ShellCreatePage = styled.div`
   display: flex;
   justify-content: center;
+`;
+export const TitleExplanation = styled.div`
+  background-color: #f5fdff;
+  border-radius: 25px;
+  padding: 10px;
+  font-size: 20px;
+  word-break: keep-all;
+  border: 2px solid #82c0fa;
+`;
+export const TitleImgWrapper = styled.div`
+  border-radius: 25px;
+  padding: 10px;
   flex-grow: 1;
+  display: flex;
+  justify-content: center;
+`;
+export const TitleImg = styled.img`
+  width: 200px;
 `;

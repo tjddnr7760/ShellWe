@@ -14,7 +14,7 @@ import {
 const ShellDetailPage = () => {
   const [modalVisible, setModalVisible] = useState(false);
   const [sidebarOpen, setSidebarOpen] = useState(false);
-  
+
   const handleOpenSidebar = () => {
     setSidebarOpen(!sidebarOpen);
   };

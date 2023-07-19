@@ -21,7 +21,11 @@ const MyPage = () => {
   return (
     <MyPageWrapper>
       <MyPageContainer>
+
         <Profile memberInfo={memberInfo} />
+
+        <Profile showTags={false} />
+
         <ProfileTab handleComponent={handelComponent}></ProfileTab>
         {selectedComponent === 'edit' && <EditProfile />}
         {selectedComponent === 'change' && <ChangePassword />}

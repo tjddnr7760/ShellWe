@@ -9,9 +9,11 @@ const IntroBox = styled.div`
   flex-direction: column;
   justify-content: center;
   padding: 30px;
+  min-width: 420px;
   height: 130px;
   gap: 10px;
   background-color: rgba(202, 240, 248, 0.15);
+  border-bottom: 0.5px solid rgba(0, 0, 0, 0.5);
 `;
 
 const IntroText1 = styled.div`

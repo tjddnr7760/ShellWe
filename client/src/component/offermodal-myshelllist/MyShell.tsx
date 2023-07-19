@@ -1,41 +1,32 @@
-import { MyShellContainer, ImgBox, Title, ShellInfo, ButtonDiv } from './MyShell.styled'
+import {
+  MyShellContainer,
+  ImgBox,
+  Title,
+  ShellInfo,
+  Category,
+} from './MyShell.styled';
+import { Shells } from '../../dataset/TypeOfMyShells.ts';
+import { useNavigate } from 'react-router';
 import { SmallButton3 } from '../../common/button/Button.styled.ts';
-import Poke from '../../asset/poke.svg';
 
-interface myShellProps {
-  shellId: number;
-  numberOfTrades: number;
-  type: string;
-  status: string;
-  title: string;
-  createdAt: string;
-  modifiedAt: string;
-  category: string;
-  tags: string[];
-  shellPhotos: string[];
-  member: {
-    memberId: number;
-    displayName: string;
-    profilePhoto: string;
+const MyShell = ({ shell }: { shell: Shells }) => {
+  const navigate = useNavigate();
+  const goToShellDetail = () => {
+    navigate(`/shelldetail/${shell.id}`);
   };
-};
-
-const MyShell = ({ shell }: { shell: myShellProps }) => {
-  const picture = shell.shellPhotos[0];
-  const title = shell.title;
 
   return (
     <MyShellContainer>
       <ShellInfo>
-        <ImgBox src={picture} alt="shell-image" />
-        <Title>{title}</Title>
+        <ImgBox src={shell.picture} alt="shell-image" />
+        <div>
+          <Title>{shell.title}</Title>
+          <Category>{shell.category}</Category>
+        </div>
       </ShellInfo>
-      <SmallButton3>
-        <ButtonDiv>
-          <img src={Poke} alt="pokeicon" />
-          <span>찌르기</span>
-        </ButtonDiv>
-      </SmallButton3>
+      <div>
+        <SmallButton3 onClick={goToShellDetail}>Detail</SmallButton3>
+      </div>
     </MyShellContainer>
   );
 };
