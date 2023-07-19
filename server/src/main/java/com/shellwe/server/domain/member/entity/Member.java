@@ -51,12 +51,13 @@ public class Member extends TimeTracker {
         this.password = password;
     }
 
-    public Member(Long id, String email, Boolean emailVerificationStatus, String password, String displayName) {
+    public Member(Long id, String email, Boolean emailVerificationStatus, String password, String displayName, String profileUrl) {
         this.id = id;
         this.email = email;
         this.emailVerificationStatus = emailVerificationStatus;
         this.password = password;
         this.displayName = displayName;
+        this.profileUrl = profileUrl;
     }
 
     public void emailVerificationCompleted() {
