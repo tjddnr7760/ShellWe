@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { ChangeEvent, useEffect, useRef, useState } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faLocationArrow } from '@fortawesome/free-solid-svg-icons';
@@ -14,7 +14,11 @@ import {
   TextArea,
   TextAreaContainer,
 } from './DMRoom.styled';
-import { Avatar } from '../../common/avatar/Avatar.tsx';
+import Avatar from '../../common/avatar/Avatar.tsx';
+import {
+  closeWebSocket,
+  connectToWebSocket,
+} from '../../utill/websocketUtils.ts';
 
 interface socketMessage {
   roomId: number;
@@ -30,6 +34,7 @@ interface socketMessage {
 }
 
 export const DMRoom = ({ id }: { id: number }) => {
+  console.log(id);
   const [websocket, setWebsocket] = useState<WebSocket>();
   const [chats, setChats] = useState<socketMessage[]>([]);
   const [text, setText] = useState<string>('');
@@ -67,8 +72,12 @@ export const DMRoom = ({ id }: { id: number }) => {
         {chats &&
           chats.map((chat) => {
             console.log('chats', chats);
-
             if (chat.notification) {
+              return <div key={uuidv4()}>{chat.payload}</div>;
+            }
+            if (chat.mine) {
+              return <MyChat key={uuidv4()}>{chat.payload}</MyChat>;
+            } else {
               return (
                 <Opponent key={uuidv4()}>
                   {chat.member && (
@@ -77,8 +86,6 @@ export const DMRoom = ({ id }: { id: number }) => {
                   <OpponentChat>{chat.payload}</OpponentChat>
                 </Opponent>
               );
-            } else {
-              return <MyChat key={uuidv4()}>{chat.payload}</MyChat>;
             }
           })}
       </MessageRoom>
@@ -87,7 +94,7 @@ export const DMRoom = ({ id }: { id: number }) => {
         <TextAreaContainer>
           <TextArea
             value={text}
-            onChange={(e) => {
+            onChange={(e: ChangeEvent<HTMLInputElement>) => {
               setText(e.target.value);
             }}
             onKeyDown={handleKeyDown}
