@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useParams } from 'react-router';
+import { useParams, useNavigate } from 'react-router';
 import Profile from '../../component/profile/Profile.tsx';
 import ProfileTab from '../../component/profile/ProfileTab';
 import EditProfile from '../../component/profile/EditProfile';
@@ -12,7 +12,7 @@ import { Member } from '../../hooks/profile/useGetMember';
 
 const MyPage = () => {
   const [selectedComponent, setSelectedComponent] = useState('edit');
-
+  const navigate = useNavigate();
   const { id } = useParams<{ id: string }>();
   const memberId = id !== undefined ? +id : 0;
   const { data: shellsData } = useCurrentShells(memberId);
@@ -23,6 +23,11 @@ const MyPage = () => {
 
   const handelComponent = (componentName: string) => {
     setSelectedComponent(componentName);
+  };
+
+  const handleLogout = () => {
+    localStorage.clear();
+    navigate('/home');
   };
 
   return (

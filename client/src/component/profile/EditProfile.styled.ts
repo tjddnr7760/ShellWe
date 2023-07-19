@@ -25,7 +25,7 @@ const ProfileImageBox = styled.div`
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
-  width: 250px;
+  width: 200px;
   height: auto;
 `;
 
@@ -34,8 +34,8 @@ const ProfileImage = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  width: 250px;
-  height: 250px;
+  width: 200px;
+  height: 200px;
   background-color: #ffffff;
   border: 0.5px solid rgba(0, 0, 0, 0.5);
   border-radius: 10px 10px 0px 0px;
@@ -48,12 +48,14 @@ const ImageBox = styled.div`
   justify-content: center;
   align-items: center;
   width: 100%;
-  height: auto;
+  height: fit-content;
 `;
 
 const Image = styled.img`
-  width: 100%;
-  height: 100%;
+  max-width: 200px;
+  max-height: 200px;
+  width: auto;
+  height: fit-content;
 `;
 
 const Title = styled.div`
