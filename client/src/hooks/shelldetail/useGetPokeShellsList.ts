@@ -16,7 +16,7 @@ const getPokedShellId: GetShellsArgs = async (memberId, method) => {
 };
 
 export const useGetMyShellToPoke = (memberId: number) => {
-  const { data = {} } = useQuery(queryKeys.tradesList, () =>
+  const { data = {} } = useQuery(queryKeys.myshellListToPoke, () =>
     getPokedShellId(memberId, 'get')
   );
 

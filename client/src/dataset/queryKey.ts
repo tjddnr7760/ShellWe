@@ -5,6 +5,7 @@ export enum queryKeys {
   shellsDetail = 'shellsDetail',
   home = 'home',
   main = 'main',
+  myshellListToPoke = 'myshellListToPoke',
   tradesList = 'tradesList',
   trade = 'trade',
   search = 'search',

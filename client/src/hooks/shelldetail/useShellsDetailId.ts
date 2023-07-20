@@ -9,7 +9,6 @@ interface GetShellsArgs {
 
 const getShellId: GetShellsArgs = async (shellId, method, isHeader = false) => {
   const headers = isHeader ? getHeader() : undefined;
-
   const { data } = await axiosInstance({
     url: `/shells/${shellId}`,
     method,
@@ -23,6 +22,5 @@ export const useGetShellDetail = () => {
   const { data = {} } = useQuery(queryKeys.shellsDetail, () =>
     getShellId(id as string, 'get', true)
   );
-
   return { data };
 };

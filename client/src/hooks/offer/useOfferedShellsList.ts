@@ -13,9 +13,8 @@ const getPokedShellId: GetPokedShellIdArgs = async (shellId) => {
   return data;
 };
 
-// 요청함 페이지 내 쉘 조회
 export const useOfferedShellsList = (shellId: number) => {
-  if (shellId === 0) {
+  if (shellId === undefined) {
     return {};
   }
   const { data = {} } = useQuery([queryKeys.tradesList, shellId], () =>
@@ -23,5 +22,3 @@ export const useOfferedShellsList = (shellId: number) => {
   );
   return { data };
 };
-
-// id 0번 사용 x 백엔드 전달

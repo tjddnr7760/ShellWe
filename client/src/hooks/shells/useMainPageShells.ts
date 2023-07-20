@@ -12,6 +12,6 @@ const getMainShells = async (): Promise<any> => {
 };
 
 export const useMainPageShells = () => {
-  const { data = {} } = useQuery(queryKeys.shellsDetail, () => getMainShells());
+  const { data = {} } = useQuery(queryKeys.main, () => getMainShells());
   return { data };
 };
