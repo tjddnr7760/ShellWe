@@ -4,6 +4,7 @@ import lombok.Builder;
 import lombok.Getter;
 
 import javax.validation.constraints.Positive;
+import java.time.LocalDateTime;
 
 public class RoomDto {
     @Builder
@@ -23,6 +24,7 @@ public class RoomDto {
         private long id;
         private long unread;
         private String lastMessage;
+        private LocalDateTime lastMessageCreatedAt;
         private MemberDto.Response member;
     }
 }
