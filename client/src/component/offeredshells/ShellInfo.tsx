@@ -4,15 +4,23 @@ import {
   ShellImage,
   TextBox,
 } from './ShellInfo.styled';
-import product from '../../asset/product.jpg';
+import { PokedShells } from '../../dataset/TypesOfferedShell';
+import { HandleClickPokedShellProps } from '../../dataset/TypesOfferedShell';
 
-const ShellInfo = () => {
+const ShellInfo = ({
+  shell,
+  HandleClickPokedShell,
+}: { shell: PokedShells } & HandleClickPokedShellProps) => {
+  const ClickHandler = () => {
+    HandleClickPokedShell(shell.id);
+  };
+
   return (
-    <ShellInfoContainer>
+    <ShellInfoContainer onClick={ClickHandler}>
       <ImageBox>
-        <ShellImage src={product} />
+        <ShellImage src={shell.picture} />
       </ImageBox>
-      <TextBox>Title</TextBox>
+      <TextBox>{shell.title}</TextBox>
     </ShellInfoContainer>
   );
 };

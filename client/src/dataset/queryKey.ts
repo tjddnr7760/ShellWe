@@ -12,7 +12,7 @@ export enum queryKeys {
   inactive = 'inactive',
   speare = 'speare',
   mctive = 'active',
-  sembers = 'members',
+  members = 'members',
   cart = 'cart',
   email = 'email',
   myshells = 'myshells',

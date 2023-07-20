@@ -12,12 +12,14 @@ import SearchToolbar from '../../component/searchtoolbar/SearchToolbar';
 import Shell from '../../common/shell/Shell';
 import { ShellType } from '../../common/shell/Shell.tsx';
 import { useSearchShells } from '../../hooks/shells/useSearchShells.ts';
+import InfiniteScroll from 'react-infinite-scroller';
 
 const SearchPage = () => {
   const location = useLocation();
   const searchParams = new URLSearchParams(location.search);
   const searchQuery = searchParams.get('q') || '';
-  const searchResults = useSearchShells(searchQuery) || [];
+  const { ShellsListData, hasNextPage, loadMore } =
+    useSearchShells(8, searchQuery) || [];
 
   return (
     <ShellListContainer>
@@ -25,13 +27,16 @@ const SearchPage = () => {
         <SearchToolbar />
       </SeachToolbarWrapper>
       <ShellsContainer>
-        <ShellsWrapper>
-          {searchResults &&
-            searchResults.shells.map((shell: ShellType) => (
-              <Shell key={uuidv4()} shell={shell} />
-            ))}
-        </ShellsWrapper>
+        <InfiniteScroll loadMore={loadMore} hasMore={hasNextPage}>
+          <ShellsWrapper>
+            {ShellsListData &&
+              ShellsListData.map((shell: ShellType) => (
+                <Shell key={uuidv4()} shell={shell} />
+              ))}
+          </ShellsWrapper>
+        </InfiniteScroll>
       </ShellsContainer>
+
       <LiftBtn />
     </ShellListContainer>
   );

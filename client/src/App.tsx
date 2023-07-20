@@ -1,5 +1,9 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import { Suspense, useEffect } from 'react';
+
+import { RecoilRoot } from 'recoil';
+import { Suspense, useEffect, useState } from 'react';
+import { ReactQueryDevtools } from 'react-query/devtools';
+import { useEffect, useState } from 'react';
 import './App.css';
 import GlobalStyle from './style/GlobalStyle.ts';
 import Footer from './component/footer/Footer.tsx';
@@ -19,6 +23,7 @@ import MyShellsPage from './page/myshells/MyShellsPage.tsx';
 import OfferedShellsPage from './page/offeredshells/OfferedShellsPage.tsx';
 import DirectMessage from './page/directmessage/DirectMessage.tsx';
 import Loading from './common/loading/Loading.tsx';
+import { useGetShells } from './hooks/shells/useShellsId.ts';
 import { useRecoilState } from 'recoil';
 import { userState } from './recoil/atom.ts';
 
@@ -56,6 +61,7 @@ function App() {
         </div>
       </main>
     </BrowserRouter>
+
   );
 }
 

@@ -6,8 +6,17 @@ import {
   IntroText2,
   ShellInfoListContainer,
 } from './PokedShellList.styled.ts';
+import {
+  MyPokedShellDataProps,
+  PokedShells,
+} from '../../dataset/TypesOfferedShell.ts';
 
-const PokedShellList = () => {
+const PokedShellList = ({
+  myPokedShellsData,
+  HandleClickPokedShell,
+}: MyPokedShellDataProps) => {
+  const pokedShellsArray: PokedShells[] = myPokedShellsData.shells;
+
   return (
     <PokedShellListContainer>
       <IntroBox>
@@ -15,17 +24,16 @@ const PokedShellList = () => {
         <IntroText2>Find great shells!</IntroText2>
       </IntroBox>
       <ShellInfoListContainer>
-        <ShellInfo />
-        <ShellInfo />
-        <ShellInfo />
-        <ShellInfo />
-        <ShellInfo />
-        <ShellInfo />
-        <ShellInfo />
-        <ShellInfo />
-        <ShellInfo />
-        <ShellInfo />
-        <ShellInfo />
+        {pokedShellsArray &&
+          pokedShellsArray.map((shell) => {
+            return (
+              <ShellInfo
+                key={shell.id}
+                shell={shell}
+                HandleClickPokedShell={HandleClickPokedShell}
+              />
+            );
+          })}
       </ShellInfoListContainer>
     </PokedShellListContainer>
   );

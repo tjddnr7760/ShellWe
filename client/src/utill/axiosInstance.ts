@@ -14,20 +14,16 @@ export const getPostHeader = () => {
     'Content-Type': `multipart/form-data; boundary=<${uuidv4}>`,
   };
 };
+export const getPostHeader = () => {
+  return {
+    'ngrok-skip-browser-warning': '69420',
+    Authorization: `${import.meta.env.VITE_TOKEN}`,
+    'Content-Type': `multipart/form-data; boundary=<${uuidv4}>`,
+  };
+};
 const config: AxiosRequestConfig = { baseURL: `${import.meta.env.VITE_KEY}` };
 const WebSocketConfig: AxiosRequestConfig = {
   baseURL: `${import.meta.env.VITE_KEY_DM}`,
 };
 
 export const axiosInstance = axios.create(config);
-export const axiosWebSocketInstance = axios.create(WebSocketConfig);
-
-/*
-사용법    
- await axiosInstance({
-    url: urlEndpoint,
-    method: 'POST',
-    data: { email, password },
-    headers: getHeader,
-});
-*/

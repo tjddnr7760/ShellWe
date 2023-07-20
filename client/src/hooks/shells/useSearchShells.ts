@@ -1,29 +1,50 @@
-import { useQuery } from 'react-query';
+import { useInfiniteQuery } from 'react-query';
 import { axiosInstance, getHeader } from '../../utill/axiosInstance';
+import { useCallback } from 'react';
 import { queryKeys } from '../../dataset/queryKey';
 
-interface getSearchShellsArgs {
-  (searchQuery: string | null): Promise<any>;
-}
-
-const getSearchShells: getSearchShellsArgs = async (searchQuery) => {
-  const { data } = await axiosInstance.get(`/shells`, {
+const getSearchShells = async (
+  limit: number,
+  cursor: number,
+  title: string
+) => {
+  const { data } = await axiosInstance.get('/shells/search', {
     params: {
-      title: encodeURIComponent(searchQuery as string),
+      limit,
+      cursor,
+      title,
     },
     headers: getHeader(),
   });
-  return { data };
+  return data;
 };
 
-//제품 상세 조회
-export const useSearchShells = (searchQuery: string | null) => {
-  if (searchQuery === null) {
-    return null;
-  }
-  const { data = {} } = useQuery([queryKeys.search, searchQuery], () =>
-    getSearchShells(searchQuery)
+export const useSearchShells = (limit: number, title: string) => {
+  const { data, hasNextPage, fetchNextPage, isFetching } = useInfiniteQuery(
+    [queryKeys.shellList, title],
+    ({ pageParam = 0 }) => getSearchShells(limit, pageParam, title),
+    {
+      getNextPageParam: (lastPage) =>
+        lastPage.shells?.length
+          ? lastPage.shells[lastPage.shells.length - 1].id
+          : null,
+    }
   );
 
-  return data;
+  const loadMore = useCallback(async () => {
+    if (!hasNextPage || isFetching) {
+      return;
+    }
+
+    await fetchNextPage();
+  }, [hasNextPage, isFetching, fetchNextPage]);
+
+  const ShellsListData = data?.pages.flatMap((page) => page.shells);
+
+  return {
+    ShellsListData,
+    hasNextPage,
+    loadMore,
+    isFetching: isFetching,
+  };
 };

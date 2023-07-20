@@ -25,30 +25,37 @@ const UserInfoAndHamburgerDiv = styled.div`
 
 const UserInfoDiv = styled.div`
   display: flex;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
   width: fit-content;
   gap: 10px;
   height: 45px;
-  padding: 5px;
+  padding: 10px;
   border: 0.5px solid rgba(0, 0, 0, 0.3);
   border-radius: 10px;
   background-color: #ffffff;
 `;
 
-const Nickname = styled.span`
-  text-align: center;
+const DisplayName = styled.span`
+  min-width: 50px;
   font-size: 16px;
 `;
 
 const Div = styled.div`
   display: flex;
-  align-items: center;
+  flex-direction: column;
   border: 0.5px solid rgba(0, 0, 0, 0.3);
   border-radius: 10px;
-  font-size: 16px;
+  font-size: 20px;
   padding: 10px;
   background-color: #ffffff;
+  gap: 5px;
+
+  div {
+    display: flex;
+    gap: 10px;
+    margin: 0;
+  }
 `;
 
 const Hamburger = styled.div`
@@ -62,7 +69,7 @@ const Hamburger = styled.div`
 `;
 const DefaultBodyWrapper = styled.div`
   display: flex;
-  justify-content: space-between;
+  align-items: center;
   gap: 10px;
   border: 0.5px solid rgba(0, 0, 0, 0.3);
   border-radius: 10px;
@@ -139,7 +146,7 @@ export {
   ShellInfoContainer,
   UserInfoAndHamburgerDiv,
   UserInfoDiv,
-  Nickname,
+  DisplayName,
   Div,
   DefaultBodyWrapper,
   SeeMoreBodyWrapper,

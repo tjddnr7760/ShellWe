@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-
+import { useCreateShells } from '../../hooks/cart/useCartShells';
 import LikeDefaultShell from '../../asset/likeshells/LikeDefaultShell.svg';
 import LikeSelectedShell from '../../asset/likeshells/LikeSelectedShell.svg';
 import {
@@ -13,28 +13,30 @@ import {
 } from './Shell.stlyled';
 import Avatar from '../avatar/Avatar';
 const Shell = ({ shell }: ShellProps) => {
+  const { mutate } = useCreateShells(shell.id);
   const [selecedShell, setSelecedShell] = useState(false);
   const navigate = useNavigate();
 
   const handleLikeCilck = () => {
+    mutate();
     setSelecedShell((prev) => !prev);
   };
 
   const handleDetailCilck = (id: number) => {
-    navigate(`/shelldetail/${id}}`);
+    navigate(`/shelldetail/${id}`);
   };
   return (
     <ShellContainer>
       {shell && (
         <>
-          <ShellImgWrapper onClick={() => handleDetailCilck(shell.id)}>
+          <ShellImgWrapper>
             <ShellImg src={shell.picture} />
             <LikeShellIcon
               src={selecedShell ? LikeSelectedShell : LikeDefaultShell}
               onClick={handleLikeCilck}
             />
           </ShellImgWrapper>
-          <ShellInfoWrapper>
+          <ShellInfoWrapper onClick={() => handleDetailCilck(shell.id)}>
             <Avatar avatartype="UserImg" member={shell.member} />
 
             <ShellTitleInfo>{shell.title}</ShellTitleInfo>
@@ -60,6 +62,6 @@ export type ShellType = {
   };
 };
 interface ShellProps {
-  shell: ShellType; // ShellType은 적절한 타입으로 대체되어야 합니다.
+  shell: ShellType;
 }
 export default Shell;

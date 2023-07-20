@@ -1,13 +1,20 @@
 import styled from 'styled-components';
 
 const ImageWrapper = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
   border: 0.5px solid rgba(0, 0, 0, 0.5);
-  border-radius: 10px;
+  border-radius: 15px;
   position: relative;
   z-index: 0;
+  width: 640px;
+  height: 400px;
+  overflow: hidden;
+`;
+
+const ShellImgContainer = styled.div`
+  display: flex;
+  width: 2000px;
+  overflow: hidden;
+  transition: transform 0.6s ease-in-out;
 `;
 
 const ShellImgBox = styled.div`
@@ -24,9 +31,8 @@ const ShellImgBox = styled.div`
 
 const ShellImg = styled.img`
   object-fit: contain;
-  max-width: 640px;
-  width: auto;
-  max-height: 100%;
+  width: 100%;
+  height: 400px;
   padding: 1px;
 `;
 
@@ -45,8 +51,8 @@ const LeftSlideButton = styled.button`
   z-index: 1;
   cursor: pointer;
   &:hover {
-    background-color: rgba(0, 0, 0, 0.1);
-    border: 0.1px solid rgba(0, 0, 0, 0.5);
+    color: #023e8a;
+    background-color: #90e0ef;
   }
 `;
 
@@ -65,8 +71,8 @@ const RightSlideButton = styled.button`
   z-index: 1;
   cursor: pointer;
   &:hover {
-    background-color: rgba(0, 0, 0, 0.1);
-    border: 0.1px solid rgba(0, 0, 0, 0.5);
+    color: #023e8a;
+    background-color: #90e0ef;
   }
 `;
 
@@ -76,4 +82,5 @@ export {
   LeftSlideButton,
   RightSlideButton,
   ShellImgBox,
+  ShellImgContainer,
 };
