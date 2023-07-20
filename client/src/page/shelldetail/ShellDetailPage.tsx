@@ -1,9 +1,9 @@
 import { useState } from 'react';
 import { useGetShellDetail } from '../../hooks/shelldetail/useShellsDetailId.ts';
-import ShellImgPreview from '../../component/ShellImgPreview/ShellImgPreview.tsx';
-import ShellDetail from '../../component/ShellDetail/ShellDetail.tsx';
-import DetailPageSidebar from '../../component/DetailPageSidebar/DetailPageSidebar.tsx';
-import OfferModal from '../../component/OfferModal/OfferModal.tsx';
+import ShellImgPreview from '../../component/shellimgpreview/ShellImgPreview.tsx';
+import ShellDetail from '../../component/shelldetail/ShellDetail.tsx';
+import DetailPageSidebar from '../../component/detailpagesidebar/DetailPageSidebar.tsx';
+import OfferModal from '../../component/offermodal/OfferModal.tsx';
 import {
   DetailPageContainer,
   Div,
@@ -15,7 +15,6 @@ import { ShellDetailDataProps } from '../../dataset/ShellDetailType.ts';
 
 const ShellDetailPage = () => {
   const { data } = useGetShellDetail();
-  console.log(data);
   const shellDetailData: ShellDetailDataProps = data.data;
 
   const [modalVisible, setModalVisible] = useState(false);

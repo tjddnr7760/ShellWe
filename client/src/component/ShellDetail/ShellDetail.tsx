@@ -19,6 +19,7 @@ import {
 } from './ShellDetail.styled.ts';
 import { ShellDetailProps, Tag } from '../../dataset/ShellDetailType.ts';
 import TagBox from '../../common/tag/TagBox.tsx';
+import { getMemberIdFromLocalStorage } from '../../utill/localstorageData.ts';
 
 const ShellDetail = ({
   handlePoke,
@@ -26,14 +27,9 @@ const ShellDetail = ({
   shellDetailData,
 }: ShellDetailProps) => {
   const [seeMoreBody, setSeeMoreBody] = useState(false);
-  // tags, category 서버 데이터 가공
   const tags = shellDetailData.tags?.map((tag: Tag) => tag.tagName);
   const category: string = shellDetailData.category.slice(2).toUpperCase();
-
-  // (recoil memberId 완료 시, 수정 필요)
-  // 제품 상세 페이지에서, 게시글의 memberId와 현재 로그인된 유저의 memberId가 일치하는지 확인하고 햄버거 렌더링.
-  // recoil의 memberId를 myMemberId 변수에 할당해서 사용한다.
-  const myMemberId = 1;
+  const myMemberId = Number(getMemberIdFromLocalStorage());
 
   const handleSeeMoreBody = () => {
     setSeeMoreBody(!seeMoreBody);
@@ -61,7 +57,7 @@ const ShellDetail = ({
         )}
         {tags && (
           <Div>
-            <span>Hope to change</span>
+            <span>Wanted Shells</span>
             <div>
               {tags.map((tag: string) => (
                 <TagBox key={uuidv4()} type="read" tag={tag} />
