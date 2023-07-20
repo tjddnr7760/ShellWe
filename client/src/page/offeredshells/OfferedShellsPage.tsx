@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useMyShellsList } from '../../hooks/offer/useMyShellsList.ts';
+import { useMyPokedShellsList } from '../../hooks/offer/useMyPokedShellsList.ts';
 import PokedShellList from '../../component/offeredshells/PokedShellList';
 import OfferedShell from '../../component/offeredshells/OfferedShell.tsx';
 import {
@@ -11,9 +11,8 @@ import {
 
 const OfferedShellsPage = () => {
   const [offeredVisible, setOfferedVisible] = useState(false);
-  const [clickedShellId, setClickedShellId] = useState<number>(0);
-
-  const { data: myPokedShellsData } = useMyShellsList();
+  const [clickedShellId, setClickedShellId] = useState<number | undefined>();
+  const { data: myPokedShellsData } = useMyPokedShellsList();
 
   const HandleClickPokedShell = (id: number): void => {
     if (clickedShellId === id) {
@@ -33,7 +32,7 @@ const OfferedShellsPage = () => {
             HandleClickPokedShell={HandleClickPokedShell}
           />
         </PokedShellListWrapper>
-        {clickedShellId !== 0 ? (
+        {clickedShellId !== undefined ? (
           <OfferedShell clickedShellId={clickedShellId} />
         ) : (
           <NoticeClickPokedShell>
