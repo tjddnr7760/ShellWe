@@ -92,7 +92,7 @@ const LoginPage: React.FC = () => {
           alt="Logo"
         ></Logo>
         <OathContainer>
-          <OathImg src={googlelogoimg}></OathImg>
+          <OathImg src={googlelogo}></OathImg>
           <OathText>Login with Google</OathText>
         </OathContainer>
         <UserinfoContainer>
