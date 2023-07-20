@@ -16,7 +16,6 @@ const patchStatusofShells = async (
   return { data };
 };
 
-//제품 업데이트
 export const usePatchStateOfShell = (requestData: ShellStatus) => {
   const navigate = useNavigate();
   const { id } = useParams();
@@ -31,6 +30,3 @@ export const usePatchStateOfShell = (requestData: ShellStatus) => {
   );
   return { data, mutate };
 };
-
-//queryClient.invalidateQueries(queryKeys.shellsDetail);
-//업데이트 후 "todos"라는 쿼리키를 useQuery api 함수를 실행

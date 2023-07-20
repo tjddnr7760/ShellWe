@@ -88,7 +88,6 @@ const SignupPage = () => {
     }
   };
 
-
   return (
     <LoginContainer>
       <LoginBox>

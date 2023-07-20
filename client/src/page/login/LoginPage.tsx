@@ -34,8 +34,6 @@ const LoginPage: React.FC = () => {
     /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{10,}$/.test(
       password
     );
-  console.log('password', password);
-  console.log('email', email);
 
   const handleGuestLogin = async (e: any) => {
     e.preventDefault();
@@ -55,9 +53,6 @@ const LoginPage: React.FC = () => {
       const accessToken = response.headers.authorization;
 
       localStorage.setItem('accessToken', accessToken);
-      console.log(accessToken);
-      console.log(userData);
-      console.log(response.headers.authorization);
 
       navigation('/main');
     }

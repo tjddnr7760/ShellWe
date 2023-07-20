@@ -22,7 +22,6 @@ export const ChatTextArea = React.memo(function ChatTextArea({
     }
 
     if (websocket) {
-      console.log(2);
       websocket.send(text);
     }
 
