@@ -12,7 +12,7 @@ const ShellListContainer = styled.div`
   width: 100%;
   height: 100%;
   flex-direction: column;
-  gap: 10px;
+  gap: 20px;
 `;
 
 const SeachToolbarWrapper = styled.div`
@@ -25,7 +25,6 @@ const SeachToolbarWrapper = styled.div`
 
 const ShellsWrapper = styled.div`
   display: flex;
-  align-items: center;
   height: fit-content;
   justify-content: flex-start;
   gap: 20px;

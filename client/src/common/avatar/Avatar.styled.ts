@@ -23,9 +23,10 @@ const Icon = styled(Avatar)`
   height: 35px;
 `;
 
+// 유저 이미지 크기 80px로 수정
 const UserImg = styled(Avatar)`
-  width: 50px;
-  height: 50px;
+  width: 80px;
+  height: 80px;
 `;
 
 export { Icon, UserImg };
