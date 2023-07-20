@@ -1,12 +1,13 @@
 import { useParams } from 'react-router';
 import { usePastShells } from '../../hooks/myshells/usePastShells';
-import MyShellList from '../offermodal-myshelllist/MyShellList';
+import MyShellsList from '../myshellspage-myshellslist/MyShellsList';
+import { MyShellTabProps } from '../../dataset/TypeOfMyShells';
 
-const PastShells = () => {
+const PastShells = ({ selectedTab }: MyShellTabProps) => {
   const { id } = useParams<{ id: string }>();
   const memberId = id !== undefined ? +id : 0;
   const { data } = usePastShells(memberId);
-  return <MyShellList data={data} />;
+  return <MyShellsList data={data} selectedTab={selectedTab} />;
 };
 
 export default PastShells;

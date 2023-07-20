@@ -6,7 +6,18 @@ const ProfileContainer = styled.div`
   height: fit-content;
   gap: 20px;
 `;
+const Box = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+`;
 
+const Box2 = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  flex-grow: 1;
+`;
 const ImgandNameContainer = styled.div`
   display: flex;
   flex-direction: column;
@@ -67,6 +78,7 @@ const Introduction = styled.div`
   font-size: 20px;
   padding: 10px;
   flex-grow: 1;
+
   @media (max-width: 768px) {
     font-size: 16px;
   }
@@ -77,10 +89,8 @@ const AllCurrentTags = styled.div`
   align-items: center;
   justify-content: flex-start;
   background-color: #ffffff;
-  /* border: 0.5px solid rgba(0, 0, 0, 0.2); */
   border-radius: 10px;
   font-size: 20px;
-  /* padding: 5px; */
   @media (max-width: 768px) {
     font-size: 16px;
   }
@@ -91,14 +101,10 @@ export {
   UserImg,
   DisplayName,
   Introduction,
-
-  AllLikeCategorys,
   ImgandNameContainer,
   IntroductionContainer,
-
   AllCurrentTags,
   Box,
   Box2,
-
   UserImgBox,
 };

@@ -33,7 +33,7 @@ const OfferedShellsPage = () => {
             HandleClickPokedShell={HandleClickPokedShell}
           />
         </PokedShellListWrapper>
-        {offeredVisible === true ? (
+        {clickedShellId !== 0 ? (
           <OfferedShell clickedShellId={clickedShellId} />
         ) : (
           <NoticeClickPokedShell>

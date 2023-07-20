@@ -1,15 +1,13 @@
 import styled from 'styled-components';
 import { MyShellsDataProps } from '../../dataset/ShellDetailType.ts';
-
 import MyShell from './MyShell.tsx';
-import { MyShellDataProps } from '../../dataset/TypeOfMyShells.ts';
 
 const MyShellListWrapper = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 20px;
-  width: auto;
+  width: 590px;
   height: 500px;
   padding-top: 25px;
   padding-bottom: 15px;
@@ -18,7 +16,6 @@ const MyShellListWrapper = styled.div`
 
 const MyShellList = ({ myShellListsData }: MyShellsDataProps) => {
   const myShellArray = myShellListsData;
-
 
   return (
     <MyShellListWrapper>

@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useParams } from 'react-router';
 import { useCurrentShells } from '../../hooks/myshells/useCurrentShells.ts';
-import Profile from '../../component/profile/Profile.tsx';
+import Profile from '../../component/profile/profile.tsx';
 import ShellsTab from '../../component/myshells/ShellsTab.tsx';
 import {
   MyShellsPageContainer,
@@ -10,13 +10,20 @@ import {
 import CurrentShells from '../../component/myshells/CurrentShells.tsx';
 import PastShells from '../../component/myshells/PastShells.tsx';
 import LikeShells from '../../component/myshells/LikeShells.tsx';
+import { useGetMember } from '../../hooks/profile/useGetMember';
+import { Member } from '../../hooks/profile/useGetMember';
+import { getMemberIdFromLocalStorage } from '../../utill/localstorageData.ts';
 
 const MyShellsPage = () => {
   const [selectedTab, setSelectedTab] = useState<string>('current');
-
   const { id } = useParams<{ id: string }>();
   const memberId = id !== undefined ? +id : 0;
-  const { data } = useCurrentShells(memberId);
+
+  const { data: shellsData } = useCurrentShells(memberId);
+  const { data: memberData } = useGetMember(
+    Number(getMemberIdFromLocalStorage())
+  );
+  const memberInfo: Member = memberData.data;
 
   const handleClickTab = (Tab: string) => {
     setSelectedTab(Tab);
@@ -25,11 +32,13 @@ const MyShellsPage = () => {
   return (
     <MyShellsPageWrapper>
       <MyShellsPageContainer>
-        <Profile showTags={true} data={data} />
+        <Profile showTags={true} data={shellsData} memberInfo={memberInfo} />
         <ShellsTab handleClickTab={handleClickTab} selectedTab={selectedTab} />
-        {selectedTab === 'current' && <CurrentShells />}
-        {selectedTab === 'past' && <PastShells />}
-        {selectedTab === 'like' && <LikeShells />}
+        {selectedTab === 'current' && (
+          <CurrentShells selectedTab={selectedTab} />
+        )}
+        {selectedTab === 'past' && <PastShells selectedTab={selectedTab} />}
+        {selectedTab === 'like' && <LikeShells selectedTab={selectedTab} />}
       </MyShellsPageContainer>
     </MyShellsPageWrapper>
   );

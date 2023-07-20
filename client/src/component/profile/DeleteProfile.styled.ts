@@ -23,7 +23,7 @@ const ContentBox = styled.div`
 `;
 
 const Title = styled.div`
-  font-size: 26px;
+  font-size: 20px;
 `;
 
 const Notice = styled.div`

@@ -1,5 +1,4 @@
 import { useParams } from 'react-router-dom';
-
 import {
   MyShellContainer,
   ImgBox,
@@ -45,7 +44,6 @@ const MyShell = ({ shell }: { shell: MyShells }) => {
           <span>찌르기</span>
         </ButtonDiv>
       </SmallButton3>
-
     </MyShellContainer>
   );
 };

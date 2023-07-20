@@ -1,12 +1,13 @@
 import { useParams } from 'react-router';
 import { useLikeShells } from '../../hooks/myshells/useLikeShells';
-import MyShellList from '../offermodal-myshelllist/MyShellList';
+import MyShellsList from '../myshellspage-myshellslist/MyShellsList';
+import { MyShellTabProps } from '../../dataset/TypeOfMyShells';
 
-const LikeShells = () => {
+const LikeShells = ({ selectedTab }: MyShellTabProps) => {
   const { id } = useParams<{ id: string }>();
   const memberId = id !== undefined ? +id : 0;
   const { data } = useLikeShells(memberId);
-  return <MyShellList data={data} />;
+  return <MyShellsList data={data} selectedTab={selectedTab} />;
 };
 
 export default LikeShells;

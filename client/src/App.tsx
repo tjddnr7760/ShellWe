@@ -1,9 +1,7 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-
 import { RecoilRoot } from 'recoil';
 import { Suspense, useEffect, useState } from 'react';
 import { ReactQueryDevtools } from 'react-query/devtools';
-import { useEffect, useState } from 'react';
 import './App.css';
 import GlobalStyle from './style/GlobalStyle.ts';
 import Footer from './component/footer/Footer.tsx';
@@ -26,7 +24,6 @@ import Loading from './common/loading/Loading.tsx';
 import { useGetShells } from './hooks/shells/useShellsId.ts';
 import { useRecoilState } from 'recoil';
 import { userState } from './recoil/atom.ts';
-
 import SearchPage from './page/searchpage/SearchPage.tsx';
 
 function App() {
@@ -61,7 +58,6 @@ function App() {
         </div>
       </main>
     </BrowserRouter>
-
   );
 }
 

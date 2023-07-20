@@ -7,13 +7,7 @@ export const getHeader = () => {
     Authorization: `${import.meta.env.VITE_TOKEN}`,
   };
 };
-export const getPostHeader = () => {
-  return {
-    'ngrok-skip-browser-warning': '69420',
-    Authorization: `${import.meta.env.VITE_TOKEN}`,
-    'Content-Type': `multipart/form-data; boundary=<${uuidv4}>`,
-  };
-};
+
 export const getPostHeader = () => {
   return {
     'ngrok-skip-browser-warning': '69420',
