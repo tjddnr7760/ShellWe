@@ -1,14 +1,16 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useMutation } from 'react-query';
+
 import axios from 'axios';
 
 import {
   LoginContainer,
   LoginBox,
   Logo,
-  OathContainer,
-  OathImg,
-  OathText,
+  OauthContainer,
+  OauthImg,
+  OauthText,
   UserinfoContainer,
   DivBox,
   DivInputBox,
@@ -49,45 +51,34 @@ const SignupPage = () => {
     );
   }, [isNicknameValid, isPasswordValid, isCheckPasswordValid, isEmailValid]);
 
+  const signupMutation = useMutation(async () => {
+    const response = await axios.post(`${import.meta.env.VITE_KEY}/members`, {
+      email,
+      password,
+      displayName,
+    });
+    return response.data;
+  });
+
   const handleSignup = async (e: any) => {
     e.preventDefault();
-    /**
-     * try
-     * /signup 이라는 url로 post 요청을
-     * request body에 nickname, email, password를 넣어서 보낼거야
-     *
-     * response -> 서버 요청에 대한 결과값 (response)
-     *
-     * 만약 response의 status가 200이라면 -> 서버 통신이 성공했다면
-     * main 페이지로 이동시켜줘
-     *
-     * catch
-     */
 
     try {
-      const response = await axios.post(
-        'https://e524-211-205-212-176.ngrok-free.app/members',
-        {
-          email,
-          password,
-          displayName,
-        }
-      );
-      if (response.status === 201) {
-        console.log('회원 가입 성공.');
-        navigation('./main');
-      }
-    } catch (error: any) {
-      console.error(error);
-      console.log(error);
-      if (error.response && error.response.data.error.status === 400) {
-        setErrorMessage(error.response.data.error.errorName);
-      } else {
-        setErrorMessage('시스템 오류로 인한 회원 가입 실패');
-      }
+      const data = await signupMutation.mutateAsync();
+      console.log('회원 가입 성공.', data);
+      navigation('/main');
+    } catch (error) {
+      console.error('회원 가입 실패.', error);
+      setEmail('');
+      alert('회원 가입에 실패했습니다.');
     }
   };
 
+  const LoginRequestHandlerGoogle = () => {
+    window.location.href = `${
+      import.meta.env.VITE_KEY
+    }/oauth2/authorization/google`;
+  };
 
   return (
     <LoginContainer>
@@ -96,10 +87,10 @@ const SignupPage = () => {
           src="https://cdn-icons-png.flaticon.com/512/499/499857.png"
           alt="Logo"
         ></Logo>
-        <OathContainer>
-          <OathImg src={googlelogo}></OathImg>
-          <OathText>Sign up with Google</OathText>
-        </OathContainer>
+        <OauthContainer onClick={LoginRequestHandlerGoogle}>
+          <OauthImg src={googlelogo}></OauthImg>
+          <OauthText>Sign up with Google</OauthText>
+        </OauthContainer>
         <UserinfoContainer>
           <DivBox>
             <div>NickName</div>
