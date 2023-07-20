@@ -21,3 +21,4 @@ const WebSocketConfig: AxiosRequestConfig = {
 };
 
 export const axiosInstance = axios.create(config);
+export const axiosWebSocketInstance = axios.create(WebSocketConfig);

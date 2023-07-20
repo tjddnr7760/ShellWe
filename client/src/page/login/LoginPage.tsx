@@ -108,7 +108,6 @@ const LoginPage: React.FC = () => {
           <OauthImg src={googlelogo}></OauthImg>
           <OauthText>Login with Google</OauthText>
         </OauthContainer>
-
         <UserinfoContainer>
           <DivBox>
             <div>Email</div>
