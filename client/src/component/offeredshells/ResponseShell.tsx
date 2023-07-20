@@ -12,6 +12,7 @@ import {
 import { useAcceptShell } from '../../hooks/offer/useAccept';
 import { OfferedShells } from '../../dataset/TypesOfferedShell';
 import { Pictures } from '../../dataset/TypesOfferedShell';
+import { MakePartOfBodyText } from '../../utill/makeBodyText';
 
 const ResponseShell = ({
   shell,
@@ -27,18 +28,6 @@ const ResponseShell = ({
     myShellId: clickedShellId,
     sellerShellId: shell.id,
     sellerMemberId: shell.member.id,
-  };
-
-  // shelldetailpage, offeredpage 머지 시, 함수 재사용.
-  const MakePartOfBodyText = (body: string) => {
-    if (body.length < 123) {
-      return body;
-    } else {
-      const slicebody = body.slice(0, 123);
-      return slicebody.charAt(slicebody.length - 1) === '.'
-        ? slicebody + '.'
-        : slicebody + '..';
-    }
   };
 
   const HandlePreview = () => {
@@ -60,7 +49,7 @@ const ResponseShell = ({
       <ShellsTextInfoBox>
         <TextBox>{shell.title}</TextBox>
         <TextBox>{shell.category}</TextBox>
-        <BodyBox>{MakePartOfBodyText(shell.body || '')}</BodyBox>
+        <BodyBox>{MakePartOfBodyText(shell.body || '', 123)}</BodyBox>
       </ShellsTextInfoBox>
       <AcceptInfo>
         <UserImg src={shell.member.profileUrl} alt="userimg"></UserImg>
