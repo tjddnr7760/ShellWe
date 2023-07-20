@@ -149,15 +149,24 @@ const Nav: React.FC = () => {
                   onMouseEnter={handleNavItemHover}
                   onMouseLeave={handleNavItemNotHover}
                 >
-                  <NavItemContent onClick={handleClick}>
-                    <FontAwesomeIcon icon={faBox} />
-                    Product
-                  </NavItemContent>
-
-                  <NavItemContent onClick={handleClick}>
-                    <FontAwesomeIcon icon={faPersonRunning} />
-                    Talent
-                  </NavItemContent>
+                  <Link
+                    to="/shelllist/product"
+                    style={{ textDecoration: 'none' }}
+                  >
+                    <NavItemContent>
+                      <FontAwesomeIcon icon={faBox} />
+                      Product
+                    </NavItemContent>
+                  </Link>
+                  <Link
+                    to="/shelllist/talent"
+                    style={{ textDecoration: 'none' }}
+                  >
+                    <NavItemContent>
+                      <FontAwesomeIcon icon={faPersonRunning} />
+                      Talent
+                    </NavItemContent>
+                  </Link>
                 </NavItemContentWrapper>
               )}
               <NavItem onClick={handleClick}>

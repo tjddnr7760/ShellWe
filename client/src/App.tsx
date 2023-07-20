@@ -20,6 +20,7 @@ import OfferedShellsPage from './page/offeredshells/OfferedShellsPage.tsx';
 import DirectMessage from './page/directmessage/DirectMessage.tsx';
 import Loading from './common/loading/Loading.tsx';
 import SearchPage from './page/searchpage/SearchPage.tsx';
+import GoogleLoginToken from './page/login/GoogleLoginToken.tsx';
 
 function App() {
   return (
@@ -35,6 +36,10 @@ function App() {
               <Route path="/signup" element={<SignupPage />} />
               <Route path="/aftersignup" element={<AfterSignUp />} />
               <Route path="/login" element={<LoginPage />} />
+              <Route
+                path="/oauth2/authorization/google/success"
+                element={<GoogleLoginToken />}
+              />
               <Route path="/shelllist/product" element={<ProductShell />} />
               <Route path="/shelllist/talent" element={<TalentShell />} />
               <Route path="/shellcreate" element={<ShellCreate />} />
