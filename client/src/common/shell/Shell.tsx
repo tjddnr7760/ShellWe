@@ -50,6 +50,7 @@ const Shell = ({ shell }: ShellProps) => {
 export type ShellType = {
   id: number;
   type: string;
+  numberOfTrades?: number;
   status: string;
   title: string;
   createdAt: string;

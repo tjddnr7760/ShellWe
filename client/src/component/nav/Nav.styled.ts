@@ -37,6 +37,7 @@ export const NavItems = styled.div`
 export const NavItem = styled.div`
   display: flex;
   align-items: center;
+  gap: 10px;
   height: 60px;
   letter-spacing: 0.5px;
   border-radius: 10px;
@@ -45,15 +46,14 @@ export const NavItem = styled.div`
   color: #828282;
   padding-left: 30px;
   padding-right: 30px;
-
+  /* 
   svg {
     margin-right: 10px;
-  }
+  } */
 
   img {
     width: 26px;
     height: 26px;
-    margin-right: 10px;
   }
 
   &:hover {

@@ -1,7 +1,5 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import { RecoilRoot } from 'recoil';
-import { Suspense, useEffect, useState } from 'react';
-import { ReactQueryDevtools } from 'react-query/devtools';
+import { Suspense } from 'react';
 import './App.css';
 import GlobalStyle from './style/GlobalStyle.ts';
 import Footer from './component/footer/Footer.tsx';
@@ -21,14 +19,9 @@ import MyShellsPage from './page/myshells/MyShellsPage.tsx';
 import OfferedShellsPage from './page/offeredshells/OfferedShellsPage.tsx';
 import DirectMessage from './page/directmessage/DirectMessage.tsx';
 import Loading from './common/loading/Loading.tsx';
-import { useGetShells } from './hooks/shells/useShellsId.ts';
-import { useRecoilState } from 'recoil';
-import { userState } from './recoil/atom.ts';
 import SearchPage from './page/searchpage/SearchPage.tsx';
 
 function App() {
-  const [user, setUser] = useRecoilState(userState);
-
   return (
     <BrowserRouter>
       <GlobalStyle />
@@ -50,7 +43,7 @@ function App() {
               <Route path="/member/:id" element={<MyPage />} />
               <Route path="/myshells/:id" element={<MyShellsPage />} />
               <Route path="/offer/:id" element={<OfferedShellsPage />} />
-              <Route path="/dm/:id" element={<DirectMessage />} />
+              {/* <Route path="/dm/:id" element={<DirectMessage />} /> */}
               <Route path="/search" element={<SearchPage />} />
             </Routes>
           </Suspense>

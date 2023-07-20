@@ -3,6 +3,9 @@ import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import googlelogo from '../../asset/googlelogo.png';
 import { Link } from 'react-router-dom';
+import { useSetRecoilState } from 'recoil';
+import { isLogInState } from '../../recoil/atom';
+// import { usePostLogin } from '../../hooks/login/PostLogin';
 
 import {
   LoginContainer,
@@ -15,8 +18,6 @@ import {
   DivBox,
   DivInputBox,
   DivInput,
-  CheckError,
-  CheckPosible,
   LoginButton,
   LoginSubFuntionBox,
   LoginSubFuntion,
@@ -25,6 +26,7 @@ import {
 const LoginPage: React.FC = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const setIsLoggedIn = useSetRecoilState(isLogInState);
   const navigation = useNavigate();
 
   const handleGuestLogin = async (e: any) => {
@@ -38,17 +40,21 @@ const LoginPage: React.FC = () => {
       }
     );
     if (response.status === 200) {
-      const userData = response.data;
-
-      localStorage.setItem('userData', userData);
-
+      setIsLoggedIn(true);
       const accessToken = response.headers.authorization;
-
+      const id = response.data.id;
+      const displayName = response.data.displayName;
+      const profileUrl = response.data.profileUrl;
+      const isMe = response.data.isMe;
       localStorage.setItem('accessToken', accessToken);
-
+      localStorage.setItem('id', id);
+      localStorage.setItem('displayName', displayName);
+      localStorage.setItem('profileUrl', profileUrl);
+      localStorage.setItem('isMe', isMe);
       navigation('/main');
     }
   };
+
   const handleLogin = async (e: any) => {
     e.preventDefault();
 
@@ -62,16 +68,17 @@ const LoginPage: React.FC = () => {
       );
 
       if (response.status === 200) {
-        const userData = response.data;
-        console.log(userData);
-        console.log('회원 가입 성공.');
-
-        localStorage.setItem('userData', userData);
-
+        setIsLoggedIn(true);
         const accessToken = response.headers.authorization;
+        const id = response.data.id;
+        const displayName = response.data.displayName;
+        const profileUrl = response.data.profileUrl;
+        const isMe = response.data.isMe;
         localStorage.setItem('accessToken', accessToken);
-
-        console.log(userData);
+        localStorage.setItem('id', id);
+        localStorage.setItem('displayName', displayName);
+        localStorage.setItem('profileUrl', profileUrl);
+        localStorage.setItem('isMe', isMe);
         navigation('/main');
       }
     } catch (error: any) {
@@ -83,11 +90,13 @@ const LoginPage: React.FC = () => {
       }
     }
   };
+
   const LoginRequestHandlerGoogle = () => {
     window.location.href = `${
       import.meta.env.VITE_KEY
     }/oauth2/authorization/google`;
   };
+
   return (
     <LoginContainer>
       <LoginBox>
