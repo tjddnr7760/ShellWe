@@ -29,9 +29,9 @@ public interface ShellRepository extends JpaRepository<Shell, Long> {
             "and s.category.shellCategory = :shellCategory " +
             "order by s.id desc")
     List<Shell> findShellsDesc(@Param("cursor") Long cursor,
-                               @Param("shellType") ShellType shellType,
-                               @Param("shellCategory") ShellCategory shellCategory,
-                               Pageable pageable);
+                           @Param("shellType") ShellType shellType,
+                           @Param("shellCategory") ShellCategory shellCategory,
+                           Pageable pageable);
 
     @Query("select s from Shell s " +
             "join fetch s.member m " +
@@ -40,9 +40,9 @@ public interface ShellRepository extends JpaRepository<Shell, Long> {
             "and s.category.shellCategory = :shellCategory " +
             "order by s.id asc")
     List<Shell> findShellsAsc(@Param("cursor") Long cursor,
-                              @Param("shellType") ShellType shellType,
-                              @Param("shellCategory") ShellCategory shellCategory,
-                              Pageable pageable);
+                           @Param("shellType") ShellType shellType,
+                           @Param("shellCategory") ShellCategory shellCategory,
+                           Pageable pageable);
 
     @Query("select s from Shell s " +
             "join fetch s.member m " +
@@ -50,8 +50,8 @@ public interface ShellRepository extends JpaRepository<Shell, Long> {
             "and s.shellType = :shellType " +
             "order by s.id desc")
     List<Shell> findAllCategoryShellsDesc(@Param("cursor") Long cursor,
-                                          @Param("shellType") ShellType shellType,
-                                          Pageable pageable);
+                                      @Param("shellType") ShellType shellType,
+                                      Pageable pageable);
 
     @Query("select s from Shell s " +
             "join fetch s.member m " +
@@ -59,10 +59,11 @@ public interface ShellRepository extends JpaRepository<Shell, Long> {
             "and s.shellType = :shellType " +
             "order by s.id asc")
     List<Shell> findAllCategoryShellsAsc(@Param("cursor") Long cursor,
-                                         @Param("shellType") ShellType shellType,
-                                         Pageable pageable);
+                                          @Param("shellType") ShellType shellType,
+                                          Pageable pageable);
 
     @Query("SELECT MAX(s.id) FROM Shell s")
     Optional<Long> findMaxId();
 }
+
 

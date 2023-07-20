@@ -1,5 +1,6 @@
 package com.shellwe.server.auth.handler.oauth;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.shellwe.server.auth.jwt.JwtTokenizer;
 import com.shellwe.server.domain.member.entity.Member;
 import com.shellwe.server.domain.member.service.OAuthMemberService;
@@ -82,8 +83,15 @@ public class OAuth2MemberSuccessHandler extends SimpleUrlAuthenticationSuccessHa
         response.setContentType("application/json");
         response.setStatus(HttpStatus.OK.value());
 
-        String bodyContent = "OAuth2 토큰이 성공적으로 생성되었습니다.";
-        response.getWriter().write(bodyContent);
+        Map<String, String> bodyContent = new HashMap<>();
+        bodyContent.put("id", member.getId().toString());
+        bodyContent.put("displayName", member.getDisplayName());
+        bodyContent.put("profileUrl", member.getProfileUrl());
+
+        ObjectMapper objectMapper = new ObjectMapper();
+        String jsonBodyContent = objectMapper.writeValueAsString(bodyContent);
+
+        response.getWriter().write(jsonBodyContent);
 
         log.info("oauth response completed");
     }

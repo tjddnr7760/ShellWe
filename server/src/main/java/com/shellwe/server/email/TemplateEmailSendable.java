@@ -17,17 +17,20 @@ public class TemplateEmailSendable implements EmailSendable {
     private final JavaMailSender javaMailSender;
     private final TemplateEngine templateEngine;
     private final Context context;
+    private final String url;
 
-    public TemplateEmailSendable(JavaMailSender javaMailSender, TemplateEngine templateEngine, Context context) {
+    public TemplateEmailSendable(JavaMailSender javaMailSender, TemplateEngine templateEngine, Context context, String url) {
         this.javaMailSender = javaMailSender;
         this.templateEngine = templateEngine;
         this.context = context;
+        this.url = url;
     }
 
     @Override
     public void send(String[] to, String subject, String email, String templateName) {
         try {
             context.setVariable("email", email);
+            context.setVariable("url", url);
 
             MimeMessage mimeMessage = javaMailSender.createMimeMessage();
             MimeMessageHelper mimeMessageHelper = new MimeMessageHelper(mimeMessage, false, "UTF-8");

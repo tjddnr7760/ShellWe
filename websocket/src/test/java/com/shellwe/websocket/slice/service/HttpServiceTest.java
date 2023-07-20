@@ -102,7 +102,7 @@ public class HttpServiceTest {
                 .lastMessage("마지막 메세지")
                 .member(member)
                 .build();
-        given(roomMapper.memberRoomToWsResponse(Mockito.any(),Mockito.anyLong(),Mockito.anyString())).willReturn(response);
+        given(roomMapper.memberRoomToWsResponse(Mockito.any(),Mockito.anyLong(),Mockito.anyString(),Mockito.any())).willReturn(response);
 
         assertThat(httpService.findAllRoom()).isEqualTo(List.of(response));
     }

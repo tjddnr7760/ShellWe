@@ -10,18 +10,20 @@ import com.shellwe.websocket.entity.Message;
 import org.mapstruct.Mapper;
 import org.mapstruct.ReportingPolicy;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Mapper(componentModel = "spring", unmappedTargetPolicy = ReportingPolicy.IGNORE)
 public interface RoomMapper {
     MemberDto.Response memberToMemberResponse(Member member);
     MemberDto.Response memberContextToMemberResponse(MemberContextInform member);
-    default RoomDto.Response memberRoomToWsResponse(MemberRoom memberRoom, long unreadCount, String message){
+    default RoomDto.Response memberRoomToWsResponse(MemberRoom memberRoom, long unreadCount, String message, LocalDateTime messageCreatedAt){
         return RoomDto.Response.builder()
                 .id(memberRoom.getRoom().getId())
                 .unread(unreadCount)
                 .lastMessage(message)
                 .member(memberToMemberResponse(memberRoom.getMember()))
+                .lastMessageCreatedAt(messageCreatedAt)
                 .build();
     };
     default MessageDto.Response messageToMessageResponse(Message message, long memberId){

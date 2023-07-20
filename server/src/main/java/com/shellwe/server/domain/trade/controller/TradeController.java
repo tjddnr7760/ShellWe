@@ -48,8 +48,8 @@ public class TradeController {
     @ResponseStatus(HttpStatus.OK)
     @PatchMapping("/{shellId}")
     public void updateShellTradeStatus(@PathVariable long shellId,
-                                       @RequestBody UpdateTradeStatusRequestDto updateTradeStatusRequestDto,
-                                       Authentication authentication) {
+                                                               @RequestBody UpdateTradeStatusRequestDto updateTradeStatusRequestDto,
+                                                               Authentication authentication) {
         tradeService.updateTradeStatus(shellId, updateTradeStatusRequestDto, getId(authentication));
     }
 

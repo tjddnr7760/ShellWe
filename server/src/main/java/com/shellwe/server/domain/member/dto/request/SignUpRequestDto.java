@@ -13,16 +13,17 @@ import javax.validation.constraints.Size;
 public class SignUpRequestDto {
 
     @NotBlank
-    @Email
+    @Email(message = "Incorrect Email Form")
     private String email;
 
     private Boolean emailVerificationStatus = false;
 
     @NotBlank
-    @Pattern(regexp = "^(?=.*[a-zA-Z])(?=.*\\d)(?=.*[!@#$%&*])[a-zA-Z\\d!@#$%&*]{8,}$")
+    @Pattern(regexp = "^(?=.*[a-zA-Z])(?=.*\\d)(?=.*[!@#$%&*])[a-zA-Z\\d!@#$%&*]{10,}$",
+            message = "Must contain at least 8 characters, including lowercase letters, numbers, and special symbols.")
     private String password;
 
     @NotBlank
-    @Size(max = 8)
+    @Size(min = 1, max = 10, message = "The displayname size must be greater than 0 and less than 10.")
     private String displayName;
 }

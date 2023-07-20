@@ -49,7 +49,7 @@ public class Shell extends TimeTracker {
     @JoinColumn(name = "CATEGORY_ID")
     private Category category;
 
-    @OneToMany(cascade = CascadeType.PERSIST)
+    @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "SHELL_ID")
     private List<Tag> tags = new ArrayList<>();
 
@@ -94,6 +94,10 @@ public class Shell extends TimeTracker {
 
     public void deleteAllPictureUrls() {
         this.pictureUrls.clear();
+    }
+
+    public void deleteAllTags() {
+        this.tags.clear();
     }
 
     public void updateShellInformExceptPictureUrl(Shell requestShell) {

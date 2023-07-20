@@ -34,23 +34,23 @@ public class ShellController {
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping
     public ShellIdDto registerShell(@Valid  @RequestPart("register") RegisterRequestDto registerRequestDto,
-                                    @RequestPart("pictures") List<MultipartFile> pictures,
-                                    Authentication authentication) {
+                                             @RequestPart("pictures") List<MultipartFile> pictures,
+                                             Authentication authentication) {
         return shellService.register(registerRequestDto, getId(authentication), pictures);
     }
 
     @ResponseStatus(HttpStatus.OK)
     @GetMapping("/{shellId}")
     public FindDetailsResponseDto findShellDetails(@PathVariable long shellId, Authentication authentication) {
-        return shellService.findDetails(shellId, getId(authentication));
+        return shellService.findDetails(shellId, getIdAllowNull(authentication));
     }
 
     @ResponseStatus(HttpStatus.OK)
     @PatchMapping("/{shellId}/update")
     public ShellIdDto updateShell(@Valid @PathVariable long shellId,
-                                  @RequestPart("update") UpdateRequestDto updateRequestDto,
-                                  @RequestPart("pictures") List<MultipartFile> pictures,
-                                  Authentication authentication) {
+                                         @RequestPart("update") UpdateRequestDto updateRequestDto,
+                                         @RequestPart("pictures") List<MultipartFile> pictures,
+                                         Authentication authentication) {
         return shellService.update(shellId, updateRequestDto, getId(authentication), pictures);
     }
 
@@ -82,6 +82,17 @@ public class ShellController {
         Long id;
         if (authentication == null) {
             throw new AccessTokenException(AccessTokenExceptionCode.TOKEN_EXPIRED);
+        } else {
+            MemberContextInform memberInform = (MemberContextInform) authentication.getPrincipal();
+            id = memberInform.getId();
+        }
+        return id;
+    }
+
+    private Long getIdAllowNull(Authentication authentication) {
+        Long id;
+        if (authentication == null) {
+            id = null;
         } else {
             MemberContextInform memberInform = (MemberContextInform) authentication.getPrincipal();
             id = memberInform.getId();
