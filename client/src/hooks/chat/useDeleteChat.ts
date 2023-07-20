@@ -43,7 +43,6 @@ const getChatRoomId: GetChatRoomIdArgs = async (
   return { data };
 };
 
-// 챗룸 삭제
 export const useDeleteChatRoom = (chatRoomId: number) => {
   const { data = {}, mutate } = useMutation(
     () => getChatRoomId(chatRoomId, 'delete', true),

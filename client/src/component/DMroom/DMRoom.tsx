@@ -37,18 +37,15 @@ export const DMRoom = React.memo(function DMRoom({ id }: { id: number }) {
   const [chats, setChats] = useState<socketMessage[]>([]);
   const [text, setText] = useState<string>('');
   const messageContainerRef = useRef<HTMLDivElement>(null);
-  console.log(chats);
   const memoizedSetChats = useMemo(() => {
     const updateChats = (messageData: string) => {
       setChats((prevChats) => {
-        console.log('messageData', messageData);
         return [...prevChats, JSON.parse(messageData)];
       });
     };
     return updateChats;
   }, [websocket, text, chats]);
   useEffect(() => {
-    // 웹소켓 연결
     const client = connectToWebSocket(id, memoizedSetChats);
 
     setWebsocket(client);

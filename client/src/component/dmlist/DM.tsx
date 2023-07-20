@@ -20,7 +20,6 @@ interface DMProps {
   ClickedRoomId: number | undefined;
   setIsRoomOpened: (type: boolean | undefined) => void;
   setClickedRoomId: (roomId: number | undefined) => void;
-  refreshChatList: () => Promise<void>;
 }
 
 interface ChatList {
@@ -43,15 +42,8 @@ const DM = ({
   setIsRoomOpened,
   setClickedRoomId,
   ClickedRoomId,
-  refreshChatList,
 }: DMProps) => {
-  const chatRoomId = chat.id;
-  const { mutate: DeleteChatRoom } = useDeleteChatRoom(chatRoomId);
-
-  const handleClick = () => {
-    handleClickRoom(chatRoomId);
-    refreshChatList();
-  };
+  const { mutate: DeleteChatRoom } = useDeleteChatRoom(chat.id);
 
   const handleDelete = () => {
     if (isRoomOpened && ClickedRoomId === chat.id) {
@@ -73,7 +65,11 @@ const DM = ({
   };
   return (
     <div>
-      <MessageListContainer onClick={handleClick}>
+      <MessageListContainer
+        onClick={() => {
+          handleClickRoom(chat.id);
+        }}
+      >
         <MessageListBox>
           <Avatar avatartype={'UserImg'} member={chat.member} />
           <MessageContainer>

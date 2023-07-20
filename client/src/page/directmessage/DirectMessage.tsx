@@ -23,6 +23,7 @@ export const DirectMessage: React.FC = () => {
     } else {
       setIsRoomOpened(true);
       setClickedRoomId(roomId);
+      refreshChatList();
     }
   };
 
@@ -38,18 +39,18 @@ export const DirectMessage: React.FC = () => {
             ChatList
           </MessageListHeader>
           <MessageListBody>
-            {chatListData?.data?.map((chat) => (
-              <DM
-                key={chat.id}
-                chat={chat}
-                handleClickRoom={handleClickRoom}
-                isRoomOpened={isRoomOpened}
-                setIsRoomOpened={setIsRoomOpened}
-                setClickedRoomId={setClickedRoomId}
-                ClickedRoomId={ClickedRoomId}
-                refreshChatList={refreshChatList}
-              />
-            ))}
+            {chatListData &&
+              chatListData.data.map((chat) => (
+                <DM
+                  key={chat.id}
+                  chat={chat}
+                  handleClickRoom={handleClickRoom}
+                  isRoomOpened={isRoomOpened}
+                  setIsRoomOpened={setIsRoomOpened}
+                  setClickedRoomId={setClickedRoomId}
+                  ClickedRoomId={ClickedRoomId}
+                />
+              ))}
           </MessageListBody>
         </MessageListWrapper>
         <MessageRoomWrapper>
