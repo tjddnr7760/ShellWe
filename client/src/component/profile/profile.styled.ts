@@ -7,13 +7,13 @@ const ProfileContainer = styled.div`
   gap: 20px;
 `;
 
-const Box = styled.div`
+const ImgandNameContainer = styled.div`
   display: flex;
   flex-direction: column;
   gap: 10px;
 `;
 
-const Box2 = styled.div`
+const IntroductionContainer = styled.div`
   display: flex;
   flex-direction: column;
   gap: 10px;
@@ -27,7 +27,7 @@ const UserImgBox = styled.div`
   background-color: #ffffff;
   max-width: 200px;
   max-height: fit-content;
-  border: 0.5px solid rgba(0, 0, 0, 0.5);
+  border: 0.5px solid rgba(0, 0, 0, 0.2);
   border-radius: 10px;
   font-size: 20px;
   overflow: hidden;
@@ -41,14 +41,14 @@ const UserImg = styled.img`
   width: 100%;
 `;
 
-const Nickname = styled.div`
+const DisplayName = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
   background-color: #ffffff;
   max-width: 200px;
   max-height: fit-content;
-  border: 0.5px solid rgba(0, 0, 0, 0.5);
+  border: 0.5px solid rgba(0, 0, 0, 0.2);
   border-radius: 10px;
   font-size: 20px;
   padding: 10px;
@@ -62,7 +62,7 @@ const Introduction = styled.div`
   align-items: center;
   justify-content: flex-start;
   background-color: #ffffff;
-  border: 0.5px solid rgba(0, 0, 0, 0.5);
+  border: 0.5px solid rgba(0, 0, 0, 0.2);
   border-radius: 10px;
   font-size: 20px;
   padding: 10px;
@@ -72,15 +72,15 @@ const Introduction = styled.div`
   }
 `;
 
-const AllLikeCategorys = styled.div`
+const AllCurrentTags = styled.div`
   display: flex;
   align-items: center;
   justify-content: flex-start;
   background-color: #ffffff;
-  border: 0.5px solid rgba(0, 0, 0, 0.5);
+  /* border: 0.5px solid rgba(0, 0, 0, 0.2); */
   border-radius: 10px;
   font-size: 20px;
-  padding: 10px;
+  /* padding: 5px; */
   @media (max-width: 768px) {
     font-size: 16px;
   }
@@ -89,10 +89,16 @@ const AllLikeCategorys = styled.div`
 export {
   ProfileContainer,
   UserImg,
-  Nickname,
+  DisplayName,
   Introduction,
+
   AllLikeCategorys,
+  ImgandNameContainer,
+  IntroductionContainer,
+
+  AllCurrentTags,
   Box,
   Box2,
+
   UserImgBox,
 };

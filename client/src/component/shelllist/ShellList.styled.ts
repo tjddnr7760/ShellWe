@@ -36,7 +36,11 @@ const ShellsWrapper = styled.div`
 
 const ShellsContainer = styled.div`
   display: flex;
-  align-items: center;
+  justify-content: center;
+  min-height: 800px;
+  &.empty {
+    min-height: auto;
+  }
 `;
 
 export {

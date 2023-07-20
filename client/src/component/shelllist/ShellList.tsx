@@ -38,7 +38,11 @@ const ShellList = ({ pagetype }: { pagetype: string }) => {
           setCategory={setCategory}
         />
       </CategoryListWrapper>
-      <ShellsContainer>
+      <ShellsContainer
+        className={
+          !ShellsListData || ShellsListData.length === 0 ? 'empty' : ''
+        }
+      >
         <InfiniteScroll loadMore={loadMore} hasMore={hasNextPage}>
           <ShellsWrapper>
             {ShellsListData &&

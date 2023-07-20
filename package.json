@@ -1,7 +1,11 @@
 {
   "dependencies": {
+<<<<<<< HEAD
+    "axios": "^1.4.0"
+=======
     "react": "^18.2.0",
     "react-router": "^6.14.1",
     "react-router-dom": "^6.14.1"
+>>>>>>> 2e998da47d8b361829225498ba391226cfd1f56c
   }
 }

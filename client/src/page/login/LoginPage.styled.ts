@@ -6,7 +6,7 @@ export const LoginContainer = styled.div`
   align-items: center;
   margin: 50px 0;
 `;
-export const LoginBox = styled.div`
+export const LoginBox = styled.form`
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -20,16 +20,26 @@ export const Logo = styled.img`
   height: 52px;
 `;
 
-export const Oath = styled.div`
+export const OathContainer = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
+  width: 300px;
+  height: 42px;
+  min-height: 30px;
+  border-radius: 15px;
+  border: 0.5px solid #00000050;
   cursor: pointer;
+  &:active {
+    transform: translateY(2px);
+  }
+`;
+export const OathImg = styled.img`
+  width: 30px;
 `;
 
-export const OathImg = styled.img`
-  width: 100%;
-  cursor: pointer;
+export const OathText = styled.div`
+  padding: 15px;
 `;
 
 export const UserinfoContainer = styled.div`
@@ -42,7 +52,7 @@ export const UserinfoContainer = styled.div`
   justify-content: center;
 `;
 
-export const EmailBox = styled.div`
+export const DivBox = styled.div`
   display: flex;
   flex-direction: column;
   font-size: 20px;
@@ -51,46 +61,36 @@ export const EmailBox = styled.div`
   gap: 3px;
 `;
 
-export const EmailInputBox = styled.div`
+export const DivInputBox = styled.div`
   border-radius: 16px;
   display: flex;
-  align-items: center;
+  flex-direction: column;
   justify-content: stretch;
-  border: 0.5px solid #00000080;
 `;
 
-export const EmailInput = styled.input`
+export const DivInput = styled.input`
   border: none;
   border-radius: 15px;
   min-height: 30px;
   padding: 5px;
   width: 100%;
-  &:focus {
-    outline: none;
+  border: 0.5px solid #00000080;
+  &::placeholder {
+    font-size: 10px;
   }
 `;
 
-export const EmailOverlapCheck = styled.button`
-  background-color: #48cae4;
-
-  border-radius: 15px;
-  font-weight: 300;
-  cursor: pointer;
-  border: 0.5px solid white;
-  font-weight: 400;
-  font-size: 14px;
-
-  &:hover {
-    color: #023e8a;
-    background-color: #90e0ef;
-  }
-`;
-
-export const EmailError = styled.span`
+export const CheckError = styled.span`
   margin: 5px 0px;
   font-weight: 400;
   font-size: 10px;
   color: red;
+`;
+export const CheckPosible = styled.div`
+  margin: 5px 0px;
+  font-weight: 400;
+  font-size: 10px;
+  color: #489f48;
 `;
 
 export const LoginButton = styled.button`
@@ -105,11 +105,20 @@ export const LoginButton = styled.button`
   width: 100%;
   min-width: 300px;
   height: 40px;
-  &:hover {
-    color: #023e8a;
-    background-color: #90e0ef;
-  }
+
   &:active {
     transform: translateY(2px);
   }
+`;
+
+export const LoginSubFuntionBox = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 130px;
+`;
+export const LoginSubFuntion = styled.div`
+  color: gray;
+  font-size: 12px;
+  cursor: pointer;
 `;

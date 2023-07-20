@@ -23,15 +23,21 @@ const ContentBox = styled.div`
 `;
 
 const Title = styled.div`
-  font-size: 16px;
+  font-size: 26px;
 `;
 
 const Notice = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
   background-color: #fff;
   border-radius: 5px;
   border: 0.5px solid rgba(0, 0, 0, 0.5);
   padding: 20px;
-  line-height: 120%;
+  width: 300px;
+  height: 150px;
+  line-height: 150%;
+  font-size: 20px;
 `;
 
 const ButtonBox = styled.div`
@@ -39,4 +45,30 @@ const ButtonBox = styled.div`
   gap: 10px;
 `;
 
-export { Wrapper, ContentBox, Title, Notice, ButtonBox };
+const PasswordInputModal = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  div {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+  }
+`;
+
+const PasswordInput = styled.input`
+  border-radius: 5px;
+  width: 250px;
+  height: 30px;
+  font-size: 26px;
+`;
+
+export {
+  Wrapper,
+  ContentBox,
+  Title,
+  Notice,
+  ButtonBox,
+  PasswordInputModal,
+  PasswordInput,
+};

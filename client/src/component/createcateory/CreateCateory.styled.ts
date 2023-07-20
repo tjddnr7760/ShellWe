@@ -6,12 +6,11 @@ export const CreateCateoryWrapper = styled.div`
   opacity: 0.6499999761581421;
   background: #fff;
   display: flex;
-  padding: 10px;
+  padding: 5px;
   flex-direction: column;
   width: fit-content;
-  min-width: 270px;
+  min-width: 230px;
   justify-content: center;
-  transition: 0.3s ease-in-out;
 
   gap: 10px;
 `;
