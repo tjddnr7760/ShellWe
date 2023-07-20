@@ -24,7 +24,6 @@ export const GoogleLoginToken = () => {
   if (displayName) {
     const decodedDisplayName = decodeURIComponent(displayName);
     localStorage.setItem('displayName', decodedDisplayName);
-    console.log(decodedDisplayName);
   }
 
   useEffect(() => {
