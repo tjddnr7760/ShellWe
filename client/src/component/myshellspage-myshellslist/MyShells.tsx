@@ -34,13 +34,15 @@ const MyShells = ({ shell }: { shell: Shells }) => {
           <Category>{shell.category}</Category>
         </div>
       </ShellInfo>
-      {getMemberIdFromLocalStorage() === urlId && (
+      {
+        // getMemberIdFromLocalStorage() === urlId && (
         <div>
           <SmallButton3 onClick={handleDeleteLikeShell}>
             Cancel Like
           </SmallButton3>
         </div>
-      )}
+        // )
+      }
     </MyShellContainer>
   );
 };
