@@ -6,6 +6,7 @@ import { isLogInState } from '../../recoil/atom';
 export const GoogleLoginToken = () => {
   const navigate = useNavigate();
   const setIsLoggedIn = useSetRecoilState(isLogInState);
+
   const id: string | null = new URL(location.href).searchParams.get('id');
   const displayName: string | null = new URL(location.href).searchParams.get(
     'displayName'
@@ -16,25 +17,22 @@ export const GoogleLoginToken = () => {
   const accessToken: string | null = new URL(location.href).searchParams.get(
     'Authorization'
   );
+
   accessToken && localStorage.setItem('Authorization', accessToken);
   id && localStorage.setItem('id', id);
-
+  profileUrl && localStorage.setItem('profileUrl', profileUrl);
   if (displayName) {
-    const decodedDisplayName = /[ㄱ-ㅎ|ㅏ-ㅣ|가-힣]/.test(displayName)
-      ? decodeURIComponent(displayName)
-      : displayName;
+    const decodedDisplayName = decodeURIComponent(displayName);
     localStorage.setItem('displayName', decodedDisplayName);
+    console.log(decodedDisplayName);
   }
-
-  profileUrl && localStorage.setItem('profileUrl', profileUrl);
-  profileUrl && localStorage.setItem('profileUrl', profileUrl);
 
   useEffect(() => {
     setIsLoggedIn(true);
     navigate('/main');
   }, []);
 
-  return <div></div>;
+  return <></>;
 };
 
 export default GoogleLoginToken;

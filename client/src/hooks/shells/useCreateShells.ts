@@ -20,7 +20,7 @@ export const useCreateShells = () => {
     (requestData: FormData) => getShell(requestData),
     {
       onSuccess: (responseData) => {
-        navigate(`shelldetail/${responseData?.data?.id}`);
+        navigate(`/shelldetail/${responseData?.data?.id}`);
       },
     }
   );
