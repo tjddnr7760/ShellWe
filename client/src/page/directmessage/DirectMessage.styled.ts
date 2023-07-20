@@ -5,6 +5,8 @@ export const MessageWrapper = styled.div`
   display: flex;
   gap: 20px;
   margin: 10px;
+  justify-content: center;
+  align-items: center;
 `;
 
 export const MessageListWrapper = styled.div`
@@ -22,7 +24,7 @@ export const MessageRoomWrapper = styled.div`
   justify-content: center;
   align-items: center;
   flex-grow: 1;
-  max-width: 780px;
+  max-width: 680px;
 `;
 
 export const MessageListHeader = styled.div`
@@ -40,7 +42,7 @@ export const MessageListHeader = styled.div`
 
 export const MessageListBody = styled.div`
   overflow-y: scroll;
-  height: 700px;
+  height: 720px;
   background-color: #bbe7ff;
   border-radius: 0 0 15px 15px;
 `;

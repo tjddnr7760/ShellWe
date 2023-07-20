@@ -13,7 +13,6 @@ export const FooterContainer = styled.div`
   align-items: center;
   flex-direction: column;
   gap: 37px;
-  margin-top: 100px;
   div {
     display: flex;
     gap: 30px;

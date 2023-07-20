@@ -32,10 +32,7 @@ export const DirectMessage: React.FC = () => {
       <MessageWrapper>
         <MessageListWrapper>
           <MessageListHeader>
-            <MessageMyInfo>
-              displayName
-              {/* Recoil에 저장된 {displayName} */}
-            </MessageMyInfo>
+            <MessageMyInfo>displayName</MessageMyInfo>
             ChatList
           </MessageListHeader>
           <MessageListBody>
