@@ -12,7 +12,7 @@ import {
   AllCurrentTags,
   Box,
   Box2,
-} from './Profile.styled';
+} from './profile.styled';
 import { MyShellsProfileProps } from '../../dataset/TypeOfMyShells';
 import TagBox from '../../common/tag/TagBox';
 

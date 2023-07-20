@@ -27,7 +27,7 @@ const ShellDetail = ({
 }: ShellDetailProps) => {
   const [seeMoreBody, setSeeMoreBody] = useState(false);
   // tags, category 서버 데이터 가공
-  const tags = shellDetailData.tags.map((tag: Tag) => tag.tagName);
+  const tags = shellDetailData.tags?.map((tag: Tag) => tag.tagName);
   const category: string = shellDetailData.category.slice(2).toUpperCase();
 
   // (recoil memberId 완료 시, 수정 필요)
@@ -59,7 +59,7 @@ const ShellDetail = ({
         ) : (
           <SeeMoreBody category={category} body={shellDetailData.body} />
         )}
-        {tags !== null && (
+        {tags && (
           <Div>
             <span>Hope to change</span>
             <div>
