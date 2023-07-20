@@ -41,6 +41,7 @@ export const useInfiniteScroll = (
         lastPage.shells?.length
           ? lastPage.shells[lastPage.shells.length - 1].id
           : null,
+      suspense: false,
     }
   );
 

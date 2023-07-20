@@ -3,153 +3,113 @@ import styled from 'styled-components';
 export const MessageWrapper = styled.div`
   width: 100%;
   display: flex;
-  justify-content: flex-start;
+  gap: 20px;
+  margin: 10px;
+  justify-content: center;
+  align-items: center;
 `;
 
+export const MessageListWrapper = styled.div`
+  height: 100%;
+`;
 export const MessageListContainer = styled.div`
-  padding: 15px;
-  background-color: #caf0f8bf;
-  overflow-y: scroll;
+  padding: 10px;
+  background-color: #bbe7ff;
+  cursor: pointer;
+`;
+
+export const MessageRoomWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  flex-grow: 1;
+  max-width: 680px;
 `;
 
 export const MessageListHeader = styled.div`
   display: flex;
   flex-direction: column;
-  align-items: start;
-  justify-content: end;
-  width: 130px;
-  height: 70px;
+  justify-content: center;
+  gap: 10px;
+  height: 130px;
+  font-size: 20px;
+  padding-top: 20px;
+  padding-left: 15px;
+  background-color: #bbe7ff;
+  border-radius: 15px 15px 0 0;
 `;
+
+export const MessageListBody = styled.div`
+  overflow-y: scroll;
+  height: 720px;
+  background-color: #bbe7ff;
+  border-radius: 0 0 15px 15px;
+`;
+
 export const MessageMyInfo = styled.div`
   font-weight: 400;
-  font-size: 20px;
+  font-size: 26px;
   margin-bottom: 6px;
 `;
 
-export const MessageListItem = styled.div`
+export const MessageListBox = styled.div`
   display: flex;
-  align-items: center;
-  margin-top: 15px;
+  gap: 10px;
 `;
 
-export const MessageListUserInfo = styled.div`
-  display: flex;
-  width: 350px;
-  margin-left: 5px;
-  flex-direction: column;
-  justify-content: space-between;
+export const MessageContainer = styled.div`
+  width: 250px;
   border-radius: 15px;
-  padding: 15px 8px;
+  padding: 15px;
   background-color: white;
-  font-size: 16px;
+  font-size: 20px;
+`;
+
+export const MessageBox = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  justify-content: space-between;
+`;
+
+export const MessageHeader = styled.div`
+  display: flex;
+  justify-content: space-between;
+`;
+
+export const Unread = styled.div`
+  color: red;
+`;
+
+export const HeaderLeft = styled.div`
+  display: flex;
+  gap: 5px;
+`;
+
+export const DeleteButton = styled.button`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 5px;
+  border: 0.1px solid #cdcdcd;
+  background-color: #fff;
+  z-index: 99;
+  cursor: pointer;
+  &:hover {
+    background-color: #90e0ef;
+  }
 `;
 
 export const MessageUserNickName = styled.div`
   font-weight: 500;
 `;
 
-export const MessageUserLastText = styled.div`
+export const MessageBody = styled.div`
   color: #828282;
   overflow: hidden;
 `;
 
-export const MessageRoomContainer = styled.div`
-  flex-grow: 1;
-  display: flex;
-  flex-direction: column;
-  margin: 30px;
-`;
-
-export const MessageLiftButton = styled.div`
-  flex: 1;
-`;
-
-export const MessageRoom = styled.div`
-  border-radius: 30px;
-  background-color: #00000010;
-  display: flex;
-  flex-direction: column-reverse;
-  align-items: stretch;
-  overflow-y: scroll;
-  flex: 8;
-`;
-export const Opponent = styled.div`
-  display: flex;
-  align-items: center;
-  margin: 8px 0px 12px 3px;
-`;
-
-export const OpponentChat = styled.div`
-  margin-left: 5px;
-  border-radius: 15px;
-  display: flex;
-  align-self: flex-start;
-  align-items: center;
-  padding: 15px 18px 15px 18px;
-  overflow: hidden;
-  word-break: break-word;
-  background-color: #6cedf599;
-`;
-
-export const MyChat = styled.div`
-  margin: 8px 12px 15px 0px;
-  max-width: 500px;
-  border-radius: 15px;
-  display: flex;
-  align-self: flex-end;
-  align-items: center;
-  padding: 15px 18px 15px 18px;
-  overflow: hidden;
-  word-break: break-word;
-  background-color: #bbe7ff;
-  line-height: 24px;
-`;
-
-export const ChatTextAreaContainer = styled.div`
-  display: flex;
-  align-items: center;
-  height: 80px;
-`;
-
-export const ImageContainer = styled.img`
-  width: 40px;
-  height: 40px;
-  cursor: pointer;
-  object-fit: cover;
-`;
-
-export const TextAreaContainer = styled.div`
-  border-radius: 25px;
-  display: flex;
-  justify-content: space-between;
-  border: 0.5px solid #00000020;
-  margin-left: 15px;
-  width: fit-content;
-  flex-grow: 1;
-`;
-
-export const TextArea = styled.textarea`
-  border: none;
-  flex-grow: 1;
-  border-radius: 25px;
-  padding-left: 10px;
-  &:focus {
-    outline: none;
-  }
-  padding: 16px 0 0 10px;
-  resize: none;
-`;
-
-export const SendButton = styled.button`
-  background-color: #48cae4;
-  width: 40px;
-  height: 40px;
-  border-radius: 16px;
-  font-weight: 300;
-  cursor: pointer;
-  border: 0.5px solid white;
-  &:hover {
-    color: #023e8a;
-    background-color: #90e0ef;
-  }
+export const NoneClickedDMRoom = styled.div`
+  font-size: 50px;
 `;

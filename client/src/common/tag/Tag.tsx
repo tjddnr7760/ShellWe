@@ -33,15 +33,16 @@ const Tag = ({ tagList, setTagList }: TagProps) => {
 
   return (
     <TagContainer>
-      {tagList.map((tag, index) => (
-        <TagBox
-          key={uuidv4()}
-          index={index}
-          type="write"
-          tag={tag}
-          handleRemove={handleRemove}
-        />
-      ))}
+      {tagList &&
+        tagList.map((tag, index) => (
+          <TagBox
+            key={uuidv4()}
+            index={index}
+            type="write"
+            tag={tag}
+            handleRemove={handleRemove}
+          />
+        ))}
       <TagInput
         type="text"
         value={inputTagValue}

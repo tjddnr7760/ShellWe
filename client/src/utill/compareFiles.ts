@@ -5,8 +5,6 @@ export const compareFiles = (
   // 파일을 비교하는 로직을 구현합니다.
   // 예를 들어, 파일의 데이터나 특정 속성을 비교하여 같은 파일인지 확인할 수 있습니다.
 
-  // 이 예제에서는 파일의 크기와 데이터(byte)를 비교합니다.
-
   return fileA.size === fileB.size && compareFileData(fileA, fileB);
 };
 

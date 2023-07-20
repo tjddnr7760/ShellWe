@@ -1,82 +1,62 @@
+import { useState } from 'react';
 import {
+  MessageRoomWrapper,
+  MessageListBody,
+  MessageListWrapper,
   MessageWrapper,
-  MessageListContainer,
   MessageListHeader,
   MessageMyInfo,
-  MessageListItem,
-  MessageListUserInfo,
-  MessageUserNickName,
-  MessageUserLastText,
-  MessageRoomContainer,
-  MessageLiftButton,
-  MessageRoom,
-  Opponent,
-  OpponentChat,
-  MyChat,
-  ChatTextAreaContainer,
-  ImageContainer,
-  TextAreaContainer,
-  TextArea,
-  SendButton,
+  NoneClickedDMRoom,
 } from './DirectMessage.styled';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faLocationArrow } from '@fortawesome/free-solid-svg-icons';
-import Avatar from '../../common/avatar/Avatar';
+import { DMRoom } from '../../component/DMroom/DMRoom';
+import DM from '../../component/dmlist/DM';
+import { useChatList } from '../../hooks/chat/useChatList';
 
-const DirectMessage: React.FC = () => {
+export const DirectMessage: React.FC = () => {
+  const { data: chatListData, refreshChatList } = useChatList();
+  const [ClickedRoomId, setClickedRoomId] = useState<number>();
+  const [isRoomOpened, setIsRoomOpened] = useState<boolean>();
+
+  const handleClickRoom = (roomId: number): void => {
+    if (isRoomOpened && ClickedRoomId === roomId) {
+      setIsRoomOpened(false);
+    } else {
+      setIsRoomOpened(true);
+      setClickedRoomId(roomId);
+      refreshChatList();
+    }
+  };
+
   return (
     <>
       <MessageWrapper>
-        <MessageListContainer>
+        <MessageListWrapper>
           <MessageListHeader>
-            <MessageMyInfo>정찬영</MessageMyInfo>
+            <MessageMyInfo>displayName</MessageMyInfo>
             ChatList
           </MessageListHeader>
-          <MessageListItem>
-            <Avatar avatartype={'UserImg'} />
-            <MessageListUserInfo>
-              <MessageUserNickName>NickName</MessageUserNickName>
-              <MessageUserLastText>UseText</MessageUserLastText>
-            </MessageListUserInfo>
-          </MessageListItem>
-          <MessageListItem>
-            <Avatar avatartype={'UserImg'} />
-            <MessageListUserInfo>
-              <MessageUserNickName>NickName</MessageUserNickName>
-              <MessageUserLastText>
-                UsessssssssssssrLddddddddddddddddddddddastTextdd
-              </MessageUserLastText>
-            </MessageListUserInfo>
-          </MessageListItem>
-        </MessageListContainer>
-        <MessageRoomContainer>
-          <MessageLiftButton>상단바</MessageLiftButton>
-          <MessageRoom>
-            <Opponent>
-              <Avatar avatartype={'UserImg'} />
-              <OpponentChat>네 안녕하세요 ㅎㅎ</OpponentChat>
-            </Opponent>
-            <MyChat>
-              안녕하세요!안녕하세요!안녕하세요!안녕하세요!안녕하세요!
-            </MyChat>
-            <MyChat>안녕하세요!</MyChat>
-            <MyChat>안녕하세요!</MyChat>
-            <MyChat>안녕하세요!</MyChat>
-          </MessageRoom>
-          <ChatTextAreaContainer>
-            <ImageContainer src="https://cdn-icons-png.flaticon.com/512/8069/8069741.png"></ImageContainer>
-            <TextAreaContainer>
-              <TextArea />
-              <SendButton>
-                <FontAwesomeIcon
-                  icon={faLocationArrow}
-                  size="1x"
-                  color="white"
+          <MessageListBody>
+            {chatListData &&
+              chatListData.data.map((chat) => (
+                <DM
+                  key={chat.id}
+                  chat={chat}
+                  handleClickRoom={handleClickRoom}
+                  isRoomOpened={isRoomOpened}
+                  setIsRoomOpened={setIsRoomOpened}
+                  setClickedRoomId={setClickedRoomId}
+                  ClickedRoomId={ClickedRoomId}
                 />
-              </SendButton>
-            </TextAreaContainer>
-          </ChatTextAreaContainer>
-        </MessageRoomContainer>
+              ))}
+          </MessageListBody>
+        </MessageListWrapper>
+        <MessageRoomWrapper>
+          {isRoomOpened && ClickedRoomId ? (
+            <DMRoom id={ClickedRoomId} />
+          ) : (
+            <NoneClickedDMRoom>Click your message!</NoneClickedDMRoom>
+          )}
+        </MessageRoomWrapper>
       </MessageWrapper>
     </>
   );
