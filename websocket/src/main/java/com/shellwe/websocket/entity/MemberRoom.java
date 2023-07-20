@@ -31,7 +31,7 @@ public class MemberRoom {
     @JoinColumn(name = "member_id")
     private Member member;
 
-    @ManyToOne(cascade = CascadeType.REMOVE)
+    @ManyToOne
     @JoinColumn(name = "room_id")
     private Room room;
 
