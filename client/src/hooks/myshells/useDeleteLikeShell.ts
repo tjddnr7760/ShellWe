@@ -17,7 +17,7 @@ export const useDeleteLikeShell = (shellId: number) => {
     () => getMemberIdForDelete(shellId),
     {
       onSuccess: () => {
-        useLikeShells(getMemberIdFromLocalStorage());
+        useLikeShells(Number(getMemberIdFromLocalStorage()));
       },
     }
   );

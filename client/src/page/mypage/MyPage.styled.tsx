@@ -16,4 +16,9 @@ const MyPageContainer = styled.div`
   padding: 35px;
 `;
 
-export { MyPageWrapper, MyPageContainer };
+const Logout = styled.div`
+  display: flex;
+  justify-content: flex-end;
+`;
+
+export { MyPageWrapper, MyPageContainer, Logout };

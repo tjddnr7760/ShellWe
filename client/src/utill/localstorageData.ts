@@ -1,5 +1,5 @@
 export const getMemberIdFromLocalStorage = () => {
-  const memberId = Number(localStorage.getItem('id'));
+  const memberId = localStorage.getItem('id');
   return memberId;
 };
 

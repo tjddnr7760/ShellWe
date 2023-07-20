@@ -29,13 +29,3 @@ export const useCreateShells = () => {
   };
   return { mutate: handleMutate };
 };
-
-//사용 예
-// const { data, mutate } = useCreateShells();
-
-// const handleSubmit = (event) => {
-//   event.preventDefault();
-
-//   const formData = new FormData(event.target);
-//   mutate(formData);
-// };

@@ -29,7 +29,7 @@ export interface MyShellsProfileProps {
   data: MyShellDataProps;
   memberInfo?: Member;
 }
-// AllTags.tsx
-// export interface MyShellsProfileProps {
-//   data: MyShellDataProps;
-// }
+
+export interface MyShellTabProps {
+  selectedTab: string;
+}

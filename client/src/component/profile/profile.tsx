@@ -21,20 +21,21 @@ const Profile = ({ memberInfo, showTags, data }: MyShellsProfileProps) => {
   const [allTags, setAlltag] = useState<string[]>([]);
 
   const MakeAllTags = () => {
-    if (data && data.shells) {
+    if (data.shells) {
       const tagsSet = new Set<string>();
-      data.shells.forEach((shell) => {
-        shell.tags.forEach((tag) => {
-          if (typeof tag?.tagName === 'string' && tag.tagName !== '') {
-            tagsSet.add(tag.tagName);
-          }
+      data.shells
+        .filter((shell) => shell.tags !== null)
+        .forEach((shell) => {
+          shell.tags.forEach((tag) => {
+            if (typeof tag?.tagName === 'string' && tag.tagName !== '') {
+              tagsSet.add(tag.tagName);
+            }
+          });
         });
-      });
       const tagsArray = Array.from(tagsSet).slice(0, 4);
       setAlltag(tagsArray);
     }
   };
-
   useEffect(() => MakeAllTags(), [id]);
 
   return (

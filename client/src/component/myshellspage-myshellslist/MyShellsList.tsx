@@ -13,14 +13,22 @@ const MyShellListWrapper = styled.div`
   overflow-y: scroll;
 `;
 
-const MyShellsList = ({ data }: { data: MyShellDataProps }) => {
+const MyShellsList = ({
+  data,
+  selectedTab,
+}: {
+  data: MyShellDataProps;
+  selectedTab: string;
+}) => {
   const myShellArray = data.shells;
 
   return (
     <MyShellListWrapper>
       {myShellArray &&
         myShellArray.map((shell) => {
-          return <MyShell key={shell.id} shell={shell} />;
+          return (
+            <MyShell key={shell.id} shell={shell} selectedTab={selectedTab} />
+          );
         })}
     </MyShellListWrapper>
   );

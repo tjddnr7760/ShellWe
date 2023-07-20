@@ -11,8 +11,15 @@ import { SmallButton3 } from '../../common/button/Button.styled.ts';
 import { useDeleteLikeShell } from '../../hooks/myshells/useDeleteLikeShell.ts';
 import { getMemberIdFromLocalStorage } from '../../utill/localstorageData.ts';
 
-const MyShells = ({ shell }: { shell: Shells }) => {
+const MyShells = ({
+  shell,
+  selectedTab,
+}: {
+  shell: Shells;
+  selectedTab: string;
+}) => {
   const { id } = useParams<{ id: string }>();
+  const myMemberId = Number(getMemberIdFromLocalStorage());
   const urlId = id !== undefined ? +id : 0;
 
   const { mutate: DeleteLikeShell } = useDeleteLikeShell(shell.id);
@@ -34,15 +41,13 @@ const MyShells = ({ shell }: { shell: Shells }) => {
           <Category>{shell.category}</Category>
         </div>
       </ShellInfo>
-      {
-        // getMemberIdFromLocalStorage() === urlId && (
+      {myMemberId === urlId && selectedTab === 'like' && (
         <div>
           <SmallButton3 onClick={handleDeleteLikeShell}>
             Cancel Like
           </SmallButton3>
         </div>
-        // )
-      }
+      )}
     </MyShellContainer>
   );
 };
