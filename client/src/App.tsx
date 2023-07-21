@@ -50,6 +50,7 @@ function App() {
               <Route path="/offer/:id" element={<OfferedShellsPage />} />
               <Route path="/dm/:id" element={<DirectMessage />} />
               <Route path="/search" element={<SearchPage />} />
+              <Route path="*" element={<HomePage />} />
             </Routes>
           </Suspense>
           <Footer />

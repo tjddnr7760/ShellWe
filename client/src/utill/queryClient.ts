@@ -8,7 +8,6 @@ export const queryClient = new QueryClient({
       refetchOnWindowFocus: false,
       onError: apiErrorHandler,
       suspense: true,
-      cacheTime: 500,
     },
     mutations: {
       onError: apiErrorHandler,

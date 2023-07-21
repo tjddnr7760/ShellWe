@@ -29,8 +29,10 @@ export const getMemberId: GetMemberArgs = async (memberId, method) => {
 
 // 회원정보 조회
 export const useGetMember = (memberId: number) => {
-  const { data = {} } = useQuery(queryKeys.members, () =>
-    getMemberId(memberId, 'get')
+  const { data = {} } = useQuery(
+    [queryKeys.currentShell, memberId],
+    () => getMemberId(memberId, 'get'),
+    { suspense: false }
   );
 
   return { data };
