@@ -6,6 +6,7 @@ import { Link } from 'react-router-dom';
 import { useSetRecoilState } from 'recoil';
 import { isLogInState } from '../../recoil/atom';
 // import { usePostLogin } from '../../hooks/login/PostLogin';
+import { userStateWithExpiry } from '../../recoil/selector';
 
 import {
   LoginContainer,
@@ -26,7 +27,7 @@ import {
 const LoginPage: React.FC = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const setIsLoggedIn = useSetRecoilState(isLogInState);
+  const setIsLoggedIn = useSetRecoilState(userStateWithExpiry);
   const navigation = useNavigate();
 
   const isEmailValid = /^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/.test(email);
@@ -35,7 +36,7 @@ const LoginPage: React.FC = () => {
     /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{10,}$/.test(
       password
     );
-    
+
   const handleGuestLogin = async (e: any) => {
     e.preventDefault();
 
