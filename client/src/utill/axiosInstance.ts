@@ -16,4 +16,9 @@ export const getPostHeader = () => {
 };
 const config: AxiosRequestConfig = { baseURL: `${import.meta.env.VITE_KEY}` };
 
+const WebSocketConfig: AxiosRequestConfig = {
+  baseURL: `${import.meta.env.VITE_KEY_DM}`,
+};
+
 export const axiosInstance = axios.create(config);
+export const axiosWebSocketInstance = axios.create(WebSocketConfig);

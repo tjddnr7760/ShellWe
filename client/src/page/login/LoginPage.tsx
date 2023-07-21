@@ -4,8 +4,7 @@ import axios from 'axios';
 import googlelogo from '../../asset/googlelogo.png';
 import { Link } from 'react-router-dom';
 import { useSetRecoilState } from 'recoil';
-import { isLogInState } from '../../recoil/atom';
-import { usePostLogin } from '../../hooks/login/PostLogin';
+//import { usePostLogin } from '../../hooks/login/PostLogin';
 import { userStateWithExpiry } from '../../recoil/selector';
 
 import {

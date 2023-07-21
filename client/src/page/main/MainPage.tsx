@@ -11,7 +11,6 @@ import { ShellType } from '../../common/shell/Shell.tsx';
 
 const MainPage: React.FC = () => {
   const { data } = useMainPageShells();
-  const mainShellsArray = data.data.shells;
 
   return (
     <MainShellWrapper>
@@ -19,8 +18,8 @@ const MainPage: React.FC = () => {
         <MainShellImg src={MainShell} alt="mainshell"></MainShellImg>
       </div>
       <ShellListContainer>
-        {mainShellsArray &&
-          mainShellsArray.map((shell: ShellType) => (
+        {data &&
+          data.data?.shells.map((shell: ShellType) => (
             <Shell key={shell.id} shell={shell} />
           ))}
       </ShellListContainer>

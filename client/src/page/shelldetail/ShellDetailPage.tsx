@@ -15,8 +15,6 @@ import { ShellDetailDataProps } from '../../dataset/ShellDetailType.ts';
 
 const ShellDetailPage = () => {
   const { data } = useGetShellDetail();
-  const shellDetailData: ShellDetailDataProps = data.data;
-  const shellMemberId: number = shellDetailData.member.id;
 
   const [modalVisible, setModalVisible] = useState(false);
   const [sidebarOpen, setSidebarOpen] = useState(false);
@@ -36,26 +34,24 @@ const ShellDetailPage = () => {
           <DetailPageContainer>
             <ContentDiv>
               <PreviewDiv>
-                {shellDetailData && (
-                  <ShellImgPreview
-                    clickedShellPictures={shellDetailData.pictures}
-                  />
+                {data.data && (
+                  <ShellImgPreview clickedShellPictures={data.data.pictures} />
                 )}
               </PreviewDiv>
               <Div>
-                {shellDetailData && (
+                {data.data && (
                   <ShellDetail
                     handlePoke={handlePoke}
                     handleOpenSidebar={handleOpenSidebar}
-                    shellDetailData={shellDetailData}
+                    shellDetailData={data.data}
                   />
                 )}
                 {sidebarOpen && (
-                  <DetailPageSidebar shellStatus={shellDetailData.status} />
+                  <DetailPageSidebar shellStatus={data.data.status} />
                 )}
               </Div>
             </ContentDiv>
-            {modalVisible && <OfferModal shellMemberId={shellMemberId} />}
+            {modalVisible && <OfferModal shellMemberId={data.data.member.id} />}
           </DetailPageContainer>
         </Wrapper>
       )}

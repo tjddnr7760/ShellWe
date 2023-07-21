@@ -1,6 +1,8 @@
 import { useMutation } from 'react-query';
 import { useNavigate } from 'react-router-dom';
 import { axiosInstance, getHeader } from '../../utill/axiosInstance';
+import { userStateWithExpiry } from '../../recoil/selector';
+import { useSetRecoilState } from 'recoil';
 
 // 회원 삭제
 interface RequestData {
@@ -22,12 +24,15 @@ const getMemberIdForDelete = async (
 
 export const useDeleteMember = (memberId: number, requestData: RequestData) => {
   const navigate = useNavigate();
+  const setIsLoggedIn = useSetRecoilState(userStateWithExpiry);
 
   const { data = {}, mutate } = useMutation(
     () => getMemberIdForDelete(memberId, requestData),
     {
       onSuccess: () => {
         alert('탈퇴가 완료되었습니다.');
+        setIsLoggedIn(false);
+        localStorage.clear();
         navigate(`/home`);
       },
       onError: () => {

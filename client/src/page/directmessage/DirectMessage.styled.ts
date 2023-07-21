@@ -11,6 +11,7 @@ export const MessageWrapper = styled.div`
 
 export const MessageListWrapper = styled.div`
   height: 100%;
+  min-width: 300px;
 `;
 export const MessageListContainer = styled.div`
   padding: 10px;

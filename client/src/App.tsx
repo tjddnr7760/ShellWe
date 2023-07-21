@@ -1,5 +1,4 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import { Suspense } from 'react';
 import './App.css';
 import GlobalStyle from './style/GlobalStyle.ts';
 import Footer from './component/footer/Footer.tsx';
