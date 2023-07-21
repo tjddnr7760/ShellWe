@@ -12,12 +12,12 @@ import { Member } from '../../hooks/profile/useGetMember';
 import { getMemberIdFromLocalStorage } from '../../utill/localstorageData.ts';
 import { SmallButton3 } from '../../common/button/Button.styled.ts';
 import { useSetRecoilState } from 'recoil';
-import { isLogInState } from '../../recoil/atom';
+import { userStateWithExpiry } from '../../recoil/selector.ts';
 
 const MyPage = () => {
   const [selectedComponent, setSelectedComponent] = useState('edit');
   const navigate = useNavigate();
-  const setIsLoggedIn = useSetRecoilState(isLogInState);
+  const setIsLoggedIn = useSetRecoilState(userStateWithExpiry);
 
   const { id } = useParams<{ id: string }>();
   const memberId = id !== undefined ? +id : 0;

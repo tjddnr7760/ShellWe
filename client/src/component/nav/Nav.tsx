@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { useRecoilValue } from 'recoil';
 import { Link } from 'react-router-dom';
-import { isLogInState } from '../../recoil/atom.ts';
 import Avatar from '../../common/avatar/Avatar';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
@@ -24,11 +23,16 @@ import {
   NavItem,
   NavItemContent,
 } from './Nav.styled';
-import { getAccessToken } from '../../utill/localstorageData';
 import { userStateWithExpiry } from '../../recoil/selector';
+import {
+  getAccessToken,
+  getMemberIdFromLocalStorage,
+} from '../../utill/localstorageData';
 
 const Nav: React.FC = () => {
   const [isNavItemContent, setIsNavItemContent] = useState(false);
+  const [activeButtonId, setActiveButtonId] = useState('');
+
   const id = Number(localStorage.getItem('id') || 0);
   const profileUrl: string = localStorage.getItem('profileUrl') || 'empty';
 
@@ -52,14 +56,13 @@ const Nav: React.FC = () => {
     }
   };
 
-  const [activeButtonId, setActiveButtonId] = useState(null);
-
   const handleButtonClick = (id: any) => {
     setActiveButtonId(id);
   };
 
   // 클릭시 버튼 색깔 바뀌기
   // 다른 div 눌렀을 때 div 원래 색깔로 초기화
+  const myId = Number(getMemberIdFromLocalStorage());
 
   return (
     <NavWrapper>
@@ -75,7 +78,9 @@ const Nav: React.FC = () => {
             <>
               <Link to="/shellcreate" style={{ textDecoration: 'none' }}>
                 <NavItem
-                  active={activeButtonId === 'createShells'}
+                  className={
+                    activeButtonId === 'createShells' ? 'selectedTab' : ''
+                  }
                   onClick={() => handleButtonClick('createShells')}
                 >
                   <FontAwesomeIcon icon={faPen} />
@@ -83,7 +88,7 @@ const Nav: React.FC = () => {
                 </NavItem>
               </Link>
               <NavItem
-                active={activeButtonId === 'findShells'}
+                className={activeButtonId === 'findShells' ? 'selectedTab' : ''}
                 onClick={() => handleButtonClick('findShells')}
                 onMouseEnter={handleNavItemHover}
                 onMouseLeave={handleNavItemNotHover}
@@ -101,7 +106,9 @@ const Nav: React.FC = () => {
                     style={{ textDecoration: 'none' }}
                   >
                     <NavItemContent
-                      active={activeButtonId === 'product'}
+                      className={
+                        activeButtonId === 'product' ? 'selectedTab' : ''
+                      }
                       onClick={() => handleButtonClick('product')}
                     >
                       <FontAwesomeIcon icon={faBox} />
@@ -113,7 +120,9 @@ const Nav: React.FC = () => {
                     style={{ textDecoration: 'none' }}
                   >
                     <NavItemContent
-                      active={activeButtonId === 'talent'}
+                      className={
+                        activeButtonId === 'talent' ? 'selectedTab' : ''
+                      }
                       onClick={() => handleButtonClick('talent')}
                     >
                       <FontAwesomeIcon icon={faPersonRunning} />
@@ -123,40 +132,36 @@ const Nav: React.FC = () => {
                 </NavItemContentWrapper>
               )}
 
-              <Link to="/offer/1" style={{ textDecoration: 'none' }}>
+              <Link to={`/offer/${myId}`} style={{ textDecoration: 'none' }}>
                 <NavItem
-                  active={activeButtonId === 'offerdShells'}
-                  onClick={() => handleButtonClick('offerdShells')}
+                  className={activeButtonId === 'offer' ? 'selectedTab' : ''}
                 >
                   <FontAwesomeIcon icon={faHandPointRight} />
                   Offered Shells
                 </NavItem>
               </Link>
 
-              <Link to="/dm/1" style={{ textDecoration: 'none' }}>
+              <Link to={`/dm/${myId}`} style={{ textDecoration: 'none' }}>
                 <NavItem
-                  active={activeButtonId === 'message'}
-                  onClick={() => handleButtonClick('message')}
+                  className={activeButtonId === 'dm' ? 'selectedTab' : ''}
                 >
                   <FontAwesomeIcon icon={faMessage} />
                   Message
                 </NavItem>
               </Link>
 
-              <Link to="/member/1" style={{ textDecoration: 'none' }}>
+              <Link to={`/member/${myId}`} style={{ textDecoration: 'none' }}>
                 <NavItem
-                  active={activeButtonId === 'myPage'}
-                  onClick={() => handleButtonClick('myPage')}
+                  className={activeButtonId === 'member' ? 'selectedTab' : ''}
                 >
                   <Avatar avatartype={'icon'} member={member} />
                   My Page
                 </NavItem>
               </Link>
 
-              <Link to="/myshells/1" style={{ textDecoration: 'none' }}>
+              <Link to={`/myshells/${myId}`} style={{ textDecoration: 'none' }}>
                 <NavItem
-                  active={activeButtonId === 'myShells'}
-                  onClick={() => handleButtonClick('myShells')}
+                  className={activeButtonId === 'myshells' ? 'selectedTab' : ''}
                 >
                   <FontAwesomeIcon icon={faPeopleCarryBox} />
                   My Shells
@@ -166,7 +171,9 @@ const Nav: React.FC = () => {
           ) : (
             <Link to="/login" style={{ textDecoration: 'none' }}>
               <NavItem
-                active={activeButtonId === 'createShells'}
+                className={
+                  activeButtonId === 'createShells' ? 'selectedTab' : ''
+                }
                 onClick={() => {
                   handleClick(), handleButtonClick('createShells');
                 }}
@@ -175,7 +182,7 @@ const Nav: React.FC = () => {
                 Create Shells
               </NavItem>
               <NavItem
-                active={activeButtonId === 'findShells'}
+                className={activeButtonId === 'findShells' ? 'selectedTab' : ''}
                 onClick={() => {
                   handleClick(), handleButtonClick('findShells');
                 }}
@@ -195,7 +202,9 @@ const Nav: React.FC = () => {
                     style={{ textDecoration: 'none' }}
                   >
                     <NavItemContent
-                      active={activeButtonId === 'product'}
+                      className={
+                        activeButtonId === 'product' ? 'selectedTab' : ''
+                      }
                       onClick={() => handleButtonClick('product')}
                     >
                       <FontAwesomeIcon icon={faBox} />
@@ -207,7 +216,9 @@ const Nav: React.FC = () => {
                     style={{ textDecoration: 'none' }}
                   >
                     <NavItemContent
-                      active={activeButtonId === 'talent'}
+                      className={
+                        activeButtonId === 'talent' ? 'selectedTab' : ''
+                      }
                       onClick={() => handleButtonClick('talent')}
                     >
                       <FontAwesomeIcon icon={faPersonRunning} />
@@ -217,7 +228,9 @@ const Nav: React.FC = () => {
                 </NavItemContentWrapper>
               )}
               <NavItem
-                active={activeButtonId === 'offerdShells'}
+                className={
+                  activeButtonId === 'offerdShells' ? 'selectedTab' : ''
+                }
                 onClick={() => {
                   handleClick(), handleButtonClick('offerdShells');
                 }}
@@ -227,7 +240,7 @@ const Nav: React.FC = () => {
               </NavItem>
 
               <NavItem
-                active={activeButtonId === 'message'}
+                className={activeButtonId === 'message' ? 'selectedTab' : ''}
                 onClick={() => {
                   handleClick(), handleButtonClick('message');
                 }}

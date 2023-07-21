@@ -18,7 +18,8 @@ export const useDeleteLikeShell = (shellId: number) => {
     () => getMemberIdForDelete(shellId),
     {
       onSuccess: () => {
-        queryClient.invalidateQueries([queryKeys.likeShell, shellId]);
+        console.log('1111');
+        queryClient.invalidateQueries(queryKeys.likeShell);
       },
     }
   );

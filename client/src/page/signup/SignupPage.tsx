@@ -1,5 +1,4 @@
 import { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
 import { useMutation } from 'react-query';
 import axios from 'axios';
 import {
@@ -17,19 +16,17 @@ import {
   CheckPosible,
   LoginButton,
 } from '../login/LoginPage.styled';
-import { useSetRecoilState } from 'recoil';
-import { isLogInState } from '../../recoil/atom';
 import googlelogo from '../../asset/googlelogo.png';
+import EmailConfirmation from './EmailComfirmation';
 
 const SignupPage = () => {
-  const [displayName, setDispayName] = useState('');
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [checkPassword, setCheckPassword] = useState('');
-  const [isSignupDisabled, setIsSignupDisabled] = useState(true);
-  const setIsLoggedIn = useSetRecoilState(isLogInState);
-
-  const navigation = useNavigate();
+  const [displayName, setDispayName] = useState<string>('');
+  const [email, setEmail] = useState<string>('');
+  const [password, setPassword] = useState<string>('');
+  const [checkPassword, setCheckPassword] = useState<string>('');
+  const [isSignupDisabled, setIsSignupDisabled] = useState<boolean>(true);
+  const [activeEmailConfirmation, setactiveEmailConfirmation] =
+    useState<boolean>(false);
 
   const isNicknameValid =
     displayName.length <= 8 && /^[a-zA-Z가-힣]+$/.test(displayName);
@@ -61,16 +58,17 @@ const SignupPage = () => {
   });
 
   // 1. 회원가입 post mutation 생성
-  // 2. 회원가입 성공 시, 토큰 및 유저 정보 저장(재사용 함수 적용)
-  // 3. 회원가입 성공 시, 로그인 상태 변경
 
   const handleSignup = async (e: any) => {
     e.preventDefault();
+    setactiveEmailConfirmation(true);
 
     try {
       const data = await signupMutation.mutateAsync();
-      console.log('회원 가입 성공.', data);
-      navigation('/aftersignup');
+      console.log(
+        '이메일 인증이 완료되었습니다. \n로그인 페이지에서 로그인을 진행해주시기 바랍니다.',
+        data
+      );
     } catch (error) {
       console.error('회원 가입 실패.', error);
       setEmail('');
@@ -86,87 +84,91 @@ const SignupPage = () => {
 
   return (
     <LoginContainer>
-      <LoginBox>
-        <Logo
-          src="https://cdn-icons-png.flaticon.com/512/499/499857.png"
-          alt="Logo"
-        ></Logo>
-        <OauthContainer onClick={LoginRequestHandlerGoogle}>
-          <OauthImg src={googlelogo}></OauthImg>
-          <OauthText>Sign up with Google</OauthText>
-        </OauthContainer>
-        <UserinfoContainer>
-          <DivBox>
-            <div>NickName</div>
-            <DivInputBox>
-              <DivInput
-                type="text"
-                name="nickname"
-                value={displayName}
-                onChange={(e: any) => setDispayName(e.target.value)}
-              />
-            </DivInputBox>
-            {!isNicknameValid && displayName.length >= 8 && (
-              <CheckError>닉네임은 8글자 이하이어야 합니다.</CheckError>
-            )}
-            {isNicknameValid && displayName && (
-              <CheckPosible>사용 가능한 닉네임입니다.</CheckPosible>
-            )}
-          </DivBox>
-          <DivBox>
-            <div>Email</div>
-            <DivInputBox>
-              <DivInput
-                type="email"
-                value={email}
-                onChange={(e: any) => setEmail(e.target.value)}
-              />
-              <CheckError>{errorMessage && <p>{errorMessage}</p>}</CheckError>
-            </DivInputBox>
-            {!isEmailValid && email.length > 0 && (
-              <CheckError>올바른 이메일 주소를 작성해주세요.</CheckError>
-            )}
-          </DivBox>
-          <DivBox>
-            <div>Password</div>
-            <DivInputBox>
-              <DivInput
-                placeholder="대소문자 (알파벳), 숫자, 특수문자 조합 10글자 이상"
-                type="password"
-                value={password}
-                onChange={(e: any) => setPassword(e.target.value)}
-              />
-            </DivInputBox>
-            {password.length > 10 && !isPasswordValid && (
-              <CheckError>비밀번호를 확인해주세요.</CheckError>
-            )}
-            {isPasswordValid && password && (
-              <CheckPosible>사용 가능한 비밀번호입니다.</CheckPosible>
-            )}
-          </DivBox>
-          <DivBox>
-            <div>Password 확인</div>
-            <DivInputBox>
-              <DivInput
-                type="password"
-                value={checkPassword}
-                onChange={(e: any) => setCheckPassword(e.target.value)}
-              />
-            </DivInputBox>
-            {!isCheckPasswordValid &&
-              isPasswordValid &&
-              checkPassword.length > 0 && (
-                <CheckError>비밀번호가 다릅니다.</CheckError>
+      {!activeEmailConfirmation ? (
+        <LoginBox>
+          <Logo
+            src="https://cdn-icons-png.flaticon.com/512/499/499857.png"
+            alt="Logo"
+          ></Logo>
+          <OauthContainer onClick={LoginRequestHandlerGoogle}>
+            <OauthImg src={googlelogo}></OauthImg>
+            <OauthText>Sign up with Google</OauthText>
+          </OauthContainer>
+          <UserinfoContainer>
+            <DivBox>
+              <div>NickName</div>
+              <DivInputBox>
+                <DivInput
+                  type="text"
+                  name="nickname"
+                  value={displayName}
+                  onChange={(e: any) => setDispayName(e.target.value)}
+                />
+              </DivInputBox>
+              {!isNicknameValid && displayName.length >= 8 && (
+                <CheckError>닉네임은 8글자 이하이어야 합니다.</CheckError>
               )}
-            {isCheckPasswordValid && checkPassword && (
-              <CheckPosible>비밀번호가 일치합니다.</CheckPosible>
-            )}
-          </DivBox>
-        </UserinfoContainer>
-        <LoginButton disabled={isSignupDisabled} onClick={handleSignup}>
-          Sign up
-        </LoginButton>
-      </LoginBox>
+              {isNicknameValid && displayName && (
+                <CheckPosible>사용 가능한 닉네임입니다.</CheckPosible>
+              )}
+            </DivBox>
+            <DivBox>
+              <div>Email</div>
+              <DivInputBox>
+                <DivInput
+                  type="email"
+                  value={email}
+                  onChange={(e: any) => setEmail(e.target.value)}
+                />
+                <CheckError>{errorMessage && <p>{errorMessage}</p>}</CheckError>
+              </DivInputBox>
+              {!isEmailValid && email.length > 0 && (
+                <CheckError>올바른 이메일 주소를 작성해주세요.</CheckError>
+              )}
+            </DivBox>
+            <DivBox>
+              <div>Password</div>
+              <DivInputBox>
+                <DivInput
+                  placeholder="대소문자 (알파벳), 숫자, 특수문자 조합 10글자 이상"
+                  type="password"
+                  value={password}
+                  onChange={(e: any) => setPassword(e.target.value)}
+                />
+              </DivInputBox>
+              {password.length > 10 && !isPasswordValid && (
+                <CheckError>비밀번호를 확인해주세요.</CheckError>
+              )}
+              {isPasswordValid && password && (
+                <CheckPosible>사용 가능한 비밀번호입니다.</CheckPosible>
+              )}
+            </DivBox>
+            <DivBox>
+              <div>Password 확인</div>
+              <DivInputBox>
+                <DivInput
+                  type="password"
+                  value={checkPassword}
+                  onChange={(e: any) => setCheckPassword(e.target.value)}
+                />
+              </DivInputBox>
+              {!isCheckPasswordValid &&
+                isPasswordValid &&
+                checkPassword.length > 0 && (
+                  <CheckError>비밀번호가 다릅니다.</CheckError>
+                )}
+              {isCheckPasswordValid && checkPassword && (
+                <CheckPosible>비밀번호가 일치합니다.</CheckPosible>
+              )}
+            </DivBox>
+          </UserinfoContainer>
+          <LoginButton disabled={isSignupDisabled} onClick={handleSignup}>
+            Sign up
+          </LoginButton>
+        </LoginBox>
+      ) : (
+        <EmailConfirmation email={email} />
+      )}
     </LoginContainer>
   );
 };

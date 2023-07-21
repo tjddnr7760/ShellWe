@@ -1,6 +1,11 @@
 // MyShellList, MyShell of OfferModal
 export interface MyShellsDataProps {
   myShellListsData: MyShells[];
+  shellMemberId: ShellMemberId;
+}
+
+export interface ShellMemberId {
+  shellMemberId: number;
 }
 
 export interface MyShells {
@@ -20,7 +25,7 @@ export interface MyShells {
 
 // ShellDetail
 export interface ShellDetailProps {
-  handlePoke: () => void; // Define the handlePoke prop
+  handlePoke: () => void;
   handleOpenSidebar: () => void;
   shellDetailData: ShellDetailDataProps;
 }
@@ -73,5 +78,5 @@ export interface RequestBodyForPoke {
 // API response
 // usePokeShell.ts
 export interface ApiResponseOfPokeShell {
-  redirectUrl: string;
+  res: unknown;
 }
