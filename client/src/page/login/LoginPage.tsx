@@ -36,12 +36,12 @@ const LoginPage: React.FC = () => {
   // };
   // const { mutate: LoginRequest } = usePostLogin(loginRequestBody);
 
-  const isEmailValid = /^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/.test(email);
-  const isPasswordValid =
-    password.length >= 10 &&
-    /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{10,}$/.test(
-      password
-    );
+  // const isEmailValid = /^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/.test(email);
+  // const isPasswordValid =
+  //   password.length >= 10 &&
+  //   /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{10,}$/.test(
+  //     password
+  //   );
 
   const handleGuestLogin = async (e: any) => {
     e.preventDefault();

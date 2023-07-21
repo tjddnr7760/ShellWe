@@ -37,7 +37,7 @@ const SignupPage = () => {
     );
   const isCheckPasswordValid = isPasswordValid && password === checkPassword;
   const isEmailValid = /^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/.test(email);
-  const [errorMessage, setErrorMessage] = useState('');
+  // const [errorMessage, setErrorMessage] = useState('');
 
   useEffect(() => {
     setIsSignupDisabled(
@@ -120,7 +120,7 @@ const SignupPage = () => {
                   value={email}
                   onChange={(e: any) => setEmail(e.target.value)}
                 />
-                <CheckError>{errorMessage && <p>{errorMessage}</p>}</CheckError>
+                {/* <CheckError>{errorMessage && <p>{errorMessage}</p>}</CheckError> */}
               </DivInputBox>
               {!isEmailValid && email.length > 0 && (
                 <CheckError>올바른 이메일 주소를 작성해주세요.</CheckError>
