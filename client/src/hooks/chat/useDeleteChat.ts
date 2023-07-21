@@ -1,5 +1,5 @@
 import { useMutation } from 'react-query';
-import { axiosWebSocketInstance, getHeader } from '../../utill/axiosInstance';
+import { axiosInstance, getHeader } from '../../utill/axiosInstance';
 import { queryClient } from '../../utill/queryClient';
 import { queryKeys } from '../../dataset/queryKey';
 
@@ -35,7 +35,7 @@ const getChatRoomId: GetChatRoomIdArgs = async (
 ): Promise<ChatListData> => {
   const headers = isHeader ? getHeader() : undefined;
 
-  const { data } = await axiosWebSocketInstance({
+  const { data } = await axiosInstance({
     url: `/chat/${chatRoomId}`,
     method,
     headers,
