@@ -35,6 +35,8 @@ export const NavItems = styled.div`
 `;
 
 export const NavItem = styled.div`
+  background-color: ${(props: any) => (props.active ? '#c8f5ff' : 'null')};
+
   display: flex;
   align-items: center;
   gap: 10px;
@@ -46,10 +48,6 @@ export const NavItem = styled.div`
   color: #828282;
   padding-left: 30px;
   padding-right: 30px;
-  /* 
-  svg {
-    margin-right: 10px;
-  } */
 
   img {
     width: 26px;
@@ -64,6 +62,7 @@ export const NavItem = styled.div`
 export const NavItemContentWrapper = styled.div``;
 
 export const NavItemContent = styled.div`
+  background-color: ${(props: any) => (props.active ? '#c8f5ff' : 'null')};
   display: flex;
   align-items: center;
   letter-spacing: 0.5px;

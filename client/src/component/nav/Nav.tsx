@@ -51,6 +51,15 @@ const Nav: React.FC = () => {
     }
   };
 
+  const [activeButtonId, setActiveButtonId] = useState(null);
+
+  const handleButtonClick = (id: any) => {
+    setActiveButtonId(id);
+  };
+
+  // 클릭시 버튼 색깔 바뀌기
+  // 다른 div 눌렀을 때 div 원래 색깔로 초기화
+
   return (
     <NavWrapper>
       <NavContainer>
@@ -64,12 +73,17 @@ const Nav: React.FC = () => {
           {isLogIn ? (
             <>
               <Link to="/shellcreate" style={{ textDecoration: 'none' }}>
-                <NavItem>
+                <NavItem
+                  active={activeButtonId === 'createShells'}
+                  onClick={() => handleButtonClick('createShells')}
+                >
                   <FontAwesomeIcon icon={faPen} />
                   Create Shells
                 </NavItem>
               </Link>
               <NavItem
+                active={activeButtonId === 'findShells'}
+                onClick={() => handleButtonClick('findShells')}
                 onMouseEnter={handleNavItemHover}
                 onMouseLeave={handleNavItemNotHover}
               >
@@ -85,7 +99,10 @@ const Nav: React.FC = () => {
                     to="/shelllist/product"
                     style={{ textDecoration: 'none' }}
                   >
-                    <NavItemContent>
+                    <NavItemContent
+                      active={activeButtonId === 'product'}
+                      onClick={() => handleButtonClick('product')}
+                    >
                       <FontAwesomeIcon icon={faBox} />
                       Product
                     </NavItemContent>
@@ -94,7 +111,10 @@ const Nav: React.FC = () => {
                     to="/shelllist/talent"
                     style={{ textDecoration: 'none' }}
                   >
-                    <NavItemContent>
+                    <NavItemContent
+                      active={activeButtonId === 'talent'}
+                      onClick={() => handleButtonClick('talent')}
+                    >
                       <FontAwesomeIcon icon={faPersonRunning} />
                       Talent
                     </NavItemContent>
@@ -103,28 +123,40 @@ const Nav: React.FC = () => {
               )}
 
               <Link to="/offer/1" style={{ textDecoration: 'none' }}>
-                <NavItem>
+                <NavItem
+                  active={activeButtonId === 'offerdShells'}
+                  onClick={() => handleButtonClick('offerdShells')}
+                >
                   <FontAwesomeIcon icon={faHandPointRight} />
                   Offered Shells
                 </NavItem>
               </Link>
 
               <Link to="/dm/1" style={{ textDecoration: 'none' }}>
-                <NavItem>
+                <NavItem
+                  active={activeButtonId === 'message'}
+                  onClick={() => handleButtonClick('message')}
+                >
                   <FontAwesomeIcon icon={faMessage} />
                   Message
                 </NavItem>
               </Link>
 
               <Link to="/member/1" style={{ textDecoration: 'none' }}>
-                <NavItem>
+                <NavItem
+                  active={activeButtonId === 'myPage'}
+                  onClick={() => handleButtonClick('myPage')}
+                >
                   <Avatar avatartype={'icon'} member={member} />
                   My Page
                 </NavItem>
               </Link>
 
               <Link to="/myshells/1" style={{ textDecoration: 'none' }}>
-                <NavItem>
+                <NavItem
+                  active={activeButtonId === 'myShells'}
+                  onClick={() => handleButtonClick('myShells')}
+                >
                   <FontAwesomeIcon icon={faPeopleCarryBox} />
                   My Shells
                 </NavItem>
@@ -132,12 +164,20 @@ const Nav: React.FC = () => {
             </>
           ) : (
             <Link to="/login" style={{ textDecoration: 'none' }}>
-              <NavItem onClick={handleClick}>
+              <NavItem
+                active={activeButtonId === 'createShells'}
+                onClick={() => {
+                  handleClick(), handleButtonClick('createShells');
+                }}
+              >
                 <FontAwesomeIcon icon={faPen} />
                 Create Shells
               </NavItem>
               <NavItem
-                onClick={handleClick}
+                active={activeButtonId === 'findShells'}
+                onClick={() => {
+                  handleClick(), handleButtonClick('findShells');
+                }}
                 onMouseEnter={handleNavItemHover}
                 onMouseLeave={handleNavItemNotHover}
               >
@@ -153,7 +193,10 @@ const Nav: React.FC = () => {
                     to="/shelllist/product"
                     style={{ textDecoration: 'none' }}
                   >
-                    <NavItemContent>
+                    <NavItemContent
+                      active={activeButtonId === 'product'}
+                      onClick={() => handleButtonClick('product')}
+                    >
                       <FontAwesomeIcon icon={faBox} />
                       Product
                     </NavItemContent>
@@ -162,19 +205,32 @@ const Nav: React.FC = () => {
                     to="/shelllist/talent"
                     style={{ textDecoration: 'none' }}
                   >
-                    <NavItemContent>
+                    <NavItemContent
+                      active={activeButtonId === 'talent'}
+                      onClick={() => handleButtonClick('talent')}
+                    >
                       <FontAwesomeIcon icon={faPersonRunning} />
                       Talent
                     </NavItemContent>
                   </Link>
                 </NavItemContentWrapper>
               )}
-              <NavItem onClick={handleClick}>
+              <NavItem
+                active={activeButtonId === 'offerdShells'}
+                onClick={() => {
+                  handleClick(), handleButtonClick('offerdShells');
+                }}
+              >
                 <FontAwesomeIcon icon={faHandPointRight} />
                 Offered Shells
               </NavItem>
 
-              <NavItem onClick={handleClick}>
+              <NavItem
+                active={activeButtonId === 'message'}
+                onClick={() => {
+                  handleClick(), handleButtonClick('message');
+                }}
+              >
                 <FontAwesomeIcon icon={faMessage} />
                 Message
               </NavItem>
