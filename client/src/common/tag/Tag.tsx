@@ -9,18 +9,24 @@ interface TagProps {
 const Tag = ({ tagList, setTagList }: TagProps) => {
   const [inputTagValue, setInputTagValue] = useState<string>('');
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
-    setInputTagValue(e.target.value);
+    if (e.target.value.length <= 20) {
+      setInputTagValue(e.target.value);
+    }
   };
+  let inDebounce: number;
 
   const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    const delay = 200;
     if (e.key === 'Enter') {
       e.preventDefault();
-      const tag = inputTagValue.trim();
-
-      if (tag !== '' && tagList.length < 4) {
-        setTagList([...tagList, tag]);
-      }
-      setInputTagValue('');
+      clearTimeout(inDebounce);
+      inDebounce = setTimeout(() => {
+        const tag = inputTagValue.trim();
+        if (tag !== '' && tagList.length < 4) {
+          setTagList([...tagList, tag]);
+        }
+        setInputTagValue('');
+      }, delay);
     }
   };
 
