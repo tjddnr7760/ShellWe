@@ -1,7 +1,6 @@
-import { DefaultBodyWrapper, Category } from './ShellDetail.styled.ts';
 import { BodyProps } from '../../dataset/ShellDetailType.ts';
 import { MakePartOfBodyText } from '../../utill/makeBodyText.ts';
-
+import { DefaultBodyWrapper, Category } from './ShellDetail.styled.ts';
 const DefaultBody = ({ category, body }: BodyProps) => {
   return (
     <DefaultBodyWrapper>

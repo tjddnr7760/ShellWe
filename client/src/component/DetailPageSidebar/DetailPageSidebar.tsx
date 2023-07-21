@@ -28,7 +28,7 @@ const DetailPageSidebar = ({ shellStatus }: { shellStatus: string }) => {
   };
 
   const goToShellUpdatePage = () => {
-    navigate(`/shelldetail/${id}/update`);
+    navigate(`/shellupdate/${id}`);
   };
 
   return (

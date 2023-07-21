@@ -28,7 +28,8 @@ const MyShells = ({
     navigate(`/shelldetail/${shell.id}`);
   };
 
-  const handleDeleteLikeShell = () => {
+  const handleDeleteLikeShell = (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.stopPropagation();
     DeleteLikeShell();
   };
 

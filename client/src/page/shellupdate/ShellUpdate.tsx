@@ -30,7 +30,7 @@ const ShellUpdate: React.FC = () => {
   const { id } = useParams();
   const { data } = useGetShells(parseInt(id as string));
   const formData = new FormData();
-  const urls = data?.data.pictures.map((item: { url: string }) => item.url);
+  const urls = data?.data?.pictures.map((item: { url: string }) => item.url);
 
   const { mutate } = useUpdateShells();
   const [selectedCateory, setSelectedCateory] = useState({
@@ -44,7 +44,7 @@ const ShellUpdate: React.FC = () => {
   const [uploadedImages, setUploadedImages] = useState<File[]>([]);
 
   useEffect(() => {
-    if (data) {
+    if (Object.keys(data).length) {
       const updatedData = processData(data.data);
 
       setSelectedCateory(
@@ -58,7 +58,7 @@ const ShellUpdate: React.FC = () => {
       setContent(updatedData?.body as React.SetStateAction<string>);
       setTagList(updatedData?.tags as React.SetStateAction<string[]>);
     }
-  }, []);
+  }, [data]);
 
   const handleInputChange = (
     e:

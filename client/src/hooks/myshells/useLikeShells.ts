@@ -16,13 +16,8 @@ const getMyShellId: GetMyShellsArgs = async (memberId) => {
 };
 
 export const useLikeShells = (memberId: number) => {
-  if (memberId === 0) {
-    alert('네트워크에 오류가 있습니다. 잠시 후 다시 시도해주세요.');
-    return { data: {} };
-  } else {
-    const { data = {} } = useQuery(queryKeys.myshells, () =>
-      getMyShellId(memberId)
-    );
-    return { data };
-  }
+  const { data = {} } = useQuery([queryKeys.likeShell, memberId], () =>
+    getMyShellId(memberId)
+  );
+  return { data };
 };

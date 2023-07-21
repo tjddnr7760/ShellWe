@@ -4,19 +4,18 @@ import { getAccessToken } from './localstorageData';
 
 export const getHeader = () => {
   return {
-    'ngrok-skip-browser-warning': '69420',
     Authorization: getAccessToken(),
   };
 };
 
 export const getPostHeader = () => {
   return {
-    'ngrok-skip-browser-warning': '69420',
     Authorization: getAccessToken(),
     'Content-Type': `multipart/form-data; boundary=<${uuidv4}>`,
   };
 };
 const config: AxiosRequestConfig = { baseURL: `${import.meta.env.VITE_KEY}` };
+
 const WebSocketConfig: AxiosRequestConfig = {
   baseURL: `${import.meta.env.VITE_KEY_DM}`,
 };

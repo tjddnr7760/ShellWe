@@ -1,11 +1,11 @@
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useSetRecoilState } from 'recoil';
-import { isLogInState } from '../../recoil/atom';
+import { userStateWithExpiry } from '../../recoil/selector';
 
 export const GoogleLoginToken = () => {
   const navigate = useNavigate();
-  const setIsLoggedIn = useSetRecoilState(isLogInState);
+  const setIsLoggedIn = useSetRecoilState(userStateWithExpiry);
 
   const id: string | null = new URL(location.href).searchParams.get('id');
   const displayName: string | null = new URL(location.href).searchParams.get(

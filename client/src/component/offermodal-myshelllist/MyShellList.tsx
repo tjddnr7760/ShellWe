@@ -14,13 +14,18 @@ const MyShellListWrapper = styled.div`
   overflow-y: scroll;
 `;
 
-const MyShellList = ({ myShellListsData }: MyShellsDataProps) => {
+const MyShellList = ({
+  myShellListsData,
+  shellMemberId,
+}: MyShellsDataProps) => {
   const myShellArray = myShellListsData;
 
   return (
     <MyShellListWrapper>
       {myShellArray.map((shell) => {
-        return <MyShell key={shell.id} shell={shell} />;
+        return (
+          <MyShell key={shell.id} shell={shell} shellMemberId={shellMemberId} />
+        );
       })}
     </MyShellListWrapper>
   );

@@ -46,10 +46,6 @@ export const NavItem = styled.div`
   color: #828282;
   padding-left: 30px;
   padding-right: 30px;
-  /* 
-  svg {
-    margin-right: 10px;
-  } */
 
   img {
     width: 26px;
@@ -58,6 +54,10 @@ export const NavItem = styled.div`
 
   &:hover {
     cursor: pointer;
+    background-color: #c8f5ff;
+  }
+
+  &.selected {
     background-color: #c8f5ff;
   }
 `;
@@ -80,6 +80,9 @@ export const NavItemContent = styled.div`
   }
   &:hover {
     cursor: pointer;
+    background-color: #c8f5ff;
+  }
+  &.selected {
     background-color: #c8f5ff;
   }
 `;

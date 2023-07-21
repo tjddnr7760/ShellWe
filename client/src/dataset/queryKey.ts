@@ -19,4 +19,7 @@ export enum queryKeys {
   myshells = 'myshells',
   chatList = 'chatList',
   chatRoom = 'chatRoom',
+  currentShell = 'currentShell',
+  pastShell = 'pastShell',
+  likeShell = 'likeShell',
 }

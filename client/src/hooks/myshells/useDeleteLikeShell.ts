@@ -1,7 +1,8 @@
 import { useMutation } from 'react-query';
 import { axiosInstance, getHeader } from '../../utill/axiosInstance';
-import { useLikeShells } from './useLikeShells';
-import { getMemberIdFromLocalStorage } from '../../utill/localstorageData';
+
+import { queryKeys } from '../../dataset/queryKey';
+import { queryClient } from '../../utill/queryClient';
 
 const getMemberIdForDelete = async (shellId: number) => {
   const { data } = await axiosInstance({
@@ -17,7 +18,8 @@ export const useDeleteLikeShell = (shellId: number) => {
     () => getMemberIdForDelete(shellId),
     {
       onSuccess: () => {
-        useLikeShells(Number(getMemberIdFromLocalStorage()));
+        console.log('1111');
+        queryClient.invalidateQueries(queryKeys.likeShell);
       },
     }
   );

@@ -7,7 +7,6 @@ export const queryClient = new QueryClient({
       keepPreviousData: true,
       refetchOnWindowFocus: false,
       onError: apiErrorHandler,
-      suspense: true,
       cacheTime: 500,
     },
     mutations: {

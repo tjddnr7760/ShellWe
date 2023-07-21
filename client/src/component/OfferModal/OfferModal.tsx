@@ -9,8 +9,9 @@ import {
 import plus from '../../asset/plus.svg';
 import { useGetMyShellToPoke } from '../../hooks/shelldetail/useGetPokeShellsList.ts';
 import { getMemberIdFromLocalStorage } from '../../utill/localstorageData.ts';
+import { ShellMemberId } from '../../dataset/ShellDetailType.ts';
 
-const OfferModal = () => {
+const OfferModal = (shellMemberId: ShellMemberId) => {
   const { data: modaldata } = useGetMyShellToPoke(
     Number(getMemberIdFromLocalStorage())
   );
@@ -29,7 +30,10 @@ const OfferModal = () => {
         </CreateShellButton>
       </Div>
       <ShellListContainer>
-        <MyShellList myShellListsData={myShellListsData} />
+        <MyShellList
+          myShellListsData={myShellListsData}
+          shellMemberId={shellMemberId}
+        />
       </ShellListContainer>
     </Wrapper>
   );
