@@ -39,7 +39,7 @@ const DropDownMenu = () => {
               type="radio"
               name="sort"
               value="newest"
-              checked={selectedOption === 'Newest'} // 선택 상태에 따라 체크 여부 결정
+              checked={selectedOption === 'newest'} // 선택 상태에 따라 체크 여부 결정
               onChange={handleRadioChange}
             />
             최신순
@@ -49,7 +49,7 @@ const DropDownMenu = () => {
               type="radio"
               name="sort"
               value="oldest"
-              checked={selectedOption === 'Oldest'} // 선택 상태에 따라 체크 여부 결정
+              checked={selectedOption === 'oldest'} // 선택 상태에 따라 체크 여부 결정
               onChange={handleRadioChange}
             />
             과거순
