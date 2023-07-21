@@ -30,7 +30,3 @@ export const useUpdateShells = () => {
   };
   return { mutate: handleUpdataMutate };
 };
-
-//queryClient.invalidateQueries(queryKeys.shellsDetail);
-
-//업데이트 후 "todos"라는 쿼리키를 useQuery api 함수를 실행

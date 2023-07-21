@@ -9,7 +9,6 @@ const getImageFile = async (imageUrl: string) => {
   const response = await axios.get(imageUrl, {
     responseType: 'blob',
   });
-  console.log('response', response);
 
   const blob = new Blob([response.data], {
     type: response.headers['content-type'],
@@ -21,6 +20,5 @@ export const useImageUpload = (updateInitalImages: string) => {
   const { data } = useQuery([queryKeys.imageData, updateInitalImages], () =>
     getImageFile(updateInitalImages)
   );
-  console.log(data);
   return data;
 };

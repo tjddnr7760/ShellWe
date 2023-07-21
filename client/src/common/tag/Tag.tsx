@@ -8,7 +8,6 @@ interface TagProps {
 }
 const Tag = ({ tagList, setTagList }: TagProps) => {
   const [inputTagValue, setInputTagValue] = useState<string>('');
-
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     setInputTagValue(e.target.value);
   };

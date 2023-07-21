@@ -7,7 +7,7 @@ import {
   MessageListHeader,
   MessageMyInfo,
   NoneClickedDMRoom,
-} from './DirectMessage.styled';
+} from './DirectMessage.styled.ts';
 import { DMRoom } from '../../component/DMroom/DMRoom';
 import DM from '../../component/dmlist/DM';
 import { useChatList } from '../../hooks/chat/useChatList';

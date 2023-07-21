@@ -10,7 +10,6 @@ import {
   UploadedImageWrapper,
   UploadExplanation,
 } from './ImageUploder.styled';
-import { useEffect } from 'react';
 
 interface ImageUploaderProps {
   uploadedImages: File[];
@@ -46,7 +45,7 @@ export const ImageUploader = ({
 
   const handleTitleImageChange = (index: number) => {
     if (index === 0) {
-      return; // 0번 인덱스는 예외 처리
+      return;
     }
 
     setUploadedImages((prevImages: FileWithPath[]) => {

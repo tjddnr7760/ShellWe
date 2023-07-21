@@ -18,7 +18,7 @@ function processData(data: ShellDetailData) {
   const updatedData = {
     title: data.title,
     body: data.body,
-    tags: data.tags?.map((tag: { tagName: string }) => tag.tagName),
+    tags: data.tags?.map((tag: { tagName: string }) => tag.tagName) || [],
     category: extractedData,
     pictures: data.pictures?.map(
       (picture: { order: number; url: string }) => picture.url
