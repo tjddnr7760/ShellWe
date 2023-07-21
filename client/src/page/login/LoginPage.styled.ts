@@ -20,7 +20,7 @@ export const Logo = styled.img`
   height: 52px;
 `;
 
-export const OathContainer = styled.div`
+export const OauthContainer = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
@@ -34,11 +34,11 @@ export const OathContainer = styled.div`
     transform: translateY(2px);
   }
 `;
-export const OathImg = styled.img`
+export const OauthImg = styled.img`
   width: 30px;
 `;
 
-export const OathText = styled.div`
+export const OauthText = styled.div`
   padding: 15px;
 `;
 

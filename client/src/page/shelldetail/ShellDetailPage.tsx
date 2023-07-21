@@ -2,8 +2,8 @@ import { useState } from 'react';
 import { useGetShellDetail } from '../../hooks/shelldetail/useShellsDetailId.ts';
 import ShellImgPreview from '../../component/shellimgpreview/ShellImgPreview.tsx';
 import ShellDetail from '../../component/shelldetail/ShellDetail.tsx';
-import DetailPageSidebar from '../../component/detailpagesidebar/DetailPageSidebar.tsx';
-import OfferModal from '../../component/offermodal/OfferModal.tsx';
+import DetailPageSidebar from '../../component/DetailPageSidebar/DetailPageSidebar.tsx';
+import OfferModal from '../../component/OfferModal/OfferModal.tsx';
 import {
   DetailPageContainer,
   Div,
@@ -35,16 +35,20 @@ const ShellDetailPage = () => {
           <DetailPageContainer>
             <ContentDiv>
               <PreviewDiv>
-                <ShellImgPreview
-                  clickedShellPictures={shellDetailData.pictures}
-                />
+                {shellDetailData && (
+                  <ShellImgPreview
+                    clickedShellPictures={shellDetailData.pictures}
+                  />
+                )}
               </PreviewDiv>
               <Div>
-                <ShellDetail
-                  handlePoke={handlePoke}
-                  handleOpenSidebar={handleOpenSidebar}
-                  shellDetailData={shellDetailData}
-                />
+                {shellDetailData && (
+                  <ShellDetail
+                    handlePoke={handlePoke}
+                    handleOpenSidebar={handleOpenSidebar}
+                    shellDetailData={shellDetailData}
+                  />
+                )}
                 {sidebarOpen && (
                   <DetailPageSidebar shellStatus={shellDetailData.status} />
                 )}

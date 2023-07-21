@@ -4,7 +4,7 @@ import { axiosInstance, getHeader } from '../../utill/axiosInstance';
 import { queryKeys } from '../../dataset/queryKey';
 import { GetMyShellsArgs } from '../../dataset/TypesOfferedShell';
 
-const getMyShellsListId: GetMyShellsArgs = async () => {
+const getMyPokedShellsListId: GetMyShellsArgs = async () => {
   const { data } = await axiosInstance({
     url: `/trades`,
     method: 'get',
@@ -13,10 +13,9 @@ const getMyShellsListId: GetMyShellsArgs = async () => {
   return data;
 };
 
-// 요청함 페이지 내 쉘 조회
-export const useMyShellsList = () => {
-  const { data = {} } = useQuery(queryKeys.shellsDetail, () =>
-    getMyShellsListId()
+export const useMyPokedShellsList = () => {
+  const { data = {} } = useQuery(queryKeys.trade, () =>
+    getMyPokedShellsListId()
   );
 
   return { data };

@@ -3,20 +3,21 @@ import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import googlelogo from '../../asset/googlelogo.png';
 import { Link } from 'react-router-dom';
+import { useSetRecoilState } from 'recoil';
+import { isLogInState } from '../../recoil/atom';
+// import { usePostLogin } from '../../hooks/login/PostLogin';
 
 import {
   LoginContainer,
   LoginBox,
   Logo,
-  OathContainer,
-  OathImg,
-  OathText,
+  OauthContainer,
+  OauthImg,
+  OauthText,
   UserinfoContainer,
   DivBox,
   DivInputBox,
   DivInput,
-  CheckError,
-  CheckPosible,
   LoginButton,
   LoginSubFuntionBox,
   LoginSubFuntion,
@@ -25,7 +26,7 @@ import {
 const LoginPage: React.FC = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [errorMessage, setErrorMessage] = useState('');
+  const setIsLoggedIn = useSetRecoilState(isLogInState);
   const navigation = useNavigate();
 
   const isEmailValid = /^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/.test(email);
@@ -34,9 +35,11 @@ const LoginPage: React.FC = () => {
     /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{10,}$/.test(
       password
     );
-
+    
   const handleGuestLogin = async (e: any) => {
     e.preventDefault();
+
+    // 유틸함수 만들기
 
     const response = await axios.post(
       `${import.meta.env.VITE_KEY}/auth/login`,
@@ -46,37 +49,61 @@ const LoginPage: React.FC = () => {
       }
     );
     if (response.status === 200) {
-      const userData = response.data.id;
-
-      localStorage.setItem('userData', JSON.stringify(userData));
-
+      setIsLoggedIn(true);
       const accessToken = response.headers.authorization;
-
+      const id = response.data.id;
+      const displayName = response.data.displayName;
+      const profileUrl = response.data.profileUrl;
+      const isMe = response.data.isMe;
       localStorage.setItem('accessToken', accessToken);
-
+      localStorage.setItem('id', id);
+      localStorage.setItem('displayName', displayName);
+      localStorage.setItem('profileUrl', profileUrl);
+      localStorage.setItem('isMe', isMe);
       navigation('/main');
     }
   };
+
   const handleLogin = async (e: any) => {
     e.preventDefault();
 
-    const response = await axios.post(
-      `${import.meta.env.VITE_KEY}/auth/login`,
-      {
-        email,
-        password,
+    try {
+      const response = await axios.post(
+        `${import.meta.env.VITE_KEY}/auth/login`,
+        {
+          email,
+          password,
+        }
+      );
+
+      if (response.status === 200) {
+        setIsLoggedIn(true);
+        const accessToken = response.headers.authorization;
+        const id = response.data.id;
+        const displayName = response.data.displayName;
+        const profileUrl = response.data.profileUrl;
+        const isMe = response.data.isMe;
+        localStorage.setItem('accessToken', accessToken);
+        localStorage.setItem('id', id);
+        localStorage.setItem('displayName', displayName);
+        localStorage.setItem('profileUrl', profileUrl);
+        localStorage.setItem('isMe', isMe);
+        navigation('/main');
       }
-    );
-    if (response.status === 200) {
-      const userData = response.data.user;
-
-      localStorage.setItem('userData', JSON.stringify(userData));
-
-      const accessToken = response.headers.authorization;
-      localStorage.setItem('accessToken', accessToken);
-
-      navigation('/main');
+    } catch (error: any) {
+      if (error.response && error.response.status === 401) {
+        setEmail('');
+        setPassword('');
+        console.error('회원 가입 실패.', error);
+        alert('이미 가입된 계정입니다.');
+      }
     }
+  };
+
+  const LoginRequestHandlerGoogle = () => {
+    window.location.href = `${
+      import.meta.env.VITE_KEY
+    }/oauth2/authorization/google`;
   };
 
   return (
@@ -86,10 +113,10 @@ const LoginPage: React.FC = () => {
           src="https://cdn-icons-png.flaticon.com/512/499/499857.png"
           alt="Logo"
         ></Logo>
-        <OathContainer>
-          <OathImg src={googlelogo}></OathImg>
-          <OathText>Login with Google</OathText>
-        </OathContainer>
+        <OauthContainer onClick={LoginRequestHandlerGoogle}>
+          <OauthImg src={googlelogo}></OauthImg>
+          <OauthText>Login with Google</OauthText>
+        </OauthContainer>
         <UserinfoContainer>
           <DivBox>
             <div>Email</div>
@@ -100,9 +127,6 @@ const LoginPage: React.FC = () => {
                 onChange={(e: any) => setEmail(e.target.value)}
               />
             </DivInputBox>
-            {!isEmailValid && email.length > 0 && (
-              <CheckError>올바른 이메일 주소를 작성해주세요.</CheckError>
-            )}
           </DivBox>
           <DivBox>
             <div>Password</div>
@@ -113,19 +137,13 @@ const LoginPage: React.FC = () => {
                 onChange={(e: any) => setPassword(e.target.value)}
               />
             </DivInputBox>
-            {password.length > 10 && !isPasswordValid && (
-              <CheckError>비밀번호를 확인해주세요.</CheckError>
-            )}
-            {isPasswordValid && password && (
-              <CheckPosible>사용 가능한 비밀번호입니다.</CheckPosible>
-            )}
           </DivBox>
         </UserinfoContainer>
         <LoginButton onClick={handleLogin}>Log in</LoginButton>
         <LoginSubFuntionBox>
           <LoginSubFuntion>
             <Link to="/signup" style={{ textDecoration: 'none' }}>
-              Signup
+              Sign up
             </Link>
           </LoginSubFuntion>
           <LoginSubFuntion onClick={handleGuestLogin}>

@@ -12,6 +12,7 @@ import {
 } from '../../page/directmessage/DirectMessage.styled';
 import Avatar from '../../common/avatar/Avatar';
 import { useDeleteChatRoom } from '../../hooks/chat/useDeleteChat';
+import { MakePartOfBodyText } from '../../utill/makeBodyText';
 
 interface DMProps {
   chat: ChatList;
@@ -53,16 +54,6 @@ const DM = ({
     DeleteChatRoom();
   };
 
-  const MakePartOfBodyText = (body: string) => {
-    if (body.length < 25) {
-      return body;
-    } else {
-      const slicebody = body.slice(0, 25);
-      return slicebody.charAt(slicebody.length - 1) === '.'
-        ? slicebody + '.'
-        : slicebody + '..';
-    }
-  };
   return (
     <div>
       <MessageListContainer
@@ -83,7 +74,9 @@ const DM = ({
                 </HeaderLeft>
                 <DeleteButton onClick={handleDelete}>x</DeleteButton>
               </MessageHeader>
-              <MessageBody>{MakePartOfBodyText(chat.lastMessage)}</MessageBody>
+              <MessageBody>
+                {MakePartOfBodyText(chat.lastMessage, 25)}
+              </MessageBody>
             </MessageBox>
           </MessageContainer>
         </MessageListBox>

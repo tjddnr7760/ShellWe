@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { useRecoilValue } from 'recoil';
 import { Link } from 'react-router-dom';
-import { Avatar } from '@mui/material';
-
+import { isLogInState } from '../../recoil/atom.ts';
+import Avatar from '../../common/avatar/Avatar';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
   faPen,
@@ -15,8 +15,6 @@ import {
   faPeopleCarryBox,
 } from '@fortawesome/free-solid-svg-icons';
 
-import { isLogInState } from '../../recoil/atom.ts';
-
 import {
   NavWrapper,
   NavContainer,
@@ -26,9 +24,17 @@ import {
   NavItem,
   NavItemContent,
 } from './Nav.styled';
+import { getAccessToken } from '../../utill/localstorageData';
 
 const Nav: React.FC = () => {
   const [isNavItemContent, setIsNavItemContent] = useState(false);
+  const id = Number(localStorage.getItem('id') || 0);
+  const profileUrl: string = localStorage.getItem('profileUrl') || 'empty';
+
+  const member = {
+    id,
+    profileUrl,
+  };
   const isLogIn = useRecoilValue(isLogInState);
 
   const handleNavItemHover = () => {
@@ -40,7 +46,7 @@ const Nav: React.FC = () => {
   };
 
   const handleClick = () => {
-    if (!isLogIn) {
+    if (!getAccessToken()) {
       alert('로그인 후 접근할 수 있습니다.');
     }
   };
@@ -48,22 +54,12 @@ const Nav: React.FC = () => {
   return (
     <NavWrapper>
       <NavContainer>
-        {isLogIn ? (
-          <Link to="/main">
-            <Logo
-              src="https://cdn-icons-png.flaticon.com/512/499/499857.png"
-              alt="Logo"
-            ></Logo>
-          </Link>
-        ) : (
-          <Link to="/">
-            <Logo
-              src="https://cdn-icons-png.flaticon.com/512/499/499857.png"
-              alt="Logo"
-            ></Logo>
-          </Link>
-        )}
-
+        <Link to={isLogIn ? '/main' : '/'}>
+          <Logo
+            src="https://cdn-icons-png.flaticon.com/512/499/499857.png"
+            alt="Logo"
+          ></Logo>
+        </Link>
         <NavItems>
           {isLogIn ? (
             <>
@@ -122,7 +118,7 @@ const Nav: React.FC = () => {
 
               <Link to="/member/1" style={{ textDecoration: 'none' }}>
                 <NavItem>
-                  <Avatar />
+                  <Avatar avatartype={'icon'} member={member} />
                   My Page
                 </NavItem>
               </Link>
@@ -153,18 +149,26 @@ const Nav: React.FC = () => {
                   onMouseEnter={handleNavItemHover}
                   onMouseLeave={handleNavItemNotHover}
                 >
-                  <NavItemContent onClick={handleClick}>
-                    <FontAwesomeIcon icon={faBox} />
-                    Product
-                  </NavItemContent>
-
-                  <NavItemContent onClick={handleClick}>
-                    <FontAwesomeIcon icon={faPersonRunning} />
-                    Talent
-                  </NavItemContent>
+                  <Link
+                    to="/shelllist/product"
+                    style={{ textDecoration: 'none' }}
+                  >
+                    <NavItemContent>
+                      <FontAwesomeIcon icon={faBox} />
+                      Product
+                    </NavItemContent>
+                  </Link>
+                  <Link
+                    to="/shelllist/talent"
+                    style={{ textDecoration: 'none' }}
+                  >
+                    <NavItemContent>
+                      <FontAwesomeIcon icon={faPersonRunning} />
+                      Talent
+                    </NavItemContent>
+                  </Link>
                 </NavItemContentWrapper>
               )}
-
               <NavItem onClick={handleClick}>
                 <FontAwesomeIcon icon={faHandPointRight} />
                 Offered Shells

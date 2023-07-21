@@ -28,9 +28,8 @@ const ShellDetail = ({
 }: ShellDetailProps) => {
   const [seeMoreBody, setSeeMoreBody] = useState(false);
   const tags = shellDetailData.tags?.map((tag: Tag) => tag.tagName);
-  const category: string = shellDetailData.category.slice(2).toUpperCase();
+  const category: string = shellDetailData?.category.slice(2).toUpperCase();
   const myMemberId = Number(getMemberIdFromLocalStorage());
-
   const handleSeeMoreBody = () => {
     setSeeMoreBody(!seeMoreBody);
   };

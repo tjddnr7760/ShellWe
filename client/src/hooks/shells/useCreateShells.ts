@@ -12,7 +12,6 @@ const getShell = async (requestData: FormData) => {
   return { data };
 };
 
-//제품 생성
 export const useCreateShells = () => {
   const navigate = useNavigate();
 

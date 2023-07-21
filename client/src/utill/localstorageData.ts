@@ -4,6 +4,6 @@ export const getMemberIdFromLocalStorage = () => {
 };
 
 export const getAccessToken = () => {
-  const accessToken = localStorage.getItem('Authorization');
+  const accessToken = localStorage.getItem('accessToken');
   return accessToken;
 };

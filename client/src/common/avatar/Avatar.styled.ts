@@ -5,15 +5,18 @@ const Avatar = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  width: 100%;
+  height: fit-content;
   border: 1px solid rgba(0, 0, 0, 0.2);
   border-radius: 50%;
+  overflow: hidden;
   &:hover {
     background-color: #90e0ef;
     border: 1px solid rgba(0, 0, 0, 0.5);
   }
   img {
-    width: 50%;
-    height: 50%;
+    width: 100%;
+    height: 100%;
     object-fit: contain;
   }
 `;

@@ -25,6 +25,7 @@ const Shell = ({ shell }: ShellProps) => {
   const handleDetailCilck = (id: number) => {
     navigate(`/shelldetail/${id}`);
   };
+
   return (
     <ShellContainer>
       {shell && (
@@ -37,8 +38,7 @@ const Shell = ({ shell }: ShellProps) => {
             />
           </ShellImgWrapper>
           <ShellInfoWrapper onClick={() => handleDetailCilck(shell.id)}>
-            <Avatar avatartype="UserImg" member={shell.member} />
-
+            <Avatar avatartype="icon" member={shell.member} />
             <ShellTitleInfo>{shell.title}</ShellTitleInfo>
           </ShellInfoWrapper>
         </>
@@ -50,6 +50,7 @@ const Shell = ({ shell }: ShellProps) => {
 export type ShellType = {
   id: number;
   type: string;
+  numberOfTrades?: number;
   status: string;
   title: string;
   createdAt: string;
