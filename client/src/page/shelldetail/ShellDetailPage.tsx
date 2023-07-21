@@ -11,7 +11,6 @@ import {
   ContentDiv,
   PreviewDiv,
 } from './ShellDetailPage.styled';
-import { ShellDetailDataProps } from '../../dataset/ShellDetailType.ts';
 
 const ShellDetailPage = () => {
   const { data } = useGetShellDetail();

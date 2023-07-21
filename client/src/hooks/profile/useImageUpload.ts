@@ -1,6 +1,5 @@
 import axios from 'axios';
-import { FileWithPath } from 'react-dropzone';
-import { QueryObserverResult, useQueries, useQuery } from 'react-query';
+import { useQuery } from 'react-query';
 
 import { v4 as uuidv4 } from 'uuid';
 import { queryKeys } from '../../dataset/queryKey';
