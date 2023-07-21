@@ -30,10 +30,16 @@ const getChatList = async (): Promise<ChatListData> => {
 };
 
 export const useChatList = () => {
-  const { data } = useQuery([queryKeys.chatList], () => getChatList());
-
+  const { data, isLoading } = useQuery(
+    [queryKeys.chatList],
+    () => getChatList(),
+    {
+      staleTime: 60000,
+    }
+  );
+  console.log(2);
   const refreshChatList = async () => {
     await queryClient.invalidateQueries(queryKeys.chatList);
   };
-  return { data, refreshChatList };
+  return { data, refreshChatList, isLoading };
 };

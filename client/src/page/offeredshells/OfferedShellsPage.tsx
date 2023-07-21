@@ -25,22 +25,24 @@ const OfferedShellsPage = () => {
 
   return (
     <Wrapper>
-      <OfferedShellsPageWrapper>
-        <PokedShellListWrapper>
-          <PokedShellList
-            myPokedShellsData={myPokedShellsData}
-            HandleClickPokedShell={HandleClickPokedShell}
-          />
-        </PokedShellListWrapper>
-        {clickedShellId !== undefined ? (
-          <OfferedShell clickedShellId={clickedShellId} />
-        ) : (
-          <NoticeClickPokedShell>
-            Click your Shell!
-            <div>요청받은 쉘을 확인해보세요</div>
-          </NoticeClickPokedShell>
-        )}
-      </OfferedShellsPageWrapper>
+      {myPokedShellsData && (
+        <OfferedShellsPageWrapper>
+          <PokedShellListWrapper>
+            <PokedShellList
+              myPokedShellsData={myPokedShellsData}
+              HandleClickPokedShell={HandleClickPokedShell}
+            />
+          </PokedShellListWrapper>
+          {clickedShellId !== undefined ? (
+            <OfferedShell clickedShellId={clickedShellId} />
+          ) : (
+            <NoticeClickPokedShell>
+              Click your Shell!
+              <div>요청받은 쉘을 확인해보세요</div>
+            </NoticeClickPokedShell>
+          )}
+        </OfferedShellsPageWrapper>
+      )}
     </Wrapper>
   );
 };

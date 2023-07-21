@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useMemo, useState } from 'react';
 import {
   MessageRoomWrapper,
   MessageListBody,
@@ -11,11 +11,14 @@ import {
 import { DMRoom } from '../../component/DMroom/DMRoom';
 import DM from '../../component/dmlist/DM';
 import { useChatList } from '../../hooks/chat/useChatList';
+import { getDisplayNameFromLocalStorage } from '../../utill/localstorageData.ts';
 
 export const DirectMessage: React.FC = () => {
   const { data: chatListData, refreshChatList } = useChatList();
+  const memoizedChatListData = useMemo(() => chatListData, [chatListData]);
   const [ClickedRoomId, setClickedRoomId] = useState<number>();
   const [isRoomOpened, setIsRoomOpened] = useState<boolean>();
+  const displayName = getDisplayNameFromLocalStorage();
 
   const handleClickRoom = (roomId: number): void => {
     if (isRoomOpened && ClickedRoomId === roomId) {
@@ -32,12 +35,12 @@ export const DirectMessage: React.FC = () => {
       <MessageWrapper>
         <MessageListWrapper>
           <MessageListHeader>
-            <MessageMyInfo>displayName</MessageMyInfo>
+            <MessageMyInfo>{displayName}</MessageMyInfo>
             ChatList
           </MessageListHeader>
           <MessageListBody>
-            {chatListData &&
-              chatListData.data.map((chat) => (
+            {memoizedChatListData &&
+              memoizedChatListData.data.map((chat) => (
                 <DM
                   key={chat.id}
                   chat={chat}

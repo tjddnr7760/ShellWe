@@ -18,7 +18,6 @@ import MyPage from './page/mypage/MyPage.tsx';
 import MyShellsPage from './page/myshells/MyShellsPage.tsx';
 import OfferedShellsPage from './page/offeredshells/OfferedShellsPage.tsx';
 import DirectMessage from './page/directmessage/DirectMessage.tsx';
-import Loading from './common/loading/Loading.tsx';
 import SearchPage from './page/searchpage/SearchPage.tsx';
 import GoogleLoginToken from './page/login/GoogleLoginToken.tsx';
 
@@ -29,29 +28,28 @@ function App() {
       <main>
         <Nav />
         <div className="inner">
-          <Suspense fallback={<Loading />}>
-            <Routes>
-              <Route path="/" element={<HomePage />} />
-              <Route path="/main" element={<MainPage />} />
-              <Route path="/signup" element={<SignupPage />} />
-              <Route path="/aftersignup" element={<AfterSignUp />} />
-              <Route path="/login" element={<LoginPage />} />
-              <Route
-                path="/oauth2/authorization/google/success"
-                element={<GoogleLoginToken />}
-              />
-              <Route path="/shelllist/product" element={<ProductShell />} />
-              <Route path="/shelllist/talent" element={<TalentShell />} />
-              <Route path="/shellcreate" element={<ShellCreate />} />
-              <Route path="/shellupdate/:id" element={<ShellUpdate />} />
-              <Route path="/shelldetail/:id" element={<ShellDetailPage />} />
-              <Route path="/member/:id" element={<MyPage />} />
-              <Route path="/myshells/:id" element={<MyShellsPage />} />
-              <Route path="/offer/:id" element={<OfferedShellsPage />} />
-              <Route path="/dm/:id" element={<DirectMessage />} />
-              <Route path="/search" element={<SearchPage />} />
-            </Routes>
-          </Suspense>
+          <Routes>
+            <Route path="/" element={<HomePage />} />
+            <Route path="/main" element={<MainPage />} />
+            <Route path="/signup" element={<SignupPage />} />
+            <Route path="/aftersignup" element={<AfterSignUp />} />
+            <Route path="/login" element={<LoginPage />} />
+            <Route
+              path="/oauth2/authorization/google/success"
+              element={<GoogleLoginToken />}
+            />
+            <Route path="/shelllist/product" element={<ProductShell />} />
+            <Route path="/shelllist/talent" element={<TalentShell />} />
+            <Route path="/shellcreate" element={<ShellCreate />} />
+            <Route path="/shellupdate/:id" element={<ShellUpdate />} />
+            <Route path="/shelldetail/:id" element={<ShellDetailPage />} />
+            <Route path="/member/:id" element={<MyPage />} />
+            <Route path="/myshells/:id" element={<MyShellsPage />} />
+            <Route path="/offer/:id" element={<OfferedShellsPage />} />
+            <Route path="/dm/:id" element={<DirectMessage />} />
+            <Route path="/search" element={<SearchPage />} />
+            <Route path="*" element={<HomePage />} />
+          </Routes>
           <Footer />
         </div>
       </main>

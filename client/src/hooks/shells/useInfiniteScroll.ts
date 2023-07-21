@@ -33,7 +33,7 @@ export const useInfiniteScroll = (
 ) => {
   const selectedOption = useRecoilValue(selectedOptionAtom);
   const { data, hasNextPage, fetchNextPage, isFetching } = useInfiniteQuery(
-    [queryKeys.shellList, category, pagetype], // 변경된 값들을 쿼리 키에 포함
+    [queryKeys.shellList, category, pagetype, selectedOption], // 변경된 값들을 쿼리 키에 포함
     ({ pageParam = 0 }) =>
       getShells(limit, pageParam, category, pagetype, selectedOption),
     {
