@@ -35,8 +35,6 @@ export const NavItems = styled.div`
 `;
 
 export const NavItem = styled.div`
-  background-color: ${(props: any) => (props.active ? '#c8f5ff' : 'null')};
-
   display: flex;
   align-items: center;
   gap: 10px;
@@ -58,11 +56,14 @@ export const NavItem = styled.div`
     cursor: pointer;
     background-color: #c8f5ff;
   }
+
+  &.selected {
+    background-color: #c8f5ff;
+  }
 `;
 export const NavItemContentWrapper = styled.div``;
 
 export const NavItemContent = styled.div`
-  background-color: ${(props: any) => (props.active ? '#c8f5ff' : 'null')};
   display: flex;
   align-items: center;
   letter-spacing: 0.5px;
@@ -79,6 +80,9 @@ export const NavItemContent = styled.div`
   }
   &:hover {
     cursor: pointer;
+    background-color: #c8f5ff;
+  }
+  &.selected {
     background-color: #c8f5ff;
   }
 `;

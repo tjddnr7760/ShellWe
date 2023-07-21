@@ -135,6 +135,7 @@ const Nav: React.FC = () => {
               <Link to={`/offer/${myId}`} style={{ textDecoration: 'none' }}>
                 <NavItem
                   className={activeButtonId === 'offer' ? 'selectedTab' : ''}
+                  onClick={() => handleButtonClick('offer')}
                 >
                   <FontAwesomeIcon icon={faHandPointRight} />
                   Offered Shells
@@ -144,6 +145,7 @@ const Nav: React.FC = () => {
               <Link to={`/dm/${myId}`} style={{ textDecoration: 'none' }}>
                 <NavItem
                   className={activeButtonId === 'dm' ? 'selectedTab' : ''}
+                  onClick={() => handleButtonClick('dm')}
                 >
                   <FontAwesomeIcon icon={faMessage} />
                   Message
@@ -153,6 +155,7 @@ const Nav: React.FC = () => {
               <Link to={`/member/${myId}`} style={{ textDecoration: 'none' }}>
                 <NavItem
                   className={activeButtonId === 'member' ? 'selectedTab' : ''}
+                  onClick={() => handleButtonClick('member')}
                 >
                   <Avatar avatartype={'icon'} member={member} />
                   My Page
@@ -162,6 +165,7 @@ const Nav: React.FC = () => {
               <Link to={`/myshells/${myId}`} style={{ textDecoration: 'none' }}>
                 <NavItem
                   className={activeButtonId === 'myshells' ? 'selectedTab' : ''}
+                  onClick={() => handleButtonClick('myshells')}
                 >
                   <FontAwesomeIcon icon={faPeopleCarryBox} />
                   My Shells
@@ -248,7 +252,12 @@ const Nav: React.FC = () => {
                 <FontAwesomeIcon icon={faMessage} />
                 Message
               </NavItem>
-              <NavItem>
+              <NavItem
+                className={activeButtonId === 'login' ? 'selectedTab' : ''}
+                onClick={() => {
+                  handleClick(), handleButtonClick('login');
+                }}
+              >
                 <FontAwesomeIcon icon={faArrowRightToBracket} />
                 Login
               </NavItem>
