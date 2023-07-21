@@ -17,7 +17,8 @@ const Shell = ({ shell }: ShellProps) => {
   const [selecedShell, setSelecedShell] = useState(false);
   const navigate = useNavigate();
 
-  const handleLikeCilck = () => {
+  const handleLikeCilck = (e: React.MouseEvent<HTMLImageElement>) => {
+    e.stopPropagation();
     mutate();
     setSelecedShell((prev) => !prev);
   };
@@ -30,14 +31,14 @@ const Shell = ({ shell }: ShellProps) => {
     <ShellContainer>
       {shell && (
         <>
-          <ShellImgWrapper>
+          <ShellImgWrapper onClick={() => handleDetailCilck(shell.id)}>
             <ShellImg src={shell.picture} />
             <LikeShellIcon
               src={selecedShell ? LikeSelectedShell : LikeDefaultShell}
               onClick={handleLikeCilck}
             />
           </ShellImgWrapper>
-          <ShellInfoWrapper onClick={() => handleDetailCilck(shell.id)}>
+          <ShellInfoWrapper>
             <Avatar avatartype="icon" member={shell.member} />
             <ShellTitleInfo>{shell.title}</ShellTitleInfo>
           </ShellInfoWrapper>
