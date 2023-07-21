@@ -25,6 +25,7 @@ import {
   NavItemContent,
 } from './Nav.styled';
 import { getAccessToken } from '../../utill/localstorageData';
+import { userStateWithExpiry } from '../../recoil/selector';
 
 const Nav: React.FC = () => {
   const [isNavItemContent, setIsNavItemContent] = useState(false);
@@ -35,7 +36,7 @@ const Nav: React.FC = () => {
     id,
     profileUrl,
   };
-  const isLogIn = useRecoilValue(isLogInState);
+  const isLogIn = useRecoilValue(userStateWithExpiry);
 
   const handleNavItemHover = () => {
     setIsNavItemContent(true);
