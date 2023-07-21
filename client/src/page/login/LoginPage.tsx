@@ -32,6 +32,8 @@ const LoginPage: React.FC = () => {
   const handleGuestLogin = async (e: any) => {
     e.preventDefault();
 
+    // 유틸함수 만들기
+
     const response = await axios.post(
       `${import.meta.env.VITE_KEY}/auth/login`,
       {

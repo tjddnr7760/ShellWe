@@ -19,6 +19,5 @@ export const useGetMyShellToPoke = (memberId: number) => {
   const { data = {} } = useQuery(queryKeys.myshellListToPoke, () =>
     getPokedShellId(memberId, 'get')
   );
-
   return { data };
 };

@@ -1,17 +1,18 @@
 import axios, { AxiosRequestConfig } from 'axios';
 import { v4 as uuidv4 } from 'uuid';
+import { getAccessToken } from './localstorageData';
 
 export const getHeader = () => {
   return {
     'ngrok-skip-browser-warning': '69420',
-    Authorization: `${import.meta.env.VITE_TOKEN}`,
+    Authorization: getAccessToken(),
   };
 };
 
 export const getPostHeader = () => {
   return {
     'ngrok-skip-browser-warning': '69420',
-    Authorization: `${import.meta.env.VITE_TOKEN}`,
+    Authorization: getAccessToken(),
     'Content-Type': `multipart/form-data; boundary=<${uuidv4}>`,
   };
 };

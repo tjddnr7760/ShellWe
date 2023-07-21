@@ -12,7 +12,7 @@ import { getMemberIdFromLocalStorage } from '../../utill/localstorageData.ts';
 
 const OfferModal = () => {
   const { data: modaldata } = useGetMyShellToPoke(
-    getMemberIdFromLocalStorage()
+    Number(getMemberIdFromLocalStorage())
   );
   const myShellListsData = modaldata.data.shells; // 추후 타입 정의해야 함
 

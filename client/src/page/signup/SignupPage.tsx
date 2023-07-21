@@ -1,9 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useMutation } from 'react-query';
-
 import axios from 'axios';
-
 import {
   LoginContainer,
   LoginBox,
@@ -18,9 +16,9 @@ import {
   CheckError,
   CheckPosible,
   LoginButton,
-  LoginSubFuntionBox,
-  LoginSubFuntion,
 } from '../login/LoginPage.styled';
+import { useSetRecoilState } from 'recoil';
+import { isLogInState } from '../../recoil/atom';
 import googlelogo from '../../asset/googlelogo.png';
 
 const SignupPage = () => {
@@ -29,6 +27,8 @@ const SignupPage = () => {
   const [password, setPassword] = useState('');
   const [checkPassword, setCheckPassword] = useState('');
   const [isSignupDisabled, setIsSignupDisabled] = useState(true);
+  const setIsLoggedIn = useSetRecoilState(isLogInState);
+
   const navigation = useNavigate();
 
   const isNicknameValid =
@@ -60,13 +60,17 @@ const SignupPage = () => {
     return response.data;
   });
 
+  // 1. 회원가입 post mutation 생성
+  // 2. 회원가입 성공 시, 토큰 및 유저 정보 저장(재사용 함수 적용)
+  // 3. 회원가입 성공 시, 로그인 상태 변경
+
   const handleSignup = async (e: any) => {
     e.preventDefault();
 
     try {
       const data = await signupMutation.mutateAsync();
       console.log('회원 가입 성공.', data);
-      navigation('/main');
+      navigation('/aftersignup');
     } catch (error) {
       console.error('회원 가입 실패.', error);
       setEmail('');

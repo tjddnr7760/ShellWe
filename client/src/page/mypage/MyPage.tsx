@@ -34,7 +34,7 @@ const MyPage = () => {
   const handleLogout = () => {
     setIsLoggedIn(false);
     localStorage.clear();
-    navigate('/home');
+    navigate('/');
   };
 
   return (

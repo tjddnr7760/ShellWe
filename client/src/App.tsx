@@ -48,7 +48,7 @@ function App() {
               <Route path="/member/:id" element={<MyPage />} />
               <Route path="/myshells/:id" element={<MyShellsPage />} />
               <Route path="/offer/:id" element={<OfferedShellsPage />} />
-              {/* <Route path="/dm/:id" element={<DirectMessage />} /> */}
+              <Route path="/dm/:id" element={<DirectMessage />} />
               <Route path="/search" element={<SearchPage />} />
             </Routes>
           </Suspense>

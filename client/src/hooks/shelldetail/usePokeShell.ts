@@ -7,8 +7,8 @@ import {
 } from '../../dataset/ShellDetailType';
 
 const postBuyerShellsId = async (
-  requestBodyForPoke: RequestBodyForPoke,
-  sellerMemberId: number
+  sellerMemberId: number,
+  requestBodyForPoke: RequestBodyForPoke
 ): Promise<ApiResponseOfPokeShell> => {
   const { data } = await axiosInstance({
     url: `trades/${sellerMemberId}`,
@@ -19,15 +19,19 @@ const postBuyerShellsId = async (
   return data;
 };
 
-export const usePokeShell = (sellerMemberId: number) => {
+export const usePokeShell = (
+  sellerMemberId: number,
+  requestBodyForPoke: RequestBodyForPoke
+) => {
   const navigate = useNavigate();
   const { id } = useParams();
+  console.log('usePokeShell 실행');
 
   const { mutate } = useMutation(
-    (requestBodyForPoke: RequestBodyForPoke) =>
-      postBuyerShellsId(requestBodyForPoke, sellerMemberId),
+    () => postBuyerShellsId(sellerMemberId, requestBodyForPoke),
     {
       onSuccess: () => {
+        console.log('success');
         navigate(`/shelldetail/${id}`);
         window.location.reload();
       },
