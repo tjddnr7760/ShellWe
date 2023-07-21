@@ -7,8 +7,8 @@ export const selectedOptionAtom = atom({
 });
 
 const { persistAtom } = recoilPersist({
-  key: 'recoil-persist', // 로컬스토리지에 저장될 키의 이름
-  storage: localStorage, // 사용할 스토리지 지정 (localStorage 또는 sessionStorage)
+  key: 'recoil-persist',
+  storage: localStorage,
 });
 
 export const isLogInState = atom({

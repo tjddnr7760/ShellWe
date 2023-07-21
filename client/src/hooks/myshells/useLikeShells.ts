@@ -16,10 +16,8 @@ const getMyShellId: GetMyShellsArgs = async (memberId) => {
 };
 
 export const useLikeShells = (memberId: number) => {
-  const { data = {} } = useQuery(
-    [queryKeys.likeShell, memberId],
-    () => getMyShellId(memberId),
-    { suspense: false }
+  const { data = {} } = useQuery([queryKeys.likeShell, memberId], () =>
+    getMyShellId(memberId)
   );
   return { data };
 };

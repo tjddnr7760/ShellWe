@@ -16,10 +16,8 @@ const getMyShellId: GetMyShellsArgs = async (memberId) => {
 };
 
 export const usePastShells = (memberId: number) => {
-  const { data = {} } = useQuery(
-    [queryKeys.pastShell, memberId],
-    () => getMyShellId(memberId),
-    { suspense: false }
+  const { data = {} } = useQuery([queryKeys.pastShell, memberId], () =>
+    getMyShellId(memberId)
   );
   return { data };
 };
