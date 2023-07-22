@@ -4,7 +4,7 @@ import axios from 'axios';
 import googlelogo from '../../asset/googlelogo.png';
 import { Link } from 'react-router-dom';
 import { useSetRecoilState } from 'recoil';
-//import { usePostLogin } from '../../hooks/login/PostLogin';
+import { usePostLogin } from '../../hooks/login/PostLogin';
 import { userStateWithExpiry } from '../../recoil/selector';
 
 import {
@@ -22,19 +22,17 @@ import {
   LoginSubFuntionBox,
   LoginSubFuntion,
 } from './LoginPage.styled';
-// import { LoginRequestBody } from '../../hooks/login/PostLogin';
 
 const LoginPage: React.FC = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const setIsLoggedIn = useSetRecoilState(userStateWithExpiry);
   const navigation = useNavigate();
-
-  // const loginRequestBody = {
-  //   email,
-  //   password,
-  // };
-  // const { mutate: LoginRequest } = usePostLogin(loginRequestBody);
+  const loginRequestBody = {
+    email,
+    password,
+  };
+  const { mutate: Login } = usePostLogin(loginRequestBody);
 
   // const isEmailValid = /^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/.test(email);
   // const isPasswordValid =
@@ -51,8 +49,8 @@ const LoginPage: React.FC = () => {
     const response = await axios.post(
       `${import.meta.env.VITE_KEY}/auth/login`,
       {
-        email: 'tjddnr7760@naver.com',
-        password: 'qwerR1234!@#',
+        email: 'lts890303@gmail.com',
+        password: 'Abcd1234!!',
       }
     );
     if (response.status === 200) {
@@ -71,41 +69,43 @@ const LoginPage: React.FC = () => {
     }
   };
 
-  const handleLogin = async (e: any) => {
-    e.preventDefault();
-
-    try {
-      const response = await axios.post(
-        `${import.meta.env.VITE_KEY}/auth/login`,
-        {
-          email,
-          password,
-        }
-      );
-
-      if (response.status === 200) {
-        setIsLoggedIn(true);
-        const accessToken = response.headers.authorization;
-        const id = response.data.id;
-        const displayName = response.data.displayName;
-        const profileUrl = response.data.profileUrl;
-        const isMe = response.data.isMe;
-        localStorage.setItem('accessToken', accessToken);
-        localStorage.setItem('id', id);
-        localStorage.setItem('displayName', displayName);
-        localStorage.setItem('profileUrl', profileUrl);
-        localStorage.setItem('isMe', isMe);
-        navigation('/main');
-      }
-    } catch (error: any) {
-      if (error.response && error.response.status === 401) {
-        setEmail('');
-        setPassword('');
-        console.error('회원 가입 실패.', error);
-        alert('이미 가입된 계정입니다.');
-      }
-    }
+  const handleLogin = () => {
+    console.log(loginRequestBody);
+    Login();
   };
+
+  // const handleLogin = async (e: any) => {
+  //   e.preventDefault();
+  //   try {
+  //     const response = await axios.post(
+  //       `${import.meta.env.VITE_KEY}/auth/login`,
+  //       {
+  //         email,
+  //         password,
+  //       }
+  //     );
+  //     if (response.status === 200) {
+  //       setIsLoggedIn(true);
+  //       const accessToken = response.headers.authorization;
+  //       const id = response.data.id;
+  //       const displayName = response.data.displayName;
+  //       const profileUrl = response.data.profileUrl;
+  //       const isMe = response.data.isMe;
+  //       localStorage.setItem('accessToken', accessToken);
+  //       localStorage.setItem('id', id);
+  //       localStorage.setItem('displayName', displayName);
+  //       localStorage.setItem('profileUrl', profileUrl);
+  //       localStorage.setItem('isMe', isMe);
+  //       navigation('/main');
+  //     }
+  //   } catch (error: any) {
+  //     if (error.response && error.response.status === 401) {
+  //       setEmail('');
+  //       setPassword('');
+  //       console.error('회원 가입 실패.', error);
+  //     }
+  //   }
+  // };
 
   const LoginRequestHandlerGoogle = () => {
     window.location.href = `${
@@ -130,7 +130,7 @@ const LoginPage: React.FC = () => {
             <DivInputBox>
               <DivInput
                 type="email"
-                value={email}
+                // value={email}
                 onChange={(e: any) => setEmail(e.target.value)}
               />
             </DivInputBox>
@@ -140,7 +140,7 @@ const LoginPage: React.FC = () => {
             <DivInputBox>
               <DivInput
                 type="password"
-                value={password}
+                // value={password}
                 onChange={(e: any) => setPassword(e.target.value)}
               />
             </DivInputBox>

@@ -1,26 +1,22 @@
 import { useMutation } from 'react-query';
-import { useNavigate } from 'react-router-dom';
 import { axiosInstance } from '../../utill/axiosInstance';
 
-const postSignup = async (): Promise<any> => {
+interface RequestBodyForSignup {
+  displayName: string;
+  email: string;
+  password: string;
+}
+
+const postSignup = async (requestBody: RequestBodyForSignup): Promise<any> => {
   const { data } = await axiosInstance({
     url: '/members',
     method: 'post',
-    data: {
-      email: '',
-      displayName: '',
-      password: '',
-    },
+    data: requestBody,
   });
   return data;
 };
 
-export const usePostSignup = () => {
-  const navigate = useNavigate();
-  const { mutate } = useMutation(() => postSignup(), {
-    onSuccess: () => {
-      navigate('/aftersignup');
-    },
-  });
+export const usePostSignup = (requestBody: RequestBodyForSignup) => {
+  const { mutate } = useMutation(() => postSignup(requestBody));
   return { mutate };
 };

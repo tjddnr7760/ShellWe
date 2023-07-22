@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useMutation } from 'react-query';
 import { useNavigate, useParams } from 'react-router-dom';
 import { axiosInstance, getHeader } from '../../utill/axiosInstance';

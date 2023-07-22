@@ -6,20 +6,27 @@ import { isLogInState } from '../../recoil/atom';
 
 // request body가 없음. 이메일, 비밀번호 -> loginPage에서 인자를 전달.
 // 인자를 받는 곳이 없음.
-const postLogin = async (): Promise<any> => {
+interface RequestBody {
+  email: string;
+  password: string;
+}
+const postLogin = async (requestBody: RequestBody): Promise<any> => {
   const { data } = await axiosInstance({
-    url: '/auth/login',
+    url: `/auth/login`,
     method: 'post',
+    data: requestBody,
   });
   return data;
 };
 
-export const usePostLogin = () => {
+export const usePostLogin = (requestBody: RequestBody) => {
+  console.log(1);
   const navigate = useNavigate();
   const setIsLoggedIn = useSetRecoilState(isLogInState);
 
-  const { mutate } = useMutation(() => postLogin(), {
+  const { mutate } = useMutation(() => postLogin(requestBody), {
     onSuccess: (res) => {
+      console.log(res);
       setIsLoggedIn(true);
       const accessToken = res.headers.authorization;
       const id = res.data.id;
@@ -32,6 +39,9 @@ export const usePostLogin = () => {
       localStorage.setItem('profileUrl', profileUrl);
       localStorage.setItem('isMe', isMe);
       navigate('/main');
+    },
+    onError(res) {
+      console.log(res);
     },
   });
   return { mutate };
