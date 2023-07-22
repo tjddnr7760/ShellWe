@@ -16,6 +16,7 @@ import {
   SeeMore,
   PokeButton,
   PokeBox,
+  ShellStatus,
 } from './ShellDetail.styled.ts';
 import { ShellDetailProps, Tag } from '../../dataset/ShellDetailType.ts';
 import TagBox from '../../common/tag/TagBox.tsx';
@@ -42,10 +43,14 @@ const ShellDetail = ({
             <Avatar avatartype={'Icon'} member={shellDetailData.member} />
             <DisplayName>{shellDetailData.member.displayName}</DisplayName>
           </UserInfoDiv>
-          {myMemberId === shellDetailData.member.id && (
+          {myMemberId === shellDetailData.member.id ? (
             <Hamburger onClick={handleOpenSidebar}>
               <img src={Ellipsis} alt="hamburger" />
             </Hamburger>
+          ) : (
+            <ShellStatus>
+              {shellDetailData.status === 'active' ? '거래 중' : '거래완료'}
+            </ShellStatus>
           )}
         </UserInfoAndHamburgerDiv>
         <Div>{shellDetailData.title}</Div>
@@ -68,14 +73,15 @@ const ShellDetail = ({
           {seeMoreBody === false ? '더 보기' : '접기'}
         </SeeMore>
       </ShellInfoContainer>
-      {myMemberId !== shellDetailData.member.id && (
-        <PokeBox>
-          <PokeButton onClick={handlePoke}>
-            <img src={Poke} alt="pokeicon" />
-            찌르기
-          </PokeButton>
-        </PokeBox>
-      )}
+      {myMemberId !== shellDetailData.member.id &&
+        shellDetailData.status === 'active' && (
+          <PokeBox>
+            <PokeButton onClick={handlePoke}>
+              <img src={Poke} alt="pokeicon" />
+              찌르기
+            </PokeButton>
+          </PokeBox>
+        )}
     </Wrapper>
   );
 };

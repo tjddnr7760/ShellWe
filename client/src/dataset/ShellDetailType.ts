@@ -1,11 +1,22 @@
 // MyShellList, MyShell of OfferModal
 export interface MyShellsDataProps {
   myShellListsData: MyShells[];
-  shellMemberId: ShellMemberId;
+  shellMemberId: number;
+  handlePoke: () => void;
 }
 
-export interface ShellMemberId {
+export interface OfferModalProps {
+  modaldata: Data;
   shellMemberId: number;
+  handlePoke: () => void;
+}
+
+export interface Data {
+  data: Shells;
+}
+
+export interface Shells {
+  shells: MyShells[];
 }
 
 export interface MyShells {

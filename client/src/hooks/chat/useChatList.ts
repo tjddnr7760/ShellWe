@@ -37,7 +37,6 @@ export const useChatList = () => {
       staleTime: 60000,
     }
   );
-  console.log(2);
   const refreshChatList = async () => {
     await queryClient.invalidateQueries(queryKeys.chatList);
   };

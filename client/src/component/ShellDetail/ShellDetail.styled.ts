@@ -67,6 +67,19 @@ const Hamburger = styled.div`
     background-color: rgba(0, 0, 0, 0.2);
   }
 `;
+
+const ShellStatus = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 12px;
+  text-align: center;
+  font-size: 18px;
+  border-radius: 10px;
+  border: 0.5px solid rgba(0, 0, 0, 0.3);
+  background-color: #fff;
+`;
+
 const DefaultBodyWrapper = styled.div`
   display: flex;
   align-items: center;
@@ -155,4 +168,5 @@ export {
   SeeMore,
   PokeButton,
   PokeBox,
+  ShellStatus,
 };

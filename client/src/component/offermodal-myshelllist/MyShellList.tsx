@@ -17,6 +17,7 @@ const MyShellListWrapper = styled.div`
 const MyShellList = ({
   myShellListsData,
   shellMemberId,
+  handlePoke,
 }: MyShellsDataProps) => {
   const myShellArray = myShellListsData;
 
@@ -24,7 +25,12 @@ const MyShellList = ({
     <MyShellListWrapper>
       {myShellArray.map((shell) => {
         return (
-          <MyShell key={shell.id} shell={shell} shellMemberId={shellMemberId} />
+          <MyShell
+            key={shell.id}
+            shell={shell}
+            shellMemberId={shellMemberId}
+            handlePoke={handlePoke}
+          />
         );
       })}
     </MyShellListWrapper>

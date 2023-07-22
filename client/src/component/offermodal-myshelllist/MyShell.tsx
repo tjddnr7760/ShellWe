@@ -11,19 +11,21 @@ import { MyShells } from '../../dataset/ShellDetailType.ts';
 import Poke from '../../asset/poke.svg';
 import { usePokeShell } from '../../hooks/shelldetail/usePokeShell.ts';
 import { RequestBodyForPoke } from '../../dataset/ShellDetailType';
-import { ShellMemberId } from '../../dataset/ShellDetailType.ts';
 const MyShell = ({
   shell,
   shellMemberId,
+  handlePoke,
 }: {
   shell: MyShells;
-  shellMemberId: ShellMemberId;
+  shellMemberId: number;
+  handlePoke: () => void;
 }) => {
   const { id } = useParams();
   const sellerShellId = Number(id);
   const buyerShellId: number = shell.id;
-  const sellerMemberId = shellMemberId.shellMemberId;
+  const sellerMemberId = shellMemberId;
 
+  console.log(shellMemberId);
   const requestBodyForPoke: RequestBodyForPoke = {
     buyerShellId: buyerShellId,
     sellerShellId: sellerShellId,
@@ -35,6 +37,7 @@ const MyShell = ({
   );
   const PokeRequestHandler = () => {
     pokeShell();
+    handlePoke();
   };
 
   return (

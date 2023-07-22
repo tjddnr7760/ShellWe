@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useGetShellDetail } from '../../hooks/shelldetail/useShellsDetailId.ts';
-import ShellImgPreview from '../../component/shellimgpreview/ShellImgPreview.tsx';
-import ShellDetail from '../../component/shelldetail/ShellDetail.tsx';
+import ShellImgPreview from '../../component/ShellImgPreview/ShellImgPreview.tsx';
+import ShellDetail from '../../component/ShellDetail/ShellDetail.tsx';
 import DetailPageSidebar from '../../component/DetailPageSidebar/DetailPageSidebar.tsx';
 import OfferModal from '../../component/OfferModal/OfferModal.tsx';
 import {
@@ -11,9 +11,14 @@ import {
   ContentDiv,
   PreviewDiv,
 } from './ShellDetailPage.styled';
+import { useGetMyShellToPoke } from '../../hooks/shelldetail/useGetPokeShellsList.ts';
+import { getMemberIdFromLocalStorage } from '../../utill/localstorageData.ts';
 
 const ShellDetailPage = () => {
   const { data } = useGetShellDetail();
+
+  const memberId = Number(getMemberIdFromLocalStorage());
+  const { data: modaldata } = useGetMyShellToPoke(memberId);
 
   const [modalVisible, setModalVisible] = useState(false);
   const [sidebarOpen, setSidebarOpen] = useState(false);
@@ -50,7 +55,13 @@ const ShellDetailPage = () => {
                 )}
               </Div>
             </ContentDiv>
-            {modalVisible && <OfferModal shellMemberId={data.data.member.id} />}
+            {modalVisible && (
+              <OfferModal
+                modaldata={modaldata}
+                shellMemberId={data.data.member.id}
+                handlePoke={handlePoke}
+              />
+            )}
           </DetailPageContainer>
         </Wrapper>
       )}

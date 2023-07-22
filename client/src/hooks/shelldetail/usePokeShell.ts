@@ -11,7 +11,7 @@ const postBuyerShellsId = async (
   requestBodyForPoke: RequestBodyForPoke
 ): Promise<ApiResponseOfPokeShell> => {
   const { data } = await axiosInstance({
-    url: `trades/${sellerMemberId}`,
+    url: `/trades/${sellerMemberId}`,
     method: 'post',
     data: requestBodyForPoke,
     headers: getHeader(),
@@ -33,22 +33,23 @@ export const usePokeShell = (
         alert(
           '찌르기에 성공하였습니다! \n판매자가 거래를 수락하면 자동으로 채팅방이 생성됩니다.'
         );
-        navigate(`/shelldetail/${id}`);
+        navigate(`/main`);
       },
-      // 타입 에러 해결
-      onError: (res: any) => {
-        if (res.response.data.error.errorName === 'Trade Duplicated') {
-          alert('이미 찌르기한 Shell입니다.');
-        } else if (res.response.data.error.errorName === 'Trade Id Error') {
-          alert('네트워크 오류. 다시 시도해주세요.');
-          navigate(`/shelldetail/${id}`);
-        } else if (
-          res.response.data.error.errorName === 'Trade Failed, Check parameter'
-        ) {
-          alert('유효하지 않은 Shell 정보입니다. 다시 시도해주세요');
-          navigate(`/shelldetail/${id}`);
-        } else {
-          return;
+      onError(res: any) {
+        switch (res.response.data.errorMessage) {
+          case 'Trade Duplicated':
+            alert('이미 찌르기한 Shell입니다.');
+            break;
+          case 'Trade Id Error':
+            alert('네트워크 오류. 다시 시도해주세요.');
+            navigate(`/shelldetail/${id}`);
+            break;
+          case 'Trade Failed, Check parameter':
+            alert('유효하지 않은 Shell 정보입니다. 다시 시도해주세요');
+            navigate(`/shelldetail/${id}`);
+            break;
+          default:
+            break;
         }
       },
     }
