@@ -6,6 +6,9 @@ const CategoryContainer = styled.div`
   justify-content: center;
   align-items: center;
   gap: 10px;
+  @media (max-width: 768px) {
+    flex-wrap: wrap;
+  }
 `;
 
 export { CategoryContainer };
