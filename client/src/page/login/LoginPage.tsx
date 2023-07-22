@@ -69,8 +69,11 @@ const LoginPage: React.FC = () => {
     }
   };
 
-  const handleLogin = () => {
+  const handleLogin = (e: any) => {
+    e.preventDefault();
+
     console.log(loginRequestBody);
+    console.log(3);
     Login();
   };
 
