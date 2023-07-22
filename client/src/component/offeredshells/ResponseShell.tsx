@@ -13,6 +13,7 @@ import { useAcceptShell } from '../../hooks/offer/useAccept';
 import { OfferedShells } from '../../dataset/TypesOfferedShell';
 import { Pictures } from '../../dataset/TypesOfferedShell';
 import { MakePartOfBodyText } from '../../utill/makeBodyText';
+import Avatar from '../../common/avatar/Avatar';
 
 const ResponseShell = ({
   shell,
@@ -52,7 +53,7 @@ const ResponseShell = ({
         <BodyBox>{MakePartOfBodyText(shell.body || '', 123)}</BodyBox>
       </ShellsTextInfoBox>
       <AcceptInfo>
-        <UserImg src={shell.member.profileUrl} alt="userimg"></UserImg>
+        <Avatar avatartype="UserImg" member={shell.member} />
         <AcceptButton onClick={AcceptHandler}>수락</AcceptButton>
       </AcceptInfo>
     </ResponseShellWrapper>

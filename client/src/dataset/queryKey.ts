@@ -22,4 +22,6 @@ export enum queryKeys {
   currentShell = 'currentShell',
   pastShell = 'pastShell',
   likeShell = 'likeShell',
+  myprofile = 'myprofile',
+  otherprofile = 'otherprofile',
 }

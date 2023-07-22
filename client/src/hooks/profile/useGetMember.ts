@@ -15,22 +15,35 @@ export interface Member {
 }
 
 export interface GetMemberArgs {
-  (memberId: number, method: string): Promise<any>;
+  (memberId: number, method: string, isHeader?: boolean): Promise<any>;
 }
 
-export const getMemberId: GetMemberArgs = async (memberId, method) => {
+export const getMemberId: GetMemberArgs = async (
+  memberId,
+  method,
+  isHeader = false
+) => {
+  const headers = isHeader ? getHeader() : undefined;
+
   const { data } = await axiosInstance({
     url: `/members/${memberId}`,
     method,
-    headers: getHeader(),
+    headers,
   });
   return { data };
 };
 
-// 회원정보 조회
 export const useGetMember = (memberId: number) => {
-  const { data = {} } = useQuery([queryKeys.currentShell, memberId], () =>
-    getMemberId(memberId, 'get')
+  const { data = {} } = useQuery([queryKeys.myprofile, memberId], () =>
+    getMemberId(memberId, 'get', true)
+  );
+
+  return { data };
+};
+
+export const useGetOtherMember = (memberId: number) => {
+  const { data = {} } = useQuery([queryKeys.otherprofile, memberId], () =>
+    getMemberId(memberId, 'get', false)
   );
 
   return { data };

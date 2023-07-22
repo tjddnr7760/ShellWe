@@ -1,6 +1,6 @@
 import { TagWrapper, TagText, CloseButton } from './Tag.styled';
 
-interface TagBoxProps {
+export interface TagBoxProps {
   type: string;
   index?: number;
   tag: string;

@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { SaveButton, CancelButton } from './EditProfile.styled';
 import {
   Wrapper,
@@ -10,7 +11,7 @@ import {
 } from './DeleteProfile.styled';
 import { useDeleteMember } from '../../hooks/profile/useDeleteMember';
 import { Member } from '../../hooks/profile/useGetMember';
-import { useState } from 'react';
+import { handleCancel } from '../../utill/handlecancel';
 
 const DeleteProfile = ({ memberInfo }: { memberInfo: Member }) => {
   const [pwModalvisible, setPwModalvisible] = useState<boolean>(false);
@@ -51,7 +52,7 @@ const DeleteProfile = ({ memberInfo }: { memberInfo: Member }) => {
           </ContentBox>
           <ButtonBox>
             <SaveButton onClick={modalVisibleHandler}>Delete</SaveButton>
-            <CancelButton>Cancel</CancelButton>
+            <CancelButton onClick={handleCancel}>Cancel</CancelButton>
           </ButtonBox>
         </>
       )}

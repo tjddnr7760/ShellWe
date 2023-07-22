@@ -1,6 +1,6 @@
 import { useNavigate } from 'react-router-dom';
 import { Icon, UserImg } from './Avatar.styled.ts';
-import noprofile from '../../asset/avatar/noprofile.svg';
+import noprofile from '../../asset/avatar/defaultprofile.webp';
 
 interface MemberProps {
   id: number;

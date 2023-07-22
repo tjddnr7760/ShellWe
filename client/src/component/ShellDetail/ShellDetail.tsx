@@ -61,7 +61,7 @@ const ShellDetail = ({
         )}
         {tags && (
           <Div>
-            <span>Wanted Shells</span>
+            <span>아래 쉘과 교환하고 싶어요!</span>
             <div>
               {tags.map((tag: string) => (
                 <TagBox key={uuidv4()} type="read" tag={tag} />

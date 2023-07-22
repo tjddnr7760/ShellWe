@@ -8,6 +8,7 @@ import {
   ButtonBox,
 } from './ChangePassword.styled';
 import { useUpdatePassword } from '../../hooks/profile/useChangePassword';
+import { handleCancel } from '../../utill/handlecancel';
 
 const ChangePassword = () => {
   const [newPassword, setNewPassword] = useState<string>('');
@@ -64,10 +65,6 @@ const ChangePassword = () => {
       new Blob([JSON.stringify(update)], { type: 'application/json' })
     );
     SendNewPassword(formData);
-  };
-
-  const handleCancel = () => {
-    window.location.reload();
   };
 
   return (

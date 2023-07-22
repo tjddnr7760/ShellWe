@@ -21,7 +21,6 @@ const postLogin = async (requestBody: RequestBody): Promise<any> => {
 };
 
 export const usePostLogin = (requestBody: RequestBody) => {
-  console.log(1);
   const navigate = useNavigate();
   const setIsLoggedIn = useSetRecoilState(userStateWithExpiry);
 

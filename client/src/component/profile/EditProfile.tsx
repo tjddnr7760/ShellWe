@@ -16,31 +16,32 @@ import {
   Image,
   ImageBox,
 } from './EditProfile.styled';
+import { handleCancel } from '../../utill/handlecancel';
 
 const EditProfile = () => {
   const [displayName, setDisplayName] = useState<string>('');
   const [introduction, setIntroduction] = useState<string>('');
   const [image, setImage] = useState<File | null>(null);
-
   const { mutate: SendprofileImage } = useUpdateMember();
 
   const handleInputValue = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ): void => {
     const { name, value } = e.target;
-
-    if (name === 'displayName') {
-      setDisplayName(value);
-    } else if (name === 'introduction') {
-      setIntroduction(value);
-    } else {
-      return;
+    switch (name) {
+      case 'displayName':
+        setDisplayName(value);
+        break;
+      case 'introduction':
+        setIntroduction(value);
+        break;
+      default:
+        break;
     }
   };
 
   const onDrop = (acceptedFiles: File[]) => {
     const file = acceptedFiles[0];
-
     if (file) {
       setImage(file);
     }
@@ -91,7 +92,7 @@ const EditProfile = () => {
           name="displayName"
           value={displayName}
           onChange={handleInputValue}
-          placeholder="내용을 입력하세요."
+          placeholder="닉네임을 입력하세요."
         ></DisplayNameInput>
       </ContentBox>
       <ContentBox>
@@ -100,12 +101,12 @@ const EditProfile = () => {
           name="introduction"
           value={introduction}
           onChange={handleInputValue}
-          placeholder="내용을 입력하세요."
+          placeholder="자기소개를 입력하세요."
         ></IntroductionInput>
       </ContentBox>
       <ButtonBox>
         <SaveButton onClick={handleSave}>Save</SaveButton>
-        <CancelButton>Cancel</CancelButton>
+        <CancelButton onClick={handleCancel}>Cancel</CancelButton>
       </ButtonBox>
     </Wrapper>
   );

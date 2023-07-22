@@ -39,7 +39,7 @@ const MyShells = ({
         <ImgBox src={shell.picture} alt="shell-image" />
         <div>
           <Title>{shell.title}</Title>
-          <Category>{shell.category}</Category>
+          <Category>{shell.category.slice(2).toUpperCase()}</Category>
         </div>
       </ShellInfo>
       {myMemberId === urlId && selectedTab === 'like' && (
