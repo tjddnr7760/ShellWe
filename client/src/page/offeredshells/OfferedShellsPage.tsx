@@ -31,6 +31,7 @@ const OfferedShellsPage = () => {
             <PokedShellList
               myPokedShellsData={myPokedShellsData}
               HandleClickPokedShell={HandleClickPokedShell}
+              clickedShellId={clickedShellId}
             />
           </PokedShellListWrapper>
           {clickedShellId !== undefined ? (

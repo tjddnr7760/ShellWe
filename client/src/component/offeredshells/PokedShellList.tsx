@@ -14,6 +14,7 @@ import {
 const PokedShellList = ({
   myPokedShellsData,
   HandleClickPokedShell,
+  clickedShellId,
 }: MyPokedShellDataProps) => {
   const pokedShellsArray: PokedShells[] = myPokedShellsData.shells;
 
@@ -31,6 +32,7 @@ const PokedShellList = ({
                 key={shell.id}
                 shell={shell}
                 HandleClickPokedShell={HandleClickPokedShell}
+                clickedShellId={clickedShellId}
               />
             );
           })}

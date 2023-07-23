@@ -42,6 +42,7 @@ const ShellsTextInfoBox = styled.div`
   border-radius: 10px;
   font-size: 20px;
   line-height: 25px;
+  flex-grow: 10;
 `;
 
 const TextBox = styled.div`
