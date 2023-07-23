@@ -11,7 +11,7 @@ const getCartShell = async (id: number) => {
 };
 export const useCreateShells = (id: number) => {
   const { mutate } = useMutation(() => getCartShell(id), {
-    onError: (error) => {
+    onError: () => {
       alert('이미 찜한 쉘입니다');
     },
   });
