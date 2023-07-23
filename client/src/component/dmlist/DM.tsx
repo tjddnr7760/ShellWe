@@ -9,6 +9,7 @@ import {
   Unread,
   MessageHeader,
   HeaderLeft,
+  AvatarContainer,
 } from '../../page/directmessage/DirectMessage.styled';
 import Avatar from '../../common/avatar/Avatar';
 import { useDeleteChatRoom } from '../../hooks/chat/useDeleteChat';
@@ -62,7 +63,9 @@ const DM = ({
         }}
       >
         <MessageListBox>
-          <Avatar avatartype={'UserImg'} member={chat.member} />
+          <AvatarContainer>
+            <Avatar avatartype={'UserImg'} member={chat.member} />
+          </AvatarContainer>
           <MessageContainer>
             <MessageBox>
               <MessageHeader>

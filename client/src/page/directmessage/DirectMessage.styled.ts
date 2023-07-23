@@ -75,9 +75,9 @@ export const MessageListBox = styled.div`
 export const MessageContainer = styled.div`
   width: 250px;
   border-radius: 15px;
-  padding: 15px;
+  padding: 12px;
   background-color: white;
-  font-size: 20px;
+  font-size: 16px;
 `;
 
 export const MessageBox = styled.div`
@@ -121,7 +121,6 @@ export const MessageUserNickName = styled.div`
 
 export const MessageBody = styled.div`
   color: #828282;
-  overflow: hidden;
 `;
 
 export const NoneClickedDMRoom = styled.div`
@@ -129,4 +128,10 @@ export const NoneClickedDMRoom = styled.div`
   @media (max-width: 768px) {
     display: none;
   }
+`;
+
+export const AvatarContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `;
