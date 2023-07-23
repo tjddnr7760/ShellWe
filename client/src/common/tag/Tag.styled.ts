@@ -58,6 +58,9 @@ const TagInput = styled.input`
   outline: none;
   cursor: text;
   margin: 20px;
+  @media (max-width: 768px) {
+    font-size: 12px;
+  }
 `;
 
 export { TagContainer, TagWrapper, TagText, CloseButton, TagInput };

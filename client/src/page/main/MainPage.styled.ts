@@ -20,4 +20,7 @@ export const ShellListContainer = styled.div`
   margin: 10px;
   padding: 10px;
   max-width: 1180px;
+  @media (max-width: 768px) {
+    flex-direction: column;
+  }
 `;

@@ -4,6 +4,9 @@ export const ChatTextAreaContainer = styled.div`
   display: flex;
   align-items: center;
   height: 80px;
+  @media (max-width: 768px) {
+    padding: 20px;
+  }
 `;
 
 export const ImageContainer = styled.img`

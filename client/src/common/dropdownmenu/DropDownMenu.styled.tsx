@@ -32,5 +32,9 @@ const DropdownContent = styled.div`
   background-color: white;
   padding: 10px;
   animation: ${fadeIn} 0.3s ease-in-out;
+  @media (max-width: 768px) {
+    width: 80px;
+    font-size: 10px;
+  }
 `;
 export { DropdownBTN, DropdownContainer, DropdownContent };

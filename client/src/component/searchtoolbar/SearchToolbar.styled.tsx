@@ -7,6 +7,9 @@ const SearchToolbarContainer = styled.div`
   justify-content: center;
   align-items: center;
   gap: 25px;
+  @media (max-width: 768px) {
+    gap: 10px;
+  }
 `;
 
 const SearchToolbarInputWrapper = styled.div`
@@ -17,6 +20,9 @@ const SearchToolbarInputWrapper = styled.div`
   gap: 10px;
   border: 1px solid #023e8a80;
   border-radius: 15px;
+  @media (max-width: 768px) {
+    width: 220px;
+  }
 `;
 
 const SearchToolbarInput = styled.input`

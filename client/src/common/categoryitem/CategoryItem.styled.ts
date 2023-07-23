@@ -8,6 +8,9 @@ const CategoryWrapper = styled.div`
   flex-direction: column;
   align-items: center;
   cursor: pointer;
+  @media (max-width: 768px) {
+    width: 52px;
+  }
 `;
 
 const CategoryIcon = styled.img`

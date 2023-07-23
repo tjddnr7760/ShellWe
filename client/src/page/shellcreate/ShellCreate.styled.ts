@@ -72,10 +72,16 @@ export const CreateImgContainer = styled.div`
   flex-direction: row;
   justify-content: space-between;
   gap: 10px;
+  @media (max-width: 768px) {
+    flex-direction: column;
+  }
 `;
 export const CreateMainImgWrapper = styled(CreateTitleWrapper)`
   width: 350px;
   display: flex;
+  @media (max-width: 768px) {
+    width: 100%;
+  }
 `;
 
 export const CreateImgListWrapper = styled(CreateTitleWrapper)`
