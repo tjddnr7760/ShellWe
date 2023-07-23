@@ -20,7 +20,7 @@ const Profile = ({ memberInfo, showTags, data }: MyShellsProfileProps) => {
   const [allTags, setAlltag] = useState<string[]>([]);
 
   const MakeAllTags = () => {
-    if (data.shells) {
+    if (data?.shells) {
       const tagsSet = new Set<string>();
       data.shells
         .filter((shell) => shell.tags !== null)
@@ -35,7 +35,7 @@ const Profile = ({ memberInfo, showTags, data }: MyShellsProfileProps) => {
       setAlltag(tagsArray);
     }
   };
-  useEffect(() => MakeAllTags(), [memberInfo?.id]);
+  useEffect(() => MakeAllTags(), [data]);
 
   return (
     <div>

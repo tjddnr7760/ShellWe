@@ -26,7 +26,7 @@ export interface Tags {
 // Profile.tsx
 export interface MyShellsProfileProps {
   showTags?: boolean;
-  data: MyShellDataProps;
+  data?: MyShellDataProps;
   memberInfo?: Member;
 }
 
