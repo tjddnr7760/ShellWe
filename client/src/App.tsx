@@ -19,13 +19,17 @@ import OfferedShellsPage from './page/offeredshells/OfferedShellsPage.tsx';
 import DirectMessage from './page/directmessage/DirectMessage.tsx';
 import SearchPage from './page/searchpage/SearchPage.tsx';
 import GoogleLoginToken from './page/login/GoogleLoginToken.tsx';
+import { useMediaQuery } from 'react-responsive';
+import Header from './component/header/Header.tsx';
 
 function App() {
+  const isMobileScreen = useMediaQuery({ maxWidth: 768 });
+
   return (
     <BrowserRouter>
       <GlobalStyle />
       <main>
-        <Nav />
+        {isMobileScreen ? <Header /> : <Nav />}
         <div className="inner">
           <Routes>
             <Route path="/" element={<HomePage />} />

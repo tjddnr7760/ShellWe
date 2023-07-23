@@ -55,6 +55,9 @@ export const UploadZone = styled.div`
   height: 320px;
   border: 2px solid #82c0fa;
   white-space: nowrap;
+  @media (max-width: 768px) {
+    font-size: 15px;
+  }
 `;
 
 export const UploadExplanation = styled.div`
@@ -64,4 +67,9 @@ export const UploadExplanation = styled.div`
 
   padding: 10px 70px;
   border: 2px solid #82c0fa;
+  @media (max-width: 768px) {
+    font-size: 12px;
+    padding: 10px 10px;
+    white-space: wrap;
+  }
 `;

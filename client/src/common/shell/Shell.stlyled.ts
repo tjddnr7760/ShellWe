@@ -16,6 +16,10 @@ export const ShellImgWrapper = styled.div`
   width: 250px;
   height: 230px;
   margin: 10px 10px 0px 10px;
+  @media (max-width: 768px) {
+    width: 180px;
+    height: 130px;
+  }
 `;
 
 export const ShellImg = styled.img`

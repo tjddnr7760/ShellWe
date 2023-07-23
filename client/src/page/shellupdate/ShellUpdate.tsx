@@ -65,14 +65,27 @@ const ShellUpdate: React.FC = () => {
       | React.ChangeEvent<HTMLInputElement>
       | React.ChangeEvent<HTMLTextAreaElement>
   ) => {
-    if (e.target instanceof HTMLInputElement) {
+    if (e.target instanceof HTMLInputElement && e.target.value.length <= 20) {
       setTitle(e.target.value);
-    } else if (e.target instanceof HTMLTextAreaElement) {
+    } else if (
+      e.target instanceof HTMLTextAreaElement &&
+      e.target.value.length <= 1500
+    ) {
       setContent(e.target.value);
     }
   };
 
   const handleContentSubmit = async () => {
+    if (
+      !title ||
+      !content ||
+      !selectedCateory.categoryid ||
+      !tagList.length ||
+      !uploadedImages.length
+    ) {
+      alert('모든 항목을 채워주세요.');
+      return;
+    }
     const update = {
       title: title,
       body: content,

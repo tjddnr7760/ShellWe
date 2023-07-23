@@ -51,8 +51,8 @@ const LoginPage: React.FC = () => {
     const response = await axios.post(
       `${import.meta.env.VITE_KEY}/auth/login`,
       {
-        email: 'tjddnr7760@naver.com',
-        password: 'qwerR1234!@#',
+        email: 'lts890303@gmail.com',
+        password: 'Abcd1234!!',
       }
     );
     if (response.status === 200) {

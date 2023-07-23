@@ -8,6 +8,9 @@ const CategoryWrapper = styled.div`
   flex-direction: column;
   align-items: center;
   cursor: pointer;
+  @media (max-width: 768px) {
+    width: 52px;
+  }
 `;
 
 const CategoryIcon = styled.img`
@@ -16,6 +19,10 @@ const CategoryIcon = styled.img`
   border-radius: 100px;
   background: url(${(props) => props.src}), lightgray 50% / cover no-repeat,
     #d9d9d9;
+  @media (max-width: 768px) {
+    width: 40px;
+    height: 40px;
+  }
 `;
 
 const Categorytext = styled.div`
@@ -29,6 +36,9 @@ const Categorytext = styled.div`
   &.selected {
     color: #0096c7;
     text-decoration-line: underline;
+  }
+  @media (max-width: 768px) {
+    font-size: 12px;
   }
 `;
 

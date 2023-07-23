@@ -17,7 +17,7 @@ export const DirectMessage: React.FC = () => {
   const { data: chatListData, refreshChatList } = useChatList();
   const memoizedChatListData = useMemo(() => chatListData, [chatListData]);
   const [ClickedRoomId, setClickedRoomId] = useState<number>();
-  const [isRoomOpened, setIsRoomOpened] = useState<boolean>();
+  const [isRoomOpened, setIsRoomOpened] = useState(false);
   const displayName = getDisplayNameFromLocalStorage();
 
   const handleClickRoom = (roomId: number): void => {
@@ -33,7 +33,7 @@ export const DirectMessage: React.FC = () => {
   return (
     <>
       <MessageWrapper>
-        <MessageListWrapper>
+        <MessageListWrapper isroomopened={isRoomOpened ? 'noView' : 'view'}>
           <MessageListHeader>
             <MessageMyInfo>{displayName}</MessageMyInfo>
             ChatList
@@ -55,7 +55,7 @@ export const DirectMessage: React.FC = () => {
         </MessageListWrapper>
         <MessageRoomWrapper>
           {isRoomOpened && ClickedRoomId ? (
-            <DMRoom id={ClickedRoomId} />
+            <DMRoom setIsRoomOpened={setIsRoomOpened} id={ClickedRoomId} />
           ) : (
             <NoneClickedDMRoom>Click your message!</NoneClickedDMRoom>
           )}
