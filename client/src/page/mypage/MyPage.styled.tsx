@@ -12,8 +12,13 @@ const MyPageContainer = styled.div`
   flex-direction: column;
   width: 735px;
   height: fit-content;
-  gap: 10px;
+  gap: 15px;
   padding: 35px;
+
+  @media (max-width: 768px) {
+    padding: 15px;
+    height: auto;
+  }
 `;
 
 const Logout = styled.div`

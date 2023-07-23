@@ -18,6 +18,7 @@ const MyShellContainer = styled.div`
     padding-right: 20px;
   }
 `;
+
 const ShellInfo = styled.div`
   display: flex;
   align-items: center;
@@ -36,16 +37,23 @@ const ImgBox = styled.img`
   border: 0.5px solid #48cae4;
   border-radius: 10px;
   background-color: rgba(0, 0, 0, 0.1);
+  @media (max-width: 768px) {
+    width: 70px;
+    height: 70px;
+  }
 `;
 
 const Title = styled.span`
   padding: 7px;
   font-size: 26px;
+  @media (max-width: 768px) {
+    font-size: 20px;
+  }
 `;
 
 const Category = styled.span`
   padding: 7px;
-  font-size: 20px;
+  font-size: 16px;
 `;
 
 export { MyShellContainer, ImgBox, Title, Category, ShellInfo };

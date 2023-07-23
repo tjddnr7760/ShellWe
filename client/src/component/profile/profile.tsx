@@ -1,5 +1,6 @@
 import { v4 as uuidv4 } from 'uuid';
 import { useEffect, useState } from 'react';
+import { useMediaQuery } from 'react-responsive';
 import {
   ProfileContainer,
   UserImg,
@@ -17,6 +18,7 @@ import TagBox from '../../common/tag/TagBox';
 import noprofile from '../../asset/avatar/noprofile.svg';
 
 const Profile = ({ memberInfo, showTags, data }: MyShellsProfileProps) => {
+  const isMobileScreen = useMediaQuery({ maxWidth: 768 });
   const [allTags, setAlltag] = useState<string[]>([]);
 
   const MakeAllTags = () => {
@@ -38,39 +40,37 @@ const Profile = ({ memberInfo, showTags, data }: MyShellsProfileProps) => {
   useEffect(() => MakeAllTags(), [data]);
 
   return (
-    <div>
-      <ProfileContainer>
-        <Box>
-          <ImgandNameContainer>
-            <UserImgBox>
-              {memberInfo && (
-                <UserImg
-                  src={
-                    memberInfo.profileUrl === 'empty'
-                      ? noprofile
-                      : memberInfo.profileUrl
-                  }
-                  alt="profile-image"
-                ></UserImg>
-              )}
-            </UserImgBox>
-            <DisplayName>{memberInfo?.displayName}</DisplayName>
-          </ImgandNameContainer>
-        </Box>
-        <Box2>
-          <IntroductionContainer>
-            <Introduction>{memberInfo?.introduction}</Introduction>
-          </IntroductionContainer>
-          {showTags && allTags.length !== 0 && (
-            <AllCurrentTags>
-              {allTags.map((tag) => (
-                <TagBox key={uuidv4()} type="read" tag={tag} />
-              ))}
-            </AllCurrentTags>
-          )}
-        </Box2>
-      </ProfileContainer>
-    </div>
+    <ProfileContainer>
+      <Box>
+        <ImgandNameContainer>
+          <UserImgBox>
+            {memberInfo && (
+              <UserImg
+                src={
+                  memberInfo.profileUrl === 'empty'
+                    ? noprofile
+                    : memberInfo.profileUrl
+                }
+                alt="profile-image"
+              ></UserImg>
+            )}
+          </UserImgBox>
+          <DisplayName>{memberInfo?.displayName}</DisplayName>
+        </ImgandNameContainer>
+      </Box>
+      <Box2>
+        <IntroductionContainer>
+          <Introduction>{memberInfo?.introduction}</Introduction>
+        </IntroductionContainer>
+        {showTags && allTags.length !== 0 && (
+          <AllCurrentTags>
+            {allTags.map((tag) => (
+              <TagBox key={uuidv4()} type="read" tag={tag} />
+            ))}
+          </AllCurrentTags>
+        )}
+      </Box2>
+    </ProfileContainer>
   );
 };
 export default Profile;

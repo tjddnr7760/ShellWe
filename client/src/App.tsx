@@ -58,7 +58,7 @@ function App() {
             <Route path="/search" element={<SearchPage />} />
             <Route path="*" element={<HomePage />} />
           </Routes>
-          <Footer />
+          {isMobileScreen ? null : <Footer />}
         </div>
       </main>
     </BrowserRouter>

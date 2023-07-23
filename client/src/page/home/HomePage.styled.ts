@@ -15,13 +15,22 @@ const ContentBox = styled.div`
   font-size: 50px;
   display: flex;
   justify-content: space-between;
-  padding: 200px 150px 0px 150px;
-  gap: 100px;
+  padding: 120px;
+  gap: 20px;
 
-  div {
-    display: flex;
-    flex-direction: column;
-    gap: 30px;
+  @media (max-width: 768px) {
+    padding: 30px;
+    gap: 5px;
+  }
+`;
+
+const ContentTextBox = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+
+  @media (max-width: 768px) {
+    gap: 10px;
   }
 `;
 
@@ -29,15 +38,33 @@ const Title = styled.div`
   color: #00b4d8;
   font-size: 40px;
   font-weight: 600;
+
+  @media (max-width: 768px) {
+    font-size: 16px;
+  }
 `;
 
 const Body = styled.div`
   font-size: 50px;
+  line-height: 60px;
+
+  @media (max-width: 768px) {
+    font-size: 15px;
+    line-height: 20px;
+  }
 `;
 
 const ContentImgBox = styled.div`
   max-width: 700px;
   height: fit-content;
+
+  @media (max-width: 768px) {
+    width: 100%;
+  }
+
+  @media (max-width: 400px) {
+    width: 150px;
+  }
 `;
 
 const ContentImg = styled.img`
@@ -49,9 +76,17 @@ const Outtro = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-top: 50px;
-  padding-bottom: 126px;
 `;
+
+const OuttroImgBox = styled.div`
+  width: 1000px;
+  height: fit-content;
+
+  @media (max-width: 768px) {
+    width: 300px;
+  }
+`;
+
 export {
   HomePageWrapper,
   ContentContainer,
@@ -61,4 +96,6 @@ export {
   ContentImg,
   ContentImgBox,
   Outtro,
+  OuttroImgBox,
+  ContentTextBox,
 };

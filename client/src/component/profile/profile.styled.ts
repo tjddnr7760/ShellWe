@@ -5,6 +5,11 @@ const ProfileContainer = styled.div`
   max-width: 700px;
   height: fit-content;
   gap: 20px;
+
+  @media (max-width: 768px) {
+    min-width: 300px;
+    gap: 10px;
+  }
 `;
 const Box = styled.div`
   display: flex;
@@ -18,6 +23,7 @@ const Box2 = styled.div`
   gap: 10px;
   flex-grow: 1;
 `;
+
 const ImgandNameContainer = styled.div`
   display: flex;
   flex-direction: column;
@@ -45,6 +51,7 @@ const UserImgBox = styled.div`
 
   @media (max-width: 768px) {
     max-width: 100px;
+    max-height: 100px;
   }
 `;
 
@@ -93,6 +100,7 @@ const AllCurrentTags = styled.div`
   font-size: 20px;
   @media (max-width: 768px) {
     font-size: 16px;
+    width: 220px;
   }
 `;
 
