@@ -8,6 +8,11 @@ const ImageWrapper = styled.div`
   width: 640px;
   height: 400px;
   overflow: hidden;
+
+  @media (max-width: 768px) {
+    width: 320px;
+    height: 200px;
+  }
 `;
 
 const ShellImgContainer = styled.div`
@@ -34,6 +39,9 @@ const ShellImg = styled.img`
   width: 100%;
   height: 400px;
   padding: 1px;
+  @media (max-width: 768px) {
+    height: 200px;
+  }
 `;
 
 const LeftSlideButton = styled.button`
@@ -42,7 +50,7 @@ const LeftSlideButton = styled.button`
   left: 10%;
   transform: translate(-50%, -50%);
   -ms-transform: translate(-50%, -50%);
-  background-color: rgba(250, 250, 250, 1);
+  background-color: rgba(250, 250, 250, 0.5);
   width: 32px;
   height: 32px;
   position: absolute;
@@ -62,7 +70,7 @@ const RightSlideButton = styled.button`
   right: 5%;
   transform: translate(-50%, -50%);
   -ms-transform: translate(-50%, -50%);
-  background-color: rgba(250, 250, 250, 1);
+  background-color: rgba(250, 250, 250, 0.5);
   width: 32px;
   height: 32px;
   position: absolute;

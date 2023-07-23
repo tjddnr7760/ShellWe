@@ -36,8 +36,8 @@ const UserImgBox = styled.div`
   justify-content: center;
   align-items: center;
   background-color: #ffffff;
-  max-width: 200px;
-  max-height: fit-content;
+  width: 200px;
+  height: 200px;
   border: 0.5px solid rgba(0, 0, 0, 0.2);
   border-radius: 10px;
   font-size: 20px;

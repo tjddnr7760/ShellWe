@@ -52,6 +52,10 @@ export interface OfferedShells {
 export interface MyPokedShellDataProps {
   myPokedShellsData: PokedShellsList;
   HandleClickPokedShell: (shellId: number) => void;
+  clickedShellId: number | undefined;
+}
+export interface ClickedShellId {
+  clickedShellId: number | undefined;
 }
 
 export interface PokedShellsList {

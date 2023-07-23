@@ -25,6 +25,7 @@ const TabButton = styled.div`
   background-color: #fff;
   text-align: center;
   color: #000;
+  cursor: pointer;
 
   &.selected {
     background-color: #00b4d8;

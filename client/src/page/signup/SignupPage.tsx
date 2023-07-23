@@ -1,6 +1,8 @@
 import { useState, useEffect } from 'react';
-import { useMutation } from 'react-query';
-import axios from 'axios';
+import googlelogo from '../../asset/googlelogo.png';
+import EmailConfirmation from './EmailComfirmation';
+import { usePostSignup } from '../../hooks/login/PostSignup';
+import { GoogleLogin } from '../../utill/googleLogin';
 import {
   LoginContainer,
   LoginBox,
@@ -16,8 +18,6 @@ import {
   CheckPosible,
   LoginButton,
 } from '../login/LoginPage.styled';
-import googlelogo from '../../asset/googlelogo.png';
-import EmailConfirmation from './EmailComfirmation';
 
 const SignupPage = () => {
   const [displayName, setDispayName] = useState<string>('');
@@ -28,16 +28,20 @@ const SignupPage = () => {
   const [activeEmailConfirmation, setactiveEmailConfirmation] =
     useState<boolean>(false);
 
-  const isNicknameValid =
-    displayName.length <= 8 && /^[a-zA-Z가-힣]+$/.test(displayName);
+  const requestBody = {
+    displayName,
+    email,
+    password,
+  };
+  const { mutate: signup } = usePostSignup(requestBody);
+
+  const isNicknameValid = displayName.length <= 8;
   const isPasswordValid =
-    password.length >= 10 &&
-    /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{10,}$/.test(
+    /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d!@#$%^&*()\-_=+~<>?/\\[\]{},.;:'"|]{8,}$/.test(
       password
     );
   const isCheckPasswordValid = isPasswordValid && password === checkPassword;
   const isEmailValid = /^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/.test(email);
-  // const [errorMessage, setErrorMessage] = useState('');
 
   useEffect(() => {
     setIsSignupDisabled(
@@ -48,38 +52,9 @@ const SignupPage = () => {
     );
   }, [isNicknameValid, isPasswordValid, isCheckPasswordValid, isEmailValid]);
 
-  const signupMutation = useMutation(async () => {
-    const response = await axios.post(`${import.meta.env.VITE_KEY}/members`, {
-      email,
-      password,
-      displayName,
-    });
-    return response.data;
-  });
-
-  // 1. 회원가입 post mutation 생성
-
-  const handleSignup = async (e: any) => {
-    e.preventDefault();
+  const handleSignup = () => {
+    signup();
     setactiveEmailConfirmation(true);
-
-    try {
-      const data = await signupMutation.mutateAsync();
-      console.log(
-        '이메일 인증이 완료되었습니다. \n로그인 페이지에서 로그인을 진행해주시기 바랍니다.',
-        data
-      );
-    } catch (error) {
-      console.error('회원 가입 실패.', error);
-      setEmail('');
-      alert('회원 가입에 실패했습니다.');
-    }
-  };
-
-  const LoginRequestHandlerGoogle = () => {
-    window.location.href = `${
-      import.meta.env.VITE_KEY
-    }/oauth2/authorization/google`;
   };
 
   return (
@@ -90,7 +65,7 @@ const SignupPage = () => {
             src="https://cdn-icons-png.flaticon.com/512/499/499857.png"
             alt="Logo"
           ></Logo>
-          <OauthContainer onClick={LoginRequestHandlerGoogle}>
+          <OauthContainer onClick={GoogleLogin}>
             <OauthImg src={googlelogo}></OauthImg>
             <OauthText>Sign up with Google</OauthText>
           </OauthContainer>
@@ -120,7 +95,6 @@ const SignupPage = () => {
                   value={email}
                   onChange={(e: any) => setEmail(e.target.value)}
                 />
-                {/* <CheckError>{errorMessage && <p>{errorMessage}</p>}</CheckError> */}
               </DivInputBox>
               {!isEmailValid && email.length > 0 && (
                 <CheckError>올바른 이메일 주소를 작성해주세요.</CheckError>
@@ -130,14 +104,16 @@ const SignupPage = () => {
               <div>Password</div>
               <DivInputBox>
                 <DivInput
-                  placeholder="대소문자 (알파벳), 숫자, 특수문자 조합 10글자 이상"
+                  placeholder="알파벳, 숫자 포함 8자 이상"
                   type="password"
                   value={password}
                   onChange={(e: any) => setPassword(e.target.value)}
                 />
               </DivInputBox>
-              {password.length > 10 && !isPasswordValid && (
-                <CheckError>비밀번호를 확인해주세요.</CheckError>
+              {!isPasswordValid && password && (
+                <CheckError>
+                  패스워드는 숫자, 영어 포함 8글자 이상이어야 합니다.
+                </CheckError>
               )}
               {isPasswordValid && password && (
                 <CheckPosible>사용 가능한 비밀번호입니다.</CheckPosible>

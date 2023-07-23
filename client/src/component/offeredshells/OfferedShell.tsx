@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import ResponseShellList from '../../component/offeredshells/ResponseShellList';
-import ShellImgPreview from '../../component/shellimgpreview/ShellImgPreview';
-import { ShellImgBox } from '../shellimgpreview/ShellImgPreview.styled';
+import ShellImgPreview from '../../component/ShellImgPreview/ShellImgPreview';
+import { ShellImgBox } from '../ShellImgPreview/ShellImgPreview.styled';
 import {
   ShellImgPreviewWrapper,
   ResponseElementWrapper,

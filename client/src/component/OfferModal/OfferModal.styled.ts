@@ -8,7 +8,7 @@ const Wrapper = styled.div`
   height: 610px;
   border: 0.5px solid #48cae4;
   border-radius: 10px;
-  background-color: rgba(202, 240, 248, 0.5);
+  background-color: rgba(202, 240, 248, 0.9);
 `;
 
 const Div = styled.div`
@@ -41,4 +41,27 @@ const ShellListContainer = styled.div`
   margin-bottom: 1px;
 `;
 
-export { CreateShellButton, Wrapper, Div, ShellListContainer };
+const NoneShellsNotice = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: #464646;
+`;
+
+const NoticeTitle = styled.p`
+  font-size: 90px;
+`;
+const NoticeBody = styled.p`
+  font-size: 20px;
+`;
+
+export {
+  CreateShellButton,
+  Wrapper,
+  Div,
+  ShellListContainer,
+  NoneShellsNotice,
+  NoticeTitle,
+  NoticeBody,
+};

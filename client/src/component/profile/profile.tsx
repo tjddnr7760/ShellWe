@@ -1,5 +1,4 @@
 import { v4 as uuidv4 } from 'uuid';
-import { useParams } from 'react-router';
 import { useEffect, useState } from 'react';
 import {
   ProfileContainer,
@@ -15,9 +14,9 @@ import {
 } from './profile.styled';
 import { MyShellsProfileProps } from '../../dataset/TypeOfMyShells';
 import TagBox from '../../common/tag/TagBox';
+import noprofile from '../../asset/avatar/noprofile.svg';
 
 const Profile = ({ memberInfo, showTags, data }: MyShellsProfileProps) => {
-  const { id } = useParams();
   const [allTags, setAlltag] = useState<string[]>([]);
 
   const MakeAllTags = () => {
@@ -36,7 +35,7 @@ const Profile = ({ memberInfo, showTags, data }: MyShellsProfileProps) => {
       setAlltag(tagsArray);
     }
   };
-  useEffect(() => MakeAllTags(), [id]);
+  useEffect(() => MakeAllTags(), [memberInfo?.id]);
 
   return (
     <div>
@@ -45,7 +44,14 @@ const Profile = ({ memberInfo, showTags, data }: MyShellsProfileProps) => {
           <ImgandNameContainer>
             <UserImgBox>
               {memberInfo && (
-                <UserImg src={memberInfo.profileUrl} alt="product"></UserImg>
+                <UserImg
+                  src={
+                    memberInfo.profileUrl === 'empty'
+                      ? noprofile
+                      : memberInfo.profileUrl
+                  }
+                  alt="profile-image"
+                ></UserImg>
               )}
             </UserImgBox>
             <DisplayName>{memberInfo?.displayName}</DisplayName>
@@ -55,7 +61,7 @@ const Profile = ({ memberInfo, showTags, data }: MyShellsProfileProps) => {
           <IntroductionContainer>
             <Introduction>{memberInfo?.introduction}</Introduction>
           </IntroductionContainer>
-          {showTags && (
+          {showTags && allTags.length !== 0 && (
             <AllCurrentTags>
               {allTags.map((tag) => (
                 <TagBox key={uuidv4()} type="read" tag={tag} />

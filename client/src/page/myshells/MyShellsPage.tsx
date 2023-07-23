@@ -13,16 +13,17 @@ import LikeShells from '../../component/myshells/LikeShells.tsx';
 import { useGetMember } from '../../hooks/profile/useGetMember';
 import { Member } from '../../hooks/profile/useGetMember';
 import { getMemberIdFromLocalStorage } from '../../utill/localstorageData.ts';
+import { useGetOtherMember } from '../../hooks/profile/useGetMember';
 
 const MyShellsPage = () => {
   const [selectedTab, setSelectedTab] = useState<string>('current');
   const { id } = useParams<{ id: string }>();
-  const memberId = id !== undefined ? +id : 0;
+  const urlMemberId = id !== undefined ? +id : 0;
+  const loginMemberId = Number(getMemberIdFromLocalStorage());
 
-  const { data: shellsData } = useCurrentShells(memberId);
-  const { data: memberData } = useGetMember(
-    Number(getMemberIdFromLocalStorage())
-  );
+  const { data: shellsData } = useCurrentShells(urlMemberId);
+  const { data: memberData } = useGetMember(loginMemberId);
+  const { data: otherMemberData } = useGetOtherMember(urlMemberId);
   const memberInfo: Member = memberData.data;
 
   const handleClickTab = (Tab: string) => {
@@ -32,7 +33,13 @@ const MyShellsPage = () => {
   return (
     <MyShellsPageWrapper>
       <MyShellsPageContainer>
-        <Profile showTags={true} data={shellsData} memberInfo={memberInfo} />
+        <Profile
+          showTags={true}
+          data={shellsData}
+          memberInfo={
+            urlMemberId === loginMemberId ? memberInfo : otherMemberData.data
+          }
+        />
         <ShellsTab handleClickTab={handleClickTab} selectedTab={selectedTab} />
         {selectedTab === 'current' && (
           <CurrentShells selectedTab={selectedTab} />

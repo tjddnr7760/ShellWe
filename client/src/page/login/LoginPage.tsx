@@ -1,12 +1,7 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import axios from 'axios';
+import { usePostLogin } from '../../hooks/login/PostLogin';
 import googlelogo from '../../asset/googlelogo.png';
-import { Link } from 'react-router-dom';
-import { useSetRecoilState } from 'recoil';
-//import { usePostLogin } from '../../hooks/login/PostLogin';
-import { userStateWithExpiry } from '../../recoil/selector';
-
 import {
   LoginContainer,
   LoginBox,
@@ -21,96 +16,35 @@ import {
   LoginButton,
   LoginSubFuntionBox,
   LoginSubFuntion,
+  LoginDiv,
 } from './LoginPage.styled';
-// import { LoginRequestBody } from '../../hooks/login/PostLogin';
+import { GoogleLogin } from '../../utill/googleLogin';
 
 const LoginPage: React.FC = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const setIsLoggedIn = useSetRecoilState(userStateWithExpiry);
-  const navigation = useNavigate();
+  const { mutate: Login } = usePostLogin();
+  const navigate = useNavigate();
+  const guestLoginRequestBody = {
+    email: 'lts890303@gmail.com',
+    password: 'Abcd1234!!',
+  };
+  const loginRequestBody = {
+    email,
+    password,
 
-  // const loginRequestBody = {
-  //   email,
-  //   password,
-  // };
-  // const { mutate: LoginRequest } = usePostLogin(loginRequestBody);
-
-  // const isEmailValid = /^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/.test(email);
-  // const isPasswordValid =
-  //   password.length >= 10 &&
-  //   /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{10,}$/.test(
-  //     password
-  //   );
-
-  const handleGuestLogin = async (e: any) => {
-    e.preventDefault();
-
-    // 유틸함수 만들기
-
-    const response = await axios.post(
-      `${import.meta.env.VITE_KEY}/auth/login`,
-      {
-        email: 'lts890303@gmail.com',
-        password: 'Abcd1234!!',
-      }
-    );
-    if (response.status === 200) {
-      setIsLoggedIn(true);
-      const accessToken = response.headers.authorization;
-      const id = response.data.id;
-      const displayName = response.data.displayName;
-      const profileUrl = response.data.profileUrl;
-      const isMe = response.data.isMe;
-      localStorage.setItem('accessToken', accessToken);
-      localStorage.setItem('id', id);
-      localStorage.setItem('displayName', displayName);
-      localStorage.setItem('profileUrl', profileUrl);
-      localStorage.setItem('isMe', isMe);
-      navigation('/main');
-    }
   };
 
-  const handleLogin = async (e: any) => {
-    e.preventDefault();
-
-    try {
-      const response = await axios.post(
-        `${import.meta.env.VITE_KEY}/auth/login`,
-        {
-          email,
-          password,
-        }
-      );
-
-      if (response.status === 200) {
-        setIsLoggedIn(true);
-        const accessToken = response.headers.authorization;
-        const id = response.data.id;
-        const displayName = response.data.displayName;
-        const profileUrl = response.data.profileUrl;
-        const isMe = response.data.isMe;
-        localStorage.setItem('accessToken', accessToken);
-        localStorage.setItem('id', id);
-        localStorage.setItem('displayName', displayName);
-        localStorage.setItem('profileUrl', profileUrl);
-        localStorage.setItem('isMe', isMe);
-        navigation('/main');
-      }
-    } catch (error: any) {
-      if (error.response && error.response.status === 401) {
-        setEmail('');
-        setPassword('');
-        console.error('회원 가입 실패.', error);
-        alert('이미 가입된 계정입니다.');
-      }
-    }
+  const handleGuestLogin = () => {
+    Login(guestLoginRequestBody);
   };
 
-  const LoginRequestHandlerGoogle = () => {
-    window.location.href = `${
-      import.meta.env.VITE_KEY
-    }/oauth2/authorization/google`;
+  const handleLogin = () => {
+    Login(loginRequestBody);
+  };
+
+  const goToSignup = () => {
+    navigate('/signup');
   };
 
   return (
@@ -120,7 +54,7 @@ const LoginPage: React.FC = () => {
           src="https://cdn-icons-png.flaticon.com/512/499/499857.png"
           alt="Logo"
         ></Logo>
-        <OauthContainer onClick={LoginRequestHandlerGoogle}>
+        <OauthContainer onClick={GoogleLogin}>
           <OauthImg src={googlelogo}></OauthImg>
           <OauthText>Login with Google</OauthText>
         </OauthContainer>
@@ -130,7 +64,6 @@ const LoginPage: React.FC = () => {
             <DivInputBox>
               <DivInput
                 type="email"
-                value={email}
                 onChange={(e: any) => setEmail(e.target.value)}
               />
             </DivInputBox>
@@ -140,22 +73,19 @@ const LoginPage: React.FC = () => {
             <DivInputBox>
               <DivInput
                 type="password"
-                value={password}
                 onChange={(e: any) => setPassword(e.target.value)}
               />
             </DivInputBox>
           </DivBox>
         </UserinfoContainer>
-        <LoginButton onClick={handleLogin}>Log in</LoginButton>
         <LoginSubFuntionBox>
-          <LoginSubFuntion>
-            <Link to="/signup" style={{ textDecoration: 'none' }}>
-              Sign up
-            </Link>
-          </LoginSubFuntion>
-          <LoginSubFuntion onClick={handleGuestLogin}>
-            Guest-Login
-          </LoginSubFuntion>
+          <LoginButton onClick={handleLogin}>Log in</LoginButton>
+          <LoginDiv>
+            <LoginSubFuntion onClick={goToSignup}>Sign up</LoginSubFuntion>
+            <LoginSubFuntion onClick={handleGuestLogin}>
+              Guest Log in
+            </LoginSubFuntion>
+          </LoginDiv>
         </LoginSubFuntionBox>
       </LoginBox>
     </LoginContainer>

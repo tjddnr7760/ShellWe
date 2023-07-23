@@ -1,7 +1,7 @@
 import { useMutation } from 'react-query';
 import { useNavigate, useParams } from 'react-router-dom';
 import { axiosInstance, getHeader } from '../../utill/axiosInstance';
-import { ShellStatus } from '../../dataset/ShellDetailType';
+import { ShellStatus } from '../../dataset/TypeOfShellDetail';
 
 const patchStatusofShells = async (
   shellId: string,

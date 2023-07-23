@@ -5,18 +5,18 @@ import {
   ShellListContainer,
   Wrapper,
   Div,
+  NoneShellsNotice,
+  NoticeTitle,
+  NoticeBody,
 } from './OfferModal.styled.ts';
 import plus from '../../asset/plus.svg';
-import { useGetMyShellToPoke } from '../../hooks/shelldetail/useGetPokeShellsList.ts';
-import { getMemberIdFromLocalStorage } from '../../utill/localstorageData.ts';
-import { ShellMemberId } from '../../dataset/ShellDetailType.ts';
+import { OfferModalProps } from '../../dataset/TypeOfShellDetail.ts';
 
-const OfferModal = (shellMemberId: ShellMemberId) => {
-  const { data: modaldata } = useGetMyShellToPoke(
-    Number(getMemberIdFromLocalStorage())
-  );
-  const myShellListsData = modaldata.data.shells; // 추후 타입 정의해야 함
-
+const OfferModal = ({
+  shellMemberId,
+  handlePoke,
+  modaldata,
+}: OfferModalProps) => {
   const navigate = useNavigate();
   const goToShellCreatePage = () => {
     navigate('/shellcreate');
@@ -30,10 +30,19 @@ const OfferModal = (shellMemberId: ShellMemberId) => {
         </CreateShellButton>
       </Div>
       <ShellListContainer>
-        <MyShellList
-          myShellListsData={myShellListsData}
-          shellMemberId={shellMemberId}
-        />
+        {modaldata.data.shells.length !== 0 ? (
+          <MyShellList
+            myShellListsData={modaldata.data.shells}
+            shellMemberId={shellMemberId}
+            handlePoke={handlePoke}
+          />
+        ) : (
+          <NoneShellsNotice>
+            <NoticeTitle>No Shells</NoticeTitle>
+            <br />
+            <NoticeBody>(+) 버튼을 눌러 새로운 쉘을 등록해보세요!</NoticeBody>
+          </NoneShellsNotice>
+        )}
       </ShellListContainer>
     </Wrapper>
   );

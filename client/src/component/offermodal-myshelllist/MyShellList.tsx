@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { MyShellsDataProps } from '../../dataset/ShellDetailType.ts';
+import { MyShellsDataProps } from '../../dataset/TypeOfShellDetail.ts';
 import MyShell from './MyShell.tsx';
 
 const MyShellListWrapper = styled.div`
@@ -17,6 +17,7 @@ const MyShellListWrapper = styled.div`
 const MyShellList = ({
   myShellListsData,
   shellMemberId,
+  handlePoke,
 }: MyShellsDataProps) => {
   const myShellArray = myShellListsData;
 
@@ -24,7 +25,12 @@ const MyShellList = ({
     <MyShellListWrapper>
       {myShellArray.map((shell) => {
         return (
-          <MyShell key={shell.id} shell={shell} shellMemberId={shellMemberId} />
+          <MyShell
+            key={shell.id}
+            shell={shell}
+            shellMemberId={shellMemberId}
+            handlePoke={handlePoke}
+          />
         );
       })}
     </MyShellListWrapper>

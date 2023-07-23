@@ -4,28 +4,38 @@ export const LoginContainer = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  margin: 50px 0;
+  padding: 50px;
 `;
-export const LoginBox = styled.form`
+export const LoginBox = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  gap: 20px;
+  gap: 40px;
+  width: 350px;
+  @media (max-width: 768px) {
+    width: 220px;
+    gap: 20px;
+  }
 `;
 
 export const Logo = styled.img`
   cursor: pointer;
-  width: 52px;
-  height: 52px;
+  width: 50px;
+  height: 50px;
+  @media (max-width: 768px) {
+    width: 30px;
+    height: 30px;
+  }
 `;
 
 export const OauthContainer = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 300px;
-  height: 42px;
+  width: 100%;
+  padding: 10px;
+  height: 45px;
   min-height: 30px;
   border-radius: 15px;
   border: 0.5px solid #00000050;
@@ -33,50 +43,64 @@ export const OauthContainer = styled.div`
   &:active {
     transform: translateY(2px);
   }
+  @media (max-width: 768px) {
+    height: 35px;
+  }
 `;
 export const OauthImg = styled.img`
   width: 30px;
 `;
 
 export const OauthText = styled.div`
+  font-size: 20px;
   padding: 15px;
+  @media (max-width: 768px) {
+    font-size: 16px;
+  }
 `;
 
 export const UserinfoContainer = styled.div`
   display: flex;
   flex-direction: column;
+  justify-content: center;
   align-items: center;
   width: 100%;
-  gap: 20px;
-
-  justify-content: center;
+  gap: 25px;
+  @media (max-width: 768px) {
+    gap: 15px;
+  }
 `;
 
 export const DivBox = styled.div`
   display: flex;
   flex-direction: column;
-  font-size: 20px;
+  font-size: 22px;
   font-weight: 500;
   width: 100%;
-  gap: 3px;
+  gap: 5px;
+  @media (max-width: 768px) {
+    font-size: 16px;
+  }
 `;
 
 export const DivInputBox = styled.div`
-  border-radius: 16px;
   display: flex;
-  flex-direction: column;
-  justify-content: stretch;
+  width: auto;
 `;
 
 export const DivInput = styled.input`
   border: none;
-  border-radius: 15px;
-  min-height: 30px;
-  padding: 5px;
   width: 100%;
+  border-radius: 15px;
+  height: 30px;
+  padding: 10px;
   border: 0.5px solid #00000080;
-  &::placeholder {
-    font-size: 10px;
+  font-size: 18px;
+
+  @media (max-width: 768px) {
+    padding: 10px;
+    height: 15px;
+    font-size: 14px;
   }
 `;
 
@@ -103,9 +127,13 @@ export const LoginButton = styled.button`
   font-weight: 500;
   font-size: 20px;
   width: 100%;
-  min-width: 300px;
-  height: 40px;
-
+  width: 350px;
+  height: 45px;
+  @media (max-width: 768px) {
+    width: 220px;
+    height: 30px;
+    font-size: 14px;
+  }
   &:active {
     transform: translateY(2px);
   }
@@ -113,12 +141,23 @@ export const LoginButton = styled.button`
 
 export const LoginSubFuntionBox = styled.div`
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   align-items: center;
-  gap: 130px;
+  gap: 20px;
 `;
+
 export const LoginSubFuntion = styled.div`
   color: gray;
-  font-size: 12px;
+  font-size: 18px;
   cursor: pointer;
+  @media (max-width: 768px) {
+    font-size: 14px;
+  }
+`;
+
+export const LoginDiv = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  width: 100%;
 `;

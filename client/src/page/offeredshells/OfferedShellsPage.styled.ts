@@ -12,6 +12,10 @@ const OfferedShellsPageWrapper = styled.div`
   display: flex;
   width: 1500px;
   height: 100%;
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+  }
 `;
 
 const PokedShellListWrapper = styled.div`
@@ -48,6 +52,11 @@ const NoticeClickPokedShell = styled.div`
   align-items: center;
   font-size: 50px;
   font-weight: 300;
+
+  @media (max-width: 768px) {
+    margin-top: 50px;
+  }
+
   div {
     font-size: 30px;
   }
