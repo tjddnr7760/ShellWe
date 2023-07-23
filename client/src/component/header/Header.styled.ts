@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled, { keyframes } from 'styled-components';
 
 export const HeaderContainer = styled.div`
   position: sticky;
@@ -15,39 +15,68 @@ export const HeaderContainer = styled.div`
   padding: 15px;
 `;
 
-export const Button = styled.button`
-  background-color: #0000ff;
-  width: 110px;
-  height: 50px;
-  padding: 10px 20px;
-  border-radius: 15px;
-  background: #00b4d8;
-  box-shadow: 1px 1px 1px 0px rgba(0, 0, 0, 0.25);
-  cursor: pointer;
-  border: 1px solid gray;
-
-  &:hover {
-    background-color: #1691ee;
+const fadeIn = keyframes`
+  from {
+    opacity: 0;
   }
-
-  color: white;
-  font-size: 18px;
-  font-family: Inter;
-  font-style: normal;
-  font-weight: 400;
-  line-height: normal;
-
-  &.SignupButton {
-    margin-right: 30px;
+  to {
+    opacity: 1;
   }
+`;
 
-  &.LoginButton {
-    margin-right: 20px;
-  }
+export const DropdownBTN = styled.img`
+  width: 32px;
+  height: 32px;
+  box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.5);
+  border-radius: 100%;
+`;
+
+export const DropdownContainer = styled.div`
+  position: relative;
+`;
+
+export const DropdownContent = styled.div`
+  right: 0;
+  position: absolute;
+  display: flex;
+  flex-direction: row;
+  width: fit-content;
+  border: 1px ridge #0077b6;
+  gap: 20px;
+  border-radius: 10px;
+  background-color: white;
+  padding: 10px;
+  animation: ${fadeIn} 0.3s ease-in-out;
 `;
 
 export const Logo = styled.img`
   margin-left: 30px;
-  width: 60px;
+  width: 40px;
+  height: 40px;
+`;
+export const NavItem = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 10px;
   height: 60px;
+  letter-spacing: 0.5px;
+  border-radius: 10px;
+  font-size: 16px;
+  font-weight: 500;
+  color: #828282;
+  padding: 10px;
+  width: 100%;
+  white-space: nowrap;
+  &:hover {
+    cursor: pointer;
+    background-color: #c8f5ff;
+  }
+
+  &.selected {
+    background-color: #c8f5ff;
+  }
+`;
+export const NavItems = styled.div`
+  display: flex;
+  flex-direction: column;
 `;

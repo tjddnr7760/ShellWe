@@ -25,7 +25,6 @@ const LoginPage: React.FC = () => {
   const [password, setPassword] = useState('');
   const { mutate: Login } = usePostLogin();
   const navigate = useNavigate();
-
   const guestLoginRequestBody = {
     email: 'lts890303@gmail.com',
     password: 'Abcd1234!!',
@@ -33,6 +32,7 @@ const LoginPage: React.FC = () => {
   const loginRequestBody = {
     email,
     password,
+
   };
 
   const handleGuestLogin = () => {

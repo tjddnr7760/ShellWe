@@ -19,7 +19,7 @@ interface DMProps {
   handleClickRoom: (roomId: number) => void;
   isRoomOpened: boolean | undefined;
   ClickedRoomId: number | undefined;
-  setIsRoomOpened: (type: boolean | undefined) => void;
+  setIsRoomOpened: (type: boolean) => void;
   setClickedRoomId: (roomId: number | undefined) => void;
 }
 

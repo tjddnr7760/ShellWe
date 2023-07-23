@@ -7,11 +7,18 @@ export const MessageWrapper = styled.div`
   margin: 10px;
   justify-content: center;
   align-items: center;
+  @media (max-width: 768px) {
+    margin: 0px;
+    display: block;
+  }
 `;
 
-export const MessageListWrapper = styled.div`
+export const MessageListWrapper = styled.div<{ isroomopened: string }>`
   height: 100%;
   min-width: 300px;
+  @media (max-width: 768px) {
+    display: ${(props) => (props.isroomopened === 'noView' ? 'none' : '')};
+  }
 `;
 export const MessageListContainer = styled.div`
   padding: 10px;
@@ -39,6 +46,9 @@ export const MessageListHeader = styled.div`
   padding-left: 15px;
   background-color: #bbe7ff;
   border-radius: 15px 15px 0 0;
+  @media (max-width: 768px) {
+    border-radius: 0;
+  }
 `;
 
 export const MessageListBody = styled.div`
@@ -46,6 +56,9 @@ export const MessageListBody = styled.div`
   height: 720px;
   background-color: #bbe7ff;
   border-radius: 0 0 15px 15px;
+  @media (max-width: 768px) {
+    border-radius: 0;
+  }
 `;
 
 export const MessageMyInfo = styled.div`
@@ -113,4 +126,7 @@ export const MessageBody = styled.div`
 
 export const NoneClickedDMRoom = styled.div`
   font-size: 50px;
+  @media (max-width: 768px) {
+    display: none;
+  }
 `;

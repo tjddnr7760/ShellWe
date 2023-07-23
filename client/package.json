@@ -24,6 +24,7 @@
     "react-dropzone": "^14.2.3",
     "react-infinite-scroller": "^1.2.6",
     "react-query": "^3.39.3",
+    "react-responsive": "^9.0.2",
     "react-router-dom": "^6.14.1",
     "react-textarea-autosize": "^8.5.2",
     "recoil": "^0.7.7",

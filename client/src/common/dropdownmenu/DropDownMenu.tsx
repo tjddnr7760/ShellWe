@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useRecoilState } from 'recoil';
-
+import { useMediaQuery } from 'react-responsive';
 import {
   DropdownContainer,
   DropdownBTN,
@@ -12,6 +12,7 @@ const DropDownMenu = () => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [selectedOption, setSelectedOption] =
     useRecoilState(selectedOptionAtom);
+  const isMobileScreen = useMediaQuery({ maxWidth: 768 });
 
   const handleMenuHover = () => {
     setIsDropdownOpen(true);
@@ -24,16 +25,21 @@ const DropDownMenu = () => {
   const handleRadioChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSelectedOption(e.target.value);
   };
-
+  const handleClick = () => {
+    setIsDropdownOpen(!isDropdownOpen);
+  };
   return (
     <DropdownContainer>
       <DropdownBTN
         src={'/mdi-light_menu.svg'}
         alt="Menu"
-        onMouseEnter={handleMenuHover}
+        onMouseEnter={isMobileScreen ? undefined : handleMenuHover}
+        onClick={isMobileScreen ? handleClick : undefined}
       ></DropdownBTN>
       {isDropdownOpen && (
-        <DropdownContent onMouseLeave={handleMenuLeave}>
+        <DropdownContent
+          onMouseLeave={isMobileScreen ? undefined : handleMenuLeave}
+        >
           <label>
             <input
               type="radio"

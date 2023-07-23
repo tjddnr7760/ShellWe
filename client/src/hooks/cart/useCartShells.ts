@@ -10,7 +10,11 @@ const getCartShell = async (id: number) => {
   return { data };
 };
 export const useCreateShells = (id: number) => {
-  const { mutate } = useMutation(() => getCartShell(id));
+  const { mutate } = useMutation(() => getCartShell(id), {
+    onError: (error) => {
+      alert('이미 찜한 쉘입니다');
+    },
+  });
   const handleMutate = () => {
     mutate();
   };

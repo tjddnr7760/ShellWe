@@ -8,11 +8,13 @@ import {
   OpponentChat,
   Notificationtext,
   NotificationContainer,
+  CloseButton,
 } from './DMRoom.styled';
 import Avatar from '../../common/avatar/Avatar.tsx';
 import { closeWebSocket, connectToWebSocket } from '../../utill/wesocket.ts';
 import React from 'react';
 import { ChatTextArea } from '../../common/chattextarea/ChatTextArea.tsx';
+import { useMediaQuery } from 'react-responsive';
 
 interface socketMessage {
   roomId: number;
@@ -26,10 +28,20 @@ interface socketMessage {
     profileUrl: string;
   };
 }
-export const DMRoom = React.memo(function DMRoom({ id }: { id: number }) {
+
+interface DMRoomProps {
+  id: number;
+  setIsRoomOpened: (type: boolean) => void;
+}
+export const DMRoom = React.memo(function DMRoom({
+  id,
+  setIsRoomOpened,
+}: DMRoomProps) {
   const [websocket, setWebsocket] = useState<WebSocket>();
   const [chats, setChats] = useState<socketMessage[]>([]);
   const messageContainerRef = useRef<HTMLDivElement>(null);
+  const isMobileScreen = useMediaQuery({ maxWidth: 768 });
+
   const memoizedSetChats = useMemo(() => {
     const updateChats = (messageData: string) => {
       setChats((prevChats) => {
@@ -55,10 +67,17 @@ export const DMRoom = React.memo(function DMRoom({ id }: { id: number }) {
         messageContainerRef.current.scrollHeight;
     }
   }, [chats]);
+
+  const handleCloseClick = () => {
+    setIsRoomOpened(false);
+  };
   return (
     <>
       {websocket && (
         <MessageRoomContainer>
+          {isMobileScreen && (
+            <CloseButton onClick={handleCloseClick}>x</CloseButton>
+          )}
           <MessageRoom ref={messageContainerRef}>
             {chats &&
               chats.map((chat) => {

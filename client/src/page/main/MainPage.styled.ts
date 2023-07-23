@@ -12,12 +12,15 @@ export const MainShellImg = styled.img`
 `;
 
 export const ShellListContainer = styled.div`
-  width: 100%;
   display: flex;
-  width: 1200px;
-  justify-content: flex-start;
-  align-items: center;
   height: fit-content;
-  gap: 30px;
-  padding: 20px;
+  justify-content: flex-start;
+  gap: 20px;
+  flex-wrap: wrap;
+  margin: 10px;
+  padding: 10px;
+  max-width: 1180px;
+  @media (max-width: 768px) {
+    flex-direction: column;
+  }
 `;
