@@ -5,7 +5,7 @@ const SeeMoreBody = ({ category, body }: BodyProps) => {
   return (
     <SeeMoreBodyWrapper>
       <Category>{category}</Category>
-      {body}
+      <pre>{body}</pre>
     </SeeMoreBodyWrapper>
   );
 };

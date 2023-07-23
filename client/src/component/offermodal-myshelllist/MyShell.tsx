@@ -25,7 +25,6 @@ const MyShell = ({
   const buyerShellId: number = shell.id;
   const sellerMemberId = shellMemberId;
 
-  console.log(shellMemberId);
   const requestBodyForPoke: RequestBodyForPoke = {
     buyerShellId: buyerShellId,
     sellerShellId: sellerShellId,
