@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useRecoilValue } from 'recoil';
 import { userStateWithExpiry } from '../../recoil/selector';
 import subwayMenu from '../../asset/subway_menu.svg';
@@ -43,10 +43,12 @@ const Header: React.FC = () => {
   };
   return (
     <HeaderContainer>
-      <Logo
-        src="https://cdn-icons-png.flaticon.com/512/499/499857.png"
-        alt="Logo"
-      />
+      <Link to={isLogIn ? '/main' : '/'}>
+        <Logo
+          src="https://cdn-icons-png.flaticon.com/512/499/499857.png"
+          alt="Logo"
+        ></Logo>
+      </Link>
       <DropdownContainer>
         <DropdownBTN
           src={subwayMenu}
