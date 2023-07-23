@@ -33,7 +33,7 @@ export const DirectMessage: React.FC = () => {
   return (
     <>
       <MessageWrapper>
-        <MessageListWrapper isRoomOpened={isRoomOpened}>
+        <MessageListWrapper isroomopened={isRoomOpened ? 'noView' : 'view'}>
           <MessageListHeader>
             <MessageMyInfo>{displayName}</MessageMyInfo>
             ChatList

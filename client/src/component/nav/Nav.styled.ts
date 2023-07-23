@@ -7,9 +7,6 @@ export const NavWrapper = styled.div`
   justify-content: space-between;
   min-width: 250px;
   height: 100%;
-  @media (max-width: 768px) {
-    display: none;
-  }
 `;
 export const NavContainer = styled.div`
   display: flex;

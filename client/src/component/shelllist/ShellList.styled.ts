@@ -14,6 +14,9 @@ const ShellListContainer = styled.div`
   flex-direction: column;
   gap: 20px;
   margin: 100px 0px;
+  @media (max-width: 768px) {
+    margin: 50px 0;
+  }
 `;
 
 const SeachToolbarWrapper = styled.div`

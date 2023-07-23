@@ -51,17 +51,18 @@ const Nav: React.FC = () => {
 
   const handleClick = () => {
     alert('로그인 후 접근할 수 있습니다.');
+    navigate(`/login`);
   };
 
-  const handleButtonClick = (id: any) => {
+  const handleButtonClick = (id: string) => {
     setActiveButtonId(id);
     navigate(`/${id}`);
   };
-  const handleShellClick = (id: any) => {
+  const handleShellClick = (id: string) => {
     setActiveButtonId(id);
     navigate(`/shelllist/${id}`);
   };
-  const handleMemberClick = (id: any) => {
+  const handleMemberClick = (id: string) => {
     setActiveButtonId(id);
     navigate(`/${id}/${myId}`);
   };
@@ -76,17 +77,15 @@ const Nav: React.FC = () => {
           ></Logo>
         </Link>
         <NavItems>
-          <Link to="/shellcreate" style={{ textDecoration: 'none' }}>
-            <NavItem
-              className={activeButtonId === 'createShells' ? 'selectedTab' : ''}
-              onClick={
-                isLogIn ? () => handleButtonClick('createShells') : handleClick
-              }
-            >
-              <FontAwesomeIcon icon={faPen} />
-              Create Shells
-            </NavItem>
-          </Link>
+          <NavItem
+            className={activeButtonId === 'shellcreate' ? 'selectedTab' : ''}
+            onClick={
+              isLogIn ? () => handleButtonClick('shellcreate') : handleClick
+            }
+          >
+            <FontAwesomeIcon icon={faPen} />
+            Create Shells
+          </NavItem>
           <NavItem
             onMouseEnter={handleNavItemHover}
             onMouseLeave={handleNavItemNotHover}

@@ -13,11 +13,11 @@ export const MessageWrapper = styled.div`
   }
 `;
 
-export const MessageListWrapper = styled.div<{ isRoomOpened: boolean }>`
+export const MessageListWrapper = styled.div<{ isroomopened: string }>`
   height: 100%;
   min-width: 300px;
   @media (max-width: 768px) {
-    display: ${(props) => (props.isRoomOpened ? 'none' : '')};
+    display: ${(props) => (props.isroomopened === 'noView' ? 'none' : '')};
   }
 `;
 export const MessageListContainer = styled.div`
