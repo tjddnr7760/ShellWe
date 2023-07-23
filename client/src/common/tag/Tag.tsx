@@ -9,7 +9,7 @@ interface TagProps {
 const Tag = ({ tagList, setTagList }: TagProps) => {
   const [inputTagValue, setInputTagValue] = useState<string>('');
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
-    if (e.target.value.length <= 20) {
+    if (e.target.value.length <= 10) {
       setInputTagValue(e.target.value);
     }
   };
