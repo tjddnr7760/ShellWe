@@ -15,12 +15,18 @@ const OfferedShellsPageWrapper = styled.div`
 
   @media (max-width: 768px) {
     flex-direction: column;
+    width: 100%;
   }
 `;
 
 const PokedShellListWrapper = styled.div`
   border-left: 1px solid rgba(0, 0, 0, 0.5);
   border-right: 1px solid rgba(0, 0, 0, 0.5);
+
+  @media (max-width: 768px) {
+    border-left: 0.5px solid rgba(0, 0, 0, 0.5);
+    border-right: 0.5px solid rgba(0, 0, 0, 0.5);
+  }
 `;
 
 const ResponseElementWrapper = styled.div`
@@ -29,6 +35,10 @@ const ResponseElementWrapper = styled.div`
   flex-grow: 2;
   align-items: center;
   border-right: 0.5px solid rgba(0, 0, 0, 0.5);
+
+  @media (max-width: 768px) {
+    border-left: 0.5px solid rgba(0, 0, 0, 0.5);
+  }
 `;
 
 const ShellImgPreviewWrapper = styled.div`

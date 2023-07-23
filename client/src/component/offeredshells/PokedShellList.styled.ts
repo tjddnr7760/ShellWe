@@ -14,15 +14,30 @@ const IntroBox = styled.div`
   gap: 10px;
   background-color: rgba(202, 240, 248, 0.15);
   border-bottom: 0.5px solid rgba(0, 0, 0, 0.5);
+
+  @media (max-width: 768px) {
+    min-width: 150px;
+    padding: 15px;
+    height: 80px;
+  }
 `;
 
 const IntroText1 = styled.div`
   min-width: 150px;
   font-size: 20px;
+  @media (max-width: 768px) {
+    font-size: 18px;
+  }
 `;
 const IntroText2 = styled.div`
   min-width: 150px;
   font-size: 16px;
+  line-height: 18px;
+
+  @media (max-width: 768px) {
+    font-size: 12px;
+    line-height: 13px;
+  }
 `;
 
 const ShellInfoListContainer = styled.div`

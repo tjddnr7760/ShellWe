@@ -30,6 +30,11 @@ const Icon = styled(Avatar)`
 const UserImg = styled(Avatar)`
   width: 80px;
   height: 80px;
+
+  @media (max-width: 768px) {
+    width: 60px;
+    height: 60px;
+  }
 `;
 
 export { Icon, UserImg };

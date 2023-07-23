@@ -1,10 +1,16 @@
 import styled from 'styled-components';
 
+const ProfileWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+`;
+
 const ProfileContainer = styled.div`
   display: flex;
   max-width: 700px;
   height: fit-content;
-  gap: 20px;
+  gap: 10px;
 
   @media (max-width: 768px) {
     min-width: 300px;
@@ -91,6 +97,20 @@ const Introduction = styled.div`
   }
 `;
 
+const TagsContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  border: 0.5px solid rgba(0, 0, 0, 0.2);
+  border-radius: 10px;
+  padding: 10px;
+`;
+const TagExplainText = styled.div`
+  font-size: 20px;
+  padding: 5px;
+  @media (max-width: 768px) {
+    font-size: 16px;
+  }
+`;
 const AllCurrentTags = styled.div`
   display: flex;
   align-items: center;
@@ -98,19 +118,22 @@ const AllCurrentTags = styled.div`
   background-color: #ffffff;
   border-radius: 10px;
   font-size: 20px;
+  flex-wrap: wrap;
   @media (max-width: 768px) {
     font-size: 16px;
-    width: 220px;
   }
 `;
 
 export {
+  ProfileWrapper,
   ProfileContainer,
   UserImg,
   DisplayName,
   Introduction,
   ImgandNameContainer,
   IntroductionContainer,
+  TagsContainer,
+  TagExplainText,
   AllCurrentTags,
   Box,
   Box2,

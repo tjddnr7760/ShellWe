@@ -11,7 +11,11 @@ const MyShellListWrapper = styled.div`
   height: 500px;
   padding-top: 25px;
   padding-bottom: 15px;
-  overflow-y: scroll;
+
+  @media (max-width: 768px) {
+    width: 300px;
+    height: 500px;
+  }
 `;
 
 const MyShellList = ({

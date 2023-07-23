@@ -14,6 +14,11 @@ const ResponseShellWrapper = styled.div`
   gap: 30px;
   padding: 30px;
   align-items: center;
+
+  @media (max-width: 768px) {
+    gap: 10px;
+    padding: 10px;
+  }
 `;
 
 const ShellsImageBox = styled.div`
@@ -28,6 +33,11 @@ const ShellsImageBox = styled.div`
   border: 0.5px solid rgba(0, 0, 0, 0.5);
   border-radius: 10px;
   flex-grow: 1;
+
+  @media (max-width: 768px) {
+    max-width: 100px;
+    min-width: 0px;
+  }
 `;
 
 const ShellImg = styled.img`
@@ -43,6 +53,10 @@ const ShellsTextInfoBox = styled.div`
   font-size: 20px;
   line-height: 25px;
   flex-grow: 10;
+
+  @media (max-width: 768px) {
+    font-size: 16px;
+  }
 `;
 
 const TextBox = styled.div`
@@ -51,6 +65,9 @@ const TextBox = styled.div`
   flex-grow: 1;
   padding: 10px;
   border-bottom: 0.5px solid rgba(0, 0, 0, 0.5);
+  @media (max-width: 768px) {
+    padding: 5px;
+  }
 `;
 
 const BodyBox = styled.div`
@@ -59,6 +76,9 @@ const BodyBox = styled.div`
   padding-left: 5px;
   flex-grow: 3;
   padding: 10px;
+  @media (max-width: 768px) {
+    padding: 5px;
+  }
 `;
 
 const AcceptInfo = styled.div`
@@ -81,6 +101,11 @@ const UserImg = styled.img`
 
 const AcceptButton = styled(SmallButton4)`
   font-weight: 400;
+
+  @media (max-width: 768px) {
+    width: 80px;
+    height: 40px;
+  }
 `;
 
 export {

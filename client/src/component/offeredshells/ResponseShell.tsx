@@ -48,7 +48,7 @@ const ResponseShell = ({
       </ShellsImageBox>
       <ShellsTextInfoBox>
         <TextBox>{shell.title}</TextBox>
-        <TextBox>{shell.category}</TextBox>
+        <TextBox>{shell.category.slice(2).toUpperCase()}</TextBox>
         <BodyBox>{MakePartOfBodyText(shell.body || '', 123)}</BodyBox>
       </ShellsTextInfoBox>
       <AcceptInfo>
