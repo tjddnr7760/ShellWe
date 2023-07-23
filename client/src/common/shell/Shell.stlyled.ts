@@ -9,6 +9,12 @@ export const ShellContainer = styled.div`
   background-color: #caf0f8;
   border-radius: 10px;
   cursor: pointer;
+  width: 270px;
+  height: 300px;
+  @media (max-width: 768px) {
+    width: 200px;
+    height: 200px;
+  }
 `;
 export const ShellImgWrapper = styled.div`
   position: relative;
@@ -45,7 +51,7 @@ export const LikeShellIcon = styled.img`
 export const ShellInfoWrapper = styled.div`
   display: flex;
   align-items: center;
-
+  justify-content: center;
   margin: 10px;
   gap: 10px;
 `;
@@ -53,7 +59,7 @@ export const ShellInfoWrapper = styled.div`
 export const ShellTitleInfo = styled.div`
   color: #000;
   font-family: Inter;
-  font-size: 14px;
+  font-size: 16px;
   font-style: normal;
   font-weight: 500;
   line-height: normal;
@@ -61,4 +67,13 @@ export const ShellTitleInfo = styled.div`
   border-radius: 10px;
   padding: 10px;
   flex-grow: 1;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  width: 205px;
+
+  @media (max-width: 768px) {
+    width: 135px;
+    height: 36px;
+  }
 `;

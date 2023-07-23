@@ -5,7 +5,8 @@ import { v4 as uuidv4 } from 'uuid';
 import { queryKeys } from '../../dataset/queryKey';
 
 const getImageFile = async (imageUrl: string) => {
-  const response = await axios.get(imageUrl, {
+  const newUrl = imageUrl.slice(0, 4) + imageUrl.slice(5);
+  const response = await axios.get(newUrl, {
     responseType: 'blob',
   });
 
@@ -16,6 +17,7 @@ const getImageFile = async (imageUrl: string) => {
   return file;
 };
 export const useImageUpload = (updateInitalImages: string[]) => {
+  console.log(updateInitalImages);
   const queryResults = useQueries(
     updateInitalImages.map((imageUrl) => ({
       queryKey: ['convert to image file', queryKeys.imageData, imageUrl],

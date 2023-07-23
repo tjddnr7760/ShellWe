@@ -17,7 +17,7 @@ const ImageWrapper = styled.div`
 
 const ShellImgContainer = styled.div`
   display: flex;
-  width: 2000px;
+  width: 2600px;
   overflow: hidden;
   transition: transform 0.6s ease-in-out;
 `;
