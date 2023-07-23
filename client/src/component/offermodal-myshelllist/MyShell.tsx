@@ -7,10 +7,10 @@ import {
   ButtonDiv,
 } from './MyShell.styled';
 import { SmallButton3 } from '../../common/button/Button.styled.ts';
-import { MyShells } from '../../dataset/ShellDetailType.ts';
+import { MyShells } from '../../dataset/TypeOfShellDetail.ts';
 import Poke from '../../asset/poke.svg';
 import { usePokeShell } from '../../hooks/shelldetail/usePokeShell.ts';
-import { RequestBodyForPoke } from '../../dataset/ShellDetailType';
+import { RequestBodyForPoke } from '../../dataset/TypeOfShellDetail.ts';
 const MyShell = ({
   shell,
   shellMemberId,

@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { MyShellsDataProps } from '../../dataset/ShellDetailType.ts';
+import { MyShellsDataProps } from '../../dataset/TypeOfShellDetail.ts';
 import MyShell from './MyShell.tsx';
 
 const MyShellListWrapper = styled.div`

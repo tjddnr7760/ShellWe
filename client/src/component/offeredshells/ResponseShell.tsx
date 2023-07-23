@@ -6,7 +6,6 @@ import {
   TextBox,
   BodyBox,
   AcceptInfo,
-  UserImg,
   AcceptButton,
 } from './ResponseShell.styled';
 import { useAcceptShell } from '../../hooks/offer/useAccept';

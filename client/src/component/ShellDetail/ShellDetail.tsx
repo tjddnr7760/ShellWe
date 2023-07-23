@@ -18,7 +18,7 @@ import {
   PokeBox,
   ShellStatus,
 } from './ShellDetail.styled.ts';
-import { ShellDetailProps, Tag } from '../../dataset/ShellDetailType.ts';
+import { ShellDetailProps, Tag } from '../../dataset/TypeOfShellDetail.ts';
 import TagBox from '../../common/tag/TagBox.tsx';
 import { getMemberIdFromLocalStorage } from '../../utill/localstorageData.ts';
 

@@ -19,6 +19,7 @@ import noprofile from '../../asset/avatar/defaultprofile.webp';
 const Profile = ({ memberInfo, showTags, data }: MyShellsProfileProps) => {
   const [allTags, setAlltag] = useState<string[]>([]);
 
+  // ["tagName": "태그1", "tagName": "태그1", "tagName": "태그1", "tagName": "태그1", "tagName": "태그1"]
   const MakeAllTags = () => {
     if (data.shells) {
       const tagsSet = new Set<string>();
@@ -61,7 +62,7 @@ const Profile = ({ memberInfo, showTags, data }: MyShellsProfileProps) => {
           <IntroductionContainer>
             <Introduction>{memberInfo?.introduction}</Introduction>
           </IntroductionContainer>
-          {showTags && (
+          {showTags && allTags.length !== 0 && (
             <AllCurrentTags>
               {allTags.map((tag) => (
                 <TagBox key={uuidv4()} type="read" tag={tag} />

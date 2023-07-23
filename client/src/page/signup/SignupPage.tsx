@@ -1,6 +1,8 @@
 import { useState, useEffect } from 'react';
-import { useMutation } from 'react-query';
-import axios from 'axios';
+import googlelogo from '../../asset/googlelogo.png';
+import EmailConfirmation from './EmailComfirmation';
+import { usePostSignup } from '../../hooks/login/PostSignup';
+import { GoogleLogin } from '../../utill/googleLogin';
 import {
   LoginContainer,
   LoginBox,
@@ -16,9 +18,6 @@ import {
   CheckPosible,
   LoginButton,
 } from '../login/LoginPage.styled';
-import googlelogo from '../../asset/googlelogo.png';
-import EmailConfirmation from './EmailComfirmation';
-import { usePostSignup } from '../../hooks/login/PostSignup';
 
 const SignupPage = () => {
   const [displayName, setDispayName] = useState<string>('');
@@ -53,42 +52,9 @@ const SignupPage = () => {
     );
   }, [isNicknameValid, isPasswordValid, isCheckPasswordValid, isEmailValid]);
 
-  const signupMutation = useMutation(async () => {
-    const response = await axios.post(`${import.meta.env.VITE_KEY}/members`, {
-      email,
-      password,
-      displayName,
-    });
-    return response.data;
-  });
-
-  // 1. 회원가입 post mutation 생성
-
   const handleSignup = () => {
     signup();
     setactiveEmailConfirmation(true);
-  };
-
-  // const handleSignup = async (e: any) => {
-  //   e.preventDefault();
-  //   setactiveEmailConfirmation(true);
-
-  //   try {
-  //     const data = await signupMutation.mutateAsync();
-  //     console.log(
-  //       '이메일 인증이 완료되었습니다. \n로그인 페이지에서 로그인을 진행해주시기 바랍니다.',
-  //       data
-  //     );
-  //   } catch (error) {
-  //     console.error('회원 가입 실패.', error);
-  //     setEmail('');
-  //   }
-  // };
-
-  const LoginRequestHandlerGoogle = () => {
-    window.location.href = `${
-      import.meta.env.VITE_KEY
-    }/oauth2/authorization/google`;
   };
 
   return (
@@ -99,7 +65,7 @@ const SignupPage = () => {
             src="https://cdn-icons-png.flaticon.com/512/499/499857.png"
             alt="Logo"
           ></Logo>
-          <OauthContainer onClick={LoginRequestHandlerGoogle}>
+          <OauthContainer onClick={GoogleLogin}>
             <OauthImg src={googlelogo}></OauthImg>
             <OauthText>Sign up with Google</OauthText>
           </OauthContainer>
@@ -138,7 +104,7 @@ const SignupPage = () => {
               <div>Password</div>
               <DivInputBox>
                 <DivInput
-                  placeholder="  알파벳, 숫자 포함 8자 이상이어야 합니다."
+                  placeholder="알파벳, 숫자 포함 8자 이상"
                   type="password"
                   value={password}
                   onChange={(e: any) => setPassword(e.target.value)}

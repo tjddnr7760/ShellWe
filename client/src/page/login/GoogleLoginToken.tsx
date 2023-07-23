@@ -18,7 +18,7 @@ export const GoogleLoginToken = () => {
     'Authorization'
   );
 
-  accessToken && localStorage.setItem('Authorization', accessToken);
+  accessToken && localStorage.setItem('accessToken', accessToken);
   id && localStorage.setItem('id', id);
   profileUrl && localStorage.setItem('profileUrl', profileUrl);
   if (displayName) {

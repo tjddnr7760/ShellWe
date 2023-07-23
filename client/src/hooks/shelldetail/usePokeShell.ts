@@ -5,7 +5,7 @@ import { axiosInstance, getHeader } from '../../utill/axiosInstance';
 import {
   RequestBodyForPoke,
   ApiResponseOfPokeShell,
-} from '../../dataset/ShellDetailType';
+} from '../../dataset/TypeOfShellDetail';
 
 const postBuyerShellsId = async (
   sellerMemberId: number,

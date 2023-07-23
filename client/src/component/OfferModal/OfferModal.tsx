@@ -10,7 +10,7 @@ import {
   NoticeBody,
 } from './OfferModal.styled.ts';
 import plus from '../../asset/plus.svg';
-import { OfferModalProps } from '../../dataset/ShellDetailType.ts';
+import { OfferModalProps } from '../../dataset/TypeOfShellDetail.ts';
 
 const OfferModal = ({
   shellMemberId,

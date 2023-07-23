@@ -1,5 +1,5 @@
 import { SeeMoreBodyWrapper, Category } from './ShellDetail.styled.ts';
-import { BodyProps } from '../../dataset/ShellDetailType.ts';
+import { BodyProps } from '../../dataset/TypeOfShellDetail.ts';
 
 const SeeMoreBody = ({ category, body }: BodyProps) => {
   return (

@@ -19,6 +19,7 @@ import OfferedShellsPage from './page/offeredshells/OfferedShellsPage.tsx';
 import DirectMessage from './page/directmessage/DirectMessage.tsx';
 import SearchPage from './page/searchpage/SearchPage.tsx';
 import GoogleLoginToken from './page/login/GoogleLoginToken.tsx';
+import OauthFailPage from './page/login/OauthFailPage.tsx';
 
 function App() {
   return (
@@ -36,6 +37,10 @@ function App() {
             <Route
               path="/oauth2/authorization/google/success"
               element={<GoogleLoginToken />}
+            />
+            <Route
+              path="/oauth2/authorization/google/fail"
+              element={<OauthFailPage />}
             />
             <Route path="/shelllist/product" element={<ProductShell />} />
             <Route path="/shelllist/talent" element={<TalentShell />} />
