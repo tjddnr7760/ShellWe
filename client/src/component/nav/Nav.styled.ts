@@ -57,7 +57,7 @@ export const NavItem = styled.div`
     background-color: #c8f5ff;
   }
 
-  &.selected {
+  &.selectedTab {
     background-color: #c8f5ff;
   }
 `;
@@ -82,7 +82,7 @@ export const NavItemContent = styled.div`
     cursor: pointer;
     background-color: #c8f5ff;
   }
-  &.selected {
+  &.selectedTab {
     background-color: #c8f5ff;
   }
 `;
