@@ -2,7 +2,6 @@ import styled from 'styled-components';
 
 export const ShellContainer = styled.div`
   width: fit-content;
-  max-width: 400px;
   height: fit-content;
   flex-shrink: 0;
   box-shadow: 1px 1px 1px 0px rgba(0, 0, 0, 0.25);
