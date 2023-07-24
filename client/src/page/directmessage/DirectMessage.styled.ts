@@ -24,6 +24,9 @@ export const MessageListContainer = styled.div`
   padding: 10px;
   background-color: #bbe7ff;
   cursor: pointer;
+  @media (max-width: 768px) {
+    padding: 8px;
+  }
 `;
 
 export const MessageRoomWrapper = styled.div`
@@ -42,12 +45,17 @@ export const MessageListHeader = styled.div`
   gap: 10px;
   height: 130px;
   font-size: 20px;
-  padding-top: 20px;
+  padding-top: 10px;
   padding-left: 15px;
   background-color: #bbe7ff;
   border-radius: 15px 15px 0 0;
   @media (max-width: 768px) {
+    padding-top: 0px;
+    gap: 5px;
     border-radius: 0;
+    font-size: 16px;
+    height: 90px;
+    padding-left: 20px;
   }
 `;
 
@@ -65,6 +73,9 @@ export const MessageMyInfo = styled.div`
   font-weight: 400;
   font-size: 26px;
   margin-bottom: 6px;
+  @media (max-width: 768px) {
+    font-size: 22px;
+  }
 `;
 
 export const MessageListBox = styled.div`
@@ -78,6 +89,9 @@ export const MessageContainer = styled.div`
   padding: 12px;
   background-color: white;
   font-size: 16px;
+  @media (max-width: 768px) {
+    width: 277px;
+  }
 `;
 
 export const MessageBox = styled.div`
@@ -134,4 +148,7 @@ export const AvatarContainer = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  @media (max-width: 768px) {
+    padding-left: 5px;
+  }
 `;
