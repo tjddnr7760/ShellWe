@@ -14,10 +14,14 @@ export const ImageContainer = styled.img`
   height: 40px;
   cursor: pointer;
   object-fit: cover;
+  @media (max-width: 768px) {
+    width: 30px;
+    height: 30px;
+  }
 `;
 
 export const TextAreaContainer = styled.div`
-  border-radius: 25px;
+  border-radius: 15px;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -31,7 +35,7 @@ export const TextAreaContainer = styled.div`
 export const TextArea = styled.input`
   border: none;
   flex-grow: 1;
-  border-radius: 25px;
+  border-radius: 15px;
   padding-left: 10px;
   &:focus {
     outline: none;
@@ -50,5 +54,12 @@ export const SendButton = styled.button`
   &:hover {
     color: #023e8a;
     background-color: #90e0ef;
+  }
+
+  @media (max-width: 768px) {
+    width: 40px;
+    height: 40px;
+    margin-right: 3px;
+    margin: 3px;
   }
 `;

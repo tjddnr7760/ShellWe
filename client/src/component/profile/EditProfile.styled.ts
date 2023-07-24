@@ -11,6 +11,7 @@ const Wrapper = styled.div`
   border: 0.5px solid rgba(0, 0, 0, 0.5);
   padding: 50px;
   @media (max-width: 768px) {
+    gap: 30px;
     padding: 30px;
   }
 `;
@@ -27,6 +28,10 @@ const ProfileImageBox = styled.div`
   align-items: center;
   width: 200px;
   height: auto;
+
+  @media (max-width: 768px) {
+    max-width: 150px;
+  }
 `;
 
 const ProfileImage = styled.div`
@@ -41,6 +46,11 @@ const ProfileImage = styled.div`
   border-radius: 10px 10px 0px 0px;
   font-size: 20px;
   overflow: hidden;
+
+  @media (max-width: 768px) {
+    max-width: 150px;
+    max-height: 150px;
+  }
 `;
 
 const ImageBox = styled.div`
@@ -56,10 +66,19 @@ const Image = styled.img`
   max-height: 200px;
   width: auto;
   height: fit-content;
+
+  @media (max-width: 768px) {
+    max-width: 150px;
+    max-height: 150px;
+  }
 `;
 
 const Title = styled.div`
   font-size: 20px;
+
+  @media (max-width: 768px) {
+    font-size: 16px;
+  }
 `;
 
 const TextDiv = styled.div`
@@ -73,6 +92,11 @@ const TextDiv = styled.div`
   color: #fff;
   border-radius: 0px 0px 10px 10px;
   padding: 10px;
+
+  @media (max-width: 768px) {
+    font-size: 15px;
+    padding: 8px;
+  }
 `;
 
 const DisplayNameInput = styled.input`
@@ -83,6 +107,11 @@ const DisplayNameInput = styled.input`
   border-radius: 5px;
   border: 0.5px solid rgba(0, 0, 0, 0.5);
   padding: 10px;
+
+  @media (max-width: 768px) {
+    font-size: 16px;
+    padding: 8px;
+  }
 `;
 
 const IntroductionInput = styled.textarea`
@@ -94,12 +123,21 @@ const IntroductionInput = styled.textarea`
   border-radius: 5px;
   border: 0.5px solid rgba(0, 0, 0, 0.5);
   padding: 10px;
+
+  @media (max-width: 768px) {
+    font-size: 16px;
+    padding: 8px;
+  }
 `;
 
 const SaveButton = styled(SmallButton6)`
   width: 125px;
   height: 40px;
   border: 0.5px solid rgba(0, 0, 0, 0.5);
+  @media (max-width: 768px) {
+    width: 120px;
+    height: 35px;
+  }
 `;
 
 const CancelButton = styled(SaveButton)`

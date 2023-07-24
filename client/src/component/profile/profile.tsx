@@ -1,6 +1,7 @@
 import { v4 as uuidv4 } from 'uuid';
 import { useEffect, useState } from 'react';
 import {
+  ProfileWrapper,
   ProfileContainer,
   UserImg,
   DisplayName,
@@ -11,6 +12,8 @@ import {
   AllCurrentTags,
   Box,
   Box2,
+  TagExplainText,
+  TagsContainer,
 } from './profile.styled';
 import { MyShellsProfileProps } from '../../dataset/TypeOfMyShells';
 import TagBox from '../../common/tag/TagBox';
@@ -38,7 +41,7 @@ const Profile = ({ memberInfo, showTags, data }: MyShellsProfileProps) => {
   useEffect(() => MakeAllTags(), [data]);
 
   return (
-    <div>
+    <ProfileWrapper>
       <ProfileContainer>
         <Box>
           <ImgandNameContainer>
@@ -61,16 +64,21 @@ const Profile = ({ memberInfo, showTags, data }: MyShellsProfileProps) => {
           <IntroductionContainer>
             <Introduction>{memberInfo?.introduction}</Introduction>
           </IntroductionContainer>
-          {showTags && allTags.length !== 0 && (
-            <AllCurrentTags>
-              {allTags.map((tag) => (
-                <TagBox key={uuidv4()} type="read" tag={tag} />
-              ))}
-            </AllCurrentTags>
-          )}
         </Box2>
       </ProfileContainer>
-    </div>
+      {showTags && allTags.length !== 0 && (
+        <TagsContainer>
+          <TagExplainText>
+            {memberInfo?.displayName}님이 원하는 Shell
+          </TagExplainText>
+          <AllCurrentTags>
+            {allTags.map((tag) => (
+              <TagBox key={uuidv4()} type="read" tag={tag} />
+            ))}
+          </AllCurrentTags>
+        </TagsContainer>
+      )}
+    </ProfileWrapper>
   );
 };
 export default Profile;

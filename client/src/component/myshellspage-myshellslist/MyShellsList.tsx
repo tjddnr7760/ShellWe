@@ -8,9 +8,13 @@ const MyShellListWrapper = styled.div`
   align-items: center;
   gap: 20px;
   width: auto;
-  height: 700px;
-  padding: 15px;
-  overflow-y: scroll;
+  padding: 10px;
+  height: 100%;
+
+  @media (max-width: 768px) {
+    padding: 0px;
+    min-height: 30px;
+  }
 `;
 
 const MyShellsList = ({

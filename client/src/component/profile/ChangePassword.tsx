@@ -32,12 +32,10 @@ const ChangePassword = () => {
       setNewPassword(value);
       if (
         !value.match(
-          /^(?=.*[a-zA-Z])(?=.*\d)(?=.*[!@#$%&])[a-zA-Z\d!@#$%&*]{10,}$/
+          /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d!@#$%^&*()\-_=+~<>?/\\[\]{},.;:'"|]{8,}$/
         )
       ) {
-        setNewPasswordError(
-          '영문 대소문자, 특수문자를 포함한 10자리 이상이어야 합니다.'
-        );
+        setNewPasswordError('알파벳, 숫자 포함 8자 이상이어야 합니다.');
         setIsPasswordValid(false);
       } else {
         setNewPasswordError(undefined);

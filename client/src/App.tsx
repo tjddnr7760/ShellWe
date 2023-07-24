@@ -1,4 +1,5 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { useMediaQuery } from 'react-responsive';
 import './App.css';
 import GlobalStyle from './style/GlobalStyle.ts';
 import Footer from './component/footer/Footer.tsx';
@@ -20,7 +21,6 @@ import DirectMessage from './page/directmessage/DirectMessage.tsx';
 import SearchPage from './page/searchpage/SearchPage.tsx';
 import GoogleLoginToken from './page/login/GoogleLoginToken.tsx';
 import OauthFailPage from './page/login/OauthFailPage.tsx';
-import { useMediaQuery } from 'react-responsive';
 import Header from './component/header/Header.tsx';
 
 function App() {
@@ -58,7 +58,7 @@ function App() {
             <Route path="/search" element={<SearchPage />} />
             <Route path="*" element={<HomePage />} />
           </Routes>
-          <Footer />
+          {isMobileScreen ? null : <Footer />}
         </div>
       </main>
     </BrowserRouter>

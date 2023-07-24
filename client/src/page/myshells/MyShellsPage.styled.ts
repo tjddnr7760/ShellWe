@@ -11,9 +11,14 @@ const MyShellsPageContainer = styled.div`
   display: flex;
   flex-direction: column;
   width: 735px;
-  height: fit-content;
-  gap: 10px;
+  height: auto;
+  gap: 15px;
   padding: 35px;
+
+  @media (max-width: 768px) {
+    width: 100%;
+    padding: 15px;
+  }
 `;
 
 export { MyShellsPageWrapper, MyShellsPageContainer };

@@ -24,6 +24,9 @@ const ContentBox = styled.div`
 
 const Title = styled.div`
   font-size: 20px;
+  @media (max-width: 768px) {
+    font-size: 16px;
+  }
 `;
 
 const Input = styled.input`
@@ -33,7 +36,11 @@ const Input = styled.input`
   height: 30px;
   border-radius: 5px;
   border: 0.5px solid rgba(0, 0, 0, 0.5);
-  padding: 5px;
+  padding: 10px;
+  @media (max-width: 768px) {
+    font-size: 16px;
+    padding: 8px;
+  }
 `;
 
 const ButtonBox = styled.div`

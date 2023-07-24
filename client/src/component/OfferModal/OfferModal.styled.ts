@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 const Wrapper = styled.div`
-  position: fixed;
+  /* position: fixed; */
   display: flex;
   flex-direction: column;
   width: 600px;
@@ -9,14 +9,18 @@ const Wrapper = styled.div`
   border: 0.5px solid #48cae4;
   border-radius: 10px;
   background-color: rgba(202, 240, 248, 0.9);
+  @media (max-width: 768px) {
+    width: 320px;
+    height: 400px;
+  }
 `;
 
 const Div = styled.div`
   display: flex;
-  flex-direction: column;
   justify-content: center;
   align-items: center;
   height: 100px;
+  padding: 10px;
 `;
 
 const CreateShellButton = styled.button`
@@ -27,6 +31,18 @@ const CreateShellButton = styled.button`
   background-color: #ffffff;
   &:hover {
     background-color: #48cae4;
+  }
+
+  @media (max-width: 768px) {
+    width: 50px;
+    height: 50px;
+    padding: 10px;
+  }
+`;
+
+const PlusImage = styled.img`
+  @media (max-width: 768px) {
+    width: 100%;
   }
 `;
 
@@ -39,6 +55,12 @@ const ShellListContainer = styled.div`
   height: 500px;
   border-radius: 0px 0px 10px 10px;
   margin-bottom: 1px;
+  overflow-y: scroll;
+  overflow-x: hidden;
+
+  @media (max-width: 768px) {
+    height: 400px;
+  }
 `;
 
 const NoneShellsNotice = styled.div`
@@ -51,13 +73,21 @@ const NoneShellsNotice = styled.div`
 
 const NoticeTitle = styled.p`
   font-size: 90px;
+
+  @media (max-width: 768px) {
+    font-size: 40px;
+  }
 `;
 const NoticeBody = styled.p`
   font-size: 20px;
+  @media (max-width: 768px) {
+    font-size: 16px;
+  }
 `;
 
 export {
   CreateShellButton,
+  PlusImage,
   Wrapper,
   Div,
   ShellListContainer,

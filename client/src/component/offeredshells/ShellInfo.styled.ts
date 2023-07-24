@@ -9,6 +9,10 @@ const ShellInfoContainer = styled.div`
   &:active {
     background-color: rgba(202, 240, 248, 0.15);
   }
+
+  @media (max-width: 768px) {
+    padding: 0px 0px 0px 10px;
+  }
 `;
 const ImageContainer = styled.div`
   display: flex;
@@ -38,6 +42,11 @@ const TextBox = styled.div`
   border-radius: 10px;
   font-size: 20px;
   padding-left: 10px;
+
+  @media (max-width: 768px) {
+    font-size: 16px;
+    padding-left: 0;
+  }
 `;
 
 export { ShellInfoContainer, ImageContainer, ImageBox, ShellImage, TextBox };

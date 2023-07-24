@@ -24,6 +24,10 @@ const ContentBox = styled.div`
 
 const Title = styled.div`
   font-size: 20px;
+
+  @media (max-width: 768px) {
+    font-size: 16px;
+  }
 `;
 
 const Notice = styled.div`
@@ -38,17 +42,27 @@ const Notice = styled.div`
   height: 150px;
   line-height: 150%;
   font-size: 20px;
+  @media (max-width: 768px) {
+    font-size: 16px;
+    max-width: 250px;
+    height: 100px;
+  }
 `;
 
 const ButtonBox = styled.div`
   display: flex;
   gap: 10px;
+
+  @media (max-width: 768px) {
+    justify-content: space-around;
+  }
 `;
 
 const PasswordInputModal = styled.div`
   display: flex;
   flex-direction: column;
   gap: 30px;
+
   div {
     display: flex;
     flex-direction: column;

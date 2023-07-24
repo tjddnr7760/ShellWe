@@ -11,6 +11,10 @@ const TagContainer = styled.div`
   &:focus-within {
     border-color: #023e8a;
   }
+
+  @media (max-width: 768px) {
+    padding: 0;
+  }
 `;
 
 const TagWrapper = styled.div`
@@ -23,6 +27,10 @@ const TagWrapper = styled.div`
   white-space: nowrap;
   border-radius: 5px;
   background-color: #0096c7;
+  @media (max-width: 768px) {
+    margin: 3px;
+    padding: 4px;
+  }
 `;
 
 const TagText = styled.span`
@@ -34,6 +42,11 @@ const TagText = styled.span`
   text-align: left;
   margin-right: 4px;
   color: white;
+
+  @media (max-width: 768px) {
+    margin: 0;
+    font-size: 16px;
+  }
 `;
 
 const CloseButton = styled.button`
