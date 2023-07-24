@@ -10,7 +10,7 @@ const Wrapper = styled.div`
 
 const OfferedShellsPageWrapper = styled.div`
   display: flex;
-  width: 1500px;
+  width: 1250px;
   height: 100%;
 
   @media (max-width: 768px) {
