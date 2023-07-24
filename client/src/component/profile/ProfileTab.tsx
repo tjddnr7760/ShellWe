@@ -5,12 +5,19 @@ const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   max-width: 700px;
-  height: 40px;
+  height: auto;
+
+  @media (max-width: 768px) {
+    height: auto;
+  }
 `;
 
 const TabContainer = styled.div`
   display: flex;
   gap: 20px;
+  @media (max-width: 768px) {
+    gap: 10px;
+  }
 `;
 
 const TabButton = styled.div`
@@ -30,6 +37,12 @@ const TabButton = styled.div`
   &.selected {
     background-color: #00b4d8;
     color: #fff;
+  }
+
+  @media (max-width: 768px) {
+    border-radius: 10px;
+    font-size: 14px;
+    height: 35px;
   }
 `;
 

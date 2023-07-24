@@ -7,9 +7,11 @@ const Wrapper = styled.div`
 
 const DetailPageContainer = styled.div`
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
   padding: 50px;
+  gap: 10px;
 `;
 
 const PreviewDiv = styled.div`

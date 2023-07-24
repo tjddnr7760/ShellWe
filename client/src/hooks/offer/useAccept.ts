@@ -31,6 +31,7 @@ export const useAcceptShell = () => {
       onSuccess: () => {
         // testFunction;
         navigate(`/dm/${memberId}`);
+        alert('요청을 수락하셨습니다! DM으로 교환을 시도해보세요!');
       },
       onError(res: any) {
         switch (res.response.data.message) {

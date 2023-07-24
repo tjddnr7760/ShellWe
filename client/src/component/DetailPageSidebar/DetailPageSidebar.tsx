@@ -17,12 +17,12 @@ const DetailPageSidebar = ({ shellStatus }: { shellStatus: string }) => {
   });
 
   const handleClick = () => {
-    patchStateOfShell(); // 거래 상태 수정
+    patchStateOfShell();
     setToggleOn((prevToggle) => !prevToggle);
   };
 
   const DeleteShellhandler = () => {
-    deleteShell(); // 게시글 삭제
+    deleteShell();
   };
 
   const goToShellUpdatePage = () => {

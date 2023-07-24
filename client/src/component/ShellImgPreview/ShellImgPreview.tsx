@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useMediaQuery } from 'react-responsive';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faAngleLeft, faAngleRight } from '@fortawesome/free-solid-svg-icons';
 import {
@@ -14,6 +15,7 @@ const ShellImgPreview = ({
   clickedShellPictures,
 }: clickedShellPicturesProps) => {
   const [slideIndex, setSlideIndex] = useState(0);
+  const isMobileScreen = useMediaQuery({ maxWidth: 768 });
 
   const handlePreviousSlide = () => {
     setSlideIndex((prevIndex: number) =>
@@ -30,7 +32,11 @@ const ShellImgPreview = ({
   return (
     <ImageWrapper>
       <ShellImgContainer
-        style={{ transform: `translateX(-${slideIndex * 640}px)` }}
+        style={{
+          transform: isMobileScreen
+            ? `translateX(-${slideIndex * 320}px)`
+            : `translateX(-${slideIndex * 640}px)`,
+        }}
       >
         {clickedShellPictures.map((picture) => (
           <Preview key={picture.order} picture={picture} />

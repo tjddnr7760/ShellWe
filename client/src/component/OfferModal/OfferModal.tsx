@@ -8,6 +8,7 @@ import {
   NoneShellsNotice,
   NoticeTitle,
   NoticeBody,
+  PlusImage,
 } from './OfferModal.styled.ts';
 import plus from '../../asset/plus.svg';
 import { OfferModalProps } from '../../dataset/TypeOfShellDetail.ts';
@@ -26,7 +27,7 @@ const OfferModal = ({
     <Wrapper>
       <Div>
         <CreateShellButton onClick={goToShellCreatePage}>
-          <img src={plus} alt="create-newshell" />
+          <PlusImage src={plus} alt="create-newshell" />
         </CreateShellButton>
       </Div>
       <ShellListContainer>

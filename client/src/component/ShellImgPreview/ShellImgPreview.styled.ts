@@ -20,6 +20,9 @@ const ShellImgContainer = styled.div`
   width: 2600px;
   overflow: hidden;
   transition: transform 0.6s ease-in-out;
+  @media (max-width: 768px) {
+    width: 1300px;
+  }
 `;
 
 const ShellImgBox = styled.div`

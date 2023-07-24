@@ -7,6 +7,8 @@ import {
   ContentImg,
   ContentImgBox,
   Outtro,
+  OuttroImgBox,
+  ContentTextBox,
 } from './HomePage.styled';
 import DM from '../../asset/homepage/DM.png';
 import poke from '../../asset/homepage/poke.png';
@@ -26,57 +28,53 @@ const HomePage = () => {
     <HomePageWrapper>
       <ContentContainer>
         <ContentBox>
-          <div>
+          <ContentTextBox>
             <Title>Shell We</Title>
             <Body>
               {intro1}
               <br />
               {intro2}
             </Body>
-          </div>
+          </ContentTextBox>
           <ContentImgBox>
             <ContentImg src={shellwefirstpage} alt="picture" />
           </ContentImgBox>
         </ContentBox>
-        {/* 물물교환 대표 사진 */}
         <ContentBox>
-          <div>
+          <ContentTextBox>
             <Title>물품 · 재능(Shell)</Title>
             <Body>{aboutproduct1}</Body>
-          </div>
+          </ContentTextBox>
           <ContentImgBox>
             <ContentImg src={poke} alt="picture" />
           </ContentImgBox>
         </ContentBox>
-        {/* product, talent 대표 사진 */}
         <ContentBox>
-          <div>
+          <ContentTextBox>
             <Title>찌르기</Title>
             <Body>
               {pokefeature1}
               <br />
               {pokefeature2}
             </Body>
-          </div>
+          </ContentTextBox>
           <ContentImgBox>
             <ContentImg src={poke2} alt="picture" />
           </ContentImgBox>
         </ContentBox>
-        {/* 찌르기 대표사진 */}
         <ContentBox>
-          <div>
+          <ContentTextBox>
             <Title>DM</Title>
             <Body>{messagefeature}</Body>
-          </div>
+          </ContentTextBox>
           <ContentImgBox>
             <ContentImg src={DM} alt="picture" />
           </ContentImgBox>
         </ContentBox>
-        {/* DM 대표 사진 */}
         <Outtro>
-          <ContentImgBox>
+          <OuttroImgBox>
             <ContentImg src={shallweshellwe} alt="picture" />
-          </ContentImgBox>
+          </OuttroImgBox>
         </Outtro>
       </ContentContainer>
     </HomePageWrapper>

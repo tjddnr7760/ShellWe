@@ -9,7 +9,13 @@ import {
 } from '../../page/offeredshells/OfferedShellsPage.styled';
 import { Pictures } from '../../dataset/TypesOfferedShell';
 
-const OfferedShell = ({ clickedShellId }: { clickedShellId: number }) => {
+const OfferedShell = ({
+  clickedShellId,
+  isPokedShellListOpen,
+}: {
+  clickedShellId: number;
+  isPokedShellListOpen: boolean;
+}) => {
   const [previewVisible, setPreviewVisible] = useState(false);
   const [clickedShellPictures, setClickedShellPictures] = useState<Pictures[]>([
     {
@@ -28,7 +34,9 @@ const OfferedShell = ({ clickedShellId }: { clickedShellId: number }) => {
   };
 
   return (
-    <ResponseElementWrapper>
+    <ResponseElementWrapper
+      ispokedshellopend={isPokedShellListOpen ? 'view' : 'noView'}
+    >
       <ShellImgPreviewWrapper>
         {previewVisible === true ? (
           <ShellImgPreview clickedShellPictures={clickedShellPictures} />

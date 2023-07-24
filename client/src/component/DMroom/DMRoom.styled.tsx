@@ -31,13 +31,14 @@ export const Notificationtext = styled.div`
   }
 `;
 export const MessageRoom = styled.div`
-  border-radius: 30px;
+  border-radius: 15px;
   background-color: #00000010;
   display: flex;
   flex-direction: column;
   align-items: stretch;
   overflow-y: scroll;
   flex: 1;
+  padding: 10px;
   @media (max-width: 768px) {
     border-radius: 0px;
     min-height: 600px;
