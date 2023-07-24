@@ -102,16 +102,14 @@ const Footer: React.FC = () => {
             <TechnologyStack>
               <span>BE</span>
               <div>
-                <li>Vite</li>
-                <li>react</li>
-                <li>React Router Dom</li>
-                <li>React Query</li>
-                <li>styled component</li>
-                <li>Axios</li>
-                <li>Recoil</li>
-                <li>Typescript</li>
-                <li>node, npm</li>
-                <li>eslint, prettier</li>
+                <li>Java</li>
+                <li>Spring</li>
+                <li>Spring Websocket</li>
+                <li>Spring Data Jpa</li>
+                <li>Spring Security</li>
+                <li>Mysql</li>
+                <li>Aws</li>
+                <li>Github Actions</li>
               </div>
             </TechnologyStack>
           </TechnologyStackContainer>
