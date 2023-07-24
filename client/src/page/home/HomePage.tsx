@@ -10,11 +10,11 @@ import {
   OuttroImgBox,
   ContentTextBox,
 } from './HomePage.styled';
-import DM from '../../asset/homepage/DM.png';
-import poke from '../../asset/homepage/poke.png';
-import poke2 from '../../asset/homepage/poke2.png';
+import DM from '../../asset/homepage/directmessage.png';
+import shelldetail from '../../asset/homepage/shelldetail.png';
+import pokeshell from '../../asset/homepage/pokeshell.png';
 import shallweshellwe from '../../asset/homepage/shallweshellwe.png';
-import shellwefirstpage from '../../asset/homepage/shellwefisrtpage.png';
+import shelllist from '../../asset/homepage/shelllist.png';
 
 const HomePage = () => {
   const intro1 = '혁신적인 물물교환 서비스';
@@ -37,7 +37,7 @@ const HomePage = () => {
             </Body>
           </ContentTextBox>
           <ContentImgBox>
-            <ContentImg src={shellwefirstpage} alt="picture" />
+            <ContentImg src={shelllist} alt="picture" />
           </ContentImgBox>
         </ContentBox>
         <ContentBox>
@@ -46,7 +46,7 @@ const HomePage = () => {
             <Body>{aboutproduct1}</Body>
           </ContentTextBox>
           <ContentImgBox>
-            <ContentImg src={poke} alt="picture" />
+            <ContentImg src={shelldetail} alt="picture" />
           </ContentImgBox>
         </ContentBox>
         <ContentBox>
@@ -59,7 +59,7 @@ const HomePage = () => {
             </Body>
           </ContentTextBox>
           <ContentImgBox>
-            <ContentImg src={poke2} alt="picture" />
+            <ContentImg src={pokeshell} alt="picture" />
           </ContentImgBox>
         </ContentBox>
         <ContentBox>

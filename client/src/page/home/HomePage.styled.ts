@@ -15,9 +15,12 @@ const ContentBox = styled.div`
   font-size: 50px;
   display: flex;
   justify-content: space-between;
-  padding: 120px;
+  padding: 150px 120px 120px 120px;
   gap: 20px;
 
+  @media (max-width: 1620px) {
+    padding: 150px 80px 120px 80px;
+  }
   @media (max-width: 768px) {
     padding: 30px;
     gap: 5px;
@@ -55,7 +58,7 @@ const Body = styled.div`
 `;
 
 const ContentImgBox = styled.div`
-  max-width: 700px;
+  max-width: 550px;
   height: fit-content;
 
   @media (max-width: 768px) {
