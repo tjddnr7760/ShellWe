@@ -1,5 +1,8 @@
+import { useRecoilValue } from 'recoil';
+import { userStateWithExpiry } from '../../recoil/selector';
 import { axiosInstance, getHeader } from '../../utill/axiosInstance';
 import { useMutation } from 'react-query';
+import { useNavigate } from 'react-router-dom';
 
 const getCartShell = async (id: number) => {
   const { data } = await axiosInstance({
@@ -10,9 +13,17 @@ const getCartShell = async (id: number) => {
   return { data };
 };
 export const useCreateShells = (id: number) => {
+  const isLoggedIn = useRecoilValue(userStateWithExpiry);
+  const navigate = useNavigate();
+
   const { mutate } = useMutation(() => getCartShell(id), {
     onError: () => {
-      alert('이미 찜한 쉘입니다');
+      if (isLoggedIn) {
+        alert('로그인 해주세요');
+        navigate(`/login`);
+      } else {
+        alert('이미 찜한 쉘입니다');
+      }
     },
   });
   const handleMutate = () => {
