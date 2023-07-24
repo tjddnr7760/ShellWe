@@ -106,7 +106,7 @@ const SeeMoreBodyWrapper = styled.div`
   line-height: 20px;
 `;
 const SeeMoreBodyText = styled.pre`
-  white-space: wrap;
+  white-space: pre-wrap;
 `;
 
 const Category = styled.div`

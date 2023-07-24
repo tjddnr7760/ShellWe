@@ -10,7 +10,7 @@ const Wrapper = styled.div`
 
 const OfferedShellsPageWrapper = styled.div`
   display: flex;
-  width: 1250px;
+  min-width: 1200px;
   height: 100%;
 
   @media (max-width: 768px) {
@@ -33,7 +33,7 @@ const PokedShellListWrapper = styled.div<{ ispokedshellopend: string }>`
 const ResponseElementWrapper = styled.div<{ ispokedshellopend: string }>`
   display: flex;
   flex-direction: column;
-  flex-grow: 2;
+  width: 100%;
   align-items: center;
   border-right: 0.5px solid rgba(0, 0, 0, 0.5);
 
