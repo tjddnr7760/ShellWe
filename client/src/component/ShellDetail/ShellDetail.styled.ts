@@ -105,6 +105,9 @@ const SeeMoreBodyWrapper = styled.div`
   background-color: #ffffff;
   line-height: 20px;
 `;
+const SeeMoreBodyText = styled.pre`
+  white-space: wrap;
+`;
 
 const Category = styled.div`
   display: flex;
@@ -170,4 +173,5 @@ export {
   PokeButton,
   PokeBox,
   ShellStatus,
+  SeeMoreBodyText,
 };
