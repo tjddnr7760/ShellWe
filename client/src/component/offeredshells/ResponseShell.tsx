@@ -1,12 +1,14 @@
+import { useMediaQuery } from 'react-responsive';
 import {
   ResponseShellWrapper,
   ShellsImageBox,
   ShellImg,
   ShellsTextInfoBox,
-  TextBox,
   BodyBox,
   AcceptInfo,
   AcceptButton,
+  TitleBox,
+  CategoryBox,
 } from './ResponseShell.styled';
 import { useAcceptShell } from '../../hooks/offer/useAccept';
 import { OfferedShells } from '../../dataset/TypesOfferedShell';
@@ -23,6 +25,7 @@ const ResponseShell = ({
   clickedShellId: number;
   HandleShellPreview: (picture: Pictures[]) => void;
 }) => {
+  const isMobileScreen = useMediaQuery({ maxWidth: 768 });
   const { mutate: acceptShell } = useAcceptShell();
   const requestBodyForAccept = {
     myShellId: clickedShellId,
@@ -47,9 +50,11 @@ const ResponseShell = ({
         ></ShellImg>
       </ShellsImageBox>
       <ShellsTextInfoBox>
-        <TextBox>{shell.title}</TextBox>
-        <TextBox>{shell.category.slice(2).toUpperCase()}</TextBox>
-        <BodyBox>{MakePartOfBodyText(shell.body || '', 123)}</BodyBox>
+        <TitleBox>{shell.title}</TitleBox>
+        <CategoryBox>{shell.category.slice(2).toUpperCase()}</CategoryBox>
+        {isMobileScreen ? null : (
+          <BodyBox>{MakePartOfBodyText(shell.body || '', 123)}</BodyBox>
+        )}
       </ShellsTextInfoBox>
       <AcceptInfo>
         <Avatar avatartype="UserImg" member={shell.member} />

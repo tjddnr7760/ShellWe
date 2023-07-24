@@ -35,13 +35,18 @@ const ShellsImageBox = styled.div`
   flex-grow: 1;
 
   @media (max-width: 768px) {
-    max-width: 100px;
-    min-width: 0px;
+    max-width: 120px;
+    min-width: 115px;
+    height: fit-content;
   }
 `;
 
 const ShellImg = styled.img`
   width: 100%;
+
+  @media (max-width: 768px) {
+    max-height: 120px;
+  }
 `;
 
 const ShellsTextInfoBox = styled.div`
@@ -59,12 +64,22 @@ const ShellsTextInfoBox = styled.div`
   }
 `;
 
-const TextBox = styled.div`
+const TitleBox = styled.div`
   display: flex;
   align-items: center;
   flex-grow: 1;
   padding: 10px;
   border-bottom: 0.5px solid rgba(0, 0, 0, 0.5);
+  @media (max-width: 768px) {
+    padding: 5px;
+  }
+`;
+
+const CategoryBox = styled.div`
+  display: flex;
+  align-items: center;
+  flex-grow: 1;
+  padding: 10px;
   @media (max-width: 768px) {
     padding: 5px;
   }
@@ -90,15 +105,6 @@ const AcceptInfo = styled.div`
   flex-grow: 1;
 `;
 
-// UserImg => Avatar 수정 후 대체 예정
-const UserImg = styled.img`
-  width: 70px;
-  height: 70px;
-  border-radius: 50%;
-  object-fit: contain;
-  border: 0.5px solid rgba(0, 0, 0, 0.5);
-`;
-
 const AcceptButton = styled(SmallButton4)`
   font-weight: 400;
 
@@ -114,9 +120,9 @@ export {
   ShellsImageBox,
   ShellImg,
   ShellsTextInfoBox,
-  TextBox,
+  CategoryBox,
   BodyBox,
   AcceptInfo,
-  UserImg,
   AcceptButton,
+  TitleBox,
 };

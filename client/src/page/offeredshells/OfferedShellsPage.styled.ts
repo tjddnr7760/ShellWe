@@ -14,6 +14,7 @@ const OfferedShellsPageWrapper = styled.div`
   height: 100%;
 
   @media (max-width: 768px) {
+    min-width: 300px;
     flex-direction: column;
     width: 100%;
   }
@@ -76,11 +77,11 @@ const NoticeClickPokedShell = styled.div`
 
 const CloseButton = styled.button`
   position: sticky;
-  top: 105px;
-  left: 345px;
-  width: 25px;
-  height: 25px;
-  border-radius: 20px;
+  top: 95px;
+  left: 335px;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
   border: 0px;
   background-color: #bbe7ff;
   display: none;
