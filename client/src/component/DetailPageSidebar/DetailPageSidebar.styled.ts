@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { SmallButton3 } from '../../common/button/Button.styled';
 
 const Wrapper = styled.div`
   position: absolute;
@@ -12,6 +13,24 @@ const Wrapper = styled.div`
   border: 0.5px solid rgba(0, 0, 0, 0.2);
   border-radius: 10px;
   background-color: #caf0f8;
+
+  @media (max-width: 768px) {
+    width: 160px;
+    height: 180px;
+    right: 0;
+    padding: 10px;
+  }
+`;
+
+const CloseButton = styled.button`
+  position: absolute;
+  top: 2px;
+  right: 2px;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  border: 0px;
+  background-color: #fff;
 `;
 
 const Div = styled.div`
@@ -20,11 +39,17 @@ const Div = styled.div`
   align-items: center;
   width: 200px;
   height: 70px;
+  @media (max-width: 768px) {
+    width: 160px;
+  }
 `;
 
 const DealState = styled(Div)`
   width: 160px;
   justify-content: space-around;
+  @media (max-width: 768px) {
+    width: 130px;
+  }
 `;
 
 const ToggleBody = styled(Div)`
@@ -40,6 +65,11 @@ const ToggleBody = styled(Div)`
   &.toggle-checked {
     background-color: #48cae4;
   }
+
+  @media (max-width: 768px) {
+    width: 60px;
+    height: 30px;
+  }
 `;
 
 const ToggleRetangle = styled.div`
@@ -53,10 +83,34 @@ const ToggleRetangle = styled.div`
   &.toggle-checked {
     transform: translateX(40px);
   }
+  @media (max-width: 768px) {
+    width: 25px;
+    height: 25px;
+    &.toggle-checked {
+      transform: translateX(30px);
+    }
+  }
 `;
 
 const Text = styled.div`
   font-size: 16px;
   font-weight: 400;
 `;
-export { Wrapper, Div, ToggleBody, DealState, ToggleRetangle, Text };
+
+const FunctionButton = styled(SmallButton3)`
+  @media (max-width: 768px) {
+    width: 85px;
+    height: 45px;
+  }
+`;
+
+export {
+  Wrapper,
+  Div,
+  ToggleBody,
+  DealState,
+  ToggleRetangle,
+  Text,
+  CloseButton,
+  FunctionButton,
+};
