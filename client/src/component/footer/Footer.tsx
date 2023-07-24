@@ -1,7 +1,7 @@
 import {
   FooterWrapper,
   FooterContainer,
-  Adress,
+  Address,
   FooterTitle,
   TeamAdress,
   PersonalAdress,
@@ -17,25 +17,27 @@ const Footer: React.FC = () => {
     <FooterWrapper>
       <FooterContainer>
         <TeamAdress>
-          <Adress>
+          <Address>
             <FooterTitle>Project: ShellWe</FooterTitle>
             <p>물품 및 재능 교환 애플리케이션</p>
-          </Adress>
-          <Adress>
+          </Address>
+          <Address>
             <FooterTitle>Repository Link</FooterTitle>
             <a href="https://github.com/codestates-seb/seb44_main_019">
               https://github.com/codestates-seb/seb44_main_019
             </a>
-          </Adress>
-          <Adress>
+          </Address>
+          <Address>
             <FooterTitle>Notion Link</FooterTitle>
             <a href="https://www.notion.so/ShellWe-1d0dc730b8ca4e4880c8b15f7461c257">
               https://www.notion.so/ShellWe-1d0dc730b8ca4e4880c8b15f7461c257
             </a>
-          </Adress>
+          </Address>
           <Copyright>
             <p>프로젝트 기간: 22일 | 교육기관: Codestates</p>
-            <Adress>Copyright © 2023 ShellWe Inc. All Rights Reserved.</Adress>
+            <Address>
+              Copyright © 2023 ShellWe Inc. All Rights Reserved.
+            </Address>
           </Copyright>
         </TeamAdress>
 

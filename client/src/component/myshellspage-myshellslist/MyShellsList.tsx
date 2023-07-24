@@ -14,6 +14,7 @@ const MyShellListWrapper = styled.div`
   @media (max-width: 768px) {
     padding: 0px;
     min-height: 30px;
+    gap: 8px;
   }
 `;
 

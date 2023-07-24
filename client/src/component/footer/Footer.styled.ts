@@ -4,7 +4,6 @@ export const FooterWrapper = styled.ul`
   width: 100%;
   padding: 36px;
   border-top: 0.5px solid rgba(0, 0, 0, 0.2);
-  background: #efefef;
 `;
 
 export const FooterContainer = styled.div`
@@ -23,7 +22,7 @@ export const TeamAdress = styled.div`
   flex-direction: column;
 `;
 
-export const Adress = styled.div`
+export const Address = styled.div`
   display: flex;
   flex-direction: column;
   a {

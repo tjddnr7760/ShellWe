@@ -5,6 +5,8 @@ import {
   Title,
   ShellInfo,
   Category,
+  DeleteLikeButton,
+  DeleteLikeText,
 } from './MyShells.styled.ts';
 import { Shells } from '../../dataset/TypeOfMyShells.ts';
 import { SmallButton3 } from '../../common/button/Button.styled.ts';
@@ -44,9 +46,9 @@ const MyShells = ({
       </ShellInfo>
       {myMemberId === urlId && selectedTab === 'like' && (
         <div>
-          <SmallButton3 onClick={handleDeleteLikeShell}>
-            Cancel Like
-          </SmallButton3>
+          <DeleteLikeButton onClick={handleDeleteLikeShell}>
+            <DeleteLikeText>Cancel Like</DeleteLikeText>
+          </DeleteLikeButton>
         </div>
       )}
     </MyShellContainer>
