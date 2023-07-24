@@ -55,6 +55,7 @@ const Div = styled.div`
     display: flex;
     gap: 10px;
     margin: 0;
+    flex-wrap: wrap;
   }
 `;
 

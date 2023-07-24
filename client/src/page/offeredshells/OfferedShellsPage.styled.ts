@@ -19,17 +19,18 @@ const OfferedShellsPageWrapper = styled.div`
   }
 `;
 
-const PokedShellListWrapper = styled.div`
+const PokedShellListWrapper = styled.div<{ ispokedshellopend: string }>`
   border-left: 1px solid rgba(0, 0, 0, 0.5);
   border-right: 1px solid rgba(0, 0, 0, 0.5);
 
   @media (max-width: 768px) {
     border-left: 0.5px solid rgba(0, 0, 0, 0.5);
     border-right: 0.5px solid rgba(0, 0, 0, 0.5);
+    display: ${(props) => (props.ispokedshellopend === 'noView' ? 'none' : '')};
   }
 `;
 
-const ResponseElementWrapper = styled.div`
+const ResponseElementWrapper = styled.div<{ ispokedshellopend: string }>`
   display: flex;
   flex-direction: column;
   flex-grow: 2;
@@ -38,6 +39,7 @@ const ResponseElementWrapper = styled.div`
 
   @media (max-width: 768px) {
     border-left: 0.5px solid rgba(0, 0, 0, 0.5);
+    display: ${(props) => (props.ispokedshellopend === 'noView' ? '' : 'none')};
   }
 `;
 
@@ -72,6 +74,21 @@ const NoticeClickPokedShell = styled.div`
   }
 `;
 
+const CloseButton = styled.button`
+  position: sticky;
+  top: 105px;
+  left: 345px;
+  width: 25px;
+  height: 25px;
+  border-radius: 20px;
+  border: 0px;
+  background-color: #bbe7ff;
+  display: none;
+  @media (max-width: 768px) {
+    display: block;
+  }
+`;
+
 export {
   Wrapper,
   ShellImgPreviewWrapper,
@@ -80,4 +97,5 @@ export {
   PokedShellListWrapper,
   PreviewNotice,
   NoticeClickPokedShell,
+  CloseButton,
 };

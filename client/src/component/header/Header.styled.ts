@@ -29,6 +29,7 @@ export const DropdownBTN = styled.img`
   height: 32px;
   box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.5);
   border-radius: 100%;
+  margin-right: 10px;
 `;
 
 export const DropdownContainer = styled.div`
@@ -50,7 +51,7 @@ export const DropdownContent = styled.div`
 `;
 
 export const Logo = styled.img`
-  margin-left: 30px;
+  margin-left: 15px;
   width: 40px;
   height: 40px;
 `;
