@@ -10,7 +10,7 @@ export const FooterWrapper = styled.ul`
 export const FooterContainer = styled.div`
   display: flex;
   justify-content: center;
-  gap: 120px;
+  gap: 100px;
 
   li {
     color: #626262;
@@ -40,9 +40,14 @@ export const CopyAdress = styled.div``;
 
 export const FooterTitle = styled.span`
   font-size: 20px;
-  margin-bottom: 25px;
+  margin-bottom: 10px;
   font-weight: 600;
   color: #4a4a4a;
+`;
+export const NameAndGitText = styled.div`
+  display: flex;
+  width: 300px;
+  gap: 8px;
 `;
 
 export const PersonalAdress = styled.div`
@@ -65,7 +70,7 @@ export const PersonalAdress = styled.div`
     }
   }
   li {
-    padding-bottom: 20px;
+    padding-bottom: 10px;
     &:last-child {
       padding-bottom: 0;
     }
@@ -93,6 +98,12 @@ export const TechnologyStackContainer = styled.div`
   div {
     padding-top: 10px;
   }
+`;
+
+export const Copyright = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
 `;
 
 export const TechnologyStack = styled.ul``;

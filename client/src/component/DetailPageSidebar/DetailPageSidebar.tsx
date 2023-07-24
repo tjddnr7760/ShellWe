@@ -34,6 +34,7 @@ const DetailPageSidebar = ({ shellStatus }: { shellStatus: string }) => {
       <DealState>
         <Text>{toggleOn ? '거래중' : '거래완료'}</Text>
         <Toggle toggleOn={toggleOn} handleClick={handleClick} />
+        {/* 여기에서 true 이면,  */}
       </DealState>
       <Div>
         <SmallButton3 onClick={goToShellUpdatePage}>

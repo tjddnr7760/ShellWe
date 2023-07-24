@@ -15,10 +15,11 @@ import { useGetMyShellToPoke } from '../../hooks/shelldetail/useGetPokeShellsLis
 import { getMemberIdFromLocalStorage } from '../../utill/localstorageData.ts';
 
 const ShellDetailPage = () => {
-  const { data } = useGetShellDetail();
+  const { data: shellDetailData } = useGetShellDetail();
 
   const memberId = Number(getMemberIdFromLocalStorage());
   const { data: modaldata } = useGetMyShellToPoke(memberId);
+  console.log(shellDetailData);
 
   const [modalVisible, setModalVisible] = useState(false);
   const [sidebarOpen, setSidebarOpen] = useState(false);
@@ -33,32 +34,36 @@ const ShellDetailPage = () => {
 
   return (
     <>
-      {data && (
+      {shellDetailData && (
         <Wrapper>
           <DetailPageContainer>
             <ContentDiv>
               <PreviewDiv>
-                {data.data && (
-                  <ShellImgPreview clickedShellPictures={data.data.pictures} />
+                {shellDetailData.data && (
+                  <ShellImgPreview
+                    clickedShellPictures={shellDetailData.data.pictures}
+                  />
                 )}
               </PreviewDiv>
               <Div>
-                {data.data && (
+                {shellDetailData.data && (
                   <ShellDetail
                     handlePoke={handlePoke}
                     handleOpenSidebar={handleOpenSidebar}
-                    shellDetailData={data.data}
+                    shellDetailData={shellDetailData.data}
                   />
                 )}
                 {sidebarOpen && (
-                  <DetailPageSidebar shellStatus={data.data.status} />
+                  <DetailPageSidebar
+                    shellStatus={shellDetailData?.data?.status}
+                  />
                 )}
               </Div>
             </ContentDiv>
             {modalVisible && (
               <OfferModal
                 modaldata={modaldata}
-                shellMemberId={data.data.member.id}
+                shellMemberId={shellDetailData.data.member.id}
                 handlePoke={handlePoke}
               />
             )}

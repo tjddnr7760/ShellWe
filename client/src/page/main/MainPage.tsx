@@ -1,3 +1,4 @@
+/* eslint-disable react/no-unescaped-entities */
 import React from 'react';
 import {
   MainShellWrapper,
@@ -18,7 +19,7 @@ const MainPage: React.FC = () => {
       <div>
         <MainShellImg src={MainShell} alt="mainshell"></MainShellImg>
       </div>
-      <MainShellText>Today Shell!!!</MainShellText>
+      <MainShellText>Today's the best Shells</MainShellText>
       <ShellListContainer>
         {data &&
           data.data?.shells.map((shell: ShellType) => (

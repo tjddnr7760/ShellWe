@@ -7,14 +7,23 @@ export const MainShellWrapper = styled.div`
   justify-content: center;
   padding: 20px;
   gap: 20px;
+  @media (max-width: 768px) {
+    gap: 10px;
+    padding: 10px;
+  }
 `;
+
 export const MainShellImg = styled.img`
   width: 100%;
 `;
 export const MainShellText = styled.div`
   font-size: 52px;
-  color: red;
+  color: skyblue;
   font-style: italic;
+
+  @media (max-width: 768px) {
+    font-size: 25px;
+  }
 `;
 export const ShellListContainer = styled.div`
   display: flex;
