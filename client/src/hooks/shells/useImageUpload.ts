@@ -17,7 +17,6 @@ const getImageFile = async (imageUrl: string) => {
   return file;
 };
 export const useImageUpload = (updateInitalImages: string[]) => {
-  console.log(updateInitalImages);
   const queryResults = useQueries(
     updateInitalImages.map((imageUrl) => ({
       queryKey: ['convert to image file', queryKeys.imageData, imageUrl],

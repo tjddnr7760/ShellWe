@@ -19,7 +19,6 @@ const ShellDetailPage = () => {
 
   const memberId = Number(getMemberIdFromLocalStorage());
   const { data: modaldata } = useGetMyShellToPoke(memberId);
-  console.log(shellDetailData);
 
   const [modalVisible, setModalVisible] = useState(false);
   const [sidebarOpen, setSidebarOpen] = useState(false);

@@ -19,7 +19,6 @@ const patchStatusofShells = async (
 export const usePatchStateOfShell = (requestData: { status: boolean }) => {
   const navigate = useNavigate();
   const { id } = useParams();
-  console.log(requestData);
   const requestBodyData = {
     status: 'active',
   };

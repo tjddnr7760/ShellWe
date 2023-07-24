@@ -33,7 +33,6 @@ const Nav: React.FC = () => {
   const navigate = useNavigate();
   const myId = Number(getMemberIdFromLocalStorage());
   const { data } = useGetMember(myId);
-  console.log(data.data);
   const isLogIn = useRecoilValue(userStateWithExpiry);
 
   const handleNavItemHover = () => {
