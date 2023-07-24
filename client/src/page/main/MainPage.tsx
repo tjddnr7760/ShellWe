@@ -3,6 +3,7 @@ import {
   MainShellWrapper,
   MainShellImg,
   ShellListContainer,
+  MainShellText,
 } from './MainPage.styled';
 import MainShell from '../../asset/mainshell.svg';
 import Shell from '../../common/shell/Shell.tsx';
@@ -17,6 +18,7 @@ const MainPage: React.FC = () => {
       <div>
         <MainShellImg src={MainShell} alt="mainshell"></MainShellImg>
       </div>
+      <MainShellText>Today Shell!!!</MainShellText>
       <ShellListContainer>
         {data &&
           data.data?.shells.map((shell: ShellType) => (
