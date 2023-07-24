@@ -19,10 +19,10 @@ export const useCreateShells = (id: number) => {
   const { mutate } = useMutation(() => getCartShell(id), {
     onError: () => {
       if (isLoggedIn) {
+        alert('이미 찜한 쉘입니다');
+      } else {
         alert('로그인 해주세요');
         navigate(`/login`);
-      } else {
-        alert('이미 찜한 쉘입니다');
       }
     },
   });
