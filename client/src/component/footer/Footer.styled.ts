@@ -1,29 +1,98 @@
 import styled from 'styled-components';
 
-export const FooterContainer = styled.div`
-  bottom: 0;
-  right: 0;
-  display: flex;
-  border-top: 0.5px solid rgba(0, 0, 0, 0.2);
-  background: #fff;
+export const FooterWrapper = styled.ul`
   width: 100%;
-  height: 150px;
-  padding: 37px 0px 36px 0px;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  gap: 37px;
-  div {
-    display: flex;
-    gap: 30px;
-  }
+  padding: 36px;
+  border-top: 0.5px solid rgba(0, 0, 0, 0.2);
+  background: #efefef;
+`;
 
-  span {
-    color: rgba(43, 43, 43, 0.75);
-    font-size: 16px;
-    font-family: Inter;
-    font-style: normal;
-    font-weight: 400;
-    line-height: normal;
+export const FooterContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  gap: 120px;
+
+  li {
+    color: #626262;
   }
 `;
+
+export const TeamAdress = styled.div`
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+`;
+
+export const Adress = styled.div`
+  display: flex;
+  flex-direction: column;
+  a {
+    text-decoration: none;
+    color: #626262;
+    &:focus,
+    &:active {
+      outline: none;
+    }
+  }
+`;
+
+export const CopyAdress = styled.div``;
+
+export const FooterTitle = styled.span`
+  font-size: 20px;
+  margin-bottom: 25px;
+  font-weight: 600;
+  color: #4a4a4a;
+`;
+
+export const PersonalAdress = styled.div`
+  display: flex;
+  flex-direction: column;
+  span {
+    font-weight: 600;
+  }
+
+  div {
+    padding-top: 10px;
+  }
+  a {
+    font-size: 14px;
+    text-decoration: none;
+    color: inherit;
+    &:focus,
+    &:active {
+      outline: none;
+    }
+  }
+  li {
+    padding-bottom: 20px;
+    &:last-child {
+      padding-bottom: 0;
+    }
+  }
+`;
+export const TechnologyStackWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+`;
+
+export const TechnologyStackContainer = styled.div`
+  display: flex;
+  gap: 40px;
+  span {
+    color: #626262;
+
+    font-weight: 600;
+  }
+  li {
+    padding-bottom: 10px;
+    &:last-child {
+      padding-bottom: 0;
+    }
+  }
+  div {
+    padding-top: 10px;
+  }
+`;
+
+export const TechnologyStack = styled.ul``;
