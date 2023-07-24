@@ -72,7 +72,7 @@ const TagInput = styled.input`
   cursor: text;
   margin: 20px;
   @media (max-width: 768px) {
-    font-size: 12px;
+    font-size: 8px;
   }
 `;
 

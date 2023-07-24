@@ -16,8 +16,9 @@ const Avatar = ({
   member: MemberProps;
 }) => {
   const navigate = useNavigate();
-  const userImg = member.profileUrl;
 
+  const userImg = member.profileUrl;
+  console.log(userImg);
   const goToMyShellsPage = (e: React.MouseEvent<HTMLDivElement>) => {
     e.stopPropagation();
     navigate(`/myshells/${member.id}`);

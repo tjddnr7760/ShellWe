@@ -25,20 +25,15 @@ import {
 } from './Nav.styled';
 import { userStateWithExpiry } from '../../recoil/selector';
 import { getMemberIdFromLocalStorage } from '../../utill/localstorageData';
+import { useGetMember } from '../../hooks/profile/useGetMember';
 
 const Nav: React.FC = () => {
   const [isNavItemContent, setIsNavItemContent] = useState(false);
   const [activeButtonId, setActiveButtonId] = useState('');
   const navigate = useNavigate();
   const myId = Number(getMemberIdFromLocalStorage());
-
-  const id = Number(localStorage.getItem('id') || 0);
-  const profileUrl: string = localStorage.getItem('profileUrl') || 'empty';
-
-  const member = {
-    id,
-    profileUrl,
-  };
+  const { data } = useGetMember(myId);
+  console.log(data.data);
   const isLogIn = useRecoilValue(userStateWithExpiry);
 
   const handleNavItemHover = () => {
@@ -132,7 +127,7 @@ const Nav: React.FC = () => {
             className={activeButtonId === 'member' ? 'selectedTab' : ''}
             onClick={isLogIn ? () => handleMemberClick('member') : handleClick}
           >
-            <Avatar avatartype={'icon'} member={member} />
+            {data.data && <Avatar avatartype={'icon'} member={data.data} />}
             My Page
           </NavItem>
           <NavItem
