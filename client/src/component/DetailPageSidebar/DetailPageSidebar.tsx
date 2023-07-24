@@ -10,7 +10,6 @@ import {
   CloseButton,
   FunctionButton,
 } from './DetailPageSidebar.styled.ts';
-import { SmallButton3 } from '../../common/button/Button.styled.ts';
 import Toggle from './Toggle.tsx';
 import { usePatchStateOfShell } from '../../hooks/shelldetail/usePatchStateOfShells.ts';
 
