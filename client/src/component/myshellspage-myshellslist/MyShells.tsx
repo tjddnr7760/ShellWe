@@ -9,7 +9,6 @@ import {
   DeleteLikeText,
 } from './MyShells.styled.ts';
 import { Shells } from '../../dataset/TypeOfMyShells.ts';
-import { SmallButton3 } from '../../common/button/Button.styled.ts';
 import { useDeleteLikeShell } from '../../hooks/myshells/useDeleteLikeShell.ts';
 import { getMemberIdFromLocalStorage } from '../../utill/localstorageData.ts';
 
