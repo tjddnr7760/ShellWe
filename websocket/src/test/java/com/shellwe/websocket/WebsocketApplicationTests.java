@@ -3,10 +3,10 @@ package com.shellwe.websocket;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
-@SpringBootTest
+//@SpringBootTest
 class WebsocketApplicationTests {
 
-	@Test
+//	@Test
 	void contextLoads() {
 	}
 

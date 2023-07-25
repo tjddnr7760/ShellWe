@@ -1,31 +1,29 @@
 spring:
-  h2:
-    console:
-      enabled: true
-      path: /h2
-      settings:
-        web-allow-others: true
   datasource:
-    url: jdbc:h2:mem:test
+    url: jdbc:mysql://localhost:3306/shellweprototype?useSSL=false
+    username: root
+    password: ${MYSQL_ROOT_PASSWORD}
+    driverClassName: com.mysql.cj.jdbc.Driver
   jpa:
+    database-platform: org.hibernate.dialect.MySQL8Dialect
     hibernate:
-      ddl-auto: create    # 스키마 자동 생성
-    show-sql: true        # SQL 쿼리 출력
+      ddl-auto: update
+    show-sql: true
     properties:
       hibernate:
-        format_sql: true  # SQL pretty print
+        format_sql: true
         jdbc:
-          time_zone: Asia/Seoul   # 서버 시간 서울로 변경
+          time_zone: Asia/Seoul
   sql:
     init:
-      data-locations: classpath*:db/h2/data.sql
+      data-locations: classpath*:db/mysql/data.sql
   security:
     oauth2:
       client:
         registration:
           google:
-            client-id: ${G_CLIENT_ID}
-            client-secret: ${G_CLIENT_SECRET}
+            client-id: ${GOOGLE_OAUTH_CLIENT_ID}
+            client-secret: ${GOOGLE_OAUTH_SECRET_KEY}
             scope:
               - profile
               - email
@@ -36,10 +34,23 @@ logging:
         orm:
           jpa: DEBUG
 server:                   # 모든 response 에 대해 지정된 인코딩 적용(한글 깨짐 방지)
+  port: 8081
   servlet:
     encoding:
       force-response: true
+cloud:
+  aws:
+    region:
+      use-default-aws-region-chain: false
+      static: ap-northeast-2
+    stack:
+      auto: false
+    credentials:
+      aws-access-key-id: ${AWS_IAM_ACCESS_KEY}
+      aws-secret-access-key: ${AWS_IAM_SECRET_KEY}
 jwt:                      # JWT 관련 정보
   key: ${JWT_SECRET_KEY}  # 시스템 환경 변수에서 로드
-  access-token-expiration-minutes: 500
-  refresh-token-expiration-minutes: 600
+  access-token-expiration-minutes: 1444
+  refresh-token-expiration-minutes: 1444
+client_server:
+  url: http://localhost:3000
