@@ -51,7 +51,7 @@ const PokeButton = styled(SmallButton3)`
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 110px;
+  width: 130px;
 
   @media (max-width: 768px) {
     width: 80px;

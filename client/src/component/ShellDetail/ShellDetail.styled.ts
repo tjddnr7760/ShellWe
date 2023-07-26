@@ -157,9 +157,9 @@ const PokeButton = styled.button`
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 6px;
+  gap: 10px;
   right: 10px;
-  width: 100px;
+  width: 120px;
   height: 40px;
   outline: none;
   border: none;
