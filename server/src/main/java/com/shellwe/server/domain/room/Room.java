@@ -26,10 +26,10 @@ public class Room extends TimeTracker {
     @Column(name = "ROOM_ID")
     private Long id;
 
-    @OneToMany(mappedBy = "room", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "room", cascade = {CascadeType.PERSIST, CascadeType.REMOVE})
     private List<Message> messages = new ArrayList<>();
 
-    @OneToMany(mappedBy = "room", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "room", cascade = {CascadeType.PERSIST, CascadeType.REMOVE})
     private List<MemberRoom> memberRooms = new ArrayList<>();
 
     public void setMemberRooms(MemberRoom memberRoom){
