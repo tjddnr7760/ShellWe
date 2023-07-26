@@ -21,11 +21,11 @@ const PokedShellList = ({
   return (
     <PokedShellListContainer>
       <IntroBox>
-        <IntroText1>Poked Shell List</IntroText1>
+        <IntroText1>요청받은 나의 쉘 목록</IntroText1>
         <IntroText2>
-          아래는 찌르기(교환요청) 받은 쉘 목록입니다.
+          아래는 교환요청 받은 쉘 목록입니다.
           <br />
-          클릭해서 상대방의 쉘을 확인해보세요!
+          쉘을 클릭해서 상대방이 요청한 쉘을 확인해보세요!
         </IntroText2>
       </IntroBox>
       <ShellInfoListContainer>

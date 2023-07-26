@@ -13,6 +13,7 @@ const Avatar = styled.div`
   &:hover {
     background-color: #90e0ef;
     border: 1px solid rgba(0, 0, 0, 0.5);
+    cursor: pointer;
   }
   img {
     width: 100%;

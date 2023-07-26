@@ -6,10 +6,8 @@ import {
   ShellInfo,
   ButtonDiv,
   PokeButton,
-  PokeImage,
 } from './MyShell.styled';
 import { MyShells } from '../../dataset/TypeOfShellDetail.ts';
-import Poke from '../../asset/poke.svg';
 import { usePokeShell } from '../../hooks/shelldetail/usePokeShell.ts';
 import { RequestBodyForPoke } from '../../dataset/TypeOfShellDetail.ts';
 const MyShell = ({
@@ -48,8 +46,7 @@ const MyShell = ({
       </ShellInfo>
       <PokeButton>
         <ButtonDiv onClick={PokeRequestHandler}>
-          <PokeImage src={Poke} alt="pokeicon" />
-          <span>찌르기</span>
+          <span>교환 요청하기</span>
         </ButtonDiv>
       </PokeButton>
     </MyShellContainer>

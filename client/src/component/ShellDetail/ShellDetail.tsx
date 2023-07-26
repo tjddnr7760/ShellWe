@@ -69,9 +69,6 @@ const ShellDetail = ({
             handleSeeMoreBody={handleSeeMoreBody}
           />
         )}
-        {/* <SeeMore onClick={handleSeeMoreBody}>
-          {seeMoreBody === false ? '더 보기' : '접기'}
-        </SeeMore> */}
         {tags && (
           <Div>
             <span>아래 쉘과 교환하고 싶어요!</span>
@@ -88,7 +85,7 @@ const ShellDetail = ({
           <PokeBox>
             <PokeButton onClick={handlePoke}>
               <img src={Poke} alt="pokeicon" />
-              찌르기
+              교환 요청
             </PokeButton>
           </PokeBox>
         )}

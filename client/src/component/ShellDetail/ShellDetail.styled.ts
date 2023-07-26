@@ -83,6 +83,7 @@ const ShellStatus = styled.div`
 
 const DefaultBodyWrapper = styled.div`
   display: flex;
+  justify-content: space-between;
   align-items: center;
   gap: 10px;
   border: 0.5px solid rgba(0, 0, 0, 0.3);
@@ -114,8 +115,8 @@ const SeeMoreStatus = styled.div`
   background-color: rgba(0, 0, 0, 0.07);
   display: flex;
   justify-content: center;
-  padding: 5px;
-  width: 55px;
+  padding: 6px;
+  width: 70px;
   border-radius: 5px;
   cursor: pointer;
   &:hover {
@@ -156,7 +157,7 @@ const PokeButton = styled.button`
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 8px;
+  gap: 6px;
   right: 10px;
   width: 100px;
   height: 40px;

@@ -86,3 +86,11 @@ export const NavItemContent = styled.div`
     background-color: #c8f5ff;
   }
 `;
+
+export const IconDiv = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 35px;
+  height: 35px;
+`;

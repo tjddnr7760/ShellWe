@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useRecoilValue } from 'recoil';
 import { Link, useNavigate } from 'react-router-dom';
 import Avatar from '../../common/avatar/Avatar';
+import { Icon } from '../../common/avatar/Avatar.styled';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
   faPen,
@@ -13,6 +14,7 @@ import {
   faArrowRightToBracket,
   faPeopleCarryBox,
 } from '@fortawesome/free-solid-svg-icons';
+import noprofile from '../../asset/avatar/noprofile.svg';
 
 import {
   NavWrapper,
@@ -22,6 +24,7 @@ import {
   NavItems,
   NavItem,
   NavItemContent,
+  IconDiv,
 } from './Nav.styled';
 import { userStateWithExpiry } from '../../recoil/selector';
 import { getMemberIdFromLocalStorage } from '../../utill/localstorageData';
@@ -77,15 +80,19 @@ const Nav: React.FC = () => {
               isLogIn ? () => handleButtonClick('shellcreate') : handleClick
             }
           >
-            <FontAwesomeIcon icon={faPen} />
-            Create Shells
+            <IconDiv>
+              <FontAwesomeIcon icon={faPen} />
+            </IconDiv>
+            쉘 생성
           </NavItem>
           <NavItem
             onMouseEnter={handleNavItemHover}
             onMouseLeave={handleNavItemNotHover}
           >
-            <FontAwesomeIcon icon={faMagnifyingGlass} />
-            Find Shells
+            <IconDiv>
+              <FontAwesomeIcon icon={faMagnifyingGlass} />
+            </IconDiv>
+            쉘 찾기
           </NavItem>
           {isNavItemContent && (
             <NavItemContentWrapper
@@ -97,14 +104,14 @@ const Nav: React.FC = () => {
                 onClick={() => handleShellClick('product')}
               >
                 <FontAwesomeIcon icon={faBox} />
-                Product
+                물품
               </NavItemContent>
               <NavItemContent
                 className={activeButtonId === 'talent' ? 'selectedTab' : ''}
                 onClick={() => handleShellClick('talent')}
               >
                 <FontAwesomeIcon icon={faPersonRunning} />
-                Talent
+                재능
               </NavItemContent>
             </NavItemContentWrapper>
           )}
@@ -112,22 +119,33 @@ const Nav: React.FC = () => {
             className={activeButtonId === 'offer' ? 'selectedTab' : ''}
             onClick={isLogIn ? () => handleMemberClick('offer') : handleClick}
           >
-            <FontAwesomeIcon icon={faHandPointRight} />
-            Offered Shells
+            <IconDiv>
+              <FontAwesomeIcon icon={faHandPointRight} />
+            </IconDiv>
+            교환 요청함
           </NavItem>
           <NavItem
             className={activeButtonId === 'dm' ? 'selectedTab' : ''}
             onClick={isLogIn ? () => handleMemberClick('dm') : handleClick}
           >
-            <FontAwesomeIcon icon={faMessage} />
-            Message
+            <IconDiv>
+              <FontAwesomeIcon icon={faMessage} />
+            </IconDiv>
+            메시지
           </NavItem>
+
           <NavItem
             className={activeButtonId === 'member' ? 'selectedTab' : ''}
             onClick={isLogIn ? () => handleMemberClick('member') : handleClick}
           >
-            {data.data && <Avatar avatartype={'icon'} member={data.data} />}
-            My Page
+            {isLogIn ? (
+              data.data && <Avatar avatartype={'icon'} member={data.data} />
+            ) : (
+              <Icon>
+                <img src={noprofile} alt="userphoto" />
+              </Icon>
+            )}
+            프로필
           </NavItem>
           <NavItem
             className={activeButtonId === 'myshells' ? 'selectedTab' : ''}
@@ -135,8 +153,10 @@ const Nav: React.FC = () => {
               isLogIn ? () => handleMemberClick('myshells') : handleClick
             }
           >
-            <FontAwesomeIcon icon={faPeopleCarryBox} />
-            My Shells
+            <IconDiv>
+              <FontAwesomeIcon icon={faPeopleCarryBox} />
+            </IconDiv>
+            나의 쉘
           </NavItem>
           {isLogIn ? null : (
             <NavItem
@@ -146,7 +166,7 @@ const Nav: React.FC = () => {
               }}
             >
               <FontAwesomeIcon icon={faArrowRightToBracket} />
-              Login
+              로그인
             </NavItem>
           )}
         </NavItems>
