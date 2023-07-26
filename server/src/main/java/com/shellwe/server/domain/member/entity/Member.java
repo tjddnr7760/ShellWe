@@ -46,10 +46,10 @@ public class Member extends TimeTracker {
     @OneToMany(mappedBy = "member", cascade = CascadeType.ALL)
     private List<Shell> shells = new ArrayList<>();
 
-    @OneToMany(mappedBy = "member", cascade = {CascadeType.PERSIST, CascadeType.REMOVE})
+    @OneToMany(mappedBy = "member", cascade = CascadeType.ALL)
     private List<Message> messages = new ArrayList<>();
 
-    @OneToMany(mappedBy = "member", cascade = {CascadeType.PERSIST, CascadeType.REMOVE})
+    @OneToMany(mappedBy = "member", cascade = CascadeType.ALL)
     private List<MemberRoom> memberRooms = new ArrayList<>();
 
     public Member(Member member, String password) {

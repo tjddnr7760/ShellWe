@@ -16,6 +16,7 @@ import java.util.List;
 @Setter
 @Entity
 public class Room extends TimeTracker {
+
     public Room(Long roomId) {
         this.id = roomId;
     }
@@ -25,10 +26,10 @@ public class Room extends TimeTracker {
     @Column(name = "ROOM_ID")
     private Long id;
 
-    @OneToMany(mappedBy = "room", cascade = {CascadeType.PERSIST, CascadeType.REMOVE})
+    @OneToMany(mappedBy = "room", cascade = CascadeType.ALL)
     private List<Message> messages = new ArrayList<>();
 
-    @OneToMany(mappedBy = "room", cascade = {CascadeType.PERSIST, CascadeType.REMOVE})
+    @OneToMany(mappedBy = "room", cascade = CascadeType.ALL)
     private List<MemberRoom> memberRooms = new ArrayList<>();
 
     public void setMemberRooms(MemberRoom memberRoom){
