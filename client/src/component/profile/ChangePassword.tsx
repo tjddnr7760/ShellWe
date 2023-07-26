@@ -9,8 +9,9 @@ import {
 } from './ChangePassword.styled';
 import { useUpdatePassword } from '../../hooks/profile/useChangePassword';
 import { handleCancel } from '../../utill/handlecancel';
+import { Member } from '../../dataset/TypeOfMyShells';
 
-const ChangePassword = () => {
+const ChangePassword = (memberInfo: { memberInfo: Member }) => {
   const [newPassword, setNewPassword] = useState<string>('');
   const [passwordAgain, setPasswordAgain] = useState<string>('');
   const [newPasswordError, setNewPasswordError] = useState<
@@ -54,15 +55,19 @@ const ChangePassword = () => {
   };
 
   const handleSave = () => {
-    const formData = new FormData();
-    const update = {
-      password: newPassword,
-    };
-    formData.append(
-      'update',
-      new Blob([JSON.stringify(update)], { type: 'application/json' })
-    );
-    SendNewPassword(formData);
+    if (memberInfo.memberInfo.oauthUser) {
+      alert('Oauth 유저는 Introduction만 수정 가능합니다.');
+    } else {
+      const formData = new FormData();
+      const update = {
+        password: newPassword,
+      };
+      formData.append(
+        'update',
+        new Blob([JSON.stringify(update)], { type: 'application/json' })
+      );
+      SendNewPassword(formData);
+    }
   };
 
   return (

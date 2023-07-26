@@ -105,8 +105,27 @@ const SeeMoreBodyWrapper = styled.div`
   background-color: #ffffff;
   line-height: 20px;
 `;
+
 const SeeMoreBodyText = styled.pre`
   white-space: pre-wrap;
+`;
+
+const SeeMoreStatus = styled.div`
+  background-color: rgba(0, 0, 0, 0.07);
+  display: flex;
+  justify-content: center;
+  padding: 5px;
+  width: 55px;
+  border-radius: 5px;
+  cursor: pointer;
+  &:hover {
+    background-color: rgba(0, 0, 0, 0.2);
+  }
+`;
+
+const CloseSeeMore = styled.div`
+  display: flex;
+  justify-content: flex-start;
 `;
 
 const Category = styled.div`
@@ -125,14 +144,7 @@ const SeeMore = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 50px;
-  height: 30px;
   font-size: 14px;
-  border-radius: 5px;
-  cursor: pointer;
-  &:hover {
-    background-color: rgba(0, 0, 0, 0.2);
-  }
 `;
 
 const PokeBox = styled.div`
@@ -174,4 +186,6 @@ export {
   PokeBox,
   ShellStatus,
   SeeMoreBodyText,
+  SeeMoreStatus,
+  CloseSeeMore,
 };

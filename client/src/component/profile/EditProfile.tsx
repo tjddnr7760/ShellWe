@@ -17,8 +17,9 @@ import {
   ImageBox,
 } from './EditProfile.styled';
 import { handleCancel } from '../../utill/handlecancel';
+import { Member } from '../../dataset/TypeOfMyShells';
 
-const EditProfile = () => {
+const EditProfile = ({ memberInfo }: { memberInfo: Member }) => {
   const [displayName, setDisplayName] = useState<string>('');
   const [introduction, setIntroduction] = useState<string>('');
   const [image, setImage] = useState<File | null>(null);
@@ -48,17 +49,22 @@ const EditProfile = () => {
   };
 
   const handleSave = () => {
-    const formData = new FormData();
-    const update = {
-      displayName,
-      introduction,
-    };
-    formData.append(
-      'update',
-      new Blob([JSON.stringify(update)], { type: 'application/json' })
-    );
-    formData.append('picture', image as File);
-    SendprofileImage(formData);
+    if (memberInfo.oauthUser) {
+      alert('Oauth 유저는 Introduction만 수정 가능합니다.');
+      window.location.reload();
+    } else {
+      const formData = new FormData();
+      const update = {
+        displayName,
+        introduction,
+      };
+      formData.append(
+        'update',
+        new Blob([JSON.stringify(update)], { type: 'application/json' })
+      );
+      formData.append('picture', image as File);
+      SendprofileImage(formData);
+    }
   };
 
   const { getRootProps, getInputProps, isDragActive } = useDropzone({

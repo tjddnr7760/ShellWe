@@ -14,6 +14,7 @@ export interface Shells {
 }
 export interface Member {
   id: number;
+  oauthUser?: boolean;
   displayName: string;
   profileUrl: string;
   introduction: string;

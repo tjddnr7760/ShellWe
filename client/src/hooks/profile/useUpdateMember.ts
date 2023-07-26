@@ -21,7 +21,7 @@ export const useUpdateMember = () => {
     {
       onSuccess: () => {
         navigate(`/member/${id}`);
-        window.location.reload(); // 서버 데이터가 바로 업로드 된다면 삭제
+        window.location.reload();
       },
     }
   );

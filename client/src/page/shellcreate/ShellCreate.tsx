@@ -59,7 +59,9 @@ const ShellCreate = () => {
       !tagList.length ||
       !uploadedImages.length
     ) {
-      alert('모든 항목을 채워주세요.');
+      alert(
+        '모든 항목을 채워주세요.\n태그 작성 시, 엔터를 누르셔야 태그 박스가 생성됩니다!'
+      );
       return;
     }
     const register = {

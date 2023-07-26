@@ -13,7 +13,6 @@ import {
   DisplayName,
   Div,
   Hamburger,
-  SeeMore,
   PokeButton,
   PokeBox,
   ShellStatus,
@@ -56,10 +55,23 @@ const ShellDetail = ({
         </UserInfoAndHamburgerDiv>
         <Div>{shellDetailData.title}</Div>
         {seeMoreBody === false ? (
-          <DefaultBody category={category} body={shellDetailData.body} />
+          <DefaultBody
+            category={category}
+            body={shellDetailData.body}
+            seeMoreBody={seeMoreBody}
+            handleSeeMoreBody={handleSeeMoreBody}
+          />
         ) : (
-          <SeeMoreBody category={category} body={shellDetailData.body} />
+          <SeeMoreBody
+            category={category}
+            body={shellDetailData.body}
+            seeMoreBody={seeMoreBody}
+            handleSeeMoreBody={handleSeeMoreBody}
+          />
         )}
+        {/* <SeeMore onClick={handleSeeMoreBody}>
+          {seeMoreBody === false ? '더 보기' : '접기'}
+        </SeeMore> */}
         {tags && (
           <Div>
             <span>아래 쉘과 교환하고 싶어요!</span>
@@ -70,9 +82,6 @@ const ShellDetail = ({
             </div>
           </Div>
         )}
-        <SeeMore onClick={handleSeeMoreBody}>
-          {seeMoreBody === false ? '더 보기' : '접기'}
-        </SeeMore>
       </ShellInfoContainer>
       {myMemberId !== shellDetailData.member.id &&
         shellDetailData.status === 'active' && (

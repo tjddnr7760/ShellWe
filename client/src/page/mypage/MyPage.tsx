@@ -37,8 +37,12 @@ const MyPage = () => {
       <MyPageContainer>
         {memberInfo && <Profile memberInfo={memberInfo} showTags={false} />}
         <ProfileTab handleComponent={handelComponent}></ProfileTab>
-        {selectedComponent === 'edit' && <EditProfile />}
-        {selectedComponent === 'change' && <ChangePassword />}
+        {selectedComponent === 'edit' && (
+          <EditProfile memberInfo={memberInfo} />
+        )}
+        {selectedComponent === 'change' && (
+          <ChangePassword memberInfo={memberInfo} />
+        )}
         {selectedComponent === 'delete' && (
           <DeleteProfile memberInfo={memberInfo} />
         )}

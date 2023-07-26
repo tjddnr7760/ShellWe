@@ -73,6 +73,8 @@ export interface Member {
 export interface BodyProps {
   category: string;
   body: string;
+  seeMoreBody: boolean;
+  handleSeeMoreBody: () => void;
 }
 
 export interface ShellStatus {

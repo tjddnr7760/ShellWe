@@ -53,7 +53,7 @@ const Tag = ({ tagList, setTagList }: TagProps) => {
         value={inputTagValue}
         onChange={handleChange}
         onKeyDown={handleKeyDown}
-        placeholder="#원하시는 쉘을 태그로 만들어 주세요. (최대 4개)"
+        placeholder="원하시는 쉘을 태그로 만들어 주세요. (최대 4개)"
       />
     </TagContainer>
   );
