@@ -47,7 +47,9 @@ const MyPage = () => {
           <DeleteProfile memberInfo={memberInfo} />
         )}
         <Logout>
-          <SmallButton3 onClick={handleLogout}>로그아웃</SmallButton3>
+          {selectedComponent === 'edit' && (
+            <SmallButton3 onClick={handleLogout}>로그아웃</SmallButton3>
+          )}
         </Logout>
       </MyPageContainer>
     </MyPageWrapper>
