@@ -55,11 +55,11 @@
 
 # 📌 주요 기능
 
-### 물품·재능(Shell)<br>
+### 물품·재능(Shell)
 - 물품, 재능의 유형 및 무형의 제품을 모두 제품으로 취급합니다.
 - ShellWe는 모든 제품을 "쉘(Shell)" 이라 통용합니다.
 
-### 쉘 CRUD<br>
+### 쉘 CRUD
 - 쉘 생성, 조회, 수정, 삭제
 - 찜하기 (장바구니 기능)
 
@@ -82,7 +82,7 @@
 <img src="https://img.shields.io/badge/styledComponent-DB7093?style=for-the-badge&logo=styled-components&logoColor=black">
 <img src="https://img.shields.io/badge/Recoil-3578E5?style=for-the-badge&logo=recoil&logoColor=black">
 </div>
----  
+<br>
 <div align=center>
 <img src="https://img.shields.io/badge/spring-6DB33F?style=for-the-badge&logo=spring&logoColor=white">
 <img src="https://img.shields.io/badge/spring boot-6DB33F?style=for-the-badge&logo=spring-boot&logoColor=white">
@@ -100,6 +100,7 @@ Tools
 <div align=center>
 <img src="https://img.shields.io/badge/github-181717?style=for-the-badge&logo=github&logoColor=white">
   <img src="https://img.shields.io/badge/git-F05032?style=for-the-badge&logo=git&logoColor=white">
+</div>
   <img src="https://img.shields.io/badge/Github Actions-F05032?style=for-the-badge&logo=git&logoColor=white">
 <img src="https://img.shields.io/badge/ubuntu-E95420?style=for-the-badge&logo=ubuntu&logoColor=white">
 <br>
