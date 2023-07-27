@@ -18,9 +18,10 @@ const ContentBox = styled.div`
   padding: 150px 120px 120px 120px;
   gap: 20px;
 
-  @media (max-width: 1620px) {
-    padding: 150px 80px 120px 80px;
+  @media (max-width: 1640px) {
+    padding: 150px 80px 100px 90px;
   }
+
   @media (max-width: 768px) {
     padding: 30px;
     gap: 5px;
