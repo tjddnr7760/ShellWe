@@ -1,8 +1,8 @@
 package com.shellwe.server.domain.shell.dto.request;
 
-import com.shellwe.server.domain.types.ShellType;
-import com.shellwe.server.domain.types.category.ShellCategory;
-import com.shellwe.server.utils.customannotation.EachSize;
+import com.shellwe.server.global.types.ShellType;
+import com.shellwe.server.global.types.category.ShellCategory;
+import com.shellwe.server.global.utils.customannotation.EachSize;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.web.multipart.MultipartFile;

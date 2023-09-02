@@ -2,9 +2,9 @@ package com.shellwe.server.domain.trade.dto.response;
 
 import com.shellwe.server.domain.member.dto.response.MemberDtoExceptIsMe;
 import com.shellwe.server.domain.picture.dto.PictureResponseDto;
-import com.shellwe.server.domain.types.ShellType;
-import com.shellwe.server.domain.types.Status;
-import com.shellwe.server.domain.types.category.ShellCategory;
+import com.shellwe.server.global.types.ShellType;
+import com.shellwe.server.global.types.Status;
+import com.shellwe.server.global.types.category.ShellCategory;
 import lombok.Getter;
 import lombok.Setter;
 
