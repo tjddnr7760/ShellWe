@@ -10,11 +10,8 @@ import lombok.*;
 import javax.persistence.*;
 import javax.validation.constraints.Size;
 
-@AllArgsConstructor
-@NoArgsConstructor
 @Getter
-@Builder
-@Table(name = "SHELL")
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Entity
 public class Shell extends TimeTracker {
 

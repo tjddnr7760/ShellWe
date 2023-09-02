@@ -1,16 +1,14 @@
 package com.shellwe.server.domain.category.domain;
 
 import com.shellwe.server.global.types.category.ShellCategory;
-import lombok.AllArgsConstructor;
+import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 
-@AllArgsConstructor
-@NoArgsConstructor
 @Getter
-@Table(name = "CATEGORY")
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Entity
 public class Category {
 

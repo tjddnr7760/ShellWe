@@ -3,16 +3,14 @@ package com.shellwe.server.domain.trade.domain;
 import com.shellwe.server.domain.member.domain.Member;
 import com.shellwe.server.domain.shell.domain.Shell;
 import com.shellwe.server.global.utils.TimeTracker;
-import lombok.AllArgsConstructor;
+import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 
-@AllArgsConstructor
-@NoArgsConstructor
 @Getter
-@Table(name = "TRADE")
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Entity
 public class Trade extends TimeTracker {
 

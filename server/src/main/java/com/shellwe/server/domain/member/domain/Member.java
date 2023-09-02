@@ -1,24 +1,14 @@
 package com.shellwe.server.domain.member.domain;
 
-import com.shellwe.server.domain.shell.domain.Shell;
-import com.shellwe.server.global.types.Status;
 import com.shellwe.server.global.utils.TimeTracker;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.util.StringUtils;
 
 import javax.persistence.*;
-import java.util.List;
-import java.util.stream.Collectors;
 
-@AllArgsConstructor
-@NoArgsConstructor
-@Builder
 @Getter
-@Table(name = "MEMBER")
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Entity
 public class Member extends TimeTracker {
 

@@ -1,16 +1,14 @@
 package com.shellwe.server.domain.tag.domain;
 
 import com.shellwe.server.domain.shell.domain.Shell;
-import lombok.AllArgsConstructor;
+import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 
-@AllArgsConstructor
-@NoArgsConstructor
 @Getter
-@Table(name = "TAG")
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Entity
 public class Tag {
 
