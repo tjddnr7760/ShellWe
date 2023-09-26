@@ -1,8 +1,8 @@
 package com.shellwe.server.domain.member.application;
 
-import com.shellwe.server.domain.member.dto.request.DeleteRequestDto;
-import com.shellwe.server.domain.member.dto.request.SignUpRequestDto;
-import com.shellwe.server.domain.member.dto.request.UpdateRequestDto;
+import com.shellwe.server.domain.member.dto.request.DeleteRequest;
+import com.shellwe.server.domain.member.dto.request.SignUpRequest;
+import com.shellwe.server.domain.member.dto.request.UpdateRequest;
 import com.shellwe.server.domain.member.dto.response.FindResponseDtoIncludeOauth;
 import com.shellwe.server.domain.member.dto.response.GetMyShellListDto;
 import com.shellwe.server.domain.member.dto.response.GetMyShellListDtoTags;
@@ -54,8 +54,8 @@ public class MemberService {
         this.eventPublisher = eventPublisher;
     }
 
-    public void signUpMember(SignUpRequestDto signUpRequestDto) throws InterruptedException {
-        Member member = memberMapper.signUpRequestDtoToMember(signUpRequestDto);
+    public void signUpMember(SignUpRequest signUpRequest) throws InterruptedException {
+        Member member = memberMapper.signUpRequestDtoToMember(signUpRequest);
         log.info("sign-up in service layer start, member : {}", member);
         verifyExistEmail(member.getEmail());
 
@@ -106,7 +106,7 @@ public class MemberService {
         return findResponseDtoIncludeOauth;
     }
 
-    public void updateMember(long contextId, long memberId, UpdateRequestDto updateRequestDto, MultipartFile picture) {
+    public void updateMember(long contextId, long memberId, UpdateRequest updateRequest, MultipartFile picture) {
         log.info("update member in service layer start");
         String profileUrl = null;
 
@@ -116,8 +116,8 @@ public class MemberService {
                 if (picture != null && !picture.isEmpty()) {
                     profileUrl = uploadPictureService.onePictureFileToUrl(picture);
                 }
-                findMember.updateMember(updateRequestDto.getPassword(), passwordEncoder,
-                        updateRequestDto.getDisplayName(), updateRequestDto.getIntroduction(), profileUrl);
+                findMember.updateMember(updateRequest.getPassword(), passwordEncoder,
+                        updateRequest.getDisplayName(), updateRequest.getIntroduction(), profileUrl);
                 memberRepository.save(findMember);
             } else {
                 throw new MemberLogicException((MemberExceptionCode.FAILED_UPDATE_MEMBER_OAUTH_USER));
@@ -129,11 +129,11 @@ public class MemberService {
         log.info("update member in service layer end");
     }
 
-    public void deleteMember(long contextId, long memberId, DeleteRequestDto deleteRequestDto) {
+    public void deleteMember(long contextId, long memberId, DeleteRequest deleteRequest) {
         log.info("delete member in service layer start");
         Member findMember = findById(contextId);
 
-        if (memberId == contextId && passwordEncoder.matches(deleteRequestDto.getPassword(), findMember.getPassword())) {
+        if (memberId == contextId && passwordEncoder.matches(deleteRequest.getPassword(), findMember.getPassword())) {
             List<Long> shellIds = findMember.getShells().stream()
                     .map(Shell::getId)
                     .collect(Collectors.toList());

@@ -5,10 +5,8 @@ import com.shellwe.server.global.types.ShellType;
 import com.shellwe.server.global.types.Status;
 import com.shellwe.server.global.types.category.ShellCategory;
 import lombok.Getter;
-import lombok.Setter;
 
 @Getter
-@Setter
 public class MainPageResponseDto {
 
     private Long id;

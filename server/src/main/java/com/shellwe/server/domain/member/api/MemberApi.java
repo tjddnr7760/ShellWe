@@ -1,9 +1,9 @@
 package com.shellwe.server.domain.member.api;
 
+import com.shellwe.server.domain.member.dto.request.SignUpRequest;
+import com.shellwe.server.domain.member.dto.request.UpdateRequest;
 import com.shellwe.server.global.auth.memberDetails.MemberContextInform;
-import com.shellwe.server.domain.member.dto.request.DeleteRequestDto;
-import com.shellwe.server.domain.member.dto.request.SignUpRequestDto;
-import com.shellwe.server.domain.member.dto.request.UpdateRequestDto;
+import com.shellwe.server.domain.member.dto.request.DeleteRequest;
 import com.shellwe.server.domain.member.dto.response.FindResponseDtoIncludeOauth;
 import com.shellwe.server.domain.member.application.MemberService;
 import com.shellwe.server.global.exception.customexception.AccessTokenException;
@@ -37,8 +37,8 @@ public class MemberApi {
 
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping
-    public void signUpMember(@Valid @RequestBody SignUpRequestDto signUpRequestDto) throws InterruptedException {
-        memberService.signUpMember(signUpRequestDto);
+    public void signUpMember(@Valid @RequestBody SignUpRequest signUpRequest) throws InterruptedException {
+        memberService.signUpMember(signUpRequest);
     }
 
     @ResponseStatus(HttpStatus.OK)
@@ -57,18 +57,18 @@ public class MemberApi {
     @ResponseStatus(HttpStatus.OK)
     @PatchMapping("/{memberId}")
     public void updateMemberById(@PathVariable long memberId,
-                                 @Valid @RequestPart(value = "update") UpdateRequestDto updateRequestDto,
+                                 @Valid @RequestPart(value = "update") UpdateRequest updateRequest,
                                  @RequestPart(value = "picture", required = false) MultipartFile picture,
                                  Authentication authentication) {
-        memberService.updateMember(getId(authentication), memberId, updateRequestDto, picture);
+        memberService.updateMember(getId(authentication), memberId, updateRequest, picture);
     }
 
     @ResponseStatus(HttpStatus.NO_CONTENT)
     @DeleteMapping("/{memberId}")
     public void deleteMemberByIdAndPassword(@PathVariable long memberId,
-                                            @RequestBody DeleteRequestDto deleteRequestDto,
+                                            @RequestBody DeleteRequest deleteRequest,
                                             Authentication authentication) {
-        memberService.deleteMember(getId(authentication), memberId, deleteRequestDto);
+        memberService.deleteMember(getId(authentication), memberId, deleteRequest);
     }
 
     private Long getId(Authentication authentication) {

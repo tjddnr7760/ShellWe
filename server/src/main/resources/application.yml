@@ -2,7 +2,7 @@ spring:
   datasource:
     url: jdbc:mysql://localhost:3306/shellweprototype?useSSL=false
     username: root
-    password: ${MYSQL_ROOT_PASSWORD}
+    password: db1234
     driverClassName: com.mysql.cj.jdbc.Driver
   jpa:
     database-platform: org.hibernate.dialect.MySQL8Dialect
@@ -59,7 +59,7 @@ server:
     encoding:
       force-response: true
 jwt:
-  key: ${JWT_SECRET_KEY}
+  key: aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
   access-token-expiration-minutes: 1444
   refresh-token-expiration-minutes: 1444
 

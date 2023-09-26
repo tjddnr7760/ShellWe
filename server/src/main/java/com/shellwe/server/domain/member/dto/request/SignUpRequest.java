@@ -1,7 +1,6 @@
 package com.shellwe.server.domain.member.dto.request;
 
 import lombok.Getter;
-import lombok.Setter;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
@@ -9,8 +8,7 @@ import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
 @Getter
-@Setter
-public class SignUpRequestDto {
+public class SignUpRequest {
 
     @NotBlank
     @Email(message = "Incorrect Email Form")

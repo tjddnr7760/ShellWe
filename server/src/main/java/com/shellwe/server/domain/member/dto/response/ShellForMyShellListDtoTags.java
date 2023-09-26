@@ -5,12 +5,10 @@ import com.shellwe.server.global.types.ShellType;
 import com.shellwe.server.global.types.Status;
 import com.shellwe.server.global.types.category.ShellCategory;
 import lombok.Getter;
-import lombok.Setter;
 
 import java.util.List;
 
 @Getter
-@Setter
 public class ShellForMyShellListDtoTags {
 
     private Long id;

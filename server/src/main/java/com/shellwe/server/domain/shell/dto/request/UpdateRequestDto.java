@@ -4,7 +4,6 @@ import com.shellwe.server.global.types.ShellType;
 import com.shellwe.server.global.types.category.ShellCategory;
 import com.shellwe.server.global.utils.customannotation.EachSize;
 import lombok.Getter;
-import lombok.Setter;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.validation.constraints.NotBlank;
@@ -13,7 +12,6 @@ import javax.validation.constraints.Size;
 import java.util.List;
 
 @Getter
-@Setter
 public class UpdateRequestDto {
 
     @NotBlank(message = "title required")
