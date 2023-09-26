@@ -4,7 +4,7 @@
   </a>
   <a href="http://shellwe.net">
     <p align="center">
-    배포 링크
+    배포 링크(게스트 로그인 사용하시면 회원가입 필요 없습니다.)
     </p>
   </a>
 
