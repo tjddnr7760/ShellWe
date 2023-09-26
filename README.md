@@ -17,20 +17,14 @@
 <details>
   <summary>목차</summary>
   <ol>
-    <li>
-      <a href="#프로젝트-소개">프로젝트 소개</a>
-    </li>
-    <li>
-      <a href="#아키텍처">아키텍처</a>
-    </li>
-    <li>
-      <a href="#기술스택">기술 스택</a>
-    </li>
+    <li><a href="#프로젝트-소개">프로젝트 소개</a></li>
+    <li><a href="#아키텍처">아키텍처</a></li>
+    <li><a href="#기술스택">기술 스택</a></li>
     <li><a href="#erd">ERD</a></li>
     <li><a href="#api-명세서">API 명세서</a></li>
     <li><a href="#주요-기능-소개">주요 기능 소개</a></li>
     <li><a href="#개발자-테스트-체크-리스트">개발자 테스트 체크 리스트</a></li>
-    <li><a href="#리팩터링">리팩터링 예정 목록</a></li>
+    <li><a href="#리팩터링-예정-목록">리팩터링 예정 목록</a></li>
   </ol>
 </details>
 
