@@ -23,8 +23,10 @@
     <li>
       <a href="#아키텍처">아키텍처</a>
     </li>
+    <li>
+      <a href="#기술스택">기술 스택</a>
+    </li>
     <li><a href="#erd">ERD</a></li>
-    <li><a href="#주요-라이브러리">주요 라이브러리</a></li>
     <li><a href="#api-명세서">API 명세서</a></li>
     <li><a href="#주요-기능-소개">주요 기능 소개</a></li>
     <li><a href="#개발자-테스트-체크-리스트">개발자 테스트 체크 리스트</a></li>
@@ -52,20 +54,16 @@
 * ERD 설계
 
 ## 아키텍처
+![image](https://github.com/tjddnr7760/stackoverflow_clone/assets/42529087/fa653ce0-213f-4a68-b733-9dd4e48e1ed1)
+
+## 기술스택
+### 백엔드 기술 스택
+Java 11,  Gradle,  Spring Boot,  Spring Data Jpa,  Spring Security,  Lombok,  MySql,  H2,  Mail,  Thymeleaf
+### 인프라 기술 스택
+Github Actions,  Aws Ec2,  Aws S3
 
 ## ERD
 ![image](https://github.com/tjddnr7760/stackoverflow_clone/assets/42529087/79bd0172-576d-4cae-a167-19d9cc2ffef3)
-
-## 주요 라이브러리
-* spring-boot-starter-data-jpa
-* spring-boot-starter-validation
-* spring-boot-starter-web
-* spring-boot-starter-mail
-* spring-boot-starter-thymleaf
-* spring-boot-starter-security
-* spring-boot-starter-oauth2
-* spring-boot-starter-test
-* lombok 1.18.28
 
 ## API 명세서
 <a href="https://www.notion.so/codestates/API-02205943da8648c98ea5c27f463405ef">
@@ -94,4 +92,3 @@
 * 성능 최적화
 * 로드 밸런싱
 * 로직 시각화 및 정리
-* 객체 의존성 파악
