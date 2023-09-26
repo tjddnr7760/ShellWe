@@ -3,7 +3,9 @@
     <img src="https://github.com/tjddnr7760/stackoverflow_clone/assets/42529087/97f8f760-ae32-4d8a-8bd5-57cfd9765805" alt="Logo" width="150" height="130">
   </a>
   <a href="http://shellwe.net">
-    <h3 align="center">ShellWe 연결하기</h3>
+    <p align="center">
+    배포 링크
+    </p>
   </a>
 
   <p align="center">
