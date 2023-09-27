@@ -4,7 +4,7 @@
   </a>
   <a href="http://shellwe.net">
     <p align="center">
-    배포 링크(Geust Login 버튼 사용하여 둘러보세요!)
+    배포 링크(Guest Login 버튼 사용하여 둘러보세요!)
     </p>
   </a>
 
