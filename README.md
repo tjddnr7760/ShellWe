@@ -17,19 +17,19 @@
 <details>
   <summary>목차</summary>
   <ol>
-    <li><a href="#프로젝트-소개">프로젝트 소개</a></li>
-    <li><a href="#아키텍처">아키텍처</a></li>
-    <li><a href="#기술스택">기술 스택</a></li>
-    <li><a href="#erd">ERD</a></li>
-    <li><a href="#api-명세서">API 명세서</a></li>
-    <li><a href="#주요-기능-소개">주요 기능 소개</a></li>
-    <li><a href="#개발자-테스트-체크-리스트">개발자 테스트 체크 리스트</a></li>
-    <li><a href="#리팩터링-예정-목록">리팩터링 예정 목록</a></li>
+    <li>프로젝트 소개</a></li>
+    <li>아키텍처</a></li>
+    <li>기술 스택</a></li>
+    <li>ERD</a></li>
+    <li>API 명세서</a></li>
+    <li>주요 기능 소개</a></li>
+    <li>개발자 테스트 체크 리스트</a></li>
+    <li>리팩터링 예정 목록</a></li>
   </ol>
 </details>
 
-
 ## 프로젝트 소개
+ 
 ![image](https://github.com/tjddnr7760/stackoverflow_clone/assets/42529087/5283f889-3f39-4959-bdc9-291e5706b97a)  
 
 물품 및 재능을 조회하고 교환요청을 통해 DM으로 물물 교환할 수 있습니다. 저는 아래의 기능을 담당하여 하였습니다.
