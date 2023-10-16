@@ -60,8 +60,8 @@ Github Actions,  Aws Ec2,  Aws S3
 ![image](https://github.com/tjddnr7760/stackoverflow_clone/assets/42529087/79bd0172-576d-4cae-a167-19d9cc2ffef3)
 
 ## API 명세서
-API 명세서
 (해상도에 따라 글씨가 깨져보일 수 있습니다. 페이지를 확대하시면 확인됩니다.)
+
 ![image](https://github.com/tjddnr7760/cafekiosk/assets/42529087/4deb275c-96e4-4c59-9587-253480c7fa69)
 ![image](https://github.com/tjddnr7760/cafekiosk/assets/42529087/2ac48e56-2003-43c0-a28f-953d5064198e)
 ![image](https://github.com/tjddnr7760/cafekiosk/assets/42529087/c247a93f-1b7f-42ff-8639-40692991232c)
@@ -88,7 +88,6 @@ API 명세서
 상대방이 교환요청을 수락하면 자동으로 DM로 연결됩니다.
 
 ## 개발자 테스트 체크 리스트
-개발자 테스트 체크 리스트
 ![image](https://github.com/tjddnr7760/cafekiosk/assets/42529087/44292757-a9f7-4aad-bca3-863467649e6d)
 ![image](https://github.com/tjddnr7760/cafekiosk/assets/42529087/ba7c9e18-4e68-482a-852c-5eb655f83e57)
 ![image](https://github.com/tjddnr7760/cafekiosk/assets/42529087/ec0f8e20-495b-46b2-9ab9-ebc97cac8d9b)
