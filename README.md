@@ -61,6 +61,7 @@ Github Actions,  Aws Ec2,  Aws S3
 
 ## API 명세서
 API 명세서
+(해상도에 따라 글씨가 깨져보일 수 있습니다. 페이지를 확대하시면 확인됩니다.)
 ![image](https://github.com/tjddnr7760/cafekiosk/assets/42529087/4deb275c-96e4-4c59-9587-253480c7fa69)
 ![image](https://github.com/tjddnr7760/cafekiosk/assets/42529087/2ac48e56-2003-43c0-a28f-953d5064198e)
 ![image](https://github.com/tjddnr7760/cafekiosk/assets/42529087/c247a93f-1b7f-42ff-8639-40692991232c)
