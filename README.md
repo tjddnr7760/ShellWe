@@ -51,7 +51,7 @@
 * ERD 설계
 
 ## 아키텍처
-![image]([https://github.com/tjddnr7760/stackoverflow_clone/assets/42529087/fa653ce0-213f-4a68-b733-9dd4e48e1ed1](https://github.com/tjddnr7760/cafekiosk/assets/42529087/e7c0079e-114d-40aa-9d6a-9fdec4ed0346))
+![image](https://github.com/tjddnr7760/cafekiosk/assets/42529087/e7c0079e-114d-40aa-9d6a-9fdec4ed0346)
 
 ## 기술스택
 ### 백엔드 기술 스택
