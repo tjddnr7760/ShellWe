@@ -4,12 +4,15 @@
   </a>
   <a href="http://shellwe.net">
     <p align="center">
-    배포 링크(Geust Login 버튼 사용하여 둘러보세요!)
+    배포 링크(Guest Login 버튼 사용하여 둘러보세요!)
     </p>
   </a>
 
   <p align="center">
     황성욱 담당 부분 소개 및 요약
+  </p>
+  <p align="center">
+    BE브랜치를 확인해 주세요. 제가 작성한 코드입니다.
   </p>
 </div>
 
@@ -17,19 +20,19 @@
 <details>
   <summary>목차</summary>
   <ol>
-    <li><a href="#프로젝트-소개">프로젝트 소개</a></li>
-    <li><a href="#아키텍처">아키텍처</a></li>
-    <li><a href="#기술스택">기술 스택</a></li>
-    <li><a href="#erd">ERD</a></li>
-    <li><a href="#api-명세서">API 명세서</a></li>
-    <li><a href="#주요-기능-소개">주요 기능 소개</a></li>
-    <li><a href="#개발자-테스트-체크-리스트">개발자 테스트 체크 리스트</a></li>
-    <li><a href="#리팩터링-예정-목록">리팩터링 예정 목록</a></li>
+    <li>프로젝트 소개</a></li>
+    <li>아키텍처</a></li>
+    <li>기술 스택</a></li>
+    <li>ERD</a></li>
+    <li>API 명세서</a></li>
+    <li>주요 기능 소개</a></li>
+    <li>개발자 테스트 체크 리스트</a></li>
+    <li>리팩터링 예정 목록</a></li>
   </ol>
 </details>
 
-
 ## 프로젝트 소개
+ 
 ![image](https://github.com/tjddnr7760/stackoverflow_clone/assets/42529087/5283f889-3f39-4959-bdc9-291e5706b97a)  
 
 물품 및 재능을 조회하고 교환요청을 통해 DM으로 물물 교환할 수 있습니다. 저는 아래의 기능을 담당하여 하였습니다.
@@ -48,7 +51,7 @@
 * ERD 설계
 
 ## 아키텍처
-![image](https://github.com/tjddnr7760/stackoverflow_clone/assets/42529087/fa653ce0-213f-4a68-b733-9dd4e48e1ed1)
+![image](https://github.com/tjddnr7760/cafekiosk/assets/42529087/e7c0079e-114d-40aa-9d6a-9fdec4ed0346)
 
 ## 기술스택
 ### 백엔드 기술 스택
@@ -60,9 +63,22 @@ Github Actions,  Aws Ec2,  Aws S3
 ![image](https://github.com/tjddnr7760/stackoverflow_clone/assets/42529087/79bd0172-576d-4cae-a167-19d9cc2ffef3)
 
 ## API 명세서
-<a href="https://www.notion.so/codestates/API-02205943da8648c98ea5c27f463405ef">
-    API 명세서
-</a>
+(해상도에 따라 글씨가 깨져보일 수 있습니다. 페이지를 확대하시면 확인됩니다.)
+
+![image](https://github.com/tjddnr7760/cafekiosk/assets/42529087/4deb275c-96e4-4c59-9587-253480c7fa69)
+![image](https://github.com/tjddnr7760/cafekiosk/assets/42529087/2ac48e56-2003-43c0-a28f-953d5064198e)
+![image](https://github.com/tjddnr7760/cafekiosk/assets/42529087/c247a93f-1b7f-42ff-8639-40692991232c)
+![image](https://github.com/tjddnr7760/cafekiosk/assets/42529087/c69052ee-8dc4-4367-a47c-6c9b60d1e848)
+![image](https://github.com/tjddnr7760/cafekiosk/assets/42529087/4785f0ea-325c-4ac1-aac6-6a161d8e6eff)
+![image](https://github.com/tjddnr7760/cafekiosk/assets/42529087/8298e4e1-2c87-456a-b77c-d7f00bff66c5)
+![image](https://github.com/tjddnr7760/cafekiosk/assets/42529087/d6b624d5-0263-48d7-bf6b-82705b4262b8)
+![image](https://github.com/tjddnr7760/cafekiosk/assets/42529087/cd3dc7fe-ce41-4aa5-a8e0-c5c387a838c3)
+![image](https://github.com/tjddnr7760/cafekiosk/assets/42529087/ec3e8397-21c8-467f-8ba5-a11e583efcc0)
+![image](https://github.com/tjddnr7760/cafekiosk/assets/42529087/f5098f88-c318-472d-8561-4e67705b6d83)
+![image](https://github.com/tjddnr7760/cafekiosk/assets/42529087/de782cf7-bbc7-4bd2-8bc8-df0d6b1989a3)
+![image](https://github.com/tjddnr7760/cafekiosk/assets/42529087/266e64f0-d074-4cee-b0fc-74e6465b2f0d)
+![image](https://github.com/tjddnr7760/cafekiosk/assets/42529087/89909d7d-e07e-4fe8-a21a-a607e7069f0b)
+
 
 ## 주요 기능 소개
 ### Shell 생성
@@ -75,9 +91,15 @@ Github Actions,  Aws Ec2,  Aws S3
 상대방이 교환요청을 수락하면 자동으로 DM로 연결됩니다.
 
 ## 개발자 테스트 체크 리스트
-<a href="https://www.notion.so/codestates/4b440ecd746e48ca8dd5e9ae3f0da1ed?v=aa472c046d8f4acf94246e589dd874f3">
-   체크 리스트 항목
-</a>
+![image](https://github.com/tjddnr7760/cafekiosk/assets/42529087/44292757-a9f7-4aad-bca3-863467649e6d)
+![image](https://github.com/tjddnr7760/cafekiosk/assets/42529087/ba7c9e18-4e68-482a-852c-5eb655f83e57)
+![image](https://github.com/tjddnr7760/cafekiosk/assets/42529087/ec0f8e20-495b-46b2-9ab9-ebc97cac8d9b)
+![image](https://github.com/tjddnr7760/cafekiosk/assets/42529087/a62a95bd-08de-40d6-8f9a-842515515716)
+![image](https://github.com/tjddnr7760/cafekiosk/assets/42529087/4859a103-f976-41dc-8cea-744dcd4fd792)
+![image](https://github.com/tjddnr7760/cafekiosk/assets/42529087/00a495ad-7a11-4d72-b3eb-f355aebedeb4)
+![image](https://github.com/tjddnr7760/cafekiosk/assets/42529087/33983d4c-9035-427b-a009-648eb19aadf9)
+![image](https://github.com/tjddnr7760/cafekiosk/assets/42529087/b8c9d849-f153-4faf-9a1e-a57340314827)
+![image](https://github.com/tjddnr7760/cafekiosk/assets/42529087/7e0e351a-5965-4623-a00f-486f8ee1fefc)
 
 ## 리팩터링 예정 목록
 * 테스트 코드 추가
